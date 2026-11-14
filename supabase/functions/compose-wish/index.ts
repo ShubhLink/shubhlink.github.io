@@ -57,7 +57,20 @@ Deno.serve(async(req:Request)=>{
       body:JSON.stringify({contents:[{parts:[{text:instructions}]}],generationConfig:{temperature:0.92,maxOutputTokens:900,responseMimeType:"application/json"}}),
       signal:AbortSignal.timeout(16000)
     });
-    if(!response.ok)return json({error:response.status===429?"ai_busy":"ai_temporarily_unavailable"},503);
+    if(!response.ok){
+      // Report a provider error category without exposing API keys or prompt contents.
+      const failure=await response.json().catch(()=>({}));
+      const providerStatus=String(failure?.error?.status||"").slice(0,60);
+      const providerCode=response.status;
+      console.warn("Gemini upstream failure",providerCode,providerStatus);
+      const kind=providerCode===429?"ai_quota_exceeded":
+        providerCode===403?"ai_project_access_denied":
+        providerCode===401?"ai_key_invalid":
+        providerCode===404?"ai_model_unavailable":
+        providerCode===400?"ai_provider_bad_request":
+        providerCode===503?"ai_provider_busy":"ai_provider_error";
+      return json({error:kind,provider_status:providerStatus},503);
+    }
     const body=await response.json();
     const output=String(body?.candidates?.[0]?.content?.parts?.map((p:{text?:string})=>p.text||"").join("")||"");
     let parsed;
@@ -65,5 +78,5 @@ Deno.serve(async(req:Request)=>{
     const messages=Array.isArray(parsed?.messages)?parsed.messages.filter((x:unknown)=>typeof x==="string").map((x:string)=>clean(x,600)).filter((x:string)=>x.length>15).slice(0,3):[];
     if(messages.length<1)return json({error:"empty_ai_output"},502);
     return json({messages,source:"gemini"});
-  }catch(_error){return json({error:"ai_temporarily_unavailable"},503)}
+  }catch(error){console.warn("Gemini function error category",error instanceof Error?error.name:"unknown");return json({error:"ai_temporarily_unavailable"},503)}
 });
