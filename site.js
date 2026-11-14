@@ -113,7 +113,8 @@ if($('wishGrid')){
   if(!q&&premium.length>=6)filtered=premium;
   const key='category:'+l+':'+c+':'+q;
   if(key!==lastKey)lastKey=key;
-  const selection=window.ShubhFresh?.choose(filtered,key,12,{quality:x=>x.featured?100:0})||filtered.slice(0,12);
+  const batchSize=Math.min(8,Math.max(4,Math.ceil(filtered.length*0.64)));
+  const selection=window.ShubhFresh?.choose(filtered,key,batchSize,{quality:x=>x.featured?100:0})||filtered.slice(0,batchSize);
   for(const item of selection){
    const msg=item.msg,topic=titleFor(msg,c,l);
    const card=document.createElement('article');card.className='wishitem';
