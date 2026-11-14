@@ -11,9 +11,9 @@
 button,input,select,textarea{font:inherit}button{cursor:pointer}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #9d8fe9;outline-offset:2px}
 a{text-decoration:none;color:inherit}
-.top{background:#191b2c;color:#fff;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;z-index:4}
+
 .brand{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:850}.brandmark{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#ffbfa0,#ef7d90);font-size:24px}.adminpill{font-size:12px;background:#3a3659;color:#f6e9ff;border-radius:999px;padding:7px 12px;font-weight:800}
-.layout{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:calc(100vh - 73px)}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
 .side{padding:24px 14px;background:#fff;border-right:1px solid var(--line)}.side a{display:flex;gap:11px;align-items:center;padding:12px 15px;border-radius:11px;font-size:14px;font-weight:700;color:#62657a;margin:5px 0}.side a.active{background:var(--light);color:var(--purple)}.side .tip{background:#f8f6ff;border:1px solid #eee8ff;border-radius:15px;padding:14px;margin-top:28px;color:#6d6680;font-size:12px;line-height:1.8}
 .main{padding:28px;max-width:1400px;width:100%;margin:0 auto}
 .eyebrow{color:var(--purple);text-transform:uppercase;font-size:11px;letter-spacing:1.6px;font-weight:900}
@@ -46,14 +46,14 @@ textarea{resize:vertical;min-height:120px;line-height:1.7}label{display:block;co
 @media(max-width:580px){.top{padding:12px}.main{padding:13px}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:22px}.panel{padding:15px}.filters{display:grid;grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}.cat-list{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{width:100%;justify-content:space-between}.tabs button{padding:10px 9px;font-size:12px}.toolbar>.button{width:100%}}
 </style>
 </head><body>
-<header class="top"><a class="brand" href="index.html"><span class="brandmark">✦</span><span>ShubhLink <span style="color:#f0ac9d">Studio</span></span></a><span class="adminpill">🔒 Owner publishing via GitHub</span></header>
+
 <div class="layout">
 <aside class="side"><a class="active" href="#dashboard">▣ Dashboard</a><a href="#editor">✎ Message Editor</a><a href="#category">▦ Categories</a><a href="https://github.com/ShubhLink/shubhlink.github.io/actions/workflows/shubhlink-admin.yml" target="_blank" rel="noopener">⚙ GitHub Publish</a><a href="index.html">↗ View Website</a><div class="tip"><b>સુરક્ષિત Publishing</b><br>આ સ્ક્રીન માત્ર Draft/Preview બનાવે છે. વેબસાઇટમાં ફેરફાર ફક્ત તમારા GitHub Login અને Owner-Only Workflow દ્વારા જ Publish થાય છે. કોઈ Password કે Token અહીં દાખલ કરશો નહીં.</div></aside>
 <main class="main">
-<span class="eyebrow">CONTENT MANAGEMENT</span>
-<h1>નમસ્તે! ShubhLink Admin Dashboard</h1>
-<p class="desc">તમારા તૈયાર મેસેજ જુઓ, નવો લખો, Preview તપાસો અને તમારા GitHub Account માંથી સુરક્ષિત રીતે Publish કરો.</p>
-<div class="note">🔐 <b>સુરક્ષા:</b> આ Dashboard લિંક અન્ય લોકો પણ ખોલી શકે છે, પરંતુ ફક્ત પેજ ખોલવાથી કોઈ તમારી વેબસાઇટ બદલી શકતું નથી. Publish માટે GitHub માં <b>Divyesh1202</b> Login જરૂરી છે. આ પેજમાં પાસવર્ડ કે GitHub Token મૂકવામાં આવતો નથી.</div>
+<span class="eyebrow">SHUBHLINK · ADMIN</span>
+<h1>ShubhLink કન્ટેન્ટ મેનેજર</h1>
+<p class="desc">મેસેજ અને કેટેગરી પસંદ કરો, નવું લખો અને Preview તપાસો.</p>
+<div class="note">🔐 <b>મહત્ત્વપૂર્ણ:</b> આ પેજમાં કરેલો Draft ફેરફાર હજી લાઇવ સાઇટ પર સેવ થતો નથી. લાઇવ Publish માટે GitHub Login જરૂરી છે. સુરક્ષિત સીધું Save વિકલ્પ Backend જોડ્યા પછી જ ઉપલબ્ધ થશે.</div>
 <section class="stats" id="dashboard"><div class="stat"><strong id="statCats">—</strong><small>કેટેગરી</small></div><div class="stat"><strong id="statMessages">—</strong><small>કુલ મેસેજ</small></div><div class="stat"><strong>3</strong><small>ભાષા</small></div></section>
 <div class="toolbar"><div class="tabs" role="tablist" aria-label="Content section"><button id="tabMessages" class="on" type="button">✉ Messages</button><button id="tabCats" type="button">▦ Categories</button></div><button class="button" id="newBtn" type="button">＋ નવો મેસેજ</button><button class="button ghost" id="refreshBtn" type="button">↻ Refresh</button></div>
 <div class="two" id="messagesView">
