@@ -1,0 +1,482 @@
+[
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A message before coffee",
+    "body": "☀️ Before your coffee cools and the day's to-do list takes over, here's a little reminder: someone is thinking of you. Good morning!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "The window is open",
+    "body": "🌿 Open the window, let the day in, and leave yesterday's unfinished worries outside for a moment. This morning belongs to you too.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Not an ordinary hello",
+    "body": "💌 No special reason to text, except that your name crossed my mind and made the morning warmer. I hope something does the same for you today.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A five-minute sunrise",
+    "body": "🌅 You don't have to win the whole day before breakfast. Start with one kind thought, one deep breath, and a small brave step.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Morning is a gift",
+    "body": "☕ A cup of tea tastes better when you aren't rushing through it. May you find a moment today that feels like time slowing down just for you.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "The sunshine test",
+    "body": "🌞 The sun can brighten a room, but only kindness can brighten someone else's day. Go be that little ray of sunshine.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A birthday for Mom",
+    "body": "💗 Mom, you understood half my worries before I even learned to name them. On your birthday, I want you to feel a little of the comfort you've given me all these years.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "To my sister",
+    "body": "🎂 From fighting over tiny things to sharing life's biggest secrets, you've been in every chapter. Happy birthday to the sister who makes my memories funnier.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "For Dad",
+    "body": "🎁 Dad, that small treat from your pocket felt like treasure when I was little. Looking back, the real treasure was the love behind it. Happy birthday.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Best friend's big day",
+    "body": "😄 Your age keeps increasing, but our collection of ridiculous jokes is still embarrassingly young. Happy birthday, my favorite partner in nonsense.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "The everyday love story",
+    "body": "❤️ Your birthday isn't just one day I love celebrating. It's a reminder that ordinary mornings feel extraordinary simply because I share them with you.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Celebrate your own courage",
+    "body": "🌟 Before you count another candle, count the hard days you quietly made it through. That strength deserves a celebration too. Happy birthday to you.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "en",
+    "title": "The night isn't a courtroom",
+    "body": "🌙 Didn't finish everything today? The night isn't a courtroom demanding an explanation. Give yourself a little kindness, then get some sleep.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "en",
+    "title": "A quiet note to the moon",
+    "body": "✨ I asked the moon to save some softness for the people who spent their day making everyone else smile. You're on that list. Good night.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "en",
+    "title": "After the last notification",
+    "body": "📱 You've answered the world all day. Now put the phone down and ask your own heart how it's doing. You deserve to hear the answer.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "en",
+    "title": "Not every star is the sun",
+    "body": "⭐ You don't have to shine the brightest tonight. Even the smallest star has a place in the dark. Rest well, and try again tomorrow.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "en",
+    "title": "Leave it at the door",
+    "body": "🕯️ Whatever bothered you today doesn't need a bed beside you. Leave it at the door and let tonight be gentle.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "en",
+    "title": "Sleep is a gift",
+    "body": "💤 A peaceful night isn't wasted time. It's a little gift your tomorrow will thank you for. Sweet dreams.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "en",
+    "title": "An old friend's ringtone",
+    "body": "☎️ So many numbers come and go, but your name on my screen still feels like an instant invitation to laugh. That's friendship.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "en",
+    "title": "Just five minutes",
+    "body": "😂 Beware the friend who says, 'Let's meet for five minutes.' Three hours and twenty stories later, you'll still be laughing.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "en",
+    "title": "The real check-in",
+    "body": "🤝 A good friend doesn't always accept your 'I'm fine.' Sometimes they sit beside you and quietly ask, 'But how are you really?'",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "en",
+    "title": "The back-row memories",
+    "body": "🎒 The scribbles on our notebooks, the jokes nobody else understood, the last bench at school—some memories refuse to grow old.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "en",
+    "title": "Different cities, same bond",
+    "body": "💛 We live miles apart and sometimes reply days late, yet I still know who I'd call first on a difficult night. You.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "en",
+    "title": "The unpaid tea bill",
+    "body": "☕ I couldn't tell you who paid for the last cup of tea, but I remember every ridiculous story we shared over it.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "en",
+    "title": "A Diwali message worth sending",
+    "body": "🪔 This Diwali, light one lamp for the relationship that grew quiet. A simple 'I've missed you' may glow longer than any decoration.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "en",
+    "title": "A kite and its string",
+    "body": "🪁 The higher a kite flies, the more its string matters. This Uttarayan, celebrate the people who keep your dreams grounded and your spirit soaring.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "en",
+    "title": "More than colors",
+    "body": "🎨 This Holi, color a forgotten friendship with a phone call. Some of the best shades are made of laughter, forgiveness, and showing up again.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "en",
+    "title": "The circle of Navratri",
+    "body": "💃 A garba circle has many different steps, yet everyone finds the same rhythm. May this Navratri bring your loved ones closer.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "en",
+    "title": "A Rakhi memory",
+    "body": "🧵 Raksha Bandhan is a tiny thread holding a thousand stories: shared chocolate, stolen toys, silly fights, and an unspoken promise to care.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "en",
+    "title": "New Year's first line",
+    "body": "🎊 Write the first line of the new year with a genuine apology, a little courage, and laughter with the people who matter.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "en",
+    "title": "The quietest kind of help",
+    "body": "🌿 Not every hurting heart needs advice. Sometimes being heard without interruption is the most generous gift you can offer.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "en",
+    "title": "The brightest home",
+    "body": "🏡 A chandelier can light a room, but the feeling that someone is waiting for you lights a whole home.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "en",
+    "title": "Words have long lives",
+    "body": "📖 A kind sentence takes a few seconds to say and can live in someone's memory for years. Choose your words with care.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "en",
+    "title": "You don't need the last word",
+    "body": "✨ Winning every argument is a lonely achievement. Sometimes the wisest answer is a smile that keeps a relationship intact.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "en",
+    "title": "A trust built slowly",
+    "body": "🪷 Big promises are easy to announce. Trust is built in small moments when nobody is keeping score.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "en",
+    "title": "How dreams grow",
+    "body": "🌱 Pulling a flower won't make it bloom faster. Dreams need attention, patience, and a little light too.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "en",
+    "title": "Ten minutes count",
+    "body": "🚀 Your dream doesn't know whether it's Monday or the first of the month. Give it ten honest minutes today and see what starts moving.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "en",
+    "title": "Update yourself",
+    "body": "📱 We update our phones without thinking. When did you last update an old habit, learn a new skill, or question an old assumption?",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "en",
+    "title": "Ask a better question",
+    "body": "💡 Alongside 'When will I get my chance?' ask, 'What am I doing to be ready for it?' The second question opens doors.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "en",
+    "title": "One step before the summit",
+    "body": "👣 A mountain is intimidating from the bottom. Forget the summit for a moment; choose the next step you can actually take.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "en",
+    "title": "Let the experiment speak",
+    "body": "🎨 Not everyone will applaud a new idea. Build a tiny version, learn from it, and let the results do the talking.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "en",
+    "title": "Two different finish lines",
+    "body": "🧭 Someone running faster than you isn't necessarily ahead. You may be heading toward entirely different destinations.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "en",
+    "title": "Two cups of tea",
+    "body": "💍 An anniversary is more than a photo from one beautiful day. It's the memory of hundreds of ordinary evenings made lovely over two cups of tea.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "en",
+    "title": "Say yes again",
+    "body": "❤️ Saying 'yes' once was romantic. Choosing each other after all the little disagreements and big responsibilities is a deeper kind of love.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "en",
+    "title": "Two habits, one home",
+    "body": "🌹 Two people with different routines somehow making one shared home—that's a love story worth celebrating.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "en",
+    "title": "A language of your own",
+    "body": "✨ When one of you leaves a sentence unfinished and the other already knows the ending, you've built something rare together.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "en",
+    "title": "Finding the hand again",
+    "body": "🤍 Love doesn't mean agreeing on everything. It means finding each other's hand again after a difficult conversation.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "en",
+    "title": "Count the hard days too",
+    "body": "🥂 When you celebrate the years, remember the tough days you made lighter together. They belong in your love story too.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "en",
+    "title": "Before the applause",
+    "body": "🏆 Everyone sees your victory today. I want to celebrate the quiet days when nobody was watching and you kept going anyway.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "en",
+    "title": "First paycheck",
+    "body": "💸 The amount on your first paycheck might be small, but the feeling of earning it yourself is enormous. Congratulations!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "en",
+    "title": "Keys to a new beginning",
+    "body": "🔑 These aren't just keys to a house. They're the address of years of effort—and the beginning of a thousand new memories.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "en",
+    "title": "Your business opens today",
+    "body": "🏪 The shutters rose for the first time today, carrying years of dreams and a remarkable amount of courage. Here's to your new adventure.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "en",
+    "title": "Everyone held the trophy",
+    "body": "🤝 One person may lift the trophy, but a team lifts the journey. Congratulations to every person who helped make it happen.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "en",
+    "title": "The size of your victory",
+    "body": "🌟 It doesn't matter if others call this a small win. You know the fears you had to cross to reach it. Be proud.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "en",
+    "title": "An unexpected hello",
+    "body": "🍃 I thought of you in the middle of a busy afternoon, so here's a small smile to go with your tea. Hope the rest of your day feels lighter.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "en",
+    "title": "A lunchbox from home",
+    "body": "🍱 Sometimes one familiar flavor at lunchtime is enough to bring back the warmth of home, even from a city far away.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "en",
+    "title": "Tea break happiness",
+    "body": "☕ Tea tastes a little better when a message from someone who cares arrives at just the right moment. Consider this your message.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "en",
+    "title": "Half a day, whole hope",
+    "body": "🌤️ Half the day has passed, but that doesn't mean half your chances are gone. Good things don't always follow the clock.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "en",
+    "title": "Permission to pause",
+    "body": "💛 Your to-do list can wait five minutes. Take some water, fresh air, and a little time for yourself. You deserve the pause.",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "en",
+    "title": "A wish without an occasion",
+    "body": "🌼 No festival, no special date, no big reason. Just a wish that something ordinary makes you smile this afternoon.",
+    "is_published": true,
+    "featured": true
+  }
+]
