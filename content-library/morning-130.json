@@ -1,0 +1,912 @@
+[
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કૃતજ્ઞતાની સવાર · દિલથી શુભેચ્છા",
+    "body": "🌞 આંખ ખુલતાં જ જે કંઈ મળ્યું છે તેનો આભાર માનવો એ સવારની સુંદર પ્રાર્થના છે.\nઆજના દિવસે તમને એવી નાની ખુશી મળે જેની યાદ સાંજ સુધી ચહેરા પર રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "નાની શરૂઆત · સ્મિતની ભેટ",
+    "body": "🌼 મોટી સફળતા માટે હંમેશાં મોટું પગલું જરૂરી નથી; સવારનો એક નાનો નિર્ધાર પણ ઘણો છે.\nજેમ ફૂલો ધીમે ધીમે ખીલે છે, તેમ તમારા સપના પણ પોતાના સમયે ખીલે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ખુશીનો દરવાજો · હૃદયનો સંદેશ",
+    "body": "☕ આજની સવાર તમારા મનના બંધ દરવાજા પર આશાનો નરમ ટકોરો કરે છે.\nઆજે કામ વચ્ચે પોતાના માટે પણ થોડી હવા, થોડો આરામ અને થોડો આનંદ સાચવજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજની નવી તક · પ્રકાશનો રસ્તો",
+    "body": "🌻 દરેક સૂર્યોદય જીવનને એક વધુ તક આપે છે, પણ તેને સુંદર બનાવવું આપણા હાથમાં છે.\nઆ સવાર માત્ર સુંદર ન રહે, આખો દિવસ તમારા માટે યાદગાર બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "દિવસની સુંદર ભેટ · નવી આશા",
+    "body": "🌿 કોઈને પ્રેમથી યાદ કરવાની ક્ષણથી વધુ સુંદર સવારનો આરંભ શું હોઈ શકે?\nવહેલી સવારનો આ ઉજાસ ઘરમાં સ્નેહ અને હૃદયમાં હળવાશ લઈને આવે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "સવારનો પહેલો પ્રકાશ · હૃદયનો સંદેશ",
+    "body": "🌞 સવારની પહેલી કિરણ યાદ અપાવે છે કે ગઈકાલ કરતાં આજે કંઈક સુંદર બની શકે છે.\nઆજે કામ વચ્ચે પોતાના માટે પણ થોડી હવા, થોડો આરામ અને થોડો આનંદ સાચવજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ચાની ખુશ્બૂ · પ્રકાશનો રસ્તો",
+    "body": "🌼 ગરમ ચાની એક ચુસ્કી અને પ્રિયજનનું સ્મિત આખી સવારને ખાસ બનાવી દે છે.\nઆ સવાર માત્ર સુંદર ન રહે, આખો દિવસ તમારા માટે યાદગાર બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજનું નવું પાનું · નવી આશા",
+    "body": "☕ આજે જીવનના નવા પાનાં પર કોઈ સુંદર યાદ લખવાની તક તમારી રાહ જુએ છે.\nવહેલી સવારનો આ ઉજાસ ઘરમાં સ્નેહ અને હૃદયમાં હળવાશ લઈને આવે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "હસતી કિરણ · આનંદની પળ",
+    "body": "🌻 બારી પાસેના પક્ષીઓની ચહકમાં પણ એક નાનકડું સુપ્રભાત છુપાયેલું હોય છે.\nચિંતાની જગ્યાએ વિશ્વાસ, ઉતાવળની જગ્યાએ ધીરજ અને મનમાં મીઠું સ્મિત રાખજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "મનનો સૂરજ · ખાસ પળ",
+    "body": "🌿 મન પ્રસન્ન હોય તો વાદળછાયું આકાશ પણ સૂરજ જેટલું પ્રકાશ આપે છે.\nજે તમારી સાથે છે તેમને પ્રેમ આપજો અને જે દૂર છે તેમને દિલથી શુભેચ્છા મોકલજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કુદરતની ભેટ · મીઠી લાગણી",
+    "body": "🌞 કુદરત દરરોજ કોઈ અવાજ કર્યા વગર નવી શરૂઆતની ભેટ મૂકી જાય છે.\nતમારો દરેક નિર્ણય શાંતિથી લેવાય અને દરેક પ્રયત્નમાં નવો આત્મવિશ્વાસ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "અધૂરી આશાઓ · સુંદર વિચાર",
+    "body": "🌼 ગઈકાલે અધૂરું રહેલું સપનું આજે ફરી પ્રયત્ન કરવા માટે બોલાવી રહ્યું છે.\nઆજે કોઈને એક સારો શબ્દ કહેજો; કદાચ એ જ તેના દિવસની શ્રેષ્ઠ ભેટ બનશે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કૃતજ્ઞતાની સવાર · સ્નેહના રંગ",
+    "body": "☕ આંખ ખુલતાં જ જે કંઈ મળ્યું છે તેનો આભાર માનવો એ સવારની સુંદર પ્રાર્થના છે.\nતમારી મહેનતને યોગ્ય દિશા મળે અને તમારી આશાને નવું બળ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "નાની શરૂઆત · દિલથી શુભેચ્છા",
+    "body": "🌻 મોટી સફળતા માટે હંમેશાં મોટું પગલું જરૂરી નથી; સવારનો એક નાનો નિર્ધાર પણ ઘણો છે.\nઆજના દિવસે તમને એવી નાની ખુશી મળે જેની યાદ સાંજ સુધી ચહેરા પર રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ખુશીનો દરવાજો · સ્મિતની ભેટ",
+    "body": "🌿 આજની સવાર તમારા મનના બંધ દરવાજા પર આશાનો નરમ ટકોરો કરે છે.\nજેમ ફૂલો ધીમે ધીમે ખીલે છે, તેમ તમારા સપના પણ પોતાના સમયે ખીલે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજની નવી તક · હૃદયનો સંદેશ",
+    "body": "🌞 દરેક સૂર્યોદય જીવનને એક વધુ તક આપે છે, પણ તેને સુંદર બનાવવું આપણા હાથમાં છે.\nઆજે કામ વચ્ચે પોતાના માટે પણ થોડી હવા, થોડો આરામ અને થોડો આનંદ સાચવજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "દિવસની સુંદર ભેટ · પ્રકાશનો રસ્તો",
+    "body": "🌼 કોઈને પ્રેમથી યાદ કરવાની ક્ષણથી વધુ સુંદર સવારનો આરંભ શું હોઈ શકે?\nઆ સવાર માત્ર સુંદર ન રહે, આખો દિવસ તમારા માટે યાદગાર બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "સવારનો પહેલો પ્રકાશ · સ્મિતની ભેટ",
+    "body": "☕ સવારની પહેલી કિરણ યાદ અપાવે છે કે ગઈકાલ કરતાં આજે કંઈક સુંદર બની શકે છે.\nજેમ ફૂલો ધીમે ધીમે ખીલે છે, તેમ તમારા સપના પણ પોતાના સમયે ખીલે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ચાની ખુશ્બૂ · હૃદયનો સંદેશ",
+    "body": "🌻 ગરમ ચાની એક ચુસ્કી અને પ્રિયજનનું સ્મિત આખી સવારને ખાસ બનાવી દે છે.\nઆજે કામ વચ્ચે પોતાના માટે પણ થોડી હવા, થોડો આરામ અને થોડો આનંદ સાચવજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજનું નવું પાનું · પ્રકાશનો રસ્તો",
+    "body": "🌿 આજે જીવનના નવા પાનાં પર કોઈ સુંદર યાદ લખવાની તક તમારી રાહ જુએ છે.\nઆ સવાર માત્ર સુંદર ન રહે, આખો દિવસ તમારા માટે યાદગાર બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "હસતી કિરણ · નવી આશા",
+    "body": "🌞 બારી પાસેના પક્ષીઓની ચહકમાં પણ એક નાનકડું સુપ્રભાત છુપાયેલું હોય છે.\nવહેલી સવારનો આ ઉજાસ ઘરમાં સ્નેહ અને હૃદયમાં હળવાશ લઈને આવે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "મનનો સૂરજ · આનંદની પળ",
+    "body": "🌼 મન પ્રસન્ન હોય તો વાદળછાયું આકાશ પણ સૂરજ જેટલું પ્રકાશ આપે છે.\nચિંતાની જગ્યાએ વિશ્વાસ, ઉતાવળની જગ્યાએ ધીરજ અને મનમાં મીઠું સ્મિત રાખજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કુદરતની ભેટ · ખાસ પળ",
+    "body": "☕ કુદરત દરરોજ કોઈ અવાજ કર્યા વગર નવી શરૂઆતની ભેટ મૂકી જાય છે.\nજે તમારી સાથે છે તેમને પ્રેમ આપજો અને જે દૂર છે તેમને દિલથી શુભેચ્છા મોકલજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "અધૂરી આશાઓ · મીઠી લાગણી",
+    "body": "🌻 ગઈકાલે અધૂરું રહેલું સપનું આજે ફરી પ્રયત્ન કરવા માટે બોલાવી રહ્યું છે.\nતમારો દરેક નિર્ણય શાંતિથી લેવાય અને દરેક પ્રયત્નમાં નવો આત્મવિશ્વાસ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કૃતજ્ઞતાની સવાર · સુંદર વિચાર",
+    "body": "🌿 આંખ ખુલતાં જ જે કંઈ મળ્યું છે તેનો આભાર માનવો એ સવારની સુંદર પ્રાર્થના છે.\nઆજે કોઈને એક સારો શબ્દ કહેજો; કદાચ એ જ તેના દિવસની શ્રેષ્ઠ ભેટ બનશે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "નાની શરૂઆત · સ્નેહના રંગ",
+    "body": "🌞 મોટી સફળતા માટે હંમેશાં મોટું પગલું જરૂરી નથી; સવારનો એક નાનો નિર્ધાર પણ ઘણો છે.\nતમારી મહેનતને યોગ્ય દિશા મળે અને તમારી આશાને નવું બળ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ખુશીનો દરવાજો · દિલથી શુભેચ્છા",
+    "body": "🌼 આજની સવાર તમારા મનના બંધ દરવાજા પર આશાનો નરમ ટકોરો કરે છે.\nઆજના દિવસે તમને એવી નાની ખુશી મળે જેની યાદ સાંજ સુધી ચહેરા પર રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજની નવી તક · સ્મિતની ભેટ",
+    "body": "☕ દરેક સૂર્યોદય જીવનને એક વધુ તક આપે છે, પણ તેને સુંદર બનાવવું આપણા હાથમાં છે.\nજેમ ફૂલો ધીમે ધીમે ખીલે છે, તેમ તમારા સપના પણ પોતાના સમયે ખીલે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "દિવસની સુંદર ભેટ · હૃદયનો સંદેશ",
+    "body": "🌻 કોઈને પ્રેમથી યાદ કરવાની ક્ષણથી વધુ સુંદર સવારનો આરંભ શું હોઈ શકે?\nઆજે કામ વચ્ચે પોતાના માટે પણ થોડી હવા, થોડો આરામ અને થોડો આનંદ સાચવજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "સવારનો પહેલો પ્રકાશ · દિલથી શુભેચ્છા",
+    "body": "🌿 સવારની પહેલી કિરણ યાદ અપાવે છે કે ગઈકાલ કરતાં આજે કંઈક સુંદર બની શકે છે.\nઆજના દિવસે તમને એવી નાની ખુશી મળે જેની યાદ સાંજ સુધી ચહેરા પર રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ચાની ખુશ્બૂ · સ્મિતની ભેટ",
+    "body": "🌞 ગરમ ચાની એક ચુસ્કી અને પ્રિયજનનું સ્મિત આખી સવારને ખાસ બનાવી દે છે.\nજેમ ફૂલો ધીમે ધીમે ખીલે છે, તેમ તમારા સપના પણ પોતાના સમયે ખીલે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજનું નવું પાનું · હૃદયનો સંદેશ",
+    "body": "🌼 આજે જીવનના નવા પાનાં પર કોઈ સુંદર યાદ લખવાની તક તમારી રાહ જુએ છે.\nઆજે કામ વચ્ચે પોતાના માટે પણ થોડી હવા, થોડો આરામ અને થોડો આનંદ સાચવજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "હસતી કિરણ · પ્રકાશનો રસ્તો",
+    "body": "☕ બારી પાસેના પક્ષીઓની ચહકમાં પણ એક નાનકડું સુપ્રભાત છુપાયેલું હોય છે.\nઆ સવાર માત્ર સુંદર ન રહે, આખો દિવસ તમારા માટે યાદગાર બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "મનનો સૂરજ · નવી આશા",
+    "body": "🌻 મન પ્રસન્ન હોય તો વાદળછાયું આકાશ પણ સૂરજ જેટલું પ્રકાશ આપે છે.\nવહેલી સવારનો આ ઉજાસ ઘરમાં સ્નેહ અને હૃદયમાં હળવાશ લઈને આવે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કુદરતની ભેટ · આનંદની પળ",
+    "body": "🌿 કુદરત દરરોજ કોઈ અવાજ કર્યા વગર નવી શરૂઆતની ભેટ મૂકી જાય છે.\nચિંતાની જગ્યાએ વિશ્વાસ, ઉતાવળની જગ્યાએ ધીરજ અને મનમાં મીઠું સ્મિત રાખજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "અધૂરી આશાઓ · ખાસ પળ",
+    "body": "🌞 ગઈકાલે અધૂરું રહેલું સપનું આજે ફરી પ્રયત્ન કરવા માટે બોલાવી રહ્યું છે.\nજે તમારી સાથે છે તેમને પ્રેમ આપજો અને જે દૂર છે તેમને દિલથી શુભેચ્છા મોકલજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કૃતજ્ઞતાની સવાર · મીઠી લાગણી",
+    "body": "🌼 આંખ ખુલતાં જ જે કંઈ મળ્યું છે તેનો આભાર માનવો એ સવારની સુંદર પ્રાર્થના છે.\nતમારો દરેક નિર્ણય શાંતિથી લેવાય અને દરેક પ્રયત્નમાં નવો આત્મવિશ્વાસ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "નાની શરૂઆત · સુંદર વિચાર",
+    "body": "☕ મોટી સફળતા માટે હંમેશાં મોટું પગલું જરૂરી નથી; સવારનો એક નાનો નિર્ધાર પણ ઘણો છે.\nઆજે કોઈને એક સારો શબ્દ કહેજો; કદાચ એ જ તેના દિવસની શ્રેષ્ઠ ભેટ બનશે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ખુશીનો દરવાજો · સ્નેહના રંગ",
+    "body": "🌻 આજની સવાર તમારા મનના બંધ દરવાજા પર આશાનો નરમ ટકોરો કરે છે.\nતમારી મહેનતને યોગ્ય દિશા મળે અને તમારી આશાને નવું બળ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજની નવી તક · દિલથી શુભેચ્છા",
+    "body": "🌿 દરેક સૂર્યોદય જીવનને એક વધુ તક આપે છે, પણ તેને સુંદર બનાવવું આપણા હાથમાં છે.\nઆજના દિવસે તમને એવી નાની ખુશી મળે જેની યાદ સાંજ સુધી ચહેરા પર રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "દિવસની સુંદર ભેટ · સ્મિતની ભેટ",
+    "body": "🌞 કોઈને પ્રેમથી યાદ કરવાની ક્ષણથી વધુ સુંદર સવારનો આરંભ શું હોઈ શકે?\nજેમ ફૂલો ધીમે ધીમે ખીલે છે, તેમ તમારા સપના પણ પોતાના સમયે ખીલે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "સવારનો પહેલો પ્રકાશ · સ્નેહના રંગ",
+    "body": "🌼 સવારની પહેલી કિરણ યાદ અપાવે છે કે ગઈકાલ કરતાં આજે કંઈક સુંદર બની શકે છે.\nતમારી મહેનતને યોગ્ય દિશા મળે અને તમારી આશાને નવું બળ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ચાની ખુશ્બૂ · દિલથી શુભેચ્છા",
+    "body": "☕ ગરમ ચાની એક ચુસ્કી અને પ્રિયજનનું સ્મિત આખી સવારને ખાસ બનાવી દે છે.\nઆજના દિવસે તમને એવી નાની ખુશી મળે જેની યાદ સાંજ સુધી ચહેરા પર રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજનું નવું પાનું · સ્મિતની ભેટ",
+    "body": "🌻 આજે જીવનના નવા પાનાં પર કોઈ સુંદર યાદ લખવાની તક તમારી રાહ જુએ છે.\nજેમ ફૂલો ધીમે ધીમે ખીલે છે, તેમ તમારા સપના પણ પોતાના સમયે ખીલે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "હસતી કિરણ · હૃદયનો સંદેશ",
+    "body": "🌿 બારી પાસેના પક્ષીઓની ચહકમાં પણ એક નાનકડું સુપ્રભાત છુપાયેલું હોય છે.\nઆજે કામ વચ્ચે પોતાના માટે પણ થોડી હવા, થોડો આરામ અને થોડો આનંદ સાચવજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "મનનો સૂરજ · પ્રકાશનો રસ્તો",
+    "body": "🌞 મન પ્રસન્ન હોય તો વાદળછાયું આકાશ પણ સૂરજ જેટલું પ્રકાશ આપે છે.\nઆ સવાર માત્ર સુંદર ન રહે, આખો દિવસ તમારા માટે યાદગાર બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કુદરતની ભેટ · નવી આશા",
+    "body": "🌼 કુદરત દરરોજ કોઈ અવાજ કર્યા વગર નવી શરૂઆતની ભેટ મૂકી જાય છે.\nવહેલી સવારનો આ ઉજાસ ઘરમાં સ્નેહ અને હૃદયમાં હળવાશ લઈને આવે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "અધૂરી આશાઓ · આનંદની પળ",
+    "body": "☕ ગઈકાલે અધૂરું રહેલું સપનું આજે ફરી પ્રયત્ન કરવા માટે બોલાવી રહ્યું છે.\nચિંતાની જગ્યાએ વિશ્વાસ, ઉતાવળની જગ્યાએ ધીરજ અને મનમાં મીઠું સ્મિત રાખજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કૃતજ્ઞતાની સવાર · ખાસ પળ",
+    "body": "🌻 આંખ ખુલતાં જ જે કંઈ મળ્યું છે તેનો આભાર માનવો એ સવારની સુંદર પ્રાર્થના છે.\nજે તમારી સાથે છે તેમને પ્રેમ આપજો અને જે દૂર છે તેમને દિલથી શુભેચ્છા મોકલજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "નાની શરૂઆત · મીઠી લાગણી",
+    "body": "🌿 મોટી સફળતા માટે હંમેશાં મોટું પગલું જરૂરી નથી; સવારનો એક નાનો નિર્ધાર પણ ઘણો છે.\nતમારો દરેક નિર્ણય શાંતિથી લેવાય અને દરેક પ્રયત્નમાં નવો આત્મવિશ્વાસ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ખુશીનો દરવાજો · સુંદર વિચાર",
+    "body": "🌞 આજની સવાર તમારા મનના બંધ દરવાજા પર આશાનો નરમ ટકોરો કરે છે.\nઆજે કોઈને એક સારો શબ્દ કહેજો; કદાચ એ જ તેના દિવસની શ્રેષ્ઠ ભેટ બનશે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજની નવી તક · સ્નેહના રંગ",
+    "body": "🌼 દરેક સૂર્યોદય જીવનને એક વધુ તક આપે છે, પણ તેને સુંદર બનાવવું આપણા હાથમાં છે.\nતમારી મહેનતને યોગ્ય દિશા મળે અને તમારી આશાને નવું બળ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "દિવસની સુંદર ભેટ · દિલથી શુભેચ્છા",
+    "body": "☕ કોઈને પ્રેમથી યાદ કરવાની ક્ષણથી વધુ સુંદર સવારનો આરંભ શું હોઈ શકે?\nઆજના દિવસે તમને એવી નાની ખુશી મળે જેની યાદ સાંજ સુધી ચહેરા પર રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "સવારનો પહેલો પ્રકાશ · સુંદર વિચાર",
+    "body": "🌻 સવારની પહેલી કિરણ યાદ અપાવે છે કે ગઈકાલ કરતાં આજે કંઈક સુંદર બની શકે છે.\nઆજે કોઈને એક સારો શબ્દ કહેજો; કદાચ એ જ તેના દિવસની શ્રેષ્ઠ ભેટ બનશે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "ચાની ખુશ્બૂ · સ્નેહના રંગ",
+    "body": "🌿 ગરમ ચાની એક ચુસ્કી અને પ્રિયજનનું સ્મિત આખી સવારને ખાસ બનાવી દે છે.\nતમારી મહેનતને યોગ્ય દિશા મળે અને તમારી આશાને નવું બળ મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "આજનું નવું પાનું · દિલથી શુભેચ્છા",
+    "body": "🌞 આજે જીવનના નવા પાનાં પર કોઈ સુંદર યાદ લખવાની તક તમારી રાહ જુએ છે.\nઆજના દિવસે તમને એવી નાની ખુશી મળે જેની યાદ સાંજ સુધી ચહેરા પર રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "હસતી કિરણ · સ્મિતની ભેટ",
+    "body": "🌼 બારી પાસેના પક્ષીઓની ચહકમાં પણ એક નાનકડું સુપ્રભાત છુપાયેલું હોય છે.\nજેમ ફૂલો ધીમે ધીમે ખીલે છે, તેમ તમારા સપના પણ પોતાના સમયે ખીલે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "મનનો સૂરજ · હૃદયનો સંદેશ",
+    "body": "☕ મન પ્રસન્ન હોય તો વાદળછાયું આકાશ પણ સૂરજ જેટલું પ્રકાશ આપે છે.\nઆજે કામ વચ્ચે પોતાના માટે પણ થોડી હવા, થોડો આરામ અને થોડો આનંદ સાચવજો.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "કુદરતની ભેટ · પ્રકાશનો રસ્તો",
+    "body": "🌻 કુદરત દરરોજ કોઈ અવાજ કર્યા વગર નવી શરૂઆતની ભેટ મૂકી જાય છે.\nઆ સવાર માત્ર સુંદર ન રહે, આખો દિવસ તમારા માટે યાદગાર બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "gu",
+    "title": "અધૂરી આશાઓ · નવી આશા",
+    "body": "🌿 ગઈકાલે અધૂરું રહેલું સપનું આજે ફરી પ્રયત્ન કરવા માટે બોલાવી રહ્યું છે.\nવહેલી સવારનો આ ઉજાસ ઘરમાં સ્નેહ અને હૃદયમાં હળવાશ લઈને આવે.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "शुक्रगुजार सुबह · दिल से शुभकामना",
+    "body": "🌞 आंख खुलते ही जिंदगी की छोटी-छोटी नेमतों का शुक्रिया करना कितना सुकून देता है।\nआज कोई ऐसी छोटी खुशी मिले जो शाम तक चेहरे पर मुस्कान बनाए रखे।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "छोटी शुरुआत · मुस्कान की वजह",
+    "body": "🌼 बड़ी मंजिल तक पहुंचने की शुरुआत कभी-कभी बस एक छोटे से फैसले से होती है।\nफूलों की तरह आपके सपने भी सही वक्त पर खूबसूरती से खिलें।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "खुशियों का दरवाजा · दिल की दुआ",
+    "body": "☕ आज की सुबह आपके मन के दरवाजे पर उम्मीद की हल्की दस्तक है।\nकाम के बीच अपने लिए भी थोड़ा वक्त और थोड़ी सी खुशी बचाकर रखिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "आज का नया मौका · रौशनी का सफर",
+    "body": "🌻 हर सूर्योदय नई कहानी लिखने का मौका देता है और कलम हमारे हाथ में होती है।\nयह सुबह ही नहीं, आपका पूरा दिन खूबसूरत याद बन जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "सुबह की प्यारी याद · नई उम्मीद",
+    "body": "🌿 जिसे हम प्यार से याद करते हैं, उसकी याद सुबह को और भी खास बना देती है।\nसुबह की यह रोशनी घर में अपनापन और दिल में हल्कापन लेकर आए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "सुबह की पहली किरण · दिल की दुआ",
+    "body": "🌞 सुबह की पहली किरण याद दिलाती है कि हर दिन एक नया अवसर लेकर आता है।\nकाम के बीच अपने लिए भी थोड़ा वक्त और थोड़ी सी खुशी बचाकर रखिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "चाय की खुशबू · रौशनी का सफर",
+    "body": "🌼 एक कप गरम चाय और किसी अपने की मुस्कान पूरी सुबह को खूबसूरत बना देती है।\nयह सुबह ही नहीं, आपका पूरा दिन खूबसूरत याद बन जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "आज का नया पन्ना · नई उम्मीद",
+    "body": "☕ आज जिंदगी का नया पन्ना खुला है; इस पर कोई प्यारी याद जरूर लिखिए।\nसुबह की यह रोशनी घर में अपनापन और दिल में हल्कापन लेकर आए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "मुस्कुराता आसमान · खुशी का पल",
+    "body": "🌻 खिड़की के बाहर पक्षियों की आवाज भी जैसे दिल से सुप्रभात कह रही हो।\nचिंता की जगह भरोसा, जल्दबाजी की जगह सब्र और चेहरे पर प्यारी मुस्कान रखिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "दिल की रोशनी · खास सुबह",
+    "body": "🌿 मन में उजाला हो तो बादलों के पीछे छिपा सूरज भी पास महसूस होता है।\nजो पास हैं उन्हें प्यार दीजिए और जो दूर हैं उन्हें दिल से दुआ भेजिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "प्रकृति का तोहफा · एक प्यारा एहसास",
+    "body": "🌞 प्रकृति बिना कुछ मांगे रोज हमें एक नई शुरुआत का उपहार देती है।\nआपके फैसलों में सुकून और हर कोशिश में नया हौसला बना रहे।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "अधूरे सपने · सुंदर विचार",
+    "body": "🌼 कल का अधूरा सपना आज फिर से कदम बढ़ाने का निमंत्रण देता है।\nआज किसी को एक अच्छा शब्द जरूर कहिए; शायद उसका पूरा दिन बन जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "शुक्रगुजार सुबह · अपनों के नाम",
+    "body": "☕ आंख खुलते ही जिंदगी की छोटी-छोटी नेमतों का शुक्रिया करना कितना सुकून देता है।\nआपकी मेहनत को सही दिशा और हर उम्मीद को नई उड़ान मिले।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "छोटी शुरुआत · दिल से शुभकामना",
+    "body": "🌻 बड़ी मंजिल तक पहुंचने की शुरुआत कभी-कभी बस एक छोटे से फैसले से होती है।\nआज कोई ऐसी छोटी खुशी मिले जो शाम तक चेहरे पर मुस्कान बनाए रखे।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "खुशियों का दरवाजा · मुस्कान की वजह",
+    "body": "🌿 आज की सुबह आपके मन के दरवाजे पर उम्मीद की हल्की दस्तक है।\nफूलों की तरह आपके सपने भी सही वक्त पर खूबसूरती से खिलें।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "आज का नया मौका · दिल की दुआ",
+    "body": "🌞 हर सूर्योदय नई कहानी लिखने का मौका देता है और कलम हमारे हाथ में होती है।\nकाम के बीच अपने लिए भी थोड़ा वक्त और थोड़ी सी खुशी बचाकर रखिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "सुबह की प्यारी याद · रौशनी का सफर",
+    "body": "🌼 जिसे हम प्यार से याद करते हैं, उसकी याद सुबह को और भी खास बना देती है।\nयह सुबह ही नहीं, आपका पूरा दिन खूबसूरत याद बन जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "सुबह की पहली किरण · मुस्कान की वजह",
+    "body": "☕ सुबह की पहली किरण याद दिलाती है कि हर दिन एक नया अवसर लेकर आता है।\nफूलों की तरह आपके सपने भी सही वक्त पर खूबसूरती से खिलें।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "चाय की खुशबू · दिल की दुआ",
+    "body": "🌻 एक कप गरम चाय और किसी अपने की मुस्कान पूरी सुबह को खूबसूरत बना देती है।\nकाम के बीच अपने लिए भी थोड़ा वक्त और थोड़ी सी खुशी बचाकर रखिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "आज का नया पन्ना · रौशनी का सफर",
+    "body": "🌿 आज जिंदगी का नया पन्ना खुला है; इस पर कोई प्यारी याद जरूर लिखिए।\nयह सुबह ही नहीं, आपका पूरा दिन खूबसूरत याद बन जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "मुस्कुराता आसमान · नई उम्मीद",
+    "body": "🌞 खिड़की के बाहर पक्षियों की आवाज भी जैसे दिल से सुप्रभात कह रही हो।\nसुबह की यह रोशनी घर में अपनापन और दिल में हल्कापन लेकर आए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "दिल की रोशनी · खुशी का पल",
+    "body": "🌼 मन में उजाला हो तो बादलों के पीछे छिपा सूरज भी पास महसूस होता है।\nचिंता की जगह भरोसा, जल्दबाजी की जगह सब्र और चेहरे पर प्यारी मुस्कान रखिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "प्रकृति का तोहफा · खास सुबह",
+    "body": "☕ प्रकृति बिना कुछ मांगे रोज हमें एक नई शुरुआत का उपहार देती है।\nजो पास हैं उन्हें प्यार दीजिए और जो दूर हैं उन्हें दिल से दुआ भेजिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "अधूरे सपने · एक प्यारा एहसास",
+    "body": "🌻 कल का अधूरा सपना आज फिर से कदम बढ़ाने का निमंत्रण देता है।\nआपके फैसलों में सुकून और हर कोशिश में नया हौसला बना रहे।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "शुक्रगुजार सुबह · सुंदर विचार",
+    "body": "🌿 आंख खुलते ही जिंदगी की छोटी-छोटी नेमतों का शुक्रिया करना कितना सुकून देता है।\nआज किसी को एक अच्छा शब्द जरूर कहिए; शायद उसका पूरा दिन बन जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "छोटी शुरुआत · अपनों के नाम",
+    "body": "🌞 बड़ी मंजिल तक पहुंचने की शुरुआत कभी-कभी बस एक छोटे से फैसले से होती है।\nआपकी मेहनत को सही दिशा और हर उम्मीद को नई उड़ान मिले।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "खुशियों का दरवाजा · दिल से शुभकामना",
+    "body": "🌼 आज की सुबह आपके मन के दरवाजे पर उम्मीद की हल्की दस्तक है।\nआज कोई ऐसी छोटी खुशी मिले जो शाम तक चेहरे पर मुस्कान बनाए रखे।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "आज का नया मौका · मुस्कान की वजह",
+    "body": "☕ हर सूर्योदय नई कहानी लिखने का मौका देता है और कलम हमारे हाथ में होती है।\nफूलों की तरह आपके सपने भी सही वक्त पर खूबसूरती से खिलें।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "सुबह की प्यारी याद · दिल की दुआ",
+    "body": "🌻 जिसे हम प्यार से याद करते हैं, उसकी याद सुबह को और भी खास बना देती है।\nकाम के बीच अपने लिए भी थोड़ा वक्त और थोड़ी सी खुशी बचाकर रखिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "सुबह की पहली किरण · दिल से शुभकामना",
+    "body": "🌿 सुबह की पहली किरण याद दिलाती है कि हर दिन एक नया अवसर लेकर आता है।\nआज कोई ऐसी छोटी खुशी मिले जो शाम तक चेहरे पर मुस्कान बनाए रखे।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "चाय की खुशबू · मुस्कान की वजह",
+    "body": "🌞 एक कप गरम चाय और किसी अपने की मुस्कान पूरी सुबह को खूबसूरत बना देती है।\nफूलों की तरह आपके सपने भी सही वक्त पर खूबसूरती से खिलें।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "आज का नया पन्ना · दिल की दुआ",
+    "body": "🌼 आज जिंदगी का नया पन्ना खुला है; इस पर कोई प्यारी याद जरूर लिखिए।\nकाम के बीच अपने लिए भी थोड़ा वक्त और थोड़ी सी खुशी बचाकर रखिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "मुस्कुराता आसमान · रौशनी का सफर",
+    "body": "☕ खिड़की के बाहर पक्षियों की आवाज भी जैसे दिल से सुप्रभात कह रही हो।\nयह सुबह ही नहीं, आपका पूरा दिन खूबसूरत याद बन जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "दिल की रोशनी · नई उम्मीद",
+    "body": "🌻 मन में उजाला हो तो बादलों के पीछे छिपा सूरज भी पास महसूस होता है।\nसुबह की यह रोशनी घर में अपनापन और दिल में हल्कापन लेकर आए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "प्रकृति का तोहफा · खुशी का पल",
+    "body": "🌿 प्रकृति बिना कुछ मांगे रोज हमें एक नई शुरुआत का उपहार देती है।\nचिंता की जगह भरोसा, जल्दबाजी की जगह सब्र और चेहरे पर प्यारी मुस्कान रखिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "अधूरे सपने · खास सुबह",
+    "body": "🌞 कल का अधूरा सपना आज फिर से कदम बढ़ाने का निमंत्रण देता है।\nजो पास हैं उन्हें प्यार दीजिए और जो दूर हैं उन्हें दिल से दुआ भेजिए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "शुक्रगुजार सुबह · एक प्यारा एहसास",
+    "body": "🌼 आंख खुलते ही जिंदगी की छोटी-छोटी नेमतों का शुक्रिया करना कितना सुकून देता है।\nआपके फैसलों में सुकून और हर कोशिश में नया हौसला बना रहे।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "छोटी शुरुआत · सुंदर विचार",
+    "body": "☕ बड़ी मंजिल तक पहुंचने की शुरुआत कभी-कभी बस एक छोटे से फैसले से होती है।\nआज किसी को एक अच्छा शब्द जरूर कहिए; शायद उसका पूरा दिन बन जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "खुशियों का दरवाजा · अपनों के नाम",
+    "body": "🌻 आज की सुबह आपके मन के दरवाजे पर उम्मीद की हल्की दस्तक है।\nआपकी मेहनत को सही दिशा और हर उम्मीद को नई उड़ान मिले।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "आज का नया मौका · दिल से शुभकामना",
+    "body": "🌿 हर सूर्योदय नई कहानी लिखने का मौका देता है और कलम हमारे हाथ में होती है।\nआज कोई ऐसी छोटी खुशी मिले जो शाम तक चेहरे पर मुस्कान बनाए रखे।",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A grateful beginning · A heartfelt wish",
+    "body": "🌞 Waking up thankful for the simple things is a beautiful way to begin the day.\nMay you find one tiny happiness today that keeps you smiling until evening.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "One small step · A reason to smile",
+    "body": "🌼 A long journey can begin with one small decision made before breakfast.\nMay your dreams bloom in their own good time, just like flowers after rain.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A doorway to joy · Warm wishes",
+    "body": "☕ This morning brings a soft knock of hope to the doors you thought were closed.\nRemember to save a little breathing room and joy for yourself between tasks.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Another beautiful chance · A brighter path",
+    "body": "🌻 Every sunrise offers a blank chapter, and you get to choose its first sentence.\nMay this lovely morning grow into a day you will remember fondly.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A morning to remember · New hope",
+    "body": "🌿 Thinking of someone with love can make the earliest hour feel wonderfully warm.\nLet the morning light fill your home with kindness and your heart with ease.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "The first morning ray · Warm wishes",
+    "body": "🌞 The first ray of sunlight is a gentle reminder that today can hold something better than yesterday.\nRemember to save a little breathing room and joy for yourself between tasks.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Tea and tiny joys · A brighter path",
+    "body": "🌼 A warm cup of tea and a familiar smile can turn an ordinary morning into a lovely memory.\nMay this lovely morning grow into a day you will remember fondly.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A fresh page today · New hope",
+    "body": "☕ Today opens like a fresh page, waiting for you to write something worth remembering.\nLet the morning light fill your home with kindness and your heart with ease.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A smiling sunrise · Little joys",
+    "body": "🌻 Birdsong outside the window sounds like nature sending a personal good-morning note.\nChoose patience over hurry, trust over worry, and a gentle smile over doubt.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Light within · A special moment",
+    "body": "🌿 When your heart feels bright, even a cloudy sky cannot take away your sunshine.\nGive love to those nearby and send warm thoughts to those far away.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Nature's morning gift · A lovely feeling",
+    "body": "🌞 Nature gives us a new beginning every morning without ever asking for anything in return.\nMay your choices feel peaceful and your efforts bring fresh confidence.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Dreams still growing · A kind thought",
+    "body": "🌼 An unfinished dream from yesterday deserves another brave little attempt today.\nOffer someone a kind word today; it might become the best part of their day.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A grateful beginning · For loved ones",
+    "body": "☕ Waking up thankful for the simple things is a beautiful way to begin the day.\nMay your hard work find direction and your hopes find new strength.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "One small step · A heartfelt wish",
+    "body": "🌻 A long journey can begin with one small decision made before breakfast.\nMay you find one tiny happiness today that keeps you smiling until evening.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A doorway to joy · A reason to smile",
+    "body": "🌿 This morning brings a soft knock of hope to the doors you thought were closed.\nMay your dreams bloom in their own good time, just like flowers after rain.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Another beautiful chance · Warm wishes",
+    "body": "🌞 Every sunrise offers a blank chapter, and you get to choose its first sentence.\nRemember to save a little breathing room and joy for yourself between tasks.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A morning to remember · A brighter path",
+    "body": "🌼 Thinking of someone with love can make the earliest hour feel wonderfully warm.\nMay this lovely morning grow into a day you will remember fondly.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "The first morning ray · A reason to smile",
+    "body": "☕ The first ray of sunlight is a gentle reminder that today can hold something better than yesterday.\nMay your dreams bloom in their own good time, just like flowers after rain.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Tea and tiny joys · Warm wishes",
+    "body": "🌻 A warm cup of tea and a familiar smile can turn an ordinary morning into a lovely memory.\nRemember to save a little breathing room and joy for yourself between tasks.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A fresh page today · A brighter path",
+    "body": "🌿 Today opens like a fresh page, waiting for you to write something worth remembering.\nMay this lovely morning grow into a day you will remember fondly.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A smiling sunrise · New hope",
+    "body": "🌞 Birdsong outside the window sounds like nature sending a personal good-morning note.\nLet the morning light fill your home with kindness and your heart with ease.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Light within · Little joys",
+    "body": "🌼 When your heart feels bright, even a cloudy sky cannot take away your sunshine.\nChoose patience over hurry, trust over worry, and a gentle smile over doubt.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Nature's morning gift · A special moment",
+    "body": "☕ Nature gives us a new beginning every morning without ever asking for anything in return.\nGive love to those nearby and send warm thoughts to those far away.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Dreams still growing · A lovely feeling",
+    "body": "🌻 An unfinished dream from yesterday deserves another brave little attempt today.\nMay your choices feel peaceful and your efforts bring fresh confidence.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A grateful beginning · A kind thought",
+    "body": "🌿 Waking up thankful for the simple things is a beautiful way to begin the day.\nOffer someone a kind word today; it might become the best part of their day.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "One small step · For loved ones",
+    "body": "🌞 A long journey can begin with one small decision made before breakfast.\nMay your hard work find direction and your hopes find new strength.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A doorway to joy · A heartfelt wish",
+    "body": "🌼 This morning brings a soft knock of hope to the doors you thought were closed.\nMay you find one tiny happiness today that keeps you smiling until evening.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "Another beautiful chance · A reason to smile",
+    "body": "☕ Every sunrise offers a blank chapter, and you get to choose its first sentence.\nMay your dreams bloom in their own good time, just like flowers after rain.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "A morning to remember · Warm wishes",
+    "body": "🌻 Thinking of someone with love can make the earliest hour feel wonderfully warm.\nRemember to save a little breathing room and joy for yourself between tasks.",
+    "is_published": true
+  },
+  {
+    "category_id": "morning",
+    "language": "en",
+    "title": "The first morning ray · A heartfelt wish",
+    "body": "🌿 The first ray of sunlight is a gentle reminder that today can hold something better than yesterday.\nMay you find one tiny happiness today that keeps you smiling until evening.",
+    "is_published": true
+  }
+]
