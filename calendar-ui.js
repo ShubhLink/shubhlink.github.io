@@ -82,4 +82,48 @@ if(month){
  reset.onclick=()=>{y=Number(zone.date.slice(0,4));m=Number(zone.date.slice(5,7))-1;render()};
  render();
 }
+
+/* Replace fixed sample text with a fresh, curated wish on each visit.
+   Category and event names stay tied to India-time calendar. */
+if(window.SHUBH_DATA_READY?.then){
+ window.SHUBH_DATA_READY.then(core=>{
+  if(!core?.D||!window.ShubhFresh)return;
+  const container=$('todayFeatures');if(!container)return;
+  const panels=container.querySelectorAll('.smart-feature');
+  const first=panels[0];
+  const quality=x=>core.dbFeatured?.has('gu|'+current+'|'+x);
+  const bank=core.D.wishes.gu?.[current]||[];
+  const featured=bank.filter(quality),candidates=featured.length?featured:bank;
+  const choice=window.ShubhFresh.pick(candidates,'home-daily-message:'+current);
+  if(first&&choice){
+   const h=first.querySelector('h3'),p=first.querySelector('p');
+   if(h)h.textContent=core.titleFor(choice,current,'gu');
+   if(p)p.textContent=choice;
+  }
+  const second=panels[1],todays=C.todayEvents(),next=C.upcoming(1)[0];
+  if(second){
+   const ev=todays[0]||next;
+   const title=second.querySelector('h3'),body=second.querySelector('p');
+   if(ev&&body){
+    const fest=(core.D.wishes.gu?.festival||[]).filter(x=>core.dbFeatured?.has('gu|festival|'+x));
+    const normal=C.normalize(ev.gu);
+    const special=fest.filter(x=>C.normalize(x).includes(normal)||ev.aliases?.some(a=>a.length>=5&&C.normalize(x).includes(C.normalize(a))));
+    const relevant=special.length?special:[];
+    if(relevant.length){
+     const text=window.ShubhFresh.pick(relevant,'home-festival:'+ev.gu);
+     if(text)body.textContent=text;
+    }else{
+     const freshLines=[
+      ev.gu+'ની ઉજવણી આવે એટલે એકબીજાને યાદ કરવાનો સુંદર બહાનો મળે છે. આજે કોઈ ખાસ વ્યક્તિને મીઠો સંદેશ મોકલજો. ✨',
+      'આ '+ev.gu+' પર ભેટ કરતાં વધુ કિંમતી એક સાચી યાદ છે. કોઈ જૂના સંબંધમાં ફરી હૂંફ ઉમેરવાનો મોકો છે. 💌',
+      ev.gu+'—ફક્ત કૅલેન્ડરની તારીખ નહીં, સાથે હસવા અને પ્રેમથી મળવાનો બહાનો. હૃદયથી શુભેચ્છા. 🌼'
+     ];
+     const txt=window.ShubhFresh.pick(freshLines,'home-festival:'+ev.gu);
+     if(txt)body.textContent=txt;
+    }
+   }
+  }
+ }).catch(()=>{});
+}
+
 })();
