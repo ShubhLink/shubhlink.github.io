@@ -1,0 +1,102 @@
+<!doctype html><html lang="gu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>મારું ખાતું | ShubhLink</title>
+<link rel="stylesheet" href="site.css"><link rel="icon" href="icon.svg">
+<style>
+.account-wrap{max-width:850px;margin:28px auto 100px;padding:0 15px}.account-hero{padding:24px;border-radius:22px;background:linear-gradient(120deg,#34243e,#6f4b75);color:#fff;margin-bottom:16px}.account-hero h1{font-size:28px;margin:0}.account-hero p{margin:8px 0 0;font-size:14px}.account-box{border:1px solid #e8dfe8;background:#fff;border-radius:20px;padding:23px;margin-bottom:15px;box-shadow:0 6px 25px #2f183310}.account-box h2{font-size:19px;margin:0 0 11px}.account-box label{display:block;margin:10px 0;font-weight:750}.account-box input,.account-box textarea{display:block;width:100%;border:1px solid #ddd6e1;border-radius:12px;padding:12px;margin-top:6px;font-size:16px}.account-box button{background:#382844;color:white;border:0;border-radius:12px;padding:13px 18px;font-weight:800;cursor:pointer}.account-box button.secondary{background:#e9e3f1;color:#382844}.account-box button.danger{background:#fff1f1;color:#a32828}.account-box button:disabled{opacity:.5}.rowbuttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.saved-item{border:1px solid #ebe3ef;border-radius:14px;padding:14px;margin:10px 0}.saved-item p{white-space:pre-wrap;overflow-wrap:anywhere}.subtle{color:#6b5a73;font-size:13px}.status{color:#6c458c;font-weight:700;min-height:22px}.account-box[hidden]{display:none!important}
+</style></head><body>
+<header class="sitehead"><div class="shell headwrap"><a class="brand" href="index.html"><span class="logomark">✦</span>Shubh<b>Link</b></a><a href="create.html" class="topbutton">મેસેજ બનાવો</a></div></header>
+<main class="account-wrap"><div class="account-hero"><h1>મારું ShubhLink ખાતું</h1><p>મફત શુભેચ્છા બધા બનાવી શકે છે. પોતાનું નામ અને મેસેજ સાચવવા માટે જ Account જરૂરી છે.</p></div>
+<section class="account-box" id="setup" hidden><h2>Account સેવા હજી શરૂ કરવાની બાકી છે</h2><p>મફત મેસેજ અને WhatsApp Sharing હાલમાં ચાલુ છે. સુરક્ષિત Phone Login માટે Database અને SMS OTP Provider જોડાયા પછી Account ચાલુ થશે.</p><a class="btn primary" href="create.html">Login વગર મેસેજ બનાવો</a></section>
+<section class="account-box" id="login" hidden>
+<h2>📱 ફોન નંબરથી Login / Register</h2><p class="subtle">તમારો ફોન નંબર OTP વડે Verify થશે. Password ની જરૂર નહીં પડે.</p>
+<label>મોબાઇલ નંબર (India +91)<input id="phone" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10 અંકનો મોબાઇલ નંબર"></label>
+<button id="sendOtp">OTP મોકલો</button>
+<div id="otpArea" hidden><label>SMS OTP<input id="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="OTP લખો"></label><button id="verifyOtp">OTP Verify કરો</button></div>
+<p id="loginStatus" class="status" role="status"></p>
+<p class="subtle">ફોન નંબરનો ઉપયોગ ફક્ત Login અને Account સુરક્ષા માટે થાય છે. OTP કોઈને જણાવશો નહીં.</p>
+</section>
+<section class="account-box" id="profile" hidden>
+<h2>👤 મારું પ્રોફાઇલ</h2><p id="phoneDisplay" class="subtle"></p>
+<label>તમારું નામ<input id="displayName" maxlength="80" placeholder="તમારું નામ લખો"></label>
+<div class="rowbuttons"><button id="saveName">નામ સેવ કરો</button><button class="secondary" id="logout">Logout</button></div>
+<p id="profileStatus" class="status" role="status"></p>
+</section>
+<section class="account-box" id="saved" hidden>
+<h2>💌 મારા સાચવેલા મેસેજ</h2>
+<p class="subtle">આ ફક્ત તમારા ખાતામાં જ દેખાશે; અન્ય વપરાશકર્તાના મેસેજ તમને દેખાશે નહીં.</p>
+<div id="savedList"></div>
+<a class="btn primary" href="create.html">＋ નવો મેસેજ બનાવો</a><p id="savedStatus" class="status" role="status"></p>
+</section>
+</main>
+<script src="backend-config.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(async()=>{
+const $=id=>document.getElementById(id),cfg=window.SHUBHLINK_BACKEND||{},ready=!!(cfg.url&&cfg.publishableKey&&window.supabase);
+if(!ready){$('setup').hidden=false;return}
+const client=window.supabase.createClient(cfg.url,cfg.publishableKey);
+let phone='';
+function status(id,msg){$(id).textContent=msg}
+function errmsg(e){return (e&&e.message)||'કોઈ સમસ્યા આવી છે. ફરી પ્રયાસ કરો.'}
+function toggle(el,on){$(el).hidden=!on}
+function normalizePhone(){const raw=$('phone').value.replace(/\D/g,'');if(!/^[6-9]\d{9}$/.test(raw))throw Error('યોગ્ય 10 અંકનો ભારતીય મોબાઇલ નંબર લખો.');return '+91'+raw}
+$('sendOtp').onclick=async()=>{
+ try{phone=normalizePhone();$('sendOtp').disabled=true;status('loginStatus','OTP મોકલી રહ્યા છીએ...');
+ const {error}=await client.auth.signInWithOtp({phone});if(error)throw error;
+ toggle('otpArea',true);status('loginStatus','OTP મોકલાયો હોય તો અહીં દાખલ કરો.');
+ }catch(e){status('loginStatus',errmsg(e))}finally{$('sendOtp').disabled=false}
+};
+$('verifyOtp').onclick=async()=>{
+ try{$('verifyOtp').disabled=true;const token=$('otp').value.trim();if(!/^\d{4,8}$/.test(token))throw Error('OTP યોગ્ય રીતે લખો.');
+ const {error}=await client.auth.verifyOtp({phone,token,type:'sms'});if(error)throw error;
+ status('loginStatus','Login સફળ.');await render();
+ }catch(e){status('loginStatus',errmsg(e))}finally{$('verifyOtp').disabled=false}
+};
+$('logout').onclick=async()=>{await client.auth.signOut();sessionStorage.removeItem('sl_pending_wish');await render()};
+$('saveName').onclick=async()=>{
+ const {data:{user}}=await client.auth.getUser();if(!user)return;
+ const name=$('displayName').value.trim();if(!name||name.length>80){status('profileStatus','નામ લખો.');return}
+ const {error}=await client.from('shubhlink_profiles').upsert({user_id:user.id,display_name:name,updated_at:new Date().toISOString()});
+ status('profileStatus',error?errmsg(error):'✓ તમારું નામ સેવ થયું.');
+};
+async function loadSaved(user){
+ const {data,error}=await client.from('shubhlink_saved_messages').select('id,title,body,category_id,language,recipient_name,sender_name,created_at').eq('user_id',user.id).order('created_at',{ascending:false}).limit(100);
+ const host=$('savedList');host.replaceChildren();if(error){status('savedStatus',errmsg(error));return}
+ if(!data.length){host.textContent='હજુ કોઈ મેસેજ સેવ કર્યો નથી.';return}
+ for(const item of data){
+ const box=document.createElement('div');box.className='saved-item';
+ const title=document.createElement('strong');title.textContent=item.title;
+ const body=document.createElement('p');body.textContent=item.body;
+ const row=document.createElement('div');row.className='rowbuttons';
+ const share=document.createElement('button');share.textContent='WhatsApp શેર';share.onclick=()=>{const text=(item.recipient_name?'પ્રિય '+item.recipient_name+',\n\n':'')+item.body+(item.sender_name?'\n\nશુભેચ્છાઓ સાથે — '+item.sender_name:'');window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(text),'_blank','noopener')};
+ const remove=document.createElement('button');remove.className='danger';remove.textContent='Delete';remove.onclick=async()=>{
+ if(!confirm('આ સેવ કરેલો મેસેજ ડિલીટ કરવો છે?'))return;
+ const {error:e}=await client.from('shubhlink_saved_messages').delete().eq('id',item.id).eq('user_id',user.id);
+ if(e){status('savedStatus',errmsg(e));return}await loadSaved(user)};
+ row.append(share,remove);box.append(title,body,row);host.append(box);
+ }
+}
+async function savePending(user){
+ const raw=sessionStorage.getItem('sl_pending_wish');if(!raw)return;
+ try{
+ const item=JSON.parse(raw);
+ if(!item.body||!item.title)return;
+ const row={user_id:user.id,title:String(item.title).slice(0,120),body:String(item.body).slice(0,1000),category_id:item.category_id||null,language:item.language||'gu',sender_name:String(item.sender_name||'').slice(0,80),recipient_name:String(item.recipient_name||'').slice(0,80)};
+ const {error}=await client.from('shubhlink_saved_messages').insert(row);
+ if(error)throw error;
+ sessionStorage.removeItem('sl_pending_wish');
+ status('savedStatus','✓ તમારો મેસેજ ખાતામાં સેવ થઈ ગયો.');
+ }catch(e){status('savedStatus','મેસેજ સેવ ન થયો: '+errmsg(e))}
+}
+async function render(){
+ const {data:{user},error}=await client.auth.getUser();
+ if(error){status('loginStatus',errmsg(error))}
+ toggle('login',!user);toggle('profile',!!user);toggle('saved',!!user);
+ if(!user)return;
+ $('phoneDisplay').textContent='Verified Phone: '+(user.phone||'');
+ const {data}=await client.from('shubhlink_profiles').select('display_name').eq('user_id',user.id).maybeSingle();
+ $('displayName').value=data?.display_name||'';
+ await savePending(user);await loadSaved(user);
+}
+await render();
+})();
+</script></body></html>
