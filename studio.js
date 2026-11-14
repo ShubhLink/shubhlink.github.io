@@ -8,6 +8,14 @@ const config=window.SHUBHLINK_BACKEND||{};
 const searchParams=new URLSearchParams(location.search);
 const validLang=['gu','hi','en'];
 let isBusy=false,topic='',history=[],avoid=[],round=0;
+function memoryKey(q){
+ const v=String(q||'').toLocaleLowerCase().slice(0,90);let h=2166136261;
+ for(let i=0;i<v.length;i++){h=Math.imul(h^v.charCodeAt(i),16777619)}
+ return 'shubhlink_studio_recent_v2_'+lang.value+'_'+(h>>>0).toString(36)
+}
+function loadRecent(q){try{const a=JSON.parse(sessionStorage.getItem(memoryKey(q))||'[]');return Array.isArray(a)?a.slice(-9):[]}catch(_){return []}}
+function saveRecent(q,items){try{sessionStorage.setItem(memoryKey(q),JSON.stringify([...loadRecent(q),...items].slice(-9)))}catch(_){}}
+
 const replyWords={gu:['હૃદયસ્પર્શી','કાવ્યમય','ટૂંકું અને ખાસ'],hi:['दिल से','शायराना','खास और नया'],en:['Heartfelt','Poetic','Memorable']};
 const starter=[
  {label:'🎂 જન્મદિવસ',text:'મારી બહેનના જન્મદિવસ માટે પ્રેમ અને બાળપણની યાદોથી ભરેલો સુંદર મેસેજ લખો'},
@@ -104,7 +112,7 @@ async function run(input,isFollowup=false){
  const text=small(input,240);
  if(isBusy||text.length<2)return;
  if(!config.url||!config.publishableKey){status.textContent='હમણાં AI ઉપલબ્ધ નથી.';return}
- if(!topic||!isFollowup){if(!topic)topic=text}
+ if(!topic||!isFollowup){if(!topic){topic=text;avoid=loadRecent(topic)}}
  isBusy=true;send.disabled=true;
  let succeeded=false;
  messageTurn('user',text);
@@ -131,6 +139,7 @@ async function run(input,isFollowup=false){
   history.push('User: '+text,'AI ideas: '+list.map(x=>small(x,130)).join(' | '));
   history=history.slice(-5);
   avoid.push(...list);avoid=avoid.slice(-9);
+  saveRecent(topic,list);
   status.textContent='';
  }catch(e){
   indicator.remove();
