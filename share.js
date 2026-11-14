@@ -32,7 +32,7 @@ function update(){
  parts.sendText.textContent=t.send;parts.close.setAttribute('aria-label',t.close);
  parts.msgTitle.textContent=current.title||t.noTitle;
  parts.msgBody.textContent=current.body;
- parts.preview.textContent=format().split('\n\n✨ ShubhLink · ')[0];
+ parts.preview.textContent=format();
 }
 function create(){
  if(initialized)return;initialized=true;
