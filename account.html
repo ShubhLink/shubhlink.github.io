@@ -14,12 +14,12 @@
 .account-box label{display:block;font-size:13px;font-weight:750;margin:13px 0 5px}
 .account-box input{display:block;width:100%;border:1px solid #ded7e1;background:#fff;border-radius:12px;padding:12px 13px;font-size:16px}
 .account-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:13px;min-height:48px;padding:12px 17px;background:#382844;color:#fff;font-weight:850;font-size:15px;margin:10px 0}
-.account-btn.google{background:#fff;border:1px solid #d5d4dc;color:#272433}
+.account-btn.google{background:#fff;border:1px solid #747775;color:#1f1f1f;font-size:14px;font-weight:600;letter-spacing:.1px}.account-btn.google:hover:not(:disabled){background:#f8f9fa}.account-google-icon{display:block;flex:none;width:20px;height:20px;object-fit:contain}.google-help{font-size:12px;line-height:1.7;color:#9c5b27;min-height:0;margin:6px 2px 12px}.google-help a{color:#6141a2;text-decoration:underline}
 .account-btn.light{background:#f0eaf4;color:#372640}
 .account-btn.small{width:auto;min-height:42px}
 .account-btn.danger{background:#fff0f0;color:#ae2f40}
 .account-btn:disabled{opacity:.55;cursor:not-allowed}
-.account-google-icon{font:900 23px system-ui;color:#4285f4}
+
 .account-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;background:#f3eff5;padding:5px;border-radius:12px;margin:16px 0}
 .account-tabs button{border:0;background:transparent;border-radius:9px;padding:10px 5px;font-size:13px;font-weight:800;color:#796a80}
 .account-tabs button.active{background:#fff;color:#493759;box-shadow:0 2px 9px #23152815}
@@ -41,7 +41,8 @@
 <section class="account-box" id="notConfigured" hidden><h2>Account Login હજી સક્રિય નથી</h2><p>Google Login તથા Email/Password Account પેજ તૈયાર છે. સુરક્ષિત Database જોડાયા પછી આ સેવા શરૂ થશે. ત્યાં સુધી કોઈ Login અથવા Password અહીં લેવાતો નથી.</p><a class="btn primary" href="create.html">Login વગર મેસેજ બનાવો ↗</a></section>
 <section class="account-box" id="authSection" hidden>
 <h2>Login અથવા મફત Account</h2>
-<button type="button" id="googleSignIn" class="account-btn google"><span class="account-google-icon" aria-hidden="true">G</span> Google થી Login કરો</button>
+<button type="button" id="googleSignIn" class="account-btn google"><img class="account-google-icon" src="https://developers.google.com/identity/images/g-logo.png" alt="" width="20" height="20" decoding="async"> Continue with Google</button>
+<p id="googleHelp" class="google-help" role="status" aria-live="polite"></p>
 <p class="account-muted" style="text-align:center">— અથવા Email અને Password દ્વારા —</p>
 <div class="account-tabs" role="group" aria-label="Account type">
 <button type="button" id="tabLogin" class="active">Login</button>
@@ -105,10 +106,45 @@ function setTab(tab){
  status('authStatus','');
 }
 $('tabLogin').onclick=()=>setTab('login');$('tabRegister').onclick=()=>setTab('register');$('tabReset').onclick=()=>setTab('reset');
+let googleProviderReady=null;
+async function checkGoogleProvider(){
+ try{
+  const response=await fetch(cfg.url.replace(/\/$/,'')+'/auth/v1/settings',{
+   headers:{apikey:cfg.publishableKey},cache:'no-store'
+  });
+  if(!response.ok)throw new Error('Settings unavailable');
+  const settings=await response.json();
+  if(settings?.external && typeof settings.external.google==='boolean'){
+   googleProviderReady=settings.external.google;
+   if(!googleProviderReady){
+    $('googleSignIn').disabled=true;
+    $('googleHelp').textContent='Google Login નું OAuth Setup હજી બાકી છે. ત્યાં સુધી Email અને Password થી Login કરો.';
+   }else{
+    $('googleSignIn').disabled=false;
+    $('googleHelp').textContent='';
+   }
+  }
+ }catch(_e){
+  // Don't claim a provider is disabled merely because the health check failed.
+  googleProviderReady=null;
+ }
+}
 $('googleSignIn').onclick=async()=>{
- busy(true);status('authStatus','Google Login ખૂલી રહ્યું છે...');
- const {error}=await db.auth.signInWithOAuth({provider:'google',options:{redirectTo}});
- if(error){status('authStatus',err(error),true);busy(false)}
+ if(googleProviderReady===false){
+  status('authStatus','Google Login પહેલાં Google OAuth Provider સક્રિય કરવો જરૂરી છે.',true);
+  return;
+ }
+ busy(true);
+ status('authStatus','Google Login શરૂ થઈ રહ્યું છે...');
+ try{
+  const {error}=await db.auth.signInWithOAuth({provider:'google',options:{redirectTo}});
+  if(error)throw error;
+  // A successful OAuth start normally redirects away from this page.
+ }catch(e){
+  const message=err(e);
+  const providerProblem=/provider|unsupported|not enabled|disabled/i.test(message);
+  status('authStatus',providerProblem?'Google Provider ની સેટિંગ્સ અધૂરી છે. ત્યાં સુધી Email/Password Login વાપરો.':message,true);
+ }finally{busy(false)}
 };
 $('emailLogin').onclick=async()=>{
  const email=$('loginEmail').value.trim(),password=$('loginPassword').value;
@@ -197,6 +233,7 @@ async function render(){
 db.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){isPasswordRecovery=true;$('authSection').hidden=false;$('loggedIn').hidden=true;setTab('reset');$('passwordForm').hidden=false}});
 if(url.searchParams.has('error'))status('authStatus','Login પૂર્ણ થયું નથી: '+(url.searchParams.get('error_description')||'ફરી પ્રયત્ન કરો.'),true);
 await render();
+await checkGoogleProvider();
 })();
 </script>
 </body></html>
