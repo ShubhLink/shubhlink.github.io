@@ -3,6 +3,7 @@
 'use strict';
 const D=window.SHUBHLINK_DATA;if(!D)return;
 const backend=window.SHUBHLINK_BACKEND||{};
+const dbTitleMap=new Map();
 if(backend.url&&backend.publishableKey){
  try{
   const root=backend.url.replace(/\/$/,'');
@@ -28,6 +29,7 @@ if(backend.url&&backend.publishableKey){
   const newWishes={};
   for(const m of messages){
    if(!['gu','hi','en'].includes(m.language))continue;
+   if(m.title)dbTitleMap.set(m.language+'|'+m.category_id+'|'+m.body,m.title);
    if(!newWishes[m.language])newWishes[m.language]={};
    if(!newWishes[m.language][m.category_id])newWishes[m.language][m.category_id]=[];
    newWishes[m.language][m.category_id].push(m.body);
@@ -50,6 +52,8 @@ const firstLang=languages.includes(qs.get('l'))?qs.get('l'):'gu';
 const enc=encodeURIComponent;
 const trim=(text,max=500)=>String(text||'').replace(/[<>\u0000-\u001f]/g,' ').trim().slice(0,max);
 const titleFor=(m,c,l)=>{
+ const stored=dbTitleMap.get(l+'|'+c+'|'+m);
+ if(stored)return stored;
  const sentences=trim(m).split(/[.!?।॥\n]/);
  let t=(sentences.find(x=>x.trim().length>=7)||sentences[0]||'').trim().replace(/^[^\p{L}\p{N}]+/u,'');
  return t.length>46?t.slice(0,43).trim()+'…':t||(D.categories.find(x=>x.id===c)?.[l]||'શુભેચ્છા');
