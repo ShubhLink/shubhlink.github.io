@@ -65,7 +65,11 @@ function catCard(c){
  const a=document.createElement('a');a.className='catbox cat-'+c.id;a.href='wishes.html?c='+enc(c.id);a.setAttribute('aria-label',c.gu+' માટે મેસેજ જુઓ');
  const emoji=document.createElement('span');emoji.className='catemoji';emoji.textContent=c.emoji;
  const title=document.createElement('strong');title.textContent=c.gu;
- const desc=document.createElement('small');desc.textContent=c.desc;const go=document.createElement('span');go.className='catgo';go.textContent='મેસેજ જુઓ →';
+ const desc=document.createElement('small');
+ const messages=D.wishes.gu?.[c.id]||[];
+ const preferred=messages.find(m=>dbFeatured.has('gu|'+c.id+'|'+m))||messages[0];
+ desc.textContent=preferred?preferred.replace(/^[^\p{L}\p{N}]+/u,'').replace(/\s+/g,' ').slice(0,80)+(preferred.length>80?'…':''):c.desc;
+ const go=document.createElement('span');go.className='catgo';go.textContent='મેસેજ જુઓ →';
  const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';
  a.append(arrow,emoji,title,desc,go);return a;
 }
