@@ -1,6 +1,6 @@
 // ShubhLink optional cloud AI composer.
 // Public website has no guest accounts. AI works only after owner sets GEMINI_API_KEY
-// as a Supabase Function Secret. Requests limited server-side to 6 per IP per India day.
+// as a Supabase Function Secret. Requests limited server-side to 30 per IP per India day.
 const allowedOrigin="https://shubhlink.github.io";
 const headers={
   "Access-Control-Allow-Origin":allowedOrigin,
