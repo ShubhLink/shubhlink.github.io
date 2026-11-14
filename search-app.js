@@ -56,7 +56,7 @@ function build(){
 }
 function score(m,q,c,parts){
  const txt=norm(m.title+' '+m.body);
- let value=m.featured?44:0;
+ let value=0;
  if(c&&m.category===c)value+=72;
  if(q&&txt.includes(norm(q)))value+=85;
  for(const token of parts){
@@ -65,7 +65,7 @@ function score(m,q,c,parts){
   else if(txt.includes(token.slice(0,Math.max(3,token.length-1))))value+=7;
  }
  if(!q&&m.category===(C?.currentCategory()||'morning'))value+=60;
- return value;
+ return value>0&&m.featured?value+44:value;
 }
 function eventMessages(query,locale){
  if(!query||!C)return [];
