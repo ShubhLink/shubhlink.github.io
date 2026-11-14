@@ -4,6 +4,7 @@ window.SHUBH_DATA_READY=(async function(){
 const D=window.SHUBHLINK_DATA;if(!D)return;
 const backend=window.SHUBHLINK_BACKEND||{};
 const dbTitleMap=new Map();
+const dbFeatured=new Set();
 if(backend.url&&backend.publishableKey){
  try{
   const root=backend.url.replace(/\/$/,'');
@@ -11,7 +12,7 @@ if(backend.url&&backend.publishableKey){
   const catRequest=fetch(root+'/rest/v1/shubhlink_categories?select=id,emoji,name_gu,name_hi,name_en,description_gu,color&is_active=eq.true',{headers,cache:'no-store'});
   const messages=[];
   for(let offset=0;offset<10000;offset+=500){
-   const url=root+'/rest/v1/shubhlink_messages?select=id,category_id,language,title,body&is_published=eq.true&order=created_at.desc,id.desc&limit=500&offset='+offset;
+   const url=root+'/rest/v1/shubhlink_messages?select=id,category_id,language,title,body,featured&is_published=eq.true&order=created_at.desc,id.desc&limit=500&offset='+offset;
    const response=await fetch(url,{headers,cache:'no-store'});
    if(!response.ok)throw Error('Published messages could not load');
    const page=await response.json();
@@ -30,6 +31,7 @@ if(backend.url&&backend.publishableKey){
   for(const m of messages){
    if(!['gu','hi','en'].includes(m.language))continue;
    if(m.title)dbTitleMap.set(m.language+'|'+m.category_id+'|'+m.body,m.title);
+   if(m.featured)dbFeatured.add(m.language+'|'+m.category_id+'|'+m.body);
    if(!newWishes[m.language])newWishes[m.language]={};
    if(!newWishes[m.language][m.category_id])newWishes[m.language][m.category_id]=[];
    newWishes[m.language][m.category_id].push(m.body);
@@ -180,6 +182,6 @@ if($('editCat')){
  if(qs.has('f'))from.value=trim(qs.get('f'),50);
  convertNameFields();renderPreview();
 }
-window.ShubhCore={D,dbTitleMap,titleFor,catName};
+window.ShubhCore={D,dbTitleMap,dbFeatured,titleFor,catName};
 return window.ShubhCore;
 })();
