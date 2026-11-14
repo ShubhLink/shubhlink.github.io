@@ -1,0 +1,912 @@
+[
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "મિત્રતાનો જન્મદિવસ · મીઠી લાગણી",
+    "body": "🎂 સાચા મિત્રો સાથે વહેંચેલો જન્મદિવસ વર્ષો પછી પણ સ્મિત આપે છે.\nતમારી ખુશીઓ ગણવા કરતાં જીવવા જેટલી વધુ હોય અને ચિંતાઓ હળવી બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "જીવનની સુંદર સફર · સુંદર વિચાર",
+    "body": "🎉 તમારી જીવનસફરમાં અનેક વળાંકો આવ્યા, પણ તમારું હૃદય હંમેશાં સુંદર રહ્યું.\nઆજે તમારું પ્રિય ગીત વગાડો, મનભરીને હસો અને યાદગાર પળો બનાવો.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "એક વધુ રંગીન વર્ષ · સ્નેહના રંગ",
+    "body": "🎈 દરેક જન્મદિવસ જાણે જીવનના કેનવાસ પર એક નવો રંગ ઉમેરે છે.\nગઈકાલનો અનુભવ આવતીકાલ માટે જ્ઞાન બને અને આજનો દિવસ આનંદ બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "આશીર્વાદની ભેટ · દિલથી શુભેચ્છા",
+    "body": "💖 ઘરના વડીલોના આશીર્વાદ અને નાનાં બાળકોની હાસ્યભરી શુભેચ્છા એકસાથે મળે એ દિવસ ખાસ છે.\nઆવતા વર્ષમાં એવી તકો મળે જેમાં તમારું મન અને તમારી મહેનત બંને ખીલી ઊઠે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારા માટે ખાસ શબ્દો · સ્મિતની ભેટ",
+    "body": "🌟 આજે એક વાત યાદ રાખજો: આ દુનિયા તમારા હોવાને કારણે કંઈક વધુ સુંદર છે.\nતમારા નાનાં સપનાઓ પણ મહત્વના છે; તેમને સાકાર થવાની સાચી તક મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારો ખાસ દિવસ · સ્નેહના રંગ",
+    "body": "🥳 જન્મદિવસ માત્ર કેક કાપવાનો દિવસ નથી, તમારા અસ્તિત્વની ખુશી મનાવવાનો અવસર છે.\nગઈકાલનો અનુભવ આવતીકાલ માટે જ્ઞાન બને અને આજનો દિવસ આનંદ બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ઉંમર નહીં, અનુભવો · દિલથી શુભેચ્છા",
+    "body": "🎂 વર્ષોની ગણતરી કરતાં તમે કેટલાં હૃદયોમાં જગ્યા બનાવી છે તે વધુ સુંદર બાબત છે.\nઆવતા વર્ષમાં એવી તકો મળે જેમાં તમારું મન અને તમારી મહેનત બંને ખીલી ઊઠે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "હાસ્યથી ભરેલી ઉજવણી · સ્મિતની ભેટ",
+    "body": "🎉 આજે તમારું હસતું મુખ જ ઉજવણીની સૌથી મોંઘી સજાવટ છે.\nતમારા નાનાં સપનાઓ પણ મહત્વના છે; તેમને સાકાર થવાની સાચી તક મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "સપનાઓનું નવું વર્ષ · હૃદયનો સંદેશ",
+    "body": "🎈 નવું વર્ષ તમારી ઉંમરમાં નહીં, તમારા સપનાઓમાં નવી ઊંચાઈ ઉમેરે એવી શુભેચ્છા.\nજીવન તમને સંપત્તિ સાથે શાંતિ, સફળતા સાથે સંતોષ અને સંબંધોમાં સ્નેહ આપે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "યાદોની મીઠાશ · પ્રકાશનો રસ્તો",
+    "body": "💖 જીવનની સૌથી મીઠી ભેટ એ યાદો છે જે તમારી સાથે હસતાં હસતાં બની છે.\nકેકની દરેક મીણબત્તી સાથે એક સુંદર યાદ અને એક નવી આશા પણ જોડાય.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "પ્રેમથી ભરેલો દિવસ · નવી આશા",
+    "body": "🌟 તમારા આસપાસના લોકો તમને પ્રેમ કરે છે એ જ તમારા ખાસ દિવસની સાચી ઉજવણી છે.\nજે નામ સાંભળતાં તમને હાસ્ય આવે એવા સ્નેહીજનો હંમેશાં નજીક રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ખુશીની નવી શરૂઆત · આનંદની પળ",
+    "body": "🥳 આજે પોતાના માટે એક નાનું સપનું પસંદ કરો અને તેને પૂરું કરવાની શરૂઆત કરો.\nતમારો રસ્તો સરળ હોય કે મુશ્કેલ, સાથે સારા લોકો અને હિંમત બંને રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "મિત્રતાનો જન્મદિવસ · ખાસ પળ",
+    "body": "🎂 સાચા મિત્રો સાથે વહેંચેલો જન્મદિવસ વર્ષો પછી પણ સ્મિત આપે છે.\nતમારી આંખોમાં જે ચમક છે તે દરેક નવા જન્મદિવસે વધુ પ્રકાશમાન બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "જીવનની સુંદર સફર · મીઠી લાગણી",
+    "body": "🎉 તમારી જીવનસફરમાં અનેક વળાંકો આવ્યા, પણ તમારું હૃદય હંમેશાં સુંદર રહ્યું.\nતમારી ખુશીઓ ગણવા કરતાં જીવવા જેટલી વધુ હોય અને ચિંતાઓ હળવી બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "એક વધુ રંગીન વર્ષ · સુંદર વિચાર",
+    "body": "🎈 દરેક જન્મદિવસ જાણે જીવનના કેનવાસ પર એક નવો રંગ ઉમેરે છે.\nઆજે તમારું પ્રિય ગીત વગાડો, મનભરીને હસો અને યાદગાર પળો બનાવો.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "આશીર્વાદની ભેટ · સ્નેહના રંગ",
+    "body": "💖 ઘરના વડીલોના આશીર્વાદ અને નાનાં બાળકોની હાસ્યભરી શુભેચ્છા એકસાથે મળે એ દિવસ ખાસ છે.\nગઈકાલનો અનુભવ આવતીકાલ માટે જ્ઞાન બને અને આજનો દિવસ આનંદ બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારા માટે ખાસ શબ્દો · દિલથી શુભેચ્છા",
+    "body": "🌟 આજે એક વાત યાદ રાખજો: આ દુનિયા તમારા હોવાને કારણે કંઈક વધુ સુંદર છે.\nઆવતા વર્ષમાં એવી તકો મળે જેમાં તમારું મન અને તમારી મહેનત બંને ખીલી ઊઠે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારો ખાસ દિવસ · સુંદર વિચાર",
+    "body": "🥳 જન્મદિવસ માત્ર કેક કાપવાનો દિવસ નથી, તમારા અસ્તિત્વની ખુશી મનાવવાનો અવસર છે.\nઆજે તમારું પ્રિય ગીત વગાડો, મનભરીને હસો અને યાદગાર પળો બનાવો.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ઉંમર નહીં, અનુભવો · સ્નેહના રંગ",
+    "body": "🎂 વર્ષોની ગણતરી કરતાં તમે કેટલાં હૃદયોમાં જગ્યા બનાવી છે તે વધુ સુંદર બાબત છે.\nગઈકાલનો અનુભવ આવતીકાલ માટે જ્ઞાન બને અને આજનો દિવસ આનંદ બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "હાસ્યથી ભરેલી ઉજવણી · દિલથી શુભેચ્છા",
+    "body": "🎉 આજે તમારું હસતું મુખ જ ઉજવણીની સૌથી મોંઘી સજાવટ છે.\nઆવતા વર્ષમાં એવી તકો મળે જેમાં તમારું મન અને તમારી મહેનત બંને ખીલી ઊઠે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "સપનાઓનું નવું વર્ષ · સ્મિતની ભેટ",
+    "body": "🎈 નવું વર્ષ તમારી ઉંમરમાં નહીં, તમારા સપનાઓમાં નવી ઊંચાઈ ઉમેરે એવી શુભેચ્છા.\nતમારા નાનાં સપનાઓ પણ મહત્વના છે; તેમને સાકાર થવાની સાચી તક મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "યાદોની મીઠાશ · હૃદયનો સંદેશ",
+    "body": "💖 જીવનની સૌથી મીઠી ભેટ એ યાદો છે જે તમારી સાથે હસતાં હસતાં બની છે.\nજીવન તમને સંપત્તિ સાથે શાંતિ, સફળતા સાથે સંતોષ અને સંબંધોમાં સ્નેહ આપે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "પ્રેમથી ભરેલો દિવસ · પ્રકાશનો રસ્તો",
+    "body": "🌟 તમારા આસપાસના લોકો તમને પ્રેમ કરે છે એ જ તમારા ખાસ દિવસની સાચી ઉજવણી છે.\nકેકની દરેક મીણબત્તી સાથે એક સુંદર યાદ અને એક નવી આશા પણ જોડાય.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ખુશીની નવી શરૂઆત · નવી આશા",
+    "body": "🥳 આજે પોતાના માટે એક નાનું સપનું પસંદ કરો અને તેને પૂરું કરવાની શરૂઆત કરો.\nજે નામ સાંભળતાં તમને હાસ્ય આવે એવા સ્નેહીજનો હંમેશાં નજીક રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "મિત્રતાનો જન્મદિવસ · આનંદની પળ",
+    "body": "🎂 સાચા મિત્રો સાથે વહેંચેલો જન્મદિવસ વર્ષો પછી પણ સ્મિત આપે છે.\nતમારો રસ્તો સરળ હોય કે મુશ્કેલ, સાથે સારા લોકો અને હિંમત બંને રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "જીવનની સુંદર સફર · ખાસ પળ",
+    "body": "🎉 તમારી જીવનસફરમાં અનેક વળાંકો આવ્યા, પણ તમારું હૃદય હંમેશાં સુંદર રહ્યું.\nતમારી આંખોમાં જે ચમક છે તે દરેક નવા જન્મદિવસે વધુ પ્રકાશમાન બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "એક વધુ રંગીન વર્ષ · મીઠી લાગણી",
+    "body": "🎈 દરેક જન્મદિવસ જાણે જીવનના કેનવાસ પર એક નવો રંગ ઉમેરે છે.\nતમારી ખુશીઓ ગણવા કરતાં જીવવા જેટલી વધુ હોય અને ચિંતાઓ હળવી બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "આશીર્વાદની ભેટ · સુંદર વિચાર",
+    "body": "💖 ઘરના વડીલોના આશીર્વાદ અને નાનાં બાળકોની હાસ્યભરી શુભેચ્છા એકસાથે મળે એ દિવસ ખાસ છે.\nઆજે તમારું પ્રિય ગીત વગાડો, મનભરીને હસો અને યાદગાર પળો બનાવો.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારા માટે ખાસ શબ્દો · સ્નેહના રંગ",
+    "body": "🌟 આજે એક વાત યાદ રાખજો: આ દુનિયા તમારા હોવાને કારણે કંઈક વધુ સુંદર છે.\nગઈકાલનો અનુભવ આવતીકાલ માટે જ્ઞાન બને અને આજનો દિવસ આનંદ બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારો ખાસ દિવસ · મીઠી લાગણી",
+    "body": "🥳 જન્મદિવસ માત્ર કેક કાપવાનો દિવસ નથી, તમારા અસ્તિત્વની ખુશી મનાવવાનો અવસર છે.\nતમારી ખુશીઓ ગણવા કરતાં જીવવા જેટલી વધુ હોય અને ચિંતાઓ હળવી બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ઉંમર નહીં, અનુભવો · સુંદર વિચાર",
+    "body": "🎂 વર્ષોની ગણતરી કરતાં તમે કેટલાં હૃદયોમાં જગ્યા બનાવી છે તે વધુ સુંદર બાબત છે.\nઆજે તમારું પ્રિય ગીત વગાડો, મનભરીને હસો અને યાદગાર પળો બનાવો.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "હાસ્યથી ભરેલી ઉજવણી · સ્નેહના રંગ",
+    "body": "🎉 આજે તમારું હસતું મુખ જ ઉજવણીની સૌથી મોંઘી સજાવટ છે.\nગઈકાલનો અનુભવ આવતીકાલ માટે જ્ઞાન બને અને આજનો દિવસ આનંદ બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "સપનાઓનું નવું વર્ષ · દિલથી શુભેચ્છા",
+    "body": "🎈 નવું વર્ષ તમારી ઉંમરમાં નહીં, તમારા સપનાઓમાં નવી ઊંચાઈ ઉમેરે એવી શુભેચ્છા.\nઆવતા વર્ષમાં એવી તકો મળે જેમાં તમારું મન અને તમારી મહેનત બંને ખીલી ઊઠે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "યાદોની મીઠાશ · સ્મિતની ભેટ",
+    "body": "💖 જીવનની સૌથી મીઠી ભેટ એ યાદો છે જે તમારી સાથે હસતાં હસતાં બની છે.\nતમારા નાનાં સપનાઓ પણ મહત્વના છે; તેમને સાકાર થવાની સાચી તક મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "પ્રેમથી ભરેલો દિવસ · હૃદયનો સંદેશ",
+    "body": "🌟 તમારા આસપાસના લોકો તમને પ્રેમ કરે છે એ જ તમારા ખાસ દિવસની સાચી ઉજવણી છે.\nજીવન તમને સંપત્તિ સાથે શાંતિ, સફળતા સાથે સંતોષ અને સંબંધોમાં સ્નેહ આપે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ખુશીની નવી શરૂઆત · પ્રકાશનો રસ્તો",
+    "body": "🥳 આજે પોતાના માટે એક નાનું સપનું પસંદ કરો અને તેને પૂરું કરવાની શરૂઆત કરો.\nકેકની દરેક મીણબત્તી સાથે એક સુંદર યાદ અને એક નવી આશા પણ જોડાય.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "મિત્રતાનો જન્મદિવસ · નવી આશા",
+    "body": "🎂 સાચા મિત્રો સાથે વહેંચેલો જન્મદિવસ વર્ષો પછી પણ સ્મિત આપે છે.\nજે નામ સાંભળતાં તમને હાસ્ય આવે એવા સ્નેહીજનો હંમેશાં નજીક રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "જીવનની સુંદર સફર · આનંદની પળ",
+    "body": "🎉 તમારી જીવનસફરમાં અનેક વળાંકો આવ્યા, પણ તમારું હૃદય હંમેશાં સુંદર રહ્યું.\nતમારો રસ્તો સરળ હોય કે મુશ્કેલ, સાથે સારા લોકો અને હિંમત બંને રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "એક વધુ રંગીન વર્ષ · ખાસ પળ",
+    "body": "🎈 દરેક જન્મદિવસ જાણે જીવનના કેનવાસ પર એક નવો રંગ ઉમેરે છે.\nતમારી આંખોમાં જે ચમક છે તે દરેક નવા જન્મદિવસે વધુ પ્રકાશમાન બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "આશીર્વાદની ભેટ · મીઠી લાગણી",
+    "body": "💖 ઘરના વડીલોના આશીર્વાદ અને નાનાં બાળકોની હાસ્યભરી શુભેચ્છા એકસાથે મળે એ દિવસ ખાસ છે.\nતમારી ખુશીઓ ગણવા કરતાં જીવવા જેટલી વધુ હોય અને ચિંતાઓ હળવી બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારા માટે ખાસ શબ્દો · સુંદર વિચાર",
+    "body": "🌟 આજે એક વાત યાદ રાખજો: આ દુનિયા તમારા હોવાને કારણે કંઈક વધુ સુંદર છે.\nઆજે તમારું પ્રિય ગીત વગાડો, મનભરીને હસો અને યાદગાર પળો બનાવો.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારો ખાસ દિવસ · ખાસ પળ",
+    "body": "🥳 જન્મદિવસ માત્ર કેક કાપવાનો દિવસ નથી, તમારા અસ્તિત્વની ખુશી મનાવવાનો અવસર છે.\nતમારી આંખોમાં જે ચમક છે તે દરેક નવા જન્મદિવસે વધુ પ્રકાશમાન બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ઉંમર નહીં, અનુભવો · મીઠી લાગણી",
+    "body": "🎂 વર્ષોની ગણતરી કરતાં તમે કેટલાં હૃદયોમાં જગ્યા બનાવી છે તે વધુ સુંદર બાબત છે.\nતમારી ખુશીઓ ગણવા કરતાં જીવવા જેટલી વધુ હોય અને ચિંતાઓ હળવી બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "હાસ્યથી ભરેલી ઉજવણી · સુંદર વિચાર",
+    "body": "🎉 આજે તમારું હસતું મુખ જ ઉજવણીની સૌથી મોંઘી સજાવટ છે.\nઆજે તમારું પ્રિય ગીત વગાડો, મનભરીને હસો અને યાદગાર પળો બનાવો.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "સપનાઓનું નવું વર્ષ · સ્નેહના રંગ",
+    "body": "🎈 નવું વર્ષ તમારી ઉંમરમાં નહીં, તમારા સપનાઓમાં નવી ઊંચાઈ ઉમેરે એવી શુભેચ્છા.\nગઈકાલનો અનુભવ આવતીકાલ માટે જ્ઞાન બને અને આજનો દિવસ આનંદ બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "યાદોની મીઠાશ · દિલથી શુભેચ્છા",
+    "body": "💖 જીવનની સૌથી મીઠી ભેટ એ યાદો છે જે તમારી સાથે હસતાં હસતાં બની છે.\nઆવતા વર્ષમાં એવી તકો મળે જેમાં તમારું મન અને તમારી મહેનત બંને ખીલી ઊઠે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "પ્રેમથી ભરેલો દિવસ · સ્મિતની ભેટ",
+    "body": "🌟 તમારા આસપાસના લોકો તમને પ્રેમ કરે છે એ જ તમારા ખાસ દિવસની સાચી ઉજવણી છે.\nતમારા નાનાં સપનાઓ પણ મહત્વના છે; તેમને સાકાર થવાની સાચી તક મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ખુશીની નવી શરૂઆત · હૃદયનો સંદેશ",
+    "body": "🥳 આજે પોતાના માટે એક નાનું સપનું પસંદ કરો અને તેને પૂરું કરવાની શરૂઆત કરો.\nજીવન તમને સંપત્તિ સાથે શાંતિ, સફળતા સાથે સંતોષ અને સંબંધોમાં સ્નેહ આપે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "મિત્રતાનો જન્મદિવસ · પ્રકાશનો રસ્તો",
+    "body": "🎂 સાચા મિત્રો સાથે વહેંચેલો જન્મદિવસ વર્ષો પછી પણ સ્મિત આપે છે.\nકેકની દરેક મીણબત્તી સાથે એક સુંદર યાદ અને એક નવી આશા પણ જોડાય.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "જીવનની સુંદર સફર · નવી આશા",
+    "body": "🎉 તમારી જીવનસફરમાં અનેક વળાંકો આવ્યા, પણ તમારું હૃદય હંમેશાં સુંદર રહ્યું.\nજે નામ સાંભળતાં તમને હાસ્ય આવે એવા સ્નેહીજનો હંમેશાં નજીક રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "એક વધુ રંગીન વર્ષ · આનંદની પળ",
+    "body": "🎈 દરેક જન્મદિવસ જાણે જીવનના કેનવાસ પર એક નવો રંગ ઉમેરે છે.\nતમારો રસ્તો સરળ હોય કે મુશ્કેલ, સાથે સારા લોકો અને હિંમત બંને રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "આશીર્વાદની ભેટ · ખાસ પળ",
+    "body": "💖 ઘરના વડીલોના આશીર્વાદ અને નાનાં બાળકોની હાસ્યભરી શુભેચ્છા એકસાથે મળે એ દિવસ ખાસ છે.\nતમારી આંખોમાં જે ચમક છે તે દરેક નવા જન્મદિવસે વધુ પ્રકાશમાન બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારા માટે ખાસ શબ્દો · મીઠી લાગણી",
+    "body": "🌟 આજે એક વાત યાદ રાખજો: આ દુનિયા તમારા હોવાને કારણે કંઈક વધુ સુંદર છે.\nતમારી ખુશીઓ ગણવા કરતાં જીવવા જેટલી વધુ હોય અને ચિંતાઓ હળવી બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "તમારો ખાસ દિવસ · આનંદની પળ",
+    "body": "🥳 જન્મદિવસ માત્ર કેક કાપવાનો દિવસ નથી, તમારા અસ્તિત્વની ખુશી મનાવવાનો અવસર છે.\nતમારો રસ્તો સરળ હોય કે મુશ્કેલ, સાથે સારા લોકો અને હિંમત બંને રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ઉંમર નહીં, અનુભવો · ખાસ પળ",
+    "body": "🎂 વર્ષોની ગણતરી કરતાં તમે કેટલાં હૃદયોમાં જગ્યા બનાવી છે તે વધુ સુંદર બાબત છે.\nતમારી આંખોમાં જે ચમક છે તે દરેક નવા જન્મદિવસે વધુ પ્રકાશમાન બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "હાસ્યથી ભરેલી ઉજવણી · મીઠી લાગણી",
+    "body": "🎉 આજે તમારું હસતું મુખ જ ઉજવણીની સૌથી મોંઘી સજાવટ છે.\nતમારી ખુશીઓ ગણવા કરતાં જીવવા જેટલી વધુ હોય અને ચિંતાઓ હળવી બને.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "સપનાઓનું નવું વર્ષ · સુંદર વિચાર",
+    "body": "🎈 નવું વર્ષ તમારી ઉંમરમાં નહીં, તમારા સપનાઓમાં નવી ઊંચાઈ ઉમેરે એવી શુભેચ્છા.\nઆજે તમારું પ્રિય ગીત વગાડો, મનભરીને હસો અને યાદગાર પળો બનાવો.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "યાદોની મીઠાશ · સ્નેહના રંગ",
+    "body": "💖 જીવનની સૌથી મીઠી ભેટ એ યાદો છે જે તમારી સાથે હસતાં હસતાં બની છે.\nગઈકાલનો અનુભવ આવતીકાલ માટે જ્ઞાન બને અને આજનો દિવસ આનંદ બની રહે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "પ્રેમથી ભરેલો દિવસ · દિલથી શુભેચ્છા",
+    "body": "🌟 તમારા આસપાસના લોકો તમને પ્રેમ કરે છે એ જ તમારા ખાસ દિવસની સાચી ઉજવણી છે.\nઆવતા વર્ષમાં એવી તકો મળે જેમાં તમારું મન અને તમારી મહેનત બંને ખીલી ઊઠે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "gu",
+    "title": "ખુશીની નવી શરૂઆત · સ્મિતની ભેટ",
+    "body": "🥳 આજે પોતાના માટે એક નાનું સપનું પસંદ કરો અને તેને પૂરું કરવાની શરૂઆત કરો.\nતમારા નાનાં સપનાઓ પણ મહત્વના છે; તેમને સાકાર થવાની સાચી તક મળે.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "दोस्ती वाला जन्मदिन · एक प्यारा एहसास",
+    "body": "🎂 सच्चे दोस्तों के साथ मनाया जन्मदिन बरसों बाद भी मुस्कुराने की वजह बनता है।\nआपकी खुशियां गिनने से ज्यादा जीने लायक हों और परेशानियां हल्की रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "जिंदगी का खूबसूरत सफर · सुंदर विचार",
+    "body": "🎉 जिंदगी के कितने ही मोड़ आए हों, आपका खूबसूरत दिल हमेशा चमकता रहे।\nआज अपना पसंदीदा गीत सुनिए, खुलकर हंसिए और यादगार पल बनाइए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "एक और रंगीन साल · अपनों के नाम",
+    "body": "🎈 हर जन्मदिन जिंदगी की तस्वीर में एक नया रंग भर देता है।\nकल के अनुभव से सीख मिले और आज के पल से खुशी।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आशीर्वाद का तोहफा · दिल से शुभकामना",
+    "body": "💖 बड़ों का आशीर्वाद और बच्चों की खिलखिलाहट मिलकर जन्मदिन को यादगार बनाते हैं।\nआने वाले साल में ऐसे मौके मिलें जिनमें आपका हुनर दिल खोलकर चमक सके।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आपके लिए खास शब्द · मुस्कान की वजह",
+    "body": "🌟 आज बस यह याद रखिए कि आपकी मौजूदगी से दुनिया थोड़ी और खूबसूरत है।\nछोटे सपनों को भी सच होने का मौका मिले, क्योंकि वे भी बहुत खास हैं।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आपका खास जन्मदिन · अपनों के नाम",
+    "body": "🥳 जन्मदिन सिर्फ केक काटने का दिन नहीं, आपके होने की खुशी मनाने का बहाना है।\nकल के अनुभव से सीख मिले और आज के पल से खुशी।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "उम्र से बड़ी खुशियां · दिल से शुभकामना",
+    "body": "🎂 उम्र के अंकों से ज्यादा खूबसूरत है उन दिलों की गिनती, जिनमें आपकी जगह है।\nआने वाले साल में ऐसे मौके मिलें जिनमें आपका हुनर दिल खोलकर चमक सके।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "हंसी वाली पार्टी · मुस्कान की वजह",
+    "body": "🎉 आज आपकी मुस्कान ही पूरे जश्न की सबसे प्यारी सजावट है।\nछोटे सपनों को भी सच होने का मौका मिले, क्योंकि वे भी बहुत खास हैं।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "सपनों का नया साल · दिल की दुआ",
+    "body": "🎈 जन्मदिन का नया साल आपकी उम्र नहीं, आपके सपनों की ऊंचाई बढ़ाए।\nजिंदगी आपको कामयाबी के साथ सुकून और रिश्तों में भरपूर अपनापन दे।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "यादों की मिठास · रौशनी का सफर",
+    "body": "💖 जिंदगी की सबसे मीठी सौगात वे यादें हैं जो हंसते हुए साथ बनी थीं।\nकेक की हर मोमबत्ती के साथ एक प्यारी याद और नई उम्मीद जुड़ती जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "अपनों का प्यार · नई उम्मीद",
+    "body": "🌟 अपने लोगों का प्यार किसी भी महंगे तोहफे से ज्यादा कीमती होता है।\nआपकी मुस्कान की वजह बनने वाले अपने हमेशा आपके करीब रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "खुशियों की नई शुरुआत · खुशी का पल",
+    "body": "🥳 आज खुद के लिए एक छोटा सा सपना चुनिए और उसकी ओर पहला कदम बढ़ाइए।\nरास्ता चाहे जैसा हो, अच्छे लोग और हौसला हमेशा साथ रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "दोस्ती वाला जन्मदिन · खास दिन",
+    "body": "🎂 सच्चे दोस्तों के साथ मनाया जन्मदिन बरसों बाद भी मुस्कुराने की वजह बनता है।\nआपकी आंखों की चमक हर नए जन्मदिन पर और बढ़ती जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "जिंदगी का खूबसूरत सफर · एक प्यारा एहसास",
+    "body": "🎉 जिंदगी के कितने ही मोड़ आए हों, आपका खूबसूरत दिल हमेशा चमकता रहे।\nआपकी खुशियां गिनने से ज्यादा जीने लायक हों और परेशानियां हल्की रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "एक और रंगीन साल · सुंदर विचार",
+    "body": "🎈 हर जन्मदिन जिंदगी की तस्वीर में एक नया रंग भर देता है।\nआज अपना पसंदीदा गीत सुनिए, खुलकर हंसिए और यादगार पल बनाइए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आशीर्वाद का तोहफा · अपनों के नाम",
+    "body": "💖 बड़ों का आशीर्वाद और बच्चों की खिलखिलाहट मिलकर जन्मदिन को यादगार बनाते हैं।\nकल के अनुभव से सीख मिले और आज के पल से खुशी।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आपके लिए खास शब्द · दिल से शुभकामना",
+    "body": "🌟 आज बस यह याद रखिए कि आपकी मौजूदगी से दुनिया थोड़ी और खूबसूरत है।\nआने वाले साल में ऐसे मौके मिलें जिनमें आपका हुनर दिल खोलकर चमक सके।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आपका खास जन्मदिन · सुंदर विचार",
+    "body": "🥳 जन्मदिन सिर्फ केक काटने का दिन नहीं, आपके होने की खुशी मनाने का बहाना है।\nआज अपना पसंदीदा गीत सुनिए, खुलकर हंसिए और यादगार पल बनाइए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "उम्र से बड़ी खुशियां · अपनों के नाम",
+    "body": "🎂 उम्र के अंकों से ज्यादा खूबसूरत है उन दिलों की गिनती, जिनमें आपकी जगह है।\nकल के अनुभव से सीख मिले और आज के पल से खुशी।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "हंसी वाली पार्टी · दिल से शुभकामना",
+    "body": "🎉 आज आपकी मुस्कान ही पूरे जश्न की सबसे प्यारी सजावट है।\nआने वाले साल में ऐसे मौके मिलें जिनमें आपका हुनर दिल खोलकर चमक सके।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "सपनों का नया साल · मुस्कान की वजह",
+    "body": "🎈 जन्मदिन का नया साल आपकी उम्र नहीं, आपके सपनों की ऊंचाई बढ़ाए।\nछोटे सपनों को भी सच होने का मौका मिले, क्योंकि वे भी बहुत खास हैं।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "यादों की मिठास · दिल की दुआ",
+    "body": "💖 जिंदगी की सबसे मीठी सौगात वे यादें हैं जो हंसते हुए साथ बनी थीं।\nजिंदगी आपको कामयाबी के साथ सुकून और रिश्तों में भरपूर अपनापन दे।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "अपनों का प्यार · रौशनी का सफर",
+    "body": "🌟 अपने लोगों का प्यार किसी भी महंगे तोहफे से ज्यादा कीमती होता है।\nकेक की हर मोमबत्ती के साथ एक प्यारी याद और नई उम्मीद जुड़ती जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "खुशियों की नई शुरुआत · नई उम्मीद",
+    "body": "🥳 आज खुद के लिए एक छोटा सा सपना चुनिए और उसकी ओर पहला कदम बढ़ाइए।\nआपकी मुस्कान की वजह बनने वाले अपने हमेशा आपके करीब रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "दोस्ती वाला जन्मदिन · खुशी का पल",
+    "body": "🎂 सच्चे दोस्तों के साथ मनाया जन्मदिन बरसों बाद भी मुस्कुराने की वजह बनता है।\nरास्ता चाहे जैसा हो, अच्छे लोग और हौसला हमेशा साथ रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "जिंदगी का खूबसूरत सफर · खास दिन",
+    "body": "🎉 जिंदगी के कितने ही मोड़ आए हों, आपका खूबसूरत दिल हमेशा चमकता रहे।\nआपकी आंखों की चमक हर नए जन्मदिन पर और बढ़ती जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "एक और रंगीन साल · एक प्यारा एहसास",
+    "body": "🎈 हर जन्मदिन जिंदगी की तस्वीर में एक नया रंग भर देता है।\nआपकी खुशियां गिनने से ज्यादा जीने लायक हों और परेशानियां हल्की रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आशीर्वाद का तोहफा · सुंदर विचार",
+    "body": "💖 बड़ों का आशीर्वाद और बच्चों की खिलखिलाहट मिलकर जन्मदिन को यादगार बनाते हैं।\nआज अपना पसंदीदा गीत सुनिए, खुलकर हंसिए और यादगार पल बनाइए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आपके लिए खास शब्द · अपनों के नाम",
+    "body": "🌟 आज बस यह याद रखिए कि आपकी मौजूदगी से दुनिया थोड़ी और खूबसूरत है।\nकल के अनुभव से सीख मिले और आज के पल से खुशी।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आपका खास जन्मदिन · एक प्यारा एहसास",
+    "body": "🥳 जन्मदिन सिर्फ केक काटने का दिन नहीं, आपके होने की खुशी मनाने का बहाना है।\nआपकी खुशियां गिनने से ज्यादा जीने लायक हों और परेशानियां हल्की रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "उम्र से बड़ी खुशियां · सुंदर विचार",
+    "body": "🎂 उम्र के अंकों से ज्यादा खूबसूरत है उन दिलों की गिनती, जिनमें आपकी जगह है।\nआज अपना पसंदीदा गीत सुनिए, खुलकर हंसिए और यादगार पल बनाइए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "हंसी वाली पार्टी · अपनों के नाम",
+    "body": "🎉 आज आपकी मुस्कान ही पूरे जश्न की सबसे प्यारी सजावट है।\nकल के अनुभव से सीख मिले और आज के पल से खुशी।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "सपनों का नया साल · दिल से शुभकामना",
+    "body": "🎈 जन्मदिन का नया साल आपकी उम्र नहीं, आपके सपनों की ऊंचाई बढ़ाए।\nआने वाले साल में ऐसे मौके मिलें जिनमें आपका हुनर दिल खोलकर चमक सके।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "यादों की मिठास · मुस्कान की वजह",
+    "body": "💖 जिंदगी की सबसे मीठी सौगात वे यादें हैं जो हंसते हुए साथ बनी थीं।\nछोटे सपनों को भी सच होने का मौका मिले, क्योंकि वे भी बहुत खास हैं।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "अपनों का प्यार · दिल की दुआ",
+    "body": "🌟 अपने लोगों का प्यार किसी भी महंगे तोहफे से ज्यादा कीमती होता है।\nजिंदगी आपको कामयाबी के साथ सुकून और रिश्तों में भरपूर अपनापन दे।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "खुशियों की नई शुरुआत · रौशनी का सफर",
+    "body": "🥳 आज खुद के लिए एक छोटा सा सपना चुनिए और उसकी ओर पहला कदम बढ़ाइए।\nकेक की हर मोमबत्ती के साथ एक प्यारी याद और नई उम्मीद जुड़ती जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "दोस्ती वाला जन्मदिन · नई उम्मीद",
+    "body": "🎂 सच्चे दोस्तों के साथ मनाया जन्मदिन बरसों बाद भी मुस्कुराने की वजह बनता है।\nआपकी मुस्कान की वजह बनने वाले अपने हमेशा आपके करीब रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "जिंदगी का खूबसूरत सफर · खुशी का पल",
+    "body": "🎉 जिंदगी के कितने ही मोड़ आए हों, आपका खूबसूरत दिल हमेशा चमकता रहे।\nरास्ता चाहे जैसा हो, अच्छे लोग और हौसला हमेशा साथ रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "एक और रंगीन साल · खास दिन",
+    "body": "🎈 हर जन्मदिन जिंदगी की तस्वीर में एक नया रंग भर देता है।\nआपकी आंखों की चमक हर नए जन्मदिन पर और बढ़ती जाए।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "आशीर्वाद का तोहफा · एक प्यारा एहसास",
+    "body": "💖 बड़ों का आशीर्वाद और बच्चों की खिलखिलाहट मिलकर जन्मदिन को यादगार बनाते हैं।\nआपकी खुशियां गिनने से ज्यादा जीने लायक हों और परेशानियां हल्की रहें।",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Friends and birthdays · A lovely feeling",
+    "body": "🎂 A birthday shared with real friends can become a smile years later.\nMay your joys be too plentiful to count and your worries easier to carry.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Your beautiful journey · A kind thought",
+    "body": "🎉 Your journey has had its twists, yet your kind heart remains something to celebrate.\nPlay your favorite song, laugh without holding back, and create a memory worth keeping.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Another colorful year · For loved ones",
+    "body": "🎈 Every birthday adds another vibrant shade to the canvas of your life.\nLet yesterday become wisdom and today become a celebration.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "The gift of blessings · A heartfelt wish",
+    "body": "💖 The blessings of elders and the laughter of children make any birthday feel richer.\nMay this year bring opportunities that let your talents shine freely.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A note just for you · A reason to smile",
+    "body": "🌟 Remember today: the world is a little brighter because you are part of it.\nGive your small dreams the attention they deserve; they matter too.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A day worth celebrating · For loved ones",
+    "body": "🥳 A birthday is more than cake and candles; it is a celebration of the difference your life makes.\nLet yesterday become wisdom and today become a celebration.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "More than a number · A heartfelt wish",
+    "body": "🎂 The most beautiful measure of age is how many hearts feel warmer because you are in them.\nMay this year bring opportunities that let your talents shine freely.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A birthday full of laughter · A reason to smile",
+    "body": "🎉 Your smile is the best decoration any birthday celebration could have.\nGive your small dreams the attention they deserve; they matter too.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Another year of dreams · Warm wishes",
+    "body": "🎈 May this new year of life add more height to your dreams than numbers to your age.\nMay success arrive with peace, and achievements always leave room for gratitude.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Sweet memories · A brighter path",
+    "body": "💖 The sweetest gifts are often the memories we made together without planning to.\nMay each candle represent both a treasured memory and a beautiful new hope.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Love all around · New hope",
+    "body": "🌟 Being surrounded by people who truly care is the loveliest birthday present.\nKeep close the people who make you laugh without even trying.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A joyful new chapter · Little joys",
+    "body": "🥳 Choose one small dream for yourself today and take the first brave step toward it.\nWhatever the road brings, may courage and good company travel beside you.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Friends and birthdays · A special moment",
+    "body": "🎂 A birthday shared with real friends can become a smile years later.\nMay the sparkle in your eyes grow brighter with every birthday.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Your beautiful journey · A lovely feeling",
+    "body": "🎉 Your journey has had its twists, yet your kind heart remains something to celebrate.\nMay your joys be too plentiful to count and your worries easier to carry.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Another colorful year · A kind thought",
+    "body": "🎈 Every birthday adds another vibrant shade to the canvas of your life.\nPlay your favorite song, laugh without holding back, and create a memory worth keeping.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "The gift of blessings · For loved ones",
+    "body": "💖 The blessings of elders and the laughter of children make any birthday feel richer.\nLet yesterday become wisdom and today become a celebration.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A note just for you · A heartfelt wish",
+    "body": "🌟 Remember today: the world is a little brighter because you are part of it.\nMay this year bring opportunities that let your talents shine freely.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A day worth celebrating · A kind thought",
+    "body": "🥳 A birthday is more than cake and candles; it is a celebration of the difference your life makes.\nPlay your favorite song, laugh without holding back, and create a memory worth keeping.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "More than a number · For loved ones",
+    "body": "🎂 The most beautiful measure of age is how many hearts feel warmer because you are in them.\nLet yesterday become wisdom and today become a celebration.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A birthday full of laughter · A heartfelt wish",
+    "body": "🎉 Your smile is the best decoration any birthday celebration could have.\nMay this year bring opportunities that let your talents shine freely.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Another year of dreams · A reason to smile",
+    "body": "🎈 May this new year of life add more height to your dreams than numbers to your age.\nGive your small dreams the attention they deserve; they matter too.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Sweet memories · Warm wishes",
+    "body": "💖 The sweetest gifts are often the memories we made together without planning to.\nMay success arrive with peace, and achievements always leave room for gratitude.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Love all around · A brighter path",
+    "body": "🌟 Being surrounded by people who truly care is the loveliest birthday present.\nMay each candle represent both a treasured memory and a beautiful new hope.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A joyful new chapter · New hope",
+    "body": "🥳 Choose one small dream for yourself today and take the first brave step toward it.\nKeep close the people who make you laugh without even trying.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Friends and birthdays · Little joys",
+    "body": "🎂 A birthday shared with real friends can become a smile years later.\nWhatever the road brings, may courage and good company travel beside you.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Your beautiful journey · A special moment",
+    "body": "🎉 Your journey has had its twists, yet your kind heart remains something to celebrate.\nMay the sparkle in your eyes grow brighter with every birthday.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "Another colorful year · A lovely feeling",
+    "body": "🎈 Every birthday adds another vibrant shade to the canvas of your life.\nMay your joys be too plentiful to count and your worries easier to carry.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "The gift of blessings · A kind thought",
+    "body": "💖 The blessings of elders and the laughter of children make any birthday feel richer.\nPlay your favorite song, laugh without holding back, and create a memory worth keeping.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A note just for you · For loved ones",
+    "body": "🌟 Remember today: the world is a little brighter because you are part of it.\nLet yesterday become wisdom and today become a celebration.",
+    "is_published": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "en",
+    "title": "A day worth celebrating · A lovely feeling",
+    "body": "🥳 A birthday is more than cake and candles; it is a celebration of the difference your life makes.\nMay your joys be too plentiful to count and your worries easier to carry.",
+    "is_published": true
+  }
+]
