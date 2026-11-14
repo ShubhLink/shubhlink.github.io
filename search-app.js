@@ -26,7 +26,8 @@ const shuffle=arr=>{
  return out;
 };
 const kindTerms=new Set(Object.values(phrases).flat().map(norm));
-let core=null,library=[],pool=[],seenByQuery=new Map(),currentKey='',currentQuery='';
+let core=null,library=[],pool=[],currentKey='',currentQuery='';
+const aiButton=$('smartAiGenerate'),aiResults=$('smartAiResults'),aiStatus=$('smartAiStatus');
 const lang=()=>['gu','hi','en'].includes(language.value)?language.value:'gu';
 function category(q){
  const query=norm(q);let choice=null,best=0;
@@ -69,82 +70,39 @@ function score(m,q,c,parts){
  if(!q&&m.category===(C?.currentCategory()||'morning'))value+=60;
  return value>0&&m.featured?value+44:value;
 }
-function eventMessages(query,locale){
- if(!query||!C)return [];
- const matches=C.findEvents(query);
- const unique=new Map();
- for(const e of matches){if(!unique.has(e.gu))unique.set(e.gu,e)}
- const arr=[...unique.values()].sort((a,b)=>{
-  const rank=e=>([e.gu,e.hi,e.en,...e.aliases].some(x=>norm(x)===norm(query))?100:10);
-  return rank(b)-rank(a)
- }).slice(0,2);
- const samples={
- gu:[
-  e=>'🌼 '+e.gu+'નો પ્રસંગ કહે છે—સુંદર દિવસો માત્ર કૅલેન્ડરમાં નથી, એ આપણે એકબીજાના જીવનમાં ઉમેરેલા સ્નેહમાં છે. આ ઉજવણી ખાસ બની રહે!',
-  e=>'✨ '+e.gu+'ની ઉજવણીમાં ઘરની એક હળવી હસી, કોઈ પોતાનું પૂછેલું “કેમ છો?” અને સાથે ગાળેલી પળો સૌથી મોટી ભેટ બની રહે.',
-  e=>'💛 '+e.gu+'ની શુભકામના. આજે કોઈ જૂના સંબંધને યાદ કરજો; એક સાચો સંદેશ પણ વર્ષોની નજીકતાને ફરી જીવંત કરી શકે છે.'
- ],
- hi:[
-  e=>'🌼 '+e.hi+' का मौका याद दिलाए कि जिंदगी की असली रौनक अपनों के साथ बिताए लम्हों में होती है। यह दिन यादगार बने।',
-  e=>'✨ '+e.hi+' की खुशियों में घर की हंसी, किसी अपने की आवाज और छोटे-छोटे पल सबसे सुंदर तोहफा बनें।',
-  e=>'💛 '+e.hi+' पर किसी पुराने रिश्ते को याद कीजिए; दिल से भेजा एक संदेश भी बरसों की दूरी मिटा सकता है।'
- ],
- en:[
-  e=>'🌼 '+e.en+' is a gentle reminder that our brightest celebrations live in the kindness we share, not merely on a calendar.',
-  e=>'✨ May '+e.en+' be remembered for laughter at home, a familiar voice, and little moments that mean more than gifts.',
-  e=>'💛 This '+e.en+', remember someone you miss. A sincere message can make years of distance feel smaller.'
- ]
- };
- return arr.flatMap(e=>(samples[locale]||samples.gu).map((fn,i)=>({
-  language:locale,category:'festival',title:e.emoji+' '+e[locale],body:fn(e),featured:true,event:true
- })));
-}
 function getPool(q,locale){
  const c=category(q),parts=wordParts(q);
  let list=library.filter(x=>x.language===locale).map(x=>({...x,score:score(x,q,c,parts)}));
  if(q){
-  const best=list.filter(x=>x.score>=25);
-  if(c){
-   list=best.filter(x=>x.category===c||x.score>=120);
-  }else list=best.filter(x=>x.score>=25);
-  if(!list.length){list=best}
+  // Never pretend a message is relevant merely because it is popular.
+  if(c)list=list.filter(x=>x.category===c||x.score>=130);
+  else list=list.filter(x=>x.score>=25);
+  const proper=parts.filter(x=>!kindTerms.has(x));
+  if(proper.length){
+   const specificallyRelated=list.filter(x=>proper.some(t=>norm(x.title+' '+x.body).includes(t)));
+   if(specificallyRelated.length>=3)list=specificallyRelated;
+  }
  }else{
   const active=C?.currentCategory()||'morning';
   list=list.filter(x=>x.category===active);
  }
- const extra=eventMessages(q,locale).map(x=>({...x,score:240}));
- return [...extra,...list];
+ const premium=list.filter(x=>x.featured);
+ // The formula-combined 2026 bulk messages are retained only as fallbacks;
+ // curated, hand-written originals are preferred when sufficient.
+ if(premium.length>=3)return premium;
+ return list;
 }
 function batch(){
- const used=seenByQuery.get(currentKey)||new Set();
- if(!pool.length){holder.replaceChildren();meta.textContent='આ વિષયના તૈયાર મેસેજ મળ્યા નથી';next.hidden=true;return}
- let remaining=pool.filter(it=>!used.has(it.category+'|'+it.body));
- if(!remaining.length){used.clear();remaining=pool}
- const mixed=shuffle(remaining).sort((a,b)=>(b.score-a.score));
- const chosen=[],firstLines=new Set();
- function lead(it){
-  return norm(it.body.split(/\n|[.!?।]/)[0].replace(/^[^\p{L}\p{N}]+/u,'').slice(0,88));
+ if(!pool.length){
+  holder.replaceChildren();meta.textContent='આ વિષય માટે તૈયાર મેસેજ મળ્યા નથી. ✦ AI થી નવો મેસેજ બનાવો.';
+  next.hidden=true;return
  }
- for(const item of mixed){
-  const first=lead(item);
-  if(firstLines.has(first))continue;
-  chosen.push(item);firstLines.add(first);
-  if(chosen.length>=12)break
- }
- if(chosen.length<12){
-  for(const item of mixed){
-   if(chosen.includes(item))continue;
-   chosen.push(item);
-   if(chosen.length>=12)break
-  }
- }
- for(const item of chosen)used.add(item.category+'|'+item.body);
- seenByQuery.set(currentKey,used);
+ const size=Math.min(9,pool.length);
+ const chosen=window.ShubhFresh?.choose(pool,'search:'+currentKey,size,{quality:x=>x.score+(x.featured?95:0)})||shuffle(pool).slice(0,size);
  holder.replaceChildren();
  for(const item of chosen)holder.append(card(item));
- const count=pool.length;
- meta.textContent=(chosen.length?chosen.length+' મેસેજ':'મેસેજ મળ્યા નથી')+(count>chosen.length?' · '+count+' ઉપલબ્ધ':'');
- next.hidden=count<=12;
+ meta.textContent=chosen.length+' મેસેજ · '+pool.length+' ઉપલબ્ધ';
+ next.hidden=pool.length<=size;
 }
 async function copyText(text,button){
  try{
@@ -187,11 +145,63 @@ function search(q,updateURL=true){
  }
  batch();
 }
+
+function aiStorageKey(q){return 'shubhlink_ai_search_history_'+lang()+'_'+norm(q).slice(0,65)}
+function readAiHistory(q){
+ try{const a=JSON.parse(sessionStorage.getItem(aiStorageKey(q))||'[]');return Array.isArray(a)?a.slice(-9):[]}catch(_){return []}
+}
+function storeAiHistory(q,messages){
+ try{const arr=[...readAiHistory(q),...messages].slice(-9);sessionStorage.setItem(aiStorageKey(q),JSON.stringify(arr))}catch(_){}
+}
+function aiError(code){
+ const errors={
+  rate_limit:'આજની AI મેસેજ મર્યાદા પૂરી થઈ છે.',
+  ai_quota_exceeded:'Google AI ની મફત મર્યાદા હાલ પૂરી છે.',
+  ai_provider_busy:'AI થોડું વ્યસ્ત છે, ફરી પ્રયાસ કરો.',
+  ai_model_unavailable:'AI મોડેલ ઉપલબ્ધ નથી.',
+  ai_temporarily_unavailable:'હમણાં AI મેસેજ બન્યા નથી, થોડા સમય પછી ફરી અજમાવો.'
+ };
+ return errors[code]||'હમણાં AI મેસેજ નથી બન્યા. ફરી પ્રયાસ કરો.';
+}
+async function generateAI(){
+ const languageCode=lang();
+ const q=input.value.trim().slice(0,100)||{
+  gu:'આજના દિવસ માટે એક સરસ અને અનોખો શુભેચ્છા મેસેજ',
+  hi:'आज के लिए नया और सुंदर शुभकामना संदेश',
+  en:'A fresh, original message to share today'
+ }[languageCode];
+ const cfg=window.SHUBHLINK_BACKEND||{};
+ if(!cfg.url||!cfg.publishableKey){aiStatus.textContent='હમણાં AI ઉપલબ્ધ નથી.';return}
+ aiButton.disabled=true;aiStatus.textContent='નવા શબ્દો રચાઈ રહ્યા છે...';aiResults.hidden=true;aiResults.replaceChildren();
+ try{
+  const recent=readAiHistory(q);
+  const avoids=[...recent,...pool.filter(x=>x.featured).slice(0,3).map(x=>x.body)].slice(-9);
+  const res=await fetch(cfg.url.replace(/\/$/,'')+'/functions/v1/compose-wish',{
+   method:'POST',headers:{'Content-Type':'application/json',apikey:cfg.publishableKey},
+   body:JSON.stringify({topic:q,language:languageCode,tone:'warm',avoid:avoids})
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok)throw Error(aiError(data.error));
+  const messages=Array.isArray(data.messages)?data.messages.filter(x=>typeof x==='string'&&x.trim().length>=20).slice(0,3):[];
+  if(!messages.length)throw Error('મેસેજ બન્યા નથી. ફરી પ્રયાસ કરો.');
+  storeAiHistory(q,messages);
+  const caption={gu:'✦ નવો AI મેસેજ',hi:'✦ नया AI संदेश',en:'✦ Fresh AI message'}[languageCode];
+  for(let i=0;i<messages.length;i++){
+   aiResults.append(card({title:caption+' '+(i+1),body:messages[i],category:category(q)||'newthought',language:languageCode,event:false,featured:true}))
+  }
+  aiResults.hidden=false;
+  aiStatus.textContent='✦ 3 નવા મેસેજ તૈયાર';
+  aiResults.scrollIntoView({block:'nearest',behavior:'smooth'});
+ }catch(e){aiStatus.textContent=e?.message||'હમણાં AI મેસેજ મળ્યા નથી.'}
+ finally{aiButton.disabled=false}
+}
+aiButton?.addEventListener('click',generateAI);
+
 input.value=params.get('q')||'';
 language.value=['gu','hi','en'].includes(params.get('l'))?params.get('l'):'gu';
 input.oninput=()=>setLink(input.value);
-form.onsubmit=e=>{e.preventDefault();search(input.value)};
-language.onchange=()=>search(input.value);
+form.onsubmit=e=>{e.preventDefault();search(input.value);aiResults.hidden=true;aiStatus.textContent=''};
+language.onchange=()=>{search(input.value);aiResults.hidden=true;aiStatus.textContent=''};
 next.onclick=()=>batch();
 if(window.SHUBH_DATA_READY?.then)window.SHUBH_DATA_READY.then(c=>{core=c;library=build();search(input.value,false)}).catch(()=>{meta.textContent='હમણાં મેસેજ લોડ ન થયા.'});
 else meta.textContent='મેસેજ લોડ થઈ રહ્યા છે...';
