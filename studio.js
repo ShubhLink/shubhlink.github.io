@@ -44,7 +44,13 @@ function working(){
 function editUrl(message){
  const u=new URL('create.html',location.href);
  u.searchParams.set('l',lang.value);
- u.searchParams.set('c','newthought');
+ const category=/જન્મદિવસ|birthday|जन्मदिन/i.test(topic)?'birthday':
+ /સવાર|સુપ્રભાત|good morning|सुप्रभात/i.test(topic)?'morning':
+ /રાત્રિ|night|शुभ रात्रि/i.test(topic)?'night':
+ /મિત્ર|દોસ્ત|friend|दोस्त/i.test(topic)?'friendship':
+ /દિવાળી|નવરાત્રી|ઉત્તરાયણ|holi|diwali|festival|त्योहार/i.test(topic)?'festival':
+ /લગ્ન|વર્ષગાંઠ|anniversary/i.test(topic)?'anniversary':'newthought';
+ u.searchParams.set('c',category);
  u.searchParams.set('title',small(topic,90)||'તમારા માટે ખાસ');
  u.searchParams.set('m',small(message,500));
  return u.href
@@ -126,6 +132,7 @@ async function run(input,isFollowup=false){
   status.textContent='';
  }catch(e){
   indicator.remove();
+  if(round===0)topic='';
   messageTurn('assistant',e?.message||'મેસેજ નથી બન્યો.');
  }finally{isBusy=false;send.disabled=false;chatScroll()}
 }
