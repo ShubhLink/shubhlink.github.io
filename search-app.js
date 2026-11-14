@@ -37,7 +37,17 @@ function festivalMatches(q){
  if(!C||!q)return [];
  const ms=C.findEvents(q);
  const unique=new Map();for(const e of ms)unique.set(e.gu,e);
- return [...unique.values()].slice(0,3);
+ const query=norm(q);
+ const ranked=[...unique.values()];
+ const score=e=>{
+   const labels=[e.gu,e.hi,e.en].map(norm);
+   if(labels.includes(query))return 100;
+   if(e.aliases.some(x=>norm(x)===query))return 70;
+   if(labels.some(x=>x.includes(query)))return 50;
+   return 10;
+ };
+ ranked.sort((a,b)=>score(b)-score(a)||(a.date<b.date?-1:1));
+ return ranked.slice(0,3);
 }
 function occasionMessages(e,lang){
  const nm=e[lang]||e.gu;
