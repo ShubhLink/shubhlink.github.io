@@ -47,7 +47,7 @@ const $=id=>document.getElementById(id);
 const qs=new URLSearchParams(location.search);
 const languages=['gu','hi','en'];
 const catIds=D.categories.map(c=>c.id);
-const firstCat=catIds.includes(qs.get('c'))?qs.get('c'):'morning';
+const firstCat=catIds.includes(qs.get('c'))?qs.get('c'):(window.ShubhCalendar?.currentCategory()||'morning');
 const firstLang=languages.includes(qs.get('l'))?qs.get('l'):'gu';
 const enc=encodeURIComponent;
 const trim=(text,max=500)=>String(text||'').replace(/[<>\u0000-\u001f]/g,' ').trim().slice(0,max);
@@ -80,7 +80,13 @@ if($('homeCats')){
  const arr=D.wishes.gu.suvichar||[];
  if(arr.length)$('dailyQuote').textContent=arr[Math.floor(Date.now()/86400000)%arr.length];
 }
-if($('allCats'))D.categories.forEach(c=>$('allCats').append(catCard(c)));
+if($('allCats')){
+ const first=window.ShubhCalendar?.currentCategory()||'morning';
+ const hasEvent=(window.ShubhCalendar?.todayEvents()||[]).length>0;
+ const ids=[first,...(hasEvent?['festival']:[]),...D.categories.map(x=>x.id)];
+ const done=new Set();
+ for(const id of ids){if(done.has(id))continue;done.add(id);const cat=D.categories.find(c=>c.id===id);if(cat)$('allCats').append(catCard(cat))}
+}
 if($('wishGrid')){
  const csel=$('filterCat'),lsel=$('filterLang'),search=$('filterSearch');
  D.categories.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.emoji+' '+c.gu;csel.add(o)});
