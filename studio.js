@@ -89,7 +89,7 @@ function output(messages){
  for(const it of optionsNames){
   const b=el('button','',it.label);b.type='button';b.onclick=()=>run(it.instruction,true);refine.append(b)
  }
- box.append(refine);row.append(box);board.append(row);chatScroll()
+ box.append(refine);row.append(box);board.append(row);row.scrollIntoView({block:"start",behavior:"smooth"})
 }
 const knownErrors={
  rate_limit:'આજના મફત AI મેસેજની મર્યાદા પૂરી થઈ ગઈ છે. આવતીકાલે ફરી બનાવશો.',
@@ -106,6 +106,7 @@ async function run(input,isFollowup=false){
  if(!config.url||!config.publishableKey){status.textContent='હમણાં AI ઉપલબ્ધ નથી.';return}
  if(!topic||!isFollowup){if(!topic)topic=text}
  isBusy=true;send.disabled=true;
+ let succeeded=false;
  messageTurn('user',text);
  prompt.value='';
  status.textContent='';
@@ -125,6 +126,7 @@ async function run(input,isFollowup=false){
   const list=Array.isArray(data.messages)?data.messages.filter(x=>typeof x==='string'&&x.length>8).slice(0,3):[];
   if(!list.length)throw Error('નવા મેસેજ નથી મળ્યા. ફરી પ્રયાસ કરો.');
   output(list);
+  succeeded=true;
   round++;
   history.push('User: '+text,'AI ideas: '+list.map(x=>small(x,130)).join(' | '));
   history=history.slice(-5);
@@ -134,7 +136,7 @@ async function run(input,isFollowup=false){
   indicator.remove();
   if(round===0)topic='';
   messageTurn('assistant',e?.message||'મેસેજ નથી બન્યો.');
- }finally{isBusy=false;send.disabled=false;chatScroll()}
+ }finally{isBusy=false;send.disabled=false;if(!succeeded)chatScroll()}
 }
 form.onsubmit=e=>{e.preventDefault();const text=prompt.value.trim();if(text.length<2){status.textContent='મેસેજ વિશે બે શબ્દ લખો.';return}run(text,round>0)};
 prompt.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();form.requestSubmit()}};
