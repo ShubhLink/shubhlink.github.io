@@ -1,0 +1,92 @@
+name: ShubhLink Admin Panel
+run-name: "Admin: \u0024{{ inputs.operation }} — \u0024{{ inputs.category_id }}"
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Choose what to change'
+        type: choice
+        required: true
+        options:
+          - add-message
+          - edit-message
+          - delete-message
+          - add-category
+          - edit-category
+      category_id:
+        description: 'Category ID (birthday, morning, suvichar, night...)'
+        type: string
+        required: true
+      language:
+        description: 'Message language'
+        type: choice
+        required: true
+        default: gu
+        options: [gu, hi, en]
+      message:
+        description: 'Full message text for add/edit (leave empty for category operations)'
+        type: string
+        required: false
+      message_number:
+        description: 'For edit/delete: existing message number, starting at 1'
+        type: string
+        required: false
+        default: '0'
+      gu_name:
+        description: 'Gujarati category name (for add/edit category)'
+        type: string
+        required: false
+      hi_name:
+        description: 'Hindi category name (for add/edit category)'
+        type: string
+        required: false
+      en_name:
+        description: 'English category name (for add/edit category)'
+        type: string
+        required: false
+      emoji:
+        description: 'Emoji (for add/edit category)'
+        type: string
+        required: false
+      description:
+        description: 'Gujarati category description'
+        type: string
+        required: false
+permissions:
+  contents: write
+concurrency:
+  group: shubhlink-content-manager
+  cancel-in-progress: false
+jobs:
+  admin:
+    if: github.actor == 'Divyesh1202' && github.repository == 'ShubhLink/shubhlink.github.io'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Update content safely
+        env:
+          ADMIN_OPERATION: \u0024{{ inputs.operation }}
+          ADMIN_CATEGORY: \u0024{{ inputs.category_id }}
+          ADMIN_LANGUAGE: \u0024{{ inputs.language }}
+          ADMIN_MESSAGE: \u0024{{ inputs.message }}
+          ADMIN_INDEX: \u0024{{ inputs.message_number }}
+          ADMIN_GU_NAME: \u0024{{ inputs.gu_name }}
+          ADMIN_HI_NAME: \u0024{{ inputs.hi_name }}
+          ADMIN_EN_NAME: \u0024{{ inputs.en_name }}
+          ADMIN_EMOJI: \u0024{{ inputs.emoji }}
+          ADMIN_DESCRIPTION: \u0024{{ inputs.description }}
+        run: node .github/scripts/manage-content.cjs
+      - name: Commit and publish changes
+        run: |
+          if git diff --quiet -- data.js; then
+            echo "No changes to publish"
+            exit 0
+          fi
+          git config user.name "shubhlink-content-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.js
+          git commit -m "Admin: update ShubhLink content"
+          git push
