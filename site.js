@@ -6,7 +6,7 @@ const backend=window.SHUBHLINK_BACKEND||{};
 if(backend.url&&backend.publishableKey){
  try{
   const root=backend.url.replace(/\/$/,'');
-  const headers={apikey:backend.publishableKey,Authorization:'Bearer '+backend.publishableKey};
+  const headers={apikey:backend.publishableKey};
   const [catResponse,msgResponse]=await Promise.all([
    fetch(root+'/rest/v1/shubhlink_categories?select=id,emoji,name_gu,name_hi,name_en,description_gu,color&is_active=eq.true',{headers,cache:'no-store'}),
    fetch(root+'/rest/v1/shubhlink_messages?select=id,category_id,language,title,body&is_published=eq.true&order=created_at.desc&limit=1000',{headers,cache:'no-store'})
