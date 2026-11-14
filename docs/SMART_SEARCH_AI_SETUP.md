@@ -17,14 +17,14 @@ Sources:
 - 2026 Drik Panchang Gujarati Calendar: https://www.drikpanchang.com/gujarati/calendar/gujarati-calendar.html
 - 2027 Panchang may differ for some days; official Gujarat notified dates take precedence on government observances.
 
-## Activate genuine AI (requires owner action)
-1. Open https://aistudio.google.com/api-keys and generate a Gemini Developer API key. Confirm the project is on the **Free tier**. **Do not enable billing** unless you knowingly accept costs.
+## Gemini AI activation — verified active (2026-11-14)
+1. The owner created a Gemini API key. Confirm the Google project stays in the **Free tier**. **Do not enable billing** unless you knowingly accept costs.
 2. In the **ShubhLink** Supabase project \`wbwxljfzzavtvzpheimi\`, navigate to Edge Functions → Secrets:
    https://supabase.com/dashboard/project/wbwxljfzzavtvzpheimi/settings/functions
 3. Add exactly one secret with name \`GEMINI_API_KEY\` and the key as its value. Do **not** paste the value into GitHub, frontend JS, AdSense, or a ChatGPT conversation.
 4. After saving, go to https://shubhlink.github.io/search.html. Type an occasion and click **નવા મેસેજ બનાવો**.
 5. The deployed \`compose-wish\` Edge Function will use \`gemini-2.5-flash-lite\` and generate at most three messages. On errors/rate limits it returns an error and the website gracefully falls back to local Smart Drafts.
-6. Do not advertise unlimited or always-free AI: providers may revise quotas and terms. Check usage and avoid upgrading Free to Paid inadvertently.
+6. AI is working as of 2026-11-14. The cloud function caps usage to 6 requests per IP per India day (best-effort) and Google's separate Free tier quotas still apply. Do not advertise unlimited or always-free AI: providers may revise quotas and terms. Check usage and avoid upgrading Free to Paid inadvertently.
 
 AI Backend:
 - URL: \`https://wbwxljfzzavtvzpheimi.supabase.co/functions/v1/compose-wish\`
@@ -41,3 +41,8 @@ AI Backend:
 - Type \`Divyesh Patel\` in the editor with Gujarati selected; it should become \`દિવ્યેશ પટેલ\` on blur / before sharing. Manual Gujarati entry should remain unchanged.
 - AI not configured: local Smart Drafts should still work, clearly labeled **not AI**.
 - Admin login and Save/Publish should continue to work; public registration remains removed.
+
+## Verified test
+- Test topic: `જન્મદિવસ માટે સુંદર શુભેચ્છા`, language Gujarati, style warm.
+- POST `https://wbwxljfzzavtvzpheimi.supabase.co/functions/v1/compose-wish` returned HTTP 200, 3 Gujarati AI messages, `source: gemini`.
+- The 1,300 public published messages and single Super Admin role remain unchanged.
