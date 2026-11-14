@@ -70,6 +70,7 @@
 <p class="account-status" id="authStatus" role="status" aria-live="polite"></p>
 </section>
 <section id="loggedIn" hidden>
+<div class="account-box" id="adminEntry" hidden><h2>🔐 ShubhLink Admin</h2><p class="account-muted">તમે આ વેબસાઇટના Admin છો. નવા મેસેજ અને કેટેગરી સીધાં Publish કરવા માટે Admin Studio ખોલો.</p><a class="btn primary" href="secure-admin.html">Admin Studio ખોલો ↗</a></div>
 <div class="account-grid">
 <section class="account-box"><h2>👤 મારું Profile</h2><p class="account-muted" id="accountEmail"></p>
 <label for="displayName">તમારું નામ</label><input id="displayName" maxlength="80" autocomplete="name">
@@ -184,7 +185,9 @@ async function render(){
  if(error)status('authStatus',err(error),true);
  $('authSection').hidden=!!user;$('loggedIn').hidden=!user;
  if(isPasswordRecovery){$('authSection').hidden=false;$('loggedIn').hidden=true;$('passwordForm').hidden=false;setTab('reset');return}
- if(!user)return;
+ if(!user){$('adminEntry').hidden=true;return;}
+ const {data:isAdmin,error:adminError}=await db.rpc('is_shubhlink_admin');
+ $('adminEntry').hidden=!!adminError||isAdmin!==true;
  $('accountEmail').textContent=user.email||'Google Account';
  const {data,error:profileError}=await db.from('shubhlink_profiles').select('display_name').eq('user_id',user.id).maybeSingle();
  if(profileError)status('profileStatus',err(profileError),true);
