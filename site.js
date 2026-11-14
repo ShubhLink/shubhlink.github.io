@@ -1,5 +1,5 @@
 
-(async function(){
+window.SHUBH_DATA_READY=(async function(){
 'use strict';
 const D=window.SHUBHLINK_DATA;if(!D)return;
 const backend=window.SHUBHLINK_BACKEND||{};
@@ -68,7 +68,15 @@ function catCard(c){
  a.append(arrow,emoji,title,desc,go);return a;
 }
 if($('homeCats')){
- D.categories.slice(0,8).forEach(c=>$('homeCats').append(catCard(c)));
+ {
+  const todayEvent=(window.ShubhCalendar?.todayEvents()||[])[0];
+  const first=window.ShubhCalendar?.currentCategory()||'morning';
+  const order=[first,...(todayEvent?['festival']:[]),...D.categories.map(c=>c.id)];
+  const shown=new Set();
+  for(const id of order){if(shown.has(id))continue;shown.add(id);
+   const c=D.categories.find(x=>x.id===id);if(c&&shown.size<=8)$('homeCats').append(catCard(c));
+  }
+ }
  const arr=D.wishes.gu.suvichar||[];
  if(arr.length)$('dailyQuote').textContent=arr[Math.floor(Date.now()/86400000)%arr.length];
 }
@@ -108,6 +116,21 @@ if($('editCat')){
  D.categories.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.emoji+' '+c.gu;cat.add(o)});
  cat.value=firstCat;lng.value=firstLang;
  const choice=()=>D.wishes[lng.value]?.[cat.value]||[];
+ const localName=value=>{
+   const v=trim(value,50);
+   return window.ShubhNames?window.ShubhNames.prepare(v,lng.value):v;
+ };
+ function convertNameFields(){
+   if(lng.value!=='gu')return;
+   for(const input of [to,from]){
+    if(/[A-Za-z]/.test(input.value))input.value=localName(input.value).slice(0,50);
+   }
+ }
+ for(const inp of [to,from])inp.addEventListener('blur',()=>{convertNameFields();renderPreview()});
+ for(const id of ['convertToGujarati','convertFromGujarati']){
+  const btn=$(id);if(btn)btn.addEventListener('click',()=>{convertNameFields();renderPreview()});
+ }
+
  function loadTemplate(index){
   const arr=choice();const i=Number.isInteger(index)&&index>=0&&index<arr.length?index:0;
   title.value=titleFor(arr[i]||'',cat.value,lng.value);msg.value=arr[i]||'';
@@ -119,17 +142,17 @@ if($('editCat')){
   $('previewEmoji').textContent=c.emoji;
   $('previewTitle').textContent=title.value||catName(c,lng.value);
   $('previewMsg').textContent=msg.value;
-  $('previewTo').textContent=to.value?'પ્રિય '+trim(to.value,50)+',':'';
-  $('previewFrom').textContent=from.value?'શુભેચ્છાઓ સાથે, '+trim(from.value,50):'દિલથી શુભેચ્છાઓ ♡';
+  $('previewTo').textContent=to.value?'પ્રિય '+localName(to.value)+',':'';
+  $('previewFrom').textContent=from.value?'શુભેચ્છાઓ સાથે, '+localName(from.value):'દિલથી શુભેચ્છાઓ ♡';
  }
  function link(){
   const u=new URL('create.html',location.href);
-  const vals={c:cat.value,l:lng.value,title:trim(title.value,100),m:trim(msg.value,500),t:trim(to.value,50),f:trim(from.value,50)};
+  const vals={c:cat.value,l:lng.value,title:trim(title.value,100),m:trim(msg.value,500),t:localName(to.value),f:localName(from.value)};
   Object.entries(vals).forEach(([k,v])=>{if(v)u.searchParams.set(k,v)});
   return u.href;
  }
  function share(){
-  const sender=trim(from.value,50),recipient=trim(to.value,50);
+  const sender=localName(from.value),recipient=localName(to.value);
   return (recipient?'💌 *પ્રિય '+recipient+',*\n\n':'')+'*'+trim(title.value,100)+'*\n\n'+trim(msg.value,500)+(sender?'\n\n🌸 *શુભેચ્છાઓ સાથે — '+sender+'*':'')+'\n\n🔗 '+link();
  }
  async function copy(text){
@@ -139,7 +162,7 @@ if($('editCat')){
    feedback.textContent='✓ કોપી થઈ ગયું';
   }catch{feedback.textContent='કોપી ન થયું. ફરી પ્રયત્ન કરો.'}
  }
- cat.addEventListener('change',()=>loadTemplate(0));lng.addEventListener('change',()=>loadTemplate(0));
+ cat.addEventListener('change',()=>loadTemplate(0));lng.addEventListener('change',()=>{convertNameFields();loadTemplate(0)});
  [title,msg,to,from].forEach(x=>x.addEventListener('input',renderPreview));
  $('waShare').addEventListener('click',()=>{window.open('https://api.whatsapp.com/send?text='+enc(share()),'_blank','noopener')});
  $('copyMsg').addEventListener('click',()=>copy(share().split('\n\n🔗 ')[0]));
@@ -149,6 +172,8 @@ if($('editCat')){
  if(qs.has('m'))msg.value=trim(qs.get('m'),500);
  if(qs.has('t'))to.value=trim(qs.get('t'),50);
  if(qs.has('f'))from.value=trim(qs.get('f'),50);
- renderPreview();
+ convertNameFields();renderPreview();
 }
+window.ShubhCore={D,dbTitleMap,titleFor,catName};
+return window.ShubhCore;
 })();
