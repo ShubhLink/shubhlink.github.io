@@ -13,13 +13,13 @@ function panel(title,detail,emoji,href,caption,featured){
  const wrap=document.createElement('div');const over=document.createElement('small');over.textContent=caption;
  const h=document.createElement('h3');h.textContent=title;
  const p=document.createElement('p');p.textContent=detail;
- const go=document.createElement('span');go.className='sf-link';go.textContent='મેસેજ જુઓ અને શેર કરો ↗';
+ const go=document.createElement('span');go.className='sf-link';go.textContent='વધુ મેસેજ જુઓ ↗';
  wrap.append(over,h,p,go);a.append(ico,wrap);return a;
 }
 const names={
- morning:['સુપ્રભાત 🌞','દિવસની શરૂઆત સુંદર શુભેચ્છાથી કરો.','🌅'],
- afternoon:['શુભ બપોર 🍃','બપોરની નાની ખુશીઓ મિત્રો સાથે વહેંચો.','☀️'],
- night:['શુભરાત્રિ 🌙','દિવસની અંતે પોતાના લોકોને મીઠી શુભેચ્છા મોકલો.','🌙']
+ morning:['સુપ્રભાત 🌞','સવારનો સૂરજ તો દરરોજ ઊગે છે, પણ આજે તમારા ચહેરાનું સ્મિત કોઈનો આખો દિવસ ઉજાળી દે. ☀️','🌅'],
+ afternoon:['શુભ બપોર 🍃','કામની દોડમાં એક ક્ષણનું સ્મિત સાચવી રાખજો; ક્યારેક નાની ખુશી પણ આખા દિવસની સૌથી મોટી કમાણી હોય છે.','☀️'],
+ night:['શુભરાત્રિ 🌙','આજનો થાક ચાંદનીને સોંપી દો. જે સપના અધૂરા છે, તેમને કાલે ફરી ઉડવાની તક મળશે. 🌙','🌙']
 };
 const current=C.currentCategory();
 if($('todayFeatures')){
@@ -28,11 +28,11 @@ if($('todayFeatures')){
  const todays=C.todayEvents();
  if(todays.length){
   for(const e of todays.slice(0,2)){
-   t.append(panel(e.gu,e.en,e.emoji,'search.html?q='+encodeURIComponent(e.gu)+'&l=gu','આજનો તહેવાર',false))
+   t.append(panel(e.gu,'ઘરના દીવડાથી મોટો પ્રકાશ એ સ્નેહ છે, જે આપણે એકબીજાના હૃદયમાં પ્રગટાવીએ છીએ. ✨',e.emoji,'search.html?q='+encodeURIComponent(e.gu)+'&l=gu','આજનો તહેવાર',false))
   }
  }else{
   const next=C.upcoming(1)[0];
-  if(next)t.append(panel(next.gu,'તારીખ: '+C.dateLabel(next.date)+' · ખાસ શુભેચ્છાઓ તૈયાર કરો',next.emoji,'search.html?q='+encodeURIComponent(next.gu)+'&l=gu','આગામી ખાસ દિવસ',false));
+  if(next)t.append(panel(next.gu,'ઉજવણી નજીક છે. દિલથી લખેલા શબ્દો એ સૌથી સુંદર ભેટ હોય છે.',next.emoji,'search.html?q='+encodeURIComponent(next.gu)+'&l=gu',C.dateLabel(next.date),false));
   else t.append(panel('આજનો સુંદર વિચાર','પ્રેરણાદાયી સુવિચાર વાંચો અને શેર કરો.','🌷','wishes.html?c=suvichar&l=gu','આજની પસંદ',false));
  }
 }
