@@ -161,13 +161,11 @@ function card(it){
  const head=document.createElement('h3');head.textContent=it.title;
  const body=document.createElement('p');body.textContent=it.body;
  const actions=document.createElement('div');actions.className='search-actions';
- const edit=document.createElement('a');
- const url=new URL('create.html',location.href);
- url.searchParams.set('c',it.category);url.searchParams.set('l',it.language);url.searchParams.set('title',it.title.slice(0,100));url.searchParams.set('m',it.body.slice(0,500));
- edit.href=url.href;edit.textContent='✍️ નામ ઉમેરો';
- const wa=document.createElement('a');wa.textContent='WhatsApp';wa.href='https://api.whatsapp.com/send?text='+encodeURIComponent(it.body+'\n\n✨ https://shubhlink.github.io/');wa.target='_blank';wa.rel='noopener noreferrer';
- const cp=document.createElement('button');cp.type='button';cp.textContent='કોપી';cp.onclick=()=>copyText(it.body,cp);
- actions.append(edit,cp,wa);node.append(label,head,body,actions);return node
+ const wa=document.createElement('button');
+ wa.type='button';wa.className='search-whatsapp';
+ wa.textContent='◉ WhatsApp પર શેર કરો';
+ wa.addEventListener('click',()=>window.ShubhShare.open({title:it.title,body:it.body,language:it.language,category:it.category}));
+ actions.append(wa);node.append(label,head,body,actions);return node
 }
 function setLink(q){
  const u=new URL('ai.html',location.href);
