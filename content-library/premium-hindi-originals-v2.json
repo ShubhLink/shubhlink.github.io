@@ -1,0 +1,482 @@
+[
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "सुबह की सबसे छोटी खुशी",
+    "body": "☀️ सुबह की चाय के साथ अगर किसी अपने का नाम याद आ जाए, तो समझिए दिन को खूबसूरत होने का पहला बहाना मिल गया। सुप्रभात!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "अलार्म के बाद",
+    "body": "🌻 अलार्म ने तो नींद तोड़ी होगी, मेरी यह दुआ आपकी थकान तोड़ दे—आज कोई छोटी बात आपको बेवजह मुस्कुराने पर मजबूर करे।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "बिना वजह याद",
+    "body": "💌 कोई खास काम नहीं था, बस सुबह आपकी याद आई। कभी-कभी सबसे प्यारा संदेश वही होता है जिसके पीछे कोई वजह नहीं होती।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "धीमी-धीमी शुरुआत",
+    "body": "🍃 सुबह को दौड़ में मत बदलिए। खिड़की से आती हवा, चाय की भाप और अपने लिए दो मिनट भी आज की जरूरी खुशियां हैं।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "एक नई कोशिश",
+    "body": "🌅 कल की हार सुबह की खबर नहीं होती। आज सूरज फिर निकला है, तो आपके हिस्से भी एक नई कोशिश जरूर आई है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "morning",
+    "language": "hi",
+    "title": "अपनों की रोशनी",
+    "body": "✨ सूरज हर घर में आता है, लेकिन घर सचमुच तब चमकता है जब उसमें कोई प्यार से पूछता है—उठ गए? सुप्रभात!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "मां के जन्मदिन पर",
+    "body": "💗 मां, बचपन में मेरी आधी बातें आप मेरे बोलने से पहले समझ लेती थीं। आज जन्मदिन पर बस इतना कहना है—आपकी उस खामोश मोहब्बत को कभी भूल नहीं सकता।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "बहन के नाम",
+    "body": "🎂 बहन, खिलौनों की लड़ाई से लेकर बड़े फैसलों की सलाह तक, तुम हर कहानी का हिस्सा रही हो। जन्मदिन पर वही पुरानी हंसी फिर से लौट आए!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "पापा की छोटी जेब",
+    "body": "🎁 पापा, बचपन में आपकी जेब से मिला छोटा सिक्का भी किसी खजाने से कम नहीं लगता था। आज आपके जन्मदिन पर उन्हीं यादों का प्यार लौटाना चाहता हूं।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "दोस्त का बर्थडे",
+    "body": "😄 तेरी उम्र बढ़ रही है, लेकिन हमारी बेवकूफियों की फाइल आज भी खुली हुई है! जन्मदिन मुबारक, जिंदगी का सबसे मजेदार साथी।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "जीवनसाथी के लिए",
+    "body": "❤️ तुम्हारे साथ गुजरे साधारण दिनों में भी बहुत कुछ असाधारण है। तुम्हारा जन्मदिन उन सारे छोटे लम्हों को शुक्रिया कहने का दिन है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "birthday",
+    "language": "hi",
+    "title": "खुद को बधाई",
+    "body": "🌟 एक और साल सिर्फ उम्र में नहीं जुड़ा; उसमें वे मुश्किलें भी हैं जिन्हें तुमने चुपचाप पार किया। आज अपने साहस को भी जन्मदिन की बधाई दो।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "hi",
+    "title": "रात कोई अदालत नहीं",
+    "body": "🌙 आज सारे काम पूरे नहीं हुए? कोई बात नहीं। रात अदालत नहीं, आराम की जगह है। अपने दिल को थोड़ी मोहलत देकर सो जाइए।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "hi",
+    "title": "चांद के पास एक दुआ",
+    "body": "✨ चांद से कह दिया है—जो दिनभर दूसरों को हंसाते हैं, उन्हें रात में थोड़ा सुकून जरूर देना। आपकी याद भी उसी दुआ में है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "hi",
+    "title": "फोन रख दीजिए",
+    "body": "📱 सारी दुनिया को जवाब दे दिए? अब अपना हाल भी पूछ लीजिए। गहरी सांस लीजिए और खुद को एक नरम-सी शुभरात्रि कहिए।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "hi",
+    "title": "कल की रोशनी",
+    "body": "⭐ आज जो सपना अधूरा है, उसे अधूरा रहने दीजिए। हर तारा एक रात में सूरज नहीं बनता। मीठे सपने।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "hi",
+    "title": "दिन को माफ कीजिए",
+    "body": "🕯️ दिन से कोई शिकायत हो तो उसे आज यहीं छोड़ दीजिए। सुबह को बीती हुई नाराजगी नहीं, नई शुरुआत का मौका दीजिए।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "night",
+    "language": "hi",
+    "title": "नींद का छोटा उपहार",
+    "body": "💤 अच्छी नींद भी जिंदगी का तोहफा है। इसे फिक्र के हाथों मत सौंपिए; आज अपने हिस्से की शांति चुनिए। शुभरात्रि।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "hi",
+    "title": "पुराना दोस्त, वही हंसी",
+    "body": "☕ कितने शहर बदले, कितने नंबर बदले, लेकिन तेरी एक पुरानी बात आज भी बिना वजह हंसा देती है। दोस्ती का यही तो कमाल है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "hi",
+    "title": "पांच मिनट का वादा",
+    "body": "😂 जो दोस्त 'बस पांच मिनट' बोलकर तीन घंटे बैठा ले, उसे नाराज मत करना। जिंदगी का असली मनोरंजन वहीं से मिलता है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "hi",
+    "title": "बिना पूछे साथ",
+    "body": "🤝 सच्ची दोस्ती का परिचय तब मिलता है जब आप 'सब ठीक है' कहते हैं और सामने वाला धीरे से पूछता है—सच बता, क्या हुआ?",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "hi",
+    "title": "स्कूल की आखिरी बेंच",
+    "body": "🎒 वह आखिरी बेंच, कॉपी के पीछे के चित्र और बेवजह की हंसी—कभी किसी दिन फिर मिलकर उन पलों को जीते हैं।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "hi",
+    "title": "दूरी की परीक्षा",
+    "body": "💛 दूरियां बातचीत कम कर सकती हैं, रिश्ता नहीं—अगर किसी मुश्किल दिन सबसे पहले उसी दोस्त का नंबर याद आए।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "friendship",
+    "language": "hi",
+    "title": "बिना हिसाब वाली खुशी",
+    "body": "🌻 दोस्ती में चाय का बिल याद नहीं रहता, पर उस चाय पर हुई बातें उम्रभर याद रहती हैं। आज एक पुराने दोस्त को याद कीजिए।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "hi",
+    "title": "दीवाली का सबसे बड़ा दीया",
+    "body": "🪔 दीवाली में एक दीया उस रिश्ते के नाम भी जलाइए जिससे बहुत दिनों से बात नहीं हुई। कभी छोटी रोशनी बड़ा अंधेरा मिटा देती है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "hi",
+    "title": "उड़ती पतंग का सच",
+    "body": "🪁 पतंग जितनी ऊंची उड़ती है, डोर की अहमियत उतनी समझ आती है। जिंदगी की उड़ान में साथ देने वालों को याद रखिए। उत्तरायण की शुभकामनाएं।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "hi",
+    "title": "होली वाला पुराना दोस्त",
+    "body": "🎨 इस होली रंगों से पहले किसी पुराने दोस्त को फोन लगाइए। कुछ रिश्तों को पानी से नहीं, एक सच्ची हंसी से रंगने की जरूरत होती है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "hi",
+    "title": "गरबे का घेरा",
+    "body": "💃 नवरात्रि का गरबा याद दिलाता है कि अलग-अलग कदम भी एक ही ताल पर मिल सकते हैं। माता रानी का आशीर्वाद सबके साथ रहे।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "hi",
+    "title": "राखी की आधी चॉकलेट",
+    "body": "🧵 बचपन में आधी चॉकलेट को लेकर हुए झगड़े भी राखी पर मीठी याद बन जाते हैं। भाई-बहन का यही रिश्ता अनमोल है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "festival",
+    "language": "hi",
+    "title": "नए साल की पहली पंक्ति",
+    "body": "🎊 नए साल की पहली पंक्ति किसी बड़े वादे से नहीं, एक सच्ची माफी और अपनों के साथ की हंसी से लिखिए।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "hi",
+    "title": "बोलने से ज्यादा सुनना",
+    "body": "🌿 कुछ दिलों को सलाह नहीं चाहिए, बस कोई बिना टोके सुन ले। कभी-कभी आपकी खामोश मौजूदगी ही सबसे बड़ी मदद है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "hi",
+    "title": "घरों की असली रौनक",
+    "body": "🏡 महंगे झूमर घर को रोशन करते हैं, लेकिन कोई आपका इंतजार करे तो घर सचमुच उजाला बन जाता है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "hi",
+    "title": "एक शब्द की उम्र",
+    "body": "📖 सिक्के का मूल्य बाजार तय करता है, लेकिन प्यार से बोले गए एक शब्द की कीमत कोई बरसों तक याद रख सकता है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "hi",
+    "title": "समझदारी की पहचान",
+    "body": "✨ हर बहस का आखिरी वाक्य बोलना जरूरी नहीं। कभी रिश्ते को बचा लेने वाला मौन सबसे सुंदर जवाब होता है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "hi",
+    "title": "छोटी ईमानदारी",
+    "body": "🪷 बड़ी बातें याद नहीं रहतीं, पर छोटी ईमानदारी से बना भरोसा मुश्किल दिनों में भी साथ खड़ा रहता है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "suvichar",
+    "language": "hi",
+    "title": "धीमे खिलते सपने",
+    "body": "🌱 फूल को खींचकर जल्दी नहीं खिलाया जा सकता। कुछ सपनों को भी पानी, रोशनी और थोड़ा भरोसा चाहिए।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "hi",
+    "title": "आज की छोटी शुरुआत",
+    "body": "🚀 सपने को सोमवार या पहली तारीख का इंतजार नहीं होता। आज के सिर्फ दस मिनट भी एक बड़े बदलाव की शुरुआत बन सकते हैं।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "hi",
+    "title": "मोबाइल से सीखिए",
+    "body": "📱 फोन को अपडेट करते रहते हैं; कभी अपनी किसी पुरानी आदत का नया संस्करण भी बनाइए। जिंदगी की स्पीड बदल सकती है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "hi",
+    "title": "कौन-सा सवाल पूछें?",
+    "body": "💡 'मौका कब मिलेगा?' के साथ पूछिए—'मौका मिलने पर मैं कितना तैयार रहूंगा?' दूसरा सवाल नई दिशा दिखा सकता है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "hi",
+    "title": "पहला कदम ही काफी",
+    "body": "👣 पहाड़ देखकर डर लगना स्वाभाविक है। आज चोटी नहीं, पहला कदम चुनिए; बाकी रास्ता चलते-चलते दिखेगा।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "hi",
+    "title": "अलग सोचने की हिम्मत",
+    "body": "🎨 नए विचार पर शुरुआत में कम लोग ताली बजाते हैं। पहले उसे छोटे काम में बदलिए, फिर उसके परिणाम को बोलने दीजिए।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "newthought",
+    "language": "hi",
+    "title": "अपना रास्ता",
+    "body": "🧭 सामने वाला तेज दौड़ रहा है तो जरूरी नहीं आप पीछे हैं। शायद दोनों की मंजिल ही अलग है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "hi",
+    "title": "दो कप चाय",
+    "body": "💍 शादी की सालगिरह बड़े फोटो से ज्यादा उन साधारण शामों की याद है जब दो कप चाय के बीच पूरी दुनिया की बातें हो जाती थीं।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "hi",
+    "title": "फिर से वही हां",
+    "body": "❤️ पहली बार 'हां' कहना सुंदर था, लेकिन छोटी नोकझोंक और बड़ी जिम्मेदारियों के बाद भी हर सुबह वही 'हां' दोहराना असली प्यार है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "hi",
+    "title": "एक ही छत के सपने",
+    "body": "🌹 दो अलग आदतें, दो अलग पसंद और एक साझा घर—रिश्ते की खूबसूरती समान होने में नहीं, साथ निभाने में है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "hi",
+    "title": "बिना कहे समझना",
+    "body": "✨ बात आधी रह जाए और साथी बाकी बात समझ जाए—वर्षों साथ रहने का यह सबसे प्यारा तोहफा है। सालगिरह मुबारक!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "hi",
+    "title": "मुस्कुराते हुए मतभेद",
+    "body": "🤍 हर बात पर सहमति जरूरी नहीं। नाराजगी के बाद भी हाथ थाम लेना ही साथ का सबसे बड़ा वादा है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "anniversary",
+    "language": "hi",
+    "title": "सालों की असली गिनती",
+    "body": "🥂 सिर्फ अच्छे दिन मत गिनिए; वे मुश्किल दिन भी याद रखिए जिन्हें एक-दूसरे के सहारे हल्का बना लिया।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "hi",
+    "title": "बिना तालियों वाले दिन",
+    "body": "🏆 आज सब आपकी सफलता देख रहे हैं। मैं उन दिनों को भी बधाई देना चाहता हूं जब कोई ताली नहीं थी, फिर भी आपने कोशिश नहीं छोड़ी।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "hi",
+    "title": "पहली कमाई",
+    "body": "💸 पहली सैलरी कितनी भी हो, उसमें अपने पैरों पर खड़े होने का एहसास सबसे बड़ी रकम है। दिल से बधाई!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "hi",
+    "title": "नए घर की चाबी",
+    "body": "🔑 यह सिर्फ घर की चाबी नहीं; बरसों की मेहनत को मिला नया पता है। अब यहां ढेर सारी प्यारी यादें बसें। बधाई!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "hi",
+    "title": "नया कारोबार",
+    "body": "🏪 आज दुकान का शटर ही नहीं उठा, उसके साथ आपकी हिम्मत भी दुनिया के सामने आई है। इस नई शुरुआत को सलाम!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "hi",
+    "title": "टीम की जीत",
+    "body": "🤝 एक हाथ ट्रॉफी उठाता है, लेकिन जीत तक पहुंचने में कई हाथ जुड़े होते हैं। पूरी टीम को दिल से बधाई!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "congrats",
+    "language": "hi",
+    "title": "खुद को शाबाशी",
+    "body": "🌟 दूसरों को जीत छोटी लगे तो लगने दीजिए। आपको पता है यहां तक पहुंचने के लिए कितने डर पार किए हैं। खुद को शाबाशी दीजिए!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "hi",
+    "title": "दोपहर की याद",
+    "body": "🍃 काम के बीच अचानक आपकी याद आई, तो सोचा चाय के साथ यह छोटी-सी मुस्कान भी भेज दूं। शुभ दोपहर!",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "hi",
+    "title": "घर के टिफिन की खुशबू",
+    "body": "🍱 किसी दूर शहर में दोपहर का खाना खाते हुए भी मां के टिफिन की याद आ जाए तो समझिए घर कभी बहुत दूर नहीं होता।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "hi",
+    "title": "दोपहर की चाय",
+    "body": "☕ दोपहर की चाय में स्वाद तब और बढ़ जाता है जब किसी अपने का 'कैसे हो?' संदेश साथ मिल जाए। आज वही संदेश मेरी तरफ से।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "hi",
+    "title": "आधा दिन, पूरी उम्मीद",
+    "body": "🌤️ आधा दिन गुजर गया तो क्या हुआ? अच्छी बातें घड़ी देखकर नहीं आतीं। बाकी दोपहर अभी आपकी है।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "hi",
+    "title": "अपने लिए विराम",
+    "body": "💛 सारी जिम्मेदारियां थोड़ी देर बाद भी पूरी हो जाएंगी; अपने मन को पानी, हवा और पांच मिनट का सुकून अभी दे दीजिए।",
+    "is_published": true,
+    "featured": true
+  },
+  {
+    "category_id": "afternoon",
+    "language": "hi",
+    "title": "बिना वजह शुभकामना",
+    "body": "🌼 कोई त्योहार नहीं, कोई खास तारीख भी नहीं। बस आपकी दोपहर में एक प्यारी-सी बात जोड़नी थी—मुस्कुराइए!",
+    "is_published": true,
+    "featured": true
+  }
+]
