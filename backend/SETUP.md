@@ -29,3 +29,11 @@ Phone numbers are not required for sign-up. Email is used as the account identif
 Google credentials are handled by the Google/Supabase OAuth flow, not by the static website.
 The public publishable key works only because every affected table has restrictive row-level security rules.
 Admin status is determined from the Auth user UUID in `shubhlink_admins`, never from browser-editable profile names.
+
+## Live backend status (2026-11-14)
+- Project: `wbwxljfzzavtvzpheimi` (Mumbai, separate from divyesh-stock-ai).
+- Five RLS-protected tables and 10 seeded categories deployed.
+- Public publishable key configured on GitHub Pages; do not add server secrets.
+- Admin role table currently empty: no real owner login has been assigned yet.
+- Google OAuth Client ID/Secret still need configuring in Google Cloud and Supabase.
+- Email/password sign-up uses Supabase Auth and may require email verification.
