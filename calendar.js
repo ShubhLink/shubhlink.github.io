@@ -53,7 +53,7 @@ function currentCategory(){
 }
 function upcoming(limit=8){const today=indiaTime().date;return items.filter(e=>e.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,limit)}
 function todayEvents(){const today=indiaTime().date;return items.filter(e=>e.date===today)}
-function normalize(s){return String(s||'').toLocaleLowerCase().normalize('NFKC').replace(/[^\p{L}\p{N}]+/gu,' ').trim()}
+function normalize(s){return String(s||'').toLocaleLowerCase().normalize('NFKC').replace(/[^\p{L}\p{M}\p{N}]+/gu,' ').trim()}
 function findEvents(query){
  const q=normalize(query);
  if(!q)return [];
