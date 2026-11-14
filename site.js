@@ -110,7 +110,8 @@ if($('wishGrid')){
   let filtered=all.filter(x=>!q||((x.msg+' '+titleFor(x.msg,c,l)).toLocaleLowerCase().includes(q)));
   const premium=filtered.filter(x=>x.featured);
   // Curated originals appear first; low-quality formula combinations remain a fallback.
-  if(!q&&premium.length>=6)filtered=premium;
+  if(premium.length)filtered=premium;
+  else if(dbFeatured.size>0)filtered=[]; // Archive low-quality formula messages when curated data is available.
   const key='category:'+l+':'+c+':'+q;
   if(key!==lastKey)lastKey=key;
   const batchSize=Math.min(8,Math.max(4,Math.ceil(filtered.length*0.64)));
