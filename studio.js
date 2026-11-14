@@ -73,10 +73,10 @@ function output(messages){
   card.append(el('div','ai-card-label',(replyWords[lang.value]||replyWords.gu)[i]||'ખાસ મેસેજ'));
   card.append(el('p','ai-message-body',msg));
   const buttons=el('div','ai-message-actions');
-  const copyButton=el('button','','કોપી કરો');copyButton.type='button';copyButton.onclick=()=>copy(msg,copyButton);
-  const edit=el('a','','✍️ નામ ઉમેરો');edit.href=editUrl(msg);
-  const share=el('a','whatsapp','WhatsApp શેર');share.href='https://api.whatsapp.com/send?text='+encodeURIComponent(msg+'\n\nhttps://shubhlink.github.io/');share.target='_blank';share.rel='noopener noreferrer';
-  buttons.append(copyButton,edit,share);card.append(buttons);options.append(card)
+  const share=el('button','whatsapp','◉ WhatsApp પર શેર કરો');
+  share.type='button';
+  share.onclick=()=>window.ShubhShare.open({title:'',body:msg,language:lang.value,category:'newthought'});
+  buttons.append(share);card.append(buttons);options.append(card)
  });
  box.append(options);
  const refine=el('div','ai-refine');
