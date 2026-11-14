@@ -107,7 +107,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
  .catbox small{font-size:12px}
  .section{padding:34px 0}
  .smallhero{padding-top:22px}
- .mobilebottom{padding:9px 0 max(9px,env(safe-area-inset-bottom))}
+ .mobilebottom{grid-template-columns:repeat(4,minmax(0,1fr));padding:9px 0 max(9px,env(safe-area-inset-bottom))}
  .mobilebottom a{font-size:11px}
  .mobilebottom a span{font-size:24px}
  .slim-search .search-message{padding:18px}
