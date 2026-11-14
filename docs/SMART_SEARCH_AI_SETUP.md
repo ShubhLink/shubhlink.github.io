@@ -24,12 +24,12 @@ Sources:
 3. Add exactly one secret with name \`GEMINI_API_KEY\` and the key as its value. Do **not** paste the value into GitHub, frontend JS, AdSense, or a ChatGPT conversation.
 4. After saving, go to https://shubhlink.github.io/search.html. Type an occasion and click **નવા મેસેજ બનાવો**.
 5. The deployed \`compose-wish\` Edge Function will use \`gemini-2.5-flash-lite\` and generate at most three messages. On errors/rate limits it returns an error and the website gracefully falls back to local Smart Drafts.
-6. AI is working as of 2026-11-14. The cloud function caps usage to 6 requests per IP per India day (best-effort) and Google's separate Free tier quotas still apply. Do not advertise unlimited or always-free AI: providers may revise quotas and terms. Check usage and avoid upgrading Free to Paid inadvertently.
+6. AI is working as of 2026-11-14. The cloud function caps usage to 30 requests per IP per India day (best-effort) and Google's separate Free tier quotas still apply. Do not advertise unlimited or always-free AI: providers may revise quotas and terms. Check usage and avoid upgrading Free to Paid inadvertently.
 
 AI Backend:
 - URL: \`https://wbwxljfzzavtvzpheimi.supabase.co/functions/v1/compose-wish\`
 - Function source: \`supabase/functions/compose-wish/index.ts\`
-- Only requests from \`https://shubhlink.github.io\` are allowed by the Origin check (not strong client authentication); request counts are additionally rate limited using a hashed network identifier, approximately six uses per day per IP, with provider quotas as a final backstop.
+- Only requests from \`https://shubhlink.github.io\` are allowed by the Origin check (not strong client authentication); request counts are additionally rate limited using a hashed network identifier, 30 requests per day per IP, with provider quotas as a final backstop.
 - Server stores API keys as environment secrets. Browser only contains the **publishable** Supabase project key.
 - Free-tier submitted content may be used by Google to improve services, depending on Google terms. Avoid personal/sensitive prompts and include a prominent disclosure.
 
