@@ -61,8 +61,10 @@ function score(m,q,c,parts){
  if(q&&txt.includes(norm(q)))value+=85;
  for(const token of parts){
   if(kindTerms.has(token))continue;
-  if(txt.includes(token))value+=29;
-  else if(txt.includes(token.slice(0,Math.max(3,token.length-1))))value+=7;
+  const words=txt.split(' ');
+  const exact=token.length<=3?words.includes(token):txt.includes(token);
+  if(exact)value+=29;
+  else if(token.length>5&&txt.includes(token.slice(0,token.length-1)))value+=7;
  }
  if(!q&&m.category===(C?.currentCategory()||'morning'))value+=60;
  return value>0&&m.featured?value+44:value;
