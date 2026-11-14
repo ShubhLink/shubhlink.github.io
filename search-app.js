@@ -197,14 +197,30 @@ async function compose(){
    method:'POST',headers:{'Content-Type':'application/json',apikey:cfg.publishableKey},
    body:JSON.stringify({topic:q,language:l,tone:style})
   });
-  if(!res.ok)throw Error('AI service not configured');
-  const data=await res.json();
+  const data=await res.json().catch(()=>({error:'unexpected_response'}));
+  if(!res.ok){
+   const code=String(data.error||'ai_temporarily_unavailable');
+   const known={
+    ai_not_configured:'Gemini API Key હજુ Backend માં ઉપલબ્ધ નથી.',
+    ai_quota_exceeded:'Google AI Free Tier ની Limit પૂરી થઈ છે અથવા આ Project માટે ઉપલબ્ધ નથી. Google AI Studio માં Rate Limits તપાસો.',
+    ai_project_access_denied:'Google એ આ Project માટે Gemini Generation પરવાનગી આપી નથી. AI Studio માં Free Tier Access તપાસો.',
+    ai_key_invalid:'Google Gemini API Key અમાન્ય છે. Google AI Studio માં Key ની સેટિંગ તપાસો.',
+    ai_model_unavailable:'આ Gemini Model આ Project માટે ઉપલબ્ધ નથી.',
+    ai_provider_busy:'Gemini Service હાલ વ્યસ્ત છે; થોડા સમય પછી ફરી પ્રયાસ કરો.',
+    ai_provider_bad_request:'Gemini ને મોકલેલી Request સ્વીકારાઈ નથી.',
+    rate_limit:'આજની મફત AI વિનંતીઓની મર્યાદા પૂરી થઈ ગઈ છે.',
+    quota_check_unavailable:'AI Rate Limit તપાસવામાં Backend Error આવ્યો છે.',
+    backend_not_configured:'AI Backend સેટિંગ અધૂરી છે.',
+    ai_temporarily_unavailable:'Gemini સાથે સંપર્ક કરવામાં હંગામી મુશ્કેલી આવી છે.'
+   };
+   throw Error(known[code]||'AI સેવા હમણાં જવાબ આપી શકી નથી. ('+code+')');
+  }
   if(!Array.isArray(data.messages)||!data.messages.length)throw Error('No AI output');
   renderDrafts(data.messages.slice(0,3).map(x=>String(x).slice(0,600)),true);
   feedback.textContent='✓ AI દ્વારા નવા મેસેજ બનાવ્યા.';
- }catch(_e){
+ }catch(e){
   renderDrafts(smartDrafts(q,l,style),false);
-  feedback.textContent='હાલ AI સેવા સક્રિય નથી; તેના બદલે મફત Smart Draft તૈયાર કર્યો છે.';
+  feedback.textContent=(e?.message||'AI સેવા ઉપલબ્ધ નથી.')+' તેથી મફત Smart Draft બતાવ્યા છે.';
  }finally{composeBtn.disabled=false}
 }
 load.onclick=()=>{visible+=24;renderResults()};
