@@ -1,0 +1,108 @@
+
+(function(){
+'use strict';
+const D=window.SHUBHLINK_DATA;if(!D)return;
+const $=id=>document.getElementById(id);
+const qs=new URLSearchParams(location.search);
+const languages=['gu','hi','en'];
+const catIds=D.categories.map(c=>c.id);
+const firstCat=catIds.includes(qs.get('c'))?qs.get('c'):'morning';
+const firstLang=languages.includes(qs.get('l'))?qs.get('l'):'gu';
+const enc=encodeURIComponent;
+const trim=(text,max=500)=>String(text||'').replace(/[<>\u0000-\u001f]/g,' ').trim().slice(0,max);
+const titleFor=(m,c,l)=>{
+ const sentences=trim(m).split(/[.!?।॥\n]/);
+ let t=(sentences.find(x=>x.trim().length>=7)||sentences[0]||'').trim().replace(/^[^\p{L}\p{N}]+/u,'');
+ return t.length>46?t.slice(0,43).trim()+'…':t||(D.categories.find(x=>x.id===c)?.[l]||'શુભેચ્છા');
+};
+const catName=(c,l)=>c[l]||c.gu;
+function catCard(c){
+ const a=document.createElement('a');a.className='catbox';a.href='wishes.html?c='+enc(c.id);
+ const emoji=document.createElement('span');emoji.className='catemoji';emoji.textContent=c.emoji;
+ const title=document.createElement('strong');title.textContent=c.gu;
+ const desc=document.createElement('small');desc.textContent=c.desc+' · મેસેજ જુઓ';
+ const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';
+ a.append(arrow,emoji,title,desc);return a;
+}
+if($('homeCats')){
+ D.categories.slice(0,8).forEach(c=>$('homeCats').append(catCard(c)));
+ const arr=D.wishes.gu.suvichar||[];
+ if(arr.length)$('dailyQuote').textContent=arr[Math.floor(Date.now()/86400000)%arr.length];
+}
+if($('allCats'))D.categories.forEach(c=>$('allCats').append(catCard(c)));
+if($('wishGrid')){
+ const csel=$('filterCat'),lsel=$('filterLang'),search=$('filterSearch');
+ D.categories.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.emoji+' '+c.gu;csel.add(o)});
+ csel.value=firstCat;lsel.value=firstLang;
+ function render(){
+  const c=csel.value,l=lsel.value,cat=D.categories.find(x=>x.id===c),arr=D.wishes[l]?.[c]||[],q=trim(search.value).toLocaleLowerCase();
+  $('wishHeading').textContent=cat.emoji+' '+catName(cat,l)+' માટે તૈયાર મેસેજ';
+  $('wishIntro').textContent='તમને ગમે તે મેસેજ પસંદ કરો અને પછી નામ ઉમેરી WhatsApp પર શેર કરો.';
+  const grid=$('wishGrid');grid.replaceChildren();
+  let count=0;
+  arr.forEach((msg,i)=>{
+   const topic=titleFor(msg,c,l);
+   if(q&&!(msg+' '+topic).toLocaleLowerCase().includes(q))return;
+   count++;
+   const card=document.createElement('article');card.className='wishitem';
+   const tag=document.createElement('span');tag.className='wishtag';tag.textContent=cat.emoji+' '+catName(cat,l);
+   const h=document.createElement('h3');h.textContent=topic;
+   const p=document.createElement('p');p.textContent=msg.slice(0,160)+(msg.length>160?'…':'');
+   const a=document.createElement('a');a.href='create.html?c='+enc(c)+'&l='+enc(l)+'&i='+i;a.textContent='નામ ઉમેરી શેર કરો ↗';
+   card.append(tag,h,p,a);grid.append(card);
+  });
+  $('resultMeta').textContent=count+' મેસેજ ઉપલબ્ધ';
+  if(!count){const empty=document.createElement('p');empty.className='empty';empty.textContent='આ વિષય માટે મેસેજ નથી મળ્યો. બીજા શબ્દો શોધો.';grid.append(empty)}
+  const url=new URL(location.href);url.searchParams.set('c',c);url.searchParams.set('l',l);history.replaceState(null,'',url);
+ }
+ csel.addEventListener('change',render);lsel.addEventListener('change',render);search.addEventListener('input',render);render();
+}
+if($('editCat')){
+ const cat=$('editCat'),lng=$('editLang'),title=$('editTitle'),msg=$('editMsg'),to=$('editTo'),from=$('editFrom'),feedback=$('feedback');
+ D.categories.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.emoji+' '+c.gu;cat.add(o)});
+ cat.value=firstCat;lng.value=firstLang;
+ const choice=()=>D.wishes[lng.value]?.[cat.value]||[];
+ function loadTemplate(index){
+  const arr=choice();const i=Number.isInteger(index)&&index>=0&&index<arr.length?index:0;
+  title.value=titleFor(arr[i]||'',cat.value,lng.value);msg.value=arr[i]||'';
+  $('createBack').href='wishes.html?c='+enc(cat.value)+'&l='+enc(lng.value);
+  renderPreview();
+ }
+ function renderPreview(){
+  const c=D.categories.find(x=>x.id===cat.value);
+  $('previewEmoji').textContent=c.emoji;
+  $('previewTitle').textContent=title.value||catName(c,lng.value);
+  $('previewMsg').textContent=msg.value;
+  $('previewTo').textContent=to.value?'પ્રિય '+trim(to.value,50)+',':'';
+  $('previewFrom').textContent=from.value?'શુભેચ્છાઓ સાથે, '+trim(from.value,50):'દિલથી શુભેચ્છાઓ ♡';
+ }
+ function link(){
+  const u=new URL('create.html',location.href);
+  const vals={c:cat.value,l:lng.value,title:trim(title.value,100),m:trim(msg.value,500),t:trim(to.value,50),f:trim(from.value,50)};
+  Object.entries(vals).forEach(([k,v])=>{if(v)u.searchParams.set(k,v)});
+  return u.href;
+ }
+ function share(){
+  const sender=trim(from.value,50),recipient=trim(to.value,50);
+  return (recipient?'💌 *પ્રિય '+recipient+',*\n\n':'')+'*'+trim(title.value,100)+'*\n\n'+trim(msg.value,500)+(sender?'\n\n🌸 *શુભેચ્છાઓ સાથે — '+sender+'*':'')+'\n\n🔗 '+link();
+ }
+ async function copy(text){
+  try{
+   if(navigator.clipboard&&isSecureContext)await navigator.clipboard.writeText(text);
+   else{const el=document.createElement('textarea');el.value=text;el.style.position='fixed';el.style.left='-9999px';document.body.append(el);el.select();if(!document.execCommand('copy'))throw Error('copy');el.remove()}
+   feedback.textContent='✓ કોપી થઈ ગયું';
+  }catch{feedback.textContent='કોપી ન થયું. ફરી પ્રયત્ન કરો.'}
+ }
+ cat.addEventListener('change',()=>loadTemplate(0));lng.addEventListener('change',()=>loadTemplate(0));
+ [title,msg,to,from].forEach(x=>x.addEventListener('input',renderPreview));
+ $('waShare').addEventListener('click',()=>{window.open('https://api.whatsapp.com/send?text='+enc(share()),'_blank','noopener')});
+ $('copyMsg').addEventListener('click',()=>copy(share().split('\n\n🔗 ')[0]));
+ $('copyLink').addEventListener('click',()=>copy(link()));
+ const n=Number(qs.get('i'));loadTemplate(n);
+ if(qs.has('title'))title.value=trim(qs.get('title'),100);
+ if(qs.has('m'))msg.value=trim(qs.get('m'),500);
+ if(qs.has('t'))to.value=trim(qs.get('t'),50);
+ if(qs.has('f'))from.value=trim(qs.get('f'),50);
+ renderPreview();
+}
+})();
