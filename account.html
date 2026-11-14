@@ -99,7 +99,7 @@ const status=(id,msg,bad=false)=>{const node=$(id);node.textContent=msg;node.cla
 const err=e=>e?.message||'ફરી પ્રયત્ન કરો.';
 const validEmail=email=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const buttons=['emailLogin','emailRegister','googleSignIn','sendReset'];
-function busy(flag){buttons.forEach(id=>$(id).disabled=flag)}
+function busy(flag){buttons.forEach(id=>$(id).disabled=flag);if(!flag&&googleProviderReady===false)$('googleSignIn').disabled=true}
 function setTab(tab){
  for(const t of ['Login','Register','Reset']){$('tab'+t).classList.toggle('active',t.toLowerCase()===tab.toLowerCase())}
  $('loginForm').hidden=tab!=='login';$('registerForm').hidden=tab!=='register';$('resetForm').hidden=tab!=='reset';
@@ -114,8 +114,8 @@ async function checkGoogleProvider(){
   });
   if(!response.ok)throw new Error('Settings unavailable');
   const settings=await response.json();
-  if(settings?.external && typeof settings.external.google==='boolean'){
-   googleProviderReady=settings.external.google;
+  if(settings?.external && (typeof settings.external.google==='boolean'||settings.external.google==='true'||settings.external.google==='false')){
+   googleProviderReady=settings.external.google===true||settings.external.google==='true';
    if(!googleProviderReady){
     $('googleSignIn').disabled=true;
     $('googleHelp').textContent='Google Login નું OAuth Setup હજી બાકી છે. ત્યાં સુધી Email અને Password થી Login કરો.';
