@@ -90,6 +90,7 @@ const $=id=>document.getElementById(id);
 const cfg=window.SHUBHLINK_BACKEND||{};
 if(!cfg.url||!cfg.publishableKey||!window.supabase){$('notConfigured').hidden=false;return}
 const db=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{detectSessionInUrl:true,persistSession:true,autoRefreshToken:true}});
+let isPasswordRecovery=false;
 const url=new URL(location.href);
 const redirectTo=location.origin+location.pathname;
 const status=(id,msg,bad=false)=>{const node=$(id);node.textContent=msg;node.classList.toggle('error',bad)};
@@ -133,7 +134,7 @@ $('sendReset').onclick=async()=>{
 $('updatePassword').onclick=async()=>{
  const password=$('newPassword').value;if(password.length<8){status('authStatus','ઓછામાં ઓછા 8 અક્ષરનો Password લખો.',true);return}
  const {error}=await db.auth.updateUser({password});
- if(error)status('authStatus',err(error),true);else{status('authStatus','Password બદલાઈ ગયો.');$('passwordForm').hidden=true}
+ if(error)status('authStatus',err(error),true);else{status('authStatus','Password બદલાઈ ગયો.');$('passwordForm').hidden=true;isPasswordRecovery=false;await render()}
 };
 $('signOut').onclick=async()=>{await db.auth.signOut();await render()};
 $('saveName').onclick=async()=>{
@@ -182,6 +183,7 @@ async function render(){
  const {data:{user},error}=await db.auth.getUser();
  if(error)status('authStatus',err(error),true);
  $('authSection').hidden=!!user;$('loggedIn').hidden=!user;
+ if(isPasswordRecovery){$('authSection').hidden=false;$('loggedIn').hidden=true;$('passwordForm').hidden=false;setTab('reset');return}
  if(!user)return;
  $('accountEmail').textContent=user.email||'Google Account';
  const {data,error:profileError}=await db.from('shubhlink_profiles').select('display_name').eq('user_id',user.id).maybeSingle();
@@ -189,7 +191,7 @@ async function render(){
  $('displayName').value=data?.display_name||user.user_metadata?.display_name||user.user_metadata?.full_name||'';
  await storePending(user);await savedMessages(user);
 }
-db.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){$('authSection').hidden=false;$('passwordForm').hidden=false;setTab('reset')}});
+db.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){isPasswordRecovery=true;$('authSection').hidden=false;$('loggedIn').hidden=true;setTab('reset');$('passwordForm').hidden=false}});
 if(url.searchParams.has('error'))status('authStatus','Login પૂર્ણ થયું નથી: '+(url.searchParams.get('error_description')||'ફરી પ્રયત્ન કરો.'),true);
 await render();
 })();
