@@ -18,7 +18,7 @@ set search_path = '' as $$
   );
 $$;
 revoke all on function public.is_shubhlink_admin() from public;
-grant execute on function public.is_shubhlink_admin() to authenticated;
+grant execute on function public.is_shubhlink_admin() to anon, authenticated;
 
 create table if not exists public.shubhlink_categories (
   id text primary key check(id ~ '^[a-z][a-z0-9-]{1,30}$'),
@@ -103,6 +103,21 @@ create policy "User edits own saved wishes" on public.shubhlink_saved_messages
 for update to authenticated using ((select auth.uid())=user_id) with check ((select auth.uid())=user_id);
 create policy "User deletes own saved wishes" on public.shubhlink_saved_messages
 for delete to authenticated using ((select auth.uid())=user_id);
+
+
+-- Existing public categories so the new admin can add messages immediately.
+insert into public.shubhlink_categories (id, emoji, name_gu, name_hi, name_en, description_gu, color) values
+('birthday','🎂','જન્મદિવસ','जन्मदिन','Birthday','જન્મદિવસની શુભેચ્છાઓ','pink'),
+('morning','🌞','સુપ્રભાત','सुप्रभात','Good Morning','સવારની સુંદર શરૂઆત','yellow'),
+('suvichar','🌷','દૈનિક સુવિચાર','सुविचार','Daily Thoughts','દરરોજ પ્રેરણાદાયી વિચાર','lavender'),
+('newthought','💡','નવા વિચાર','नई सोच','Fresh Ideas','નવું વિચારવાની પ્રેરણા','mint'),
+('night','🌙','શુભરાત્રિ','शुभ रात्रि','Good Night','મીઠા સપનાની શુભેચ્છા','blue'),
+('festival','🪔','તહેવાર શુભેચ્છા','त्योहार','Festivals','દરેક તહેવારમાં આનંદ','peach'),
+('friendship','💛','મિત્રતા','दोस्ती','Friendship','દોસ્તીનું ખાસ બંધન','yellow'),
+('anniversary','💍','વર્ષગાંઠ','सालगिरह','Anniversary','સાથે રહેવાની ખુશી','pink'),
+('congrats','🎉','અભિનંદન','बधाई','Congratulations','સફળતાની ઉજવણી','mint'),
+('afternoon','🍃','શુભ બપોર','शुभ दोपहर','Good Afternoon','બપોરની શુભેચ્છા','blue')
+on conflict (id) do nothing;
 
 -- Grant owner access AFTER creating the admin user in Supabase Authentication > Users.
 -- IMPORTANT: replace with the actual authenticated Admin UUID. Do not use an unverified email.
