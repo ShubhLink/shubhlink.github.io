@@ -67,7 +67,7 @@ function catCard(c){
  const title=document.createElement('strong');title.textContent=c.gu;
  const desc=document.createElement('small');
  const messages=D.wishes.gu?.[c.id]||[];
- const preferred=messages.find(m=>dbFeatured.has('gu|'+c.id+'|'+m))||messages[0];
+ const preferred=window.ShubhFresh?.pick(messages.filter(m=>dbFeatured.has('gu|'+c.id+'|'+m)).length?messages.filter(m=>dbFeatured.has('gu|'+c.id+'|'+m)):messages,'home-card:'+c.id);
  desc.textContent=preferred?preferred.replace(/^[^\p{L}\p{N}]+/u,'').replace(/\s+/g,' ').slice(0,80)+(preferred.length>80?'…':''):c.desc;
  const go=document.createElement('span');go.className='catgo';go.textContent='મેસેજ જુઓ →';
  const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';
@@ -84,7 +84,10 @@ if($('homeCats')){
   }
  }
  const arr=D.wishes.gu.suvichar||[];
- if(arr.length)$('dailyQuote').textContent=arr[Math.floor(Date.now()/86400000)%arr.length];
+ if(arr.length){
+  const premium=arr.filter(m=>dbFeatured.has('gu|suvichar|'+m));
+  $('dailyQuote').textContent=(window.ShubhFresh?.pick(premium.length?premium:arr,'daily-quote')||arr[0]);
+ }
 }
 if($('allCats')){
  const first=window.ShubhCalendar?.currentCategory()||'morning';
@@ -97,29 +100,42 @@ if($('wishGrid')){
  const csel=$('filterCat'),lsel=$('filterLang'),search=$('filterSearch');
  D.categories.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.emoji+' '+c.gu;csel.add(o)});
  csel.value=firstCat;lsel.value=firstLang;
- function render(){
-  const c=csel.value,l=lsel.value,cat=D.categories.find(x=>x.id===c),arr=D.wishes[l]?.[c]||[],q=trim(search.value).toLocaleLowerCase();
-  $('wishHeading').textContent=cat.emoji+' '+catName(cat,l)+' માટે તૈયાર મેસેજ';
+ let lastKey='',more=null;
+ function render(loadMore=false){
+  const c=csel.value,l=lsel.value,cat=D.categories.find(x=>x.id===c),q=trim(search.value).toLocaleLowerCase();
+  const all=(D.wishes[l]?.[c]||[]).map((msg,i)=>({msg,i,featured:dbFeatured.has(l+'|'+c+'|'+msg)}));
+  $('wishHeading').textContent=cat.emoji+' '+catName(cat,l);
   $('wishIntro').textContent='';
   const grid=$('wishGrid');grid.replaceChildren();
-  let count=0;
-  arr.forEach((msg,i)=>{
-   const topic=titleFor(msg,c,l);
-   if(q&&!(msg+' '+topic).toLocaleLowerCase().includes(q))return;
-   count++;
+  let filtered=all.filter(x=>!q||((x.msg+' '+titleFor(x.msg,c,l)).toLocaleLowerCase().includes(q)));
+  const premium=filtered.filter(x=>x.featured);
+  // Curated originals appear first; low-quality formula combinations remain a fallback.
+  if(!q&&premium.length>=6)filtered=premium;
+  const key='category:'+l+':'+c+':'+q;
+  if(key!==lastKey)lastKey=key;
+  const selection=window.ShubhFresh?.choose(filtered,key,12,{quality:x=>x.featured?100:0})||filtered.slice(0,12);
+  for(const item of selection){
+   const msg=item.msg,topic=titleFor(msg,c,l);
    const card=document.createElement('article');card.className='wishitem';
    const tag=document.createElement('span');tag.className='wishtag';tag.textContent=cat.emoji+' '+catName(cat,l);
    const h=document.createElement('h3');h.textContent=topic;
-   const p=document.createElement('p');p.textContent=msg.slice(0,160)+(msg.length>160?'…':'');
+   const p=document.createElement('p');p.textContent=msg;
    const actions=document.createElement('div');actions.className='wish-actions';
-
    const wa=document.createElement('button');wa.className='wish-whatsapp';wa.type='button';wa.textContent='◉ WhatsApp પર શેર કરો';
-   wa.setAttribute('aria-label','મેસેજનું Preview અને WhatsApp Share');
    wa.addEventListener('click',()=>window.ShubhShare.open({title:topic,body:msg,language:l,category:c}));
    actions.append(wa);card.append(tag,h,p,actions);grid.append(card);
-  });
-  $('resultMeta').textContent=count+' મેસેજ ઉપલબ્ધ';
-  if(!count){const empty=document.createElement('p');empty.className='empty';empty.textContent='આ વિષય માટે મેસેજ નથી મળ્યો. બીજા શબ્દો શોધો.';grid.append(empty)}
+  }
+  $('resultMeta').textContent=selection.length+' નવા મેસેજ · '+filtered.length+' ઉપલબ્ધ';
+  if(!filtered.length){
+   const empty=document.createElement('p');empty.className='empty';empty.textContent='આ વિષય માટે મેસેજ નથી મળ્યો. AI Studio માં નવો મેસેજ બનાવો.';grid.append(empty)
+  }
+  if(!more){
+   more=document.createElement('button');more.type='button';more.className='search-more shubh-more';
+   more.textContent='↻ બીજા અલગ મેસેજ જુઓ';
+   grid.after(more);
+   more.addEventListener('click',()=>render(true));
+  }
+  more.hidden=filtered.length<=selection.length;
   const url=new URL(location.href);url.searchParams.set('c',c);url.searchParams.set('l',l);history.replaceState(null,'',url);
  }
  csel.addEventListener('change',render);lsel.addEventListener('change',render);search.addEventListener('input',render);render();
