@@ -51,7 +51,7 @@ Deno.serve(async(req:Request)=>{
     const remaining=await quota.json();
     if(remaining!==true)return json({error:"rate_limit",message:"Please try again tomorrow."},429);
     const instructions="You write high quality ORIGINAL and varied short WhatsApp greetings for Indian users. Return strictly valid JSON with one field messages containing exactly three DIFFERENT strings. Each message must be 30 to 280 characters and be ready to share. Use only "+langLabel[language]+" script and appropriate cultural context. Style: "+tone+". Include the user's occasion naturally, without repeating the same first line. No markdown, URLs, hashtags, explanations, false facts, dangerous content or personal identifiers. If the occasion is religious, respect the user's context without inventing dates. User topic: "+topic;
-    const response=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent",{
+    const response=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",{
       method:"POST",
       headers:{"Content-Type":"application/json","x-goog-api-key":key},
       body:JSON.stringify({contents:[{parts:[{text:instructions}]}],generationConfig:{temperature:0.92,maxOutputTokens:900,responseMimeType:"application/json"}}),
