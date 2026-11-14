@@ -1,7 +1,28 @@
 
-(function(){
+(async function(){
 'use strict';
 const D=window.SHUBHLINK_DATA;if(!D)return;
+const backend=window.SHUBHLINK_BACKEND||{};
+if(backend.url&&backend.publishableKey){
+ try{
+  const root=backend.url.replace(/\/$/,'');
+  const headers={apikey:backend.publishableKey,Authorization:'Bearer '+backend.publishableKey};
+  const [catResponse,msgResponse]=await Promise.all([
+   fetch(root+'/rest/v1/shubhlink_categories?select=id,emoji,name_gu,name_hi,name_en,description_gu,color&is_active=eq.true',{headers,cache:'no-store'}),
+   fetch(root+'/rest/v1/shubhlink_messages?select=id,category_id,language,title,body&is_published=eq.true&order=created_at.desc&limit=1000',{headers,cache:'no-store'})
+  ]);
+  if(!catResponse.ok||!msgResponse.ok)throw Error('Published content could not load');
+  const [cats,msgs]=await Promise.all([catResponse.json(),msgResponse.json()]);
+  for(const c of cats){
+    if(!D.categories.some(x=>x.id===c.id))D.categories.push({id:c.id,emoji:c.emoji,gu:c.name_gu,hi:c.name_hi,en:c.name_en,desc:c.description_gu,color:c.color||'pink'});
+  }
+  for(const m of msgs){
+   if(!D.wishes[m.language])D.wishes[m.language]={};
+   if(!D.wishes[m.language][m.category_id])D.wishes[m.language][m.category_id]=[];
+   D.wishes[m.language][m.category_id].unshift(m.body);
+  }
+ }catch(error){console.warn('ShubhLink backend temporarily unavailable; showing free built-in messages.',error)}
+}
 const $=id=>document.getElementById(id);
 const qs=new URLSearchParams(location.search);
 const languages=['gu','hi','en'];
