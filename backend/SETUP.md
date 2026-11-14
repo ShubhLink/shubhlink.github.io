@@ -1,39 +1,28 @@
-# ShubhLink — Google + Email/Password Accounts (No Phone OTP)
+# ShubhLink — Guest-only website, Super Admin only
 
-## Status
-The static frontend has been published. **Supabase backend is NOT yet connected.** Do not claim Login, saving, or Admin direct publish is live until backend activation and end-to-end tests complete.
+Updated 2026-11-14.
 
-## Public site stays free
-Guest visitors can create wishes and share them without accounts. A personal account is only for saving a display name and wishes.
+## Public site
+- `index.html`, `categories.html`, `wishes.html`, `create.html`: public without sign-up or sign-in. Visitors can personalize wishes, copy a message or link, and share via WhatsApp for free.
+- Public account links and Save-to-Account were retired. `account.html` redirects to `create.html` for bookmarks.
+- The old public draft admin screen `admin.html` redirects to `secure-admin.html`.
+- `privacy.html` reflects that there are no visitor accounts or server-side visitor saved messages.
 
-## Activate Supabase backend
-1. Create/connect your Supabase project.
-2. Review and execute `backend/shubhlink_schema.sql` in Supabase SQL Editor once. It creates categories, messages, private profiles/saved messages, Admin role mapping and RLS policies.
-3. In Supabase Authentication -> Providers -> Email: enable email/password sign-in. Keep **Confirm email enabled** for secure registrations. Users click a verification **link**, not an SMS OTP.
-4. Enable the **Google** provider in Supabase Authentication -> Providers. In Google Cloud create a Web OAuth client, configure the provider callback shown in Supabase (typically `https://<project-ref>.supabase.co/auth/v1/callback`) as an Authorized redirect URI; set Google Client ID and Secret **only inside Supabase**.
-5. Authentication -> URL Configuration: set `https://shubhlink.github.io` as Site URL. Add `https://shubhlink.github.io/account.html` to Redirect URLs. Confirm email and Google OAuth callbacks must return to that account page.
-6. In `backend-config.js` add **only** the Supabase Project URL and public publishable/anon key. Never include a service-role key, Google OAuth secret, SMTP password or admin password in the repository.
-7. Test Google login, email signup, confirmation link, email/password login, password recovery, logout, name saving, private wish save/delete, and two user accounts' isolation. Confirm guest editor/share is still accessible.
-8. Admin: Create an Authentication account with a strong password, inspect its exact Auth UUID, then run `insert into public.shubhlink_admins (user_id) values ('ADMIN-AUTH-UUID');` securely in SQL Editor. Test `secure-admin.html` and RLS; ensure non-admins cannot add public messages.
-9. Privacy: before collecting real user data, publish accurate retention, deletion and contact instructions and configure a working support channel.
-10. Optional: enable CAPTCHA/rate limits and monitor auth abuse. No SMS provider is required.
+## Administrator
+- Admin URL: https://shubhlink.github.io/secure-admin.html
+- Owner account: verified Supabase Auth email `divpatel225@gmail.com` (already assigned to `public.shubhlink_admins`). Never put the password into the repository.
+- Admin logs in with email + password. GitHub Actions owner-only workflow remains as a manual backup.
+- Database RLS limits create, edit, and delete of public categories and published messages to approved admin UUIDs.
+- Only 1 Auth user and 1 Admin role were present at the last database verification.
 
-## URLs
-- Public: https://shubhlink.github.io/
-- Login/account (frontend ready, backend not connected): https://shubhlink.github.io/account.html
-- Secure Admin (frontend ready, backend not connected): https://shubhlink.github.io/secure-admin.html
-- Legacy owner-only GitHub content workflow (currently working): https://github.com/ShubhLink/shubhlink.github.io/actions/workflows/shubhlink-admin.yml
+## Retired user-account database access
+- The older `shubhlink_profiles` and `shubhlink_saved_messages` tables are kept for migration history only. `anon` and `authenticated` privileges were revoked; the former user-specific RLS policies removed, so they cannot be used from the site.
+- See applied Supabase migration `retire_public_user_accounts_and_saved_message_access`.
 
-## Security
-Phone numbers are not required for sign-up. Email is used as the account identifier.
-Google credentials are handled by the Google/Supabase OAuth flow, not by the static website.
-The public publishable key works only because every affected table has restrictive row-level security rules.
-Admin status is determined from the Auth user UUID in `shubhlink_admins`, never from browser-editable profile names.
+## IMPORTANT — disable new registrations at Supabase Auth too
+- The GitHub Pages UI no longer has user registration or public Google login.
+- To block **direct API sign-ups**, a project administrator must additionally disable new user registration in Supabase Auth's hosted project configuration. The available project integration does not expose that setting; it has **not** been changed by these GitHub / SQL updates.
+- Do not disable Email sign-in; the current Super Admin still requires email/password login.
+- Keep Row Level Security enabled. Never expose service_role or secret keys.
 
-## Live backend status (2026-11-14)
-- Project: `wbwxljfzzavtvzpheimi` (Mumbai, separate from divyesh-stock-ai).
-- Five RLS-protected tables and 10 seeded categories deployed.
-- Public publishable key configured on GitHub Pages; do not add server secrets.
-- Admin role table currently empty: no real owner login has been assigned yet.
-- Google OAuth Client ID/Secret still need configuring in Google Cloud and Supabase.
-- Email/password sign-up uses Supabase Auth and may require email verification.
+Project: `wbwxljfzzavtvzpheimi` in Mumbai (separate from divyesh-stock-ai).
