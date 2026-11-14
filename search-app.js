@@ -89,8 +89,9 @@ function getPool(q,locale){
  const premium=list.filter(x=>x.featured);
  // The formula-combined 2026 bulk messages are retained only as fallbacks;
  // curated, hand-written originals are preferred when sufficient.
- if(premium.length>=3)return premium;
- return list;
+ if(premium.length)return premium;
+ // Show legacy built-in messages only when the public curated database is offline.
+ return library.some(x=>x.featured)?[]:list;
 }
 function batch(){
  if(!pool.length){
