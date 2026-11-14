@@ -120,14 +120,6 @@ if($('editCat')){
  cat.addEventListener('change',()=>loadTemplate(0));lng.addEventListener('change',()=>loadTemplate(0));
  [title,msg,to,from].forEach(x=>x.addEventListener('input',renderPreview));
  $('waShare').addEventListener('click',()=>{window.open('https://api.whatsapp.com/send?text='+enc(share()),'_blank','noopener')});
- const saveButton=$('saveToAccount');
- if(saveButton)saveButton.addEventListener('click',()=>{
-   const body=trim(msg.value,1000),heading=trim(title.value,120);
-   if(!body||!heading){feedback.textContent='સેવ કરવા માટે પહેલા મેસેજ લખો.';return}
-   const draft={title:heading,body,category_id:cat.value,language:lng.value,recipient_name:trim(to.value,80),sender_name:trim(from.value,80)};
-   try{sessionStorage.setItem('sl_pending_wish',JSON.stringify(draft));window.location.href='account.html'}
-   catch{feedback.textContent='આ Browser માં મેસેજ સાચવવાની પ્રક્રિયા શક્ય નથી.'}
- });
  $('copyMsg').addEventListener('click',()=>copy(share().split('\n\n🔗 ')[0]));
  $('copyLink').addEventListener('click',()=>copy(link()));
  const n=Number(qs.get('i'));loadTemplate(n);
