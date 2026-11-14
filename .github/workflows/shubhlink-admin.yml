@@ -1,5 +1,5 @@
 name: ShubhLink Admin Panel
-run-name: "Admin: \u0024{{ inputs.operation }} — \u0024{{ inputs.category_id }}"
+run-name: "Admin: ${{ inputs.operation }} — ${{ inputs.category_id }}"
 on:
   workflow_dispatch:
     inputs:
@@ -68,16 +68,16 @@ jobs:
           persist-credentials: true
       - name: Update content safely
         env:
-          ADMIN_OPERATION: \u0024{{ inputs.operation }}
-          ADMIN_CATEGORY: \u0024{{ inputs.category_id }}
-          ADMIN_LANGUAGE: \u0024{{ inputs.language }}
-          ADMIN_MESSAGE: \u0024{{ inputs.message }}
-          ADMIN_INDEX: \u0024{{ inputs.message_number }}
-          ADMIN_GU_NAME: \u0024{{ inputs.gu_name }}
-          ADMIN_HI_NAME: \u0024{{ inputs.hi_name }}
-          ADMIN_EN_NAME: \u0024{{ inputs.en_name }}
-          ADMIN_EMOJI: \u0024{{ inputs.emoji }}
-          ADMIN_DESCRIPTION: \u0024{{ inputs.description }}
+          ADMIN_OPERATION: ${{ inputs.operation }}
+          ADMIN_CATEGORY: ${{ inputs.category_id }}
+          ADMIN_LANGUAGE: ${{ inputs.language }}
+          ADMIN_MESSAGE: ${{ inputs.message }}
+          ADMIN_INDEX: ${{ inputs.message_number }}
+          ADMIN_GU_NAME: ${{ inputs.gu_name }}
+          ADMIN_HI_NAME: ${{ inputs.hi_name }}
+          ADMIN_EN_NAME: ${{ inputs.en_name }}
+          ADMIN_EMOJI: ${{ inputs.emoji }}
+          ADMIN_DESCRIPTION: ${{ inputs.description }}
         run: node .github/scripts/manage-content.cjs
       - name: Commit and publish changes
         run: |
