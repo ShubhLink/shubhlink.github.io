@@ -189,12 +189,6 @@ function search(q,updateURL=true){
 }
 input.value=params.get('q')||'';
 language.value=['gu','hi','en'].includes(params.get('l'))?params.get('l'):'gu';
-const chips=['સુપ્રભાત','જન્મદિવસ બહેન','દિવાળી','મિત્રતા','મા માટે','નવરાત્રી','વર્ષગાંઠ'];
-for(const txt of chips){
- const btn=document.createElement('button');btn.type='button';btn.className='search-chip';btn.textContent=txt;
- btn.onclick=()=>{input.value=txt;search(txt);input.scrollIntoView({block:'center',behavior:'smooth'})};
- $('smartSearchChips').append(btn)
-}
 input.oninput=()=>setLink(input.value);
 form.onsubmit=e=>{e.preventDefault();search(input.value)};
 language.onchange=()=>search(input.value);
