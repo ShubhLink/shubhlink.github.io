@@ -1,0 +1,126 @@
+<!doctype html><html lang="gu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Secure Admin | ShubhLink</title><link rel="icon" href="icon.svg">
+<style>
+*{box-sizing:border-box}body{font-family:system-ui,'Noto Sans Gujarati',sans-serif;background:#f4f4fa;color:#242036;margin:0}button,input,textarea,select{font:inherit}button{cursor:pointer}
+header{background:#242036;color:#fff;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:800}
+header a{color:#fff;text-decoration:none;font-size:13px}
+.shell{max-width:1120px;margin:24px auto;padding:0 14px}.box{background:white;border:1px solid #e6e0ea;border-radius:20px;padding:22px;margin-bottom:17px;box-shadow:0 5px 22px #2420360b}
+h1{font-size:26px;margin:0 0 7px}h2{font-size:19px;margin:0 0 12px}p{line-height:1.8}.muted{color:#756d80;font-size:13px}
+label{display:block;font-weight:700;font-size:13px;margin:12px 0}input,select,textarea{display:block;margin-top:6px;width:100%;padding:12px;border-radius:11px;border:1px solid #d9d1de;background:#fff;min-height:45px}
+textarea{min-height:130px;resize:vertical}button{background:#5541a2;color:white;border:0;border-radius:11px;padding:12px 17px;font-weight:800;min-height:44px}
+button.secondary{background:#e9e3f6;color:#433781}button.danger{background:#fff0f2;color:#a33144}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.item{display:block;text-align:left;width:100%;border:1px solid #e8dfed;background:#fff;color:#242036;margin:6px 0;font-weight:500;white-space:normal}.item.active{background:#f1edff;border-color:#7d6bc6}
+.preview{background:linear-gradient(140deg,#fff8e9,#f5dfef);border-radius:16px;padding:23px;text-align:center;white-space:pre-wrap;overflow-wrap:anywhere}
+.status{color:#487b56;font-weight:750;font-size:13px;min-height:22px}.error{color:#af3345}section[hidden]{display:none!important}
+@media(max-width:740px){.grid{grid-template-columns:1fr}.box{padding:16px}}
+</style></head><body><header><span>✦ ShubhLink · Secure Admin</span><a href="index.html">↗ Public Website</a></header>
+<main class="shell">
+<section class="box" id="setup" hidden><h1>Backend જોડવાનું બાકી છે</h1><p>આ પેજ સુરક્ષિત Direct Save માટે બનાવ્યું છે. Supabase Database અને Admin Account સેટ થયા પછી અહીંથી મેસેજ તરત Publish કરી શકશો. હાલમાં <a href="https://github.com/ShubhLink/shubhlink.github.io/actions/workflows/shubhlink-admin.yml">જૂનું GitHub Admin</a> કામ કરે છે.</p></section>
+<section class="box" id="login" hidden><h1>🔐 Admin Login</h1><p class="muted">માત્ર ShubhLink Owner માટે. Public Users આ Login થી Admin બની શકતા નથી.</p>
+<label>Admin Email<input type="email" id="email" autocomplete="username" placeholder="તમારું Admin Email"></label>
+<label>Password<input type="password" id="password" autocomplete="current-password" placeholder="Admin Password"></label>
+<button id="signIn">Login</button><p class="status" id="loginStatus" role="status"></p></section>
+<section id="dashboard" hidden>
+<div class="box"><div class="row" style="justify-content:space-between"><div><h1>Admin Content Studio</h1><p class="muted">Save કરેલો Published Message Database માં તરત જ ઉપલબ્ધ થાય છે.</p></div><button class="secondary" id="logout">Logout</button></div></div>
+<div class="grid">
+<div>
+<section class="box">
+<h2>📋 મેસેજ શોધો અને Edit કરો</h2>
+<label>કેટેગરી<select id="filterCategory"></select></label><label>ભાષા<select id="filterLanguage"><option value="gu">ગુજરાતી</option><option value="hi">हिन्दी</option><option value="en">English</option></select></label>
+<button class="secondary" id="reload">↻ Refresh</button><div id="items"></div></section>
+<section class="box"><h2>🗂️ નવી કેટેગરી</h2>
+<label>ID (English lowercase)<input id="catId" placeholder="special-wishes"></label>
+<label>Gujarati Name<input id="catGu" placeholder="ખાસ શુભેચ્છા"></label><label>Hindi Name<input id="catHi" placeholder="शुभकामनाएँ"></label>
+<label>English Name<input id="catEn" placeholder="Special Wishes"></label>
+<label>Emoji<input id="catEmoji" placeholder="💐"></label>
+<label>ટૂંકું વર્ણન<input id="catDescription" placeholder="નવી કેટેગરીનું વર્ણન"></label>
+<button id="createCategory">＋ કેટેગરી સેવ કરો</button><p class="status" id="catStatus"></p>
+</section></div>
+<div>
+<section class="box"><h2 id="editorHeading">＋ નવો મેસેજ</h2>
+<label>કેટેગરી<select id="msgCategory"></select></label>
+<label>ભાષા<select id="msgLanguage"><option value="gu">ગુજરાતી</option><option value="hi">हिन्दी</option><option value="en">English</option></select></label>
+<label>મેસેજનું શીર્ષક<input id="msgTitle" maxlength="120" placeholder="જેમ કે: સુંદર સવાર"></label>
+<label>મેસેજ<textarea id="msgBody" maxlength="1000" placeholder="તમારી નવી શુભેચ્છા અહીં લખો"></textarea></label>
+<label><input id="published" type="checkbox" checked style="width:auto;min-height:0;display:inline"> સાઇટ પર Published રાખો</label>
+<div class="row"><button id="saveMessage">✓ Save & Publish</button><button class="secondary" id="newMessage">＋ નવો</button><button class="danger" id="deleteMessage" hidden>Delete</button></div>
+<p class="status" id="saveStatus" role="status"></p>
+</section><section class="box"><h2>👁️ Live Preview</h2><div class="preview"><h3 id="previewTitle">મેસેજનું શીર્ષક</h3><p id="previewBody">મેસેજ લખો</p></div></section>
+</div></div>
+</section></main>
+<script src="backend-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(async()=>{'use strict';
+const $=id=>document.getElementById(id),cfg=window.SHUBHLINK_BACKEND||{};
+if(!cfg.url||!cfg.publishableKey||!window.supabase){$('setup').hidden=false;return}
+const db=window.supabase.createClient(cfg.url,cfg.publishableKey);
+let selectedId=null,categories=[],messages=[];
+const errorText=e=>e?.message||'સમસ્યા આવી. ફરી પ્રયત્ન કરો.';
+const showStatus=(id,t,bad=false)=>{const e=$(id);e.textContent=t;e.classList.toggle('error',bad)};
+function show(which){$('login').hidden=which!=='login';$('dashboard').hidden=which!=='dashboard'}
+async function guard(){
+ const {data:{user},error}=await db.auth.getUser();
+ if(error||!user){show('login');return}
+ const check=await db.rpc('is_shubhlink_admin');
+ if(check.error||check.data!==true){await db.auth.signOut();show('login');showStatus('loginStatus','આ ખાતાને Admin પરવાનગી નથી.',true);return}
+ show('dashboard');await loadCategories();
+}
+$('signIn').onclick=async()=>{
+ const email=$('email').value.trim(),password=$('password').value;
+ if(!email||!password){showStatus('loginStatus','Email અને Password લખો',true);return}
+ $('signIn').disabled=true;
+ const {error}=await db.auth.signInWithPassword({email,password});
+ if(error)showStatus('loginStatus',errorText(error),true);else await guard();
+ $('signIn').disabled=false;
+};
+$('logout').onclick=async()=>{await db.auth.signOut();show('login');$('password').value=''};
+function setOptions(id,old){const sel=$(id);sel.replaceChildren();categories.forEach(c=>{const o=new Option(c.emoji+' '+c.name_gu,c.id);sel.add(o)});if(old&&categories.some(c=>c.id===old))sel.value=old}
+async function loadCategories(){
+ const {data,error}=await db.from('shubhlink_categories').select('id,emoji,name_gu,name_hi,name_en,description_gu').order('created_at',{ascending:true});
+ if(error){showStatus('saveStatus',errorText(error),true);return}
+ categories=data||[];
+ for(const id of ['filterCategory','msgCategory'])setOptions(id,$(id).value);
+ await loadMessages();
+}
+async function loadMessages(){
+ if(!categories.length){$('items').textContent='હજી કોઈ કેટેગરી નથી. પહેલાં કેટેગરી બનાવો.';return}
+ const {data,error}=await db.from('shubhlink_messages').select('id,category_id,language,title,body,is_published,created_at').eq('category_id',$('filterCategory').value).eq('language',$('filterLanguage').value).order('created_at',{ascending:false});
+ if(error){showStatus('saveStatus',errorText(error),true);return}
+ messages=data||[];const host=$('items');host.replaceChildren();
+ if(!messages.length){host.textContent='હજુ આ વિભાગમાં મેસેજ નથી.';return}
+ for(const m of messages){const button=document.createElement('button');button.className='item'+(selectedId===m.id?' active':'');button.type='button';button.textContent=(m.is_published?'🟢 ':'⚪ ')+m.title+' — '+m.body.slice(0,70);button.onclick=()=>{
+ selectedId=m.id;$('editorHeading').textContent='✎ મેસેજ Edit';$('msgCategory').value=m.category_id;$('msgLanguage').value=m.language;$('msgTitle').value=m.title;$('msgBody').value=m.body;$('published').checked=m.is_published;$('deleteMessage').hidden=false;preview();loadMessages();
+ };host.append(button)}
+}
+$('reload').onclick=loadCategories;$('filterCategory').onchange=loadMessages;$('filterLanguage').onchange=loadMessages;
+function preview(){$('previewTitle').textContent=$('msgTitle').value||'મેસેજનું શીર્ષક';$('previewBody').textContent=$('msgBody').value||'મેસેજ લખો'}
+$('msgTitle').oninput=preview;$('msgBody').oninput=preview;
+function reset(){selectedId=null;$('editorHeading').textContent='＋ નવો મેસેજ';$('msgTitle').value='';$('msgBody').value='';$('published').checked=true;$('deleteMessage').hidden=true;showStatus('saveStatus','');preview()}
+$('newMessage').onclick=reset;
+$('saveMessage').onclick=async()=>{
+ const payload={category_id:$('msgCategory').value,language:$('msgLanguage').value,title:$('msgTitle').value.trim(),body:$('msgBody').value.trim(),is_published:$('published').checked};
+ if(!payload.category_id||!payload.title||!payload.body){showStatus('saveStatus','શીર્ષક અને મેસેજ લખો.',true);return}
+ $('saveMessage').disabled=true;showStatus('saveStatus','Save થઈ રહ્યું છે...');
+ const request=selectedId?db.from('shubhlink_messages').update(payload).eq('id',selectedId):db.from('shubhlink_messages').insert(payload);
+ const {error}=await request;
+ if(error)showStatus('saveStatus',errorText(error),true);
+ else{showStatus('saveStatus','✓ Database માં સેવ થયું. Public page Refresh કરતાં દેખાશે.');reset();await loadMessages()}
+ $('saveMessage').disabled=false;
+};
+$('deleteMessage').onclick=async()=>{
+ if(!selectedId||!confirm('આ મેસેજ હંમેશ માટે Delete કરવો છે?'))return;
+ const {error}=await db.from('shubhlink_messages').delete().eq('id',selectedId);
+ if(error){showStatus('saveStatus',errorText(error),true);return}reset();await loadMessages();showStatus('saveStatus','મેસેજ Delete થયો.');
+};
+$('createCategory').onclick=async()=>{
+ const row={id:$('catId').value.trim().toLowerCase(),name_gu:$('catGu').value.trim(),name_hi:$('catHi').value.trim(),name_en:$('catEn').value.trim(),emoji:$('catEmoji').value.trim(),description_gu:$('catDescription').value.trim()};
+ if(!/^[a-z][a-z0-9-]{1,30}$/.test(row.id)||!row.name_gu||!row.name_hi||!row.name_en||!row.emoji){showStatus('catStatus','ID અને ત્રણેય ભાષાના નામ, Emoji ભરો.',true);return}
+ const {error}=await db.from('shubhlink_categories').insert(row);
+ if(error)showStatus('catStatus',errorText(error),true);
+ else{showStatus('catStatus','✓ કેટેગરી સેવ થઈ.');await loadCategories()}
+};
+await guard();
+})();
+</script></body></html>
