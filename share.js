@@ -17,11 +17,10 @@ function format(){
  const body=String(current.body||'').trim().slice(0,1200);
  const blocks=[];
  if(to)blocks.push('💌 '+t.prefix+' '+to+',');
- if(title&&title!==body&&body.indexOf(title)!==0)blocks.push('*'+title.replace(/\*/g,'')+'*');
+ if(title&&title!==body&&!body.includes(title)&&!/^✦|^◉/.test(title))blocks.push('*'+title.replace(/\*/g,'')+'*');
  blocks.push(body);
  if(from)blocks.push('🌸 '+t.suffix+' — '+from);
- // A short, stable homepage address, never the URL-encoded personalized edit link.
- blocks.push('✨ ShubhLink · https://shubhlink.github.io/');
+ // Keep the actual WhatsApp message clean. Never append editor URLs or encoded query strings.
  return blocks.filter(Boolean).join('\n\n');
 }
 function update(){
@@ -54,7 +53,7 @@ function create(){
  const from=E('input');from.type='text';from.maxLength=65;from.autocomplete='name';
  const remember=()=>{try{sessionStorage.setItem('shubhlink_sender',from.value.slice(0,65))}catch(_){}};
  toWrapper.append(toLabel,to);fromWrapper.append(fromLabel,from);fields.append(toWrapper,fromWrapper);
- const caption=E('span','sh-share-caption','WhatsApp માં આવું દેખાશે');
+ const caption=E('span','sh-share-caption','WhatsApp માં મોકલાતો મેસેજ');
  const preview=E('div','sh-share-final-preview');preview.setAttribute('aria-live','polite');
  const send=E('button','sh-share-send');send.type='button';
  const sendText=E('span');send.append(E('span','','◉'),sendText,E('span','','↗'));
@@ -64,7 +63,8 @@ function create(){
   const text=format(),url='https://api.whatsapp.com/send?text='+encodeURIComponent(text);
   // The URL is only passed to WhatsApp, never appended to the shared text.
   dismiss();
-  window.open(url,'_blank','noopener,noreferrer');
+  // Navigate directly from the user gesture so Android WhatsApp opens reliably.
+  window.location.assign(url);
  });
  [to,from].forEach(x=>x.addEventListener('input',update));
  box.append(top,heading,card,fields,caption,preview,send);
