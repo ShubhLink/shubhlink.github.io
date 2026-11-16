@@ -20,7 +20,9 @@ function format(){
  if(title&&title!==body&&!body.includes(title)&&!/^✦|^◉/.test(title))blocks.push('*'+title.replace(/\*/g,'')+'*');
  blocks.push(body);
  if(from)blocks.push('🌸 '+t.suffix+' — '+from);
- // Keep the actual WhatsApp message clean. Never append editor URLs or encoded query strings.
+ // Link back to the public site, never to an editor URL containing encoded names/messages.
+ // Keep it literal and short so WhatsApp shows one readable clickable link.
+ blocks.push('🔗 ShubhLink પર તમારા નામથી મેસેજ બનાવો\nhttps://shubhlink.github.io/');
  return blocks.filter(Boolean).join('\n\n');
 }
 function update(){
