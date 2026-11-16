@@ -61,12 +61,22 @@ async function generate(plans:Plan[],recent:string[]){
  const requestBody=JSON.stringify({contents:[{parts:[{text:instructions}]}],generationConfig:{
   temperature:1.07,topP:0.97,maxOutputTokens:2400,responseMimeType:"application/json"
  }});
- const call=()=>fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",{
+ const call=(model:string)=>fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent",{
   method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":gemini},
   body:requestBody,signal:AbortSignal.timeout(24000)
  });
- let resp=await call();
- if(resp.status===503){await resp.text().catch(()=>undefined);await new Promise(r=>setTimeout(r,800));resp=await call()}
+ let resp=await call("gemini-3.5-flash-lite");
+ if(resp.status===503||resp.status===404){
+  // If a supported model is temporarily unavailable, fall back once to another
+  // published Flash-Lite model. Do not retry quota/auth failures.
+  await resp.text().catch(()=>undefined);
+  resp=await call("gemini-3.1-flash-lite");
+ }
+ if(resp.status===503){
+  await resp.text().catch(()=>undefined);
+  await new Promise(r=>setTimeout(r,1100));
+  resp=await call("gemini-3.1-flash-lite");
+ }
  if(!resp.ok)throw Error("gemini_"+resp.status);
  const obj=await resp.json();
  const raw=brief(obj?.candidates?.[0]?.content?.parts?.map((p:{text?:string})=>p.text||"").join(""),16000);
