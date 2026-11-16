@@ -19,7 +19,8 @@ const fallbackTitle=(body,cat)=>{
   const title=sentences.find(v=>v.length>7)||sentences[0]||cat?.gu||"ખાસ મેસેજ";
   return title.length>65?title.slice(0,62)+"…":title;
 };
-let currentCat=categories.some(c=>c.id===params.get("c"))?params.get("c"):"morning";
+const requestedCat=params.get("c");
+let currentCat=categories.some(c=>c.id===requestedCat)?requestedCat:"morning";
 let currentLang=languages.includes(params.get("l"))?params.get("l"):"gu";
 let fetchSequence=0;
 function addCategory(c){
@@ -127,8 +128,10 @@ async function loadCategories(){
    id:c.id,emoji:c.emoji,gu:c.name_gu,hi:c.name_hi,en:c.name_en,
    desc:c.description_gu,color:c.color
   });
-  if(!categories.some(c=>c.id===currentCat))return;
-  if(catSel.value!==currentCat)catSel.value=currentCat;
+  if(requestedCat&&categories.some(c=>c.id===requestedCat)&&catSel.value!==requestedCat){
+   catSel.value=requestedCat;
+   changeCategory();
+  }
  }catch(_err){}
 }
 function changeCategory(){
