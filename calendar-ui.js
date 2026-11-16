@@ -18,7 +18,7 @@ function panel(title,detail,emoji,href,caption,featured){
 }
 const names={
  morning:['સુપ્રભાત 🌞','સવારનો સૂરજ તો દરરોજ ઊગે છે, પણ આજે તમારા ચહેરાનું સ્મિત કોઈનો આખો દિવસ ઉજાળી દે. ☀️','🌅'],
- afternoon:['શુભ બપોર 🍃','કામની દોડમાં એક ક્ષણનું સ્મિત સાચવી રાખજો; ક્યારેક નાની ખુશી પણ આખા દિવસની સૌથી મોટી કમાણી હોય છે.','☀️'],
+ suvichar:['આજનો સુવિચાર 🌷','સાચી સમૃદ્ધિ કેટલી વસ્તુઓ ભેગી કરી તેમાં નહીં, કેટલી ખુશીઓ વહેંચી તેમાં રહેલી છે.','🌷'],
  night:['શુભરાત્રિ 🌙','આજનો થાક ચાંદનીને સોંપી દો. જે સપના અધૂરા છે, તેમને કાલે ફરી ઉડવાની તક મળશે. 🌙','🌙']
 };
 const current=C.currentCategory();
@@ -52,34 +52,90 @@ if(upcoming){
 }
 const month=$('monthCalendar');
 if(month){
+ const P=window.ShubhPanchang;
  let y=Number(zone.date.slice(0,4)),m=Number(zone.date.slice(5,7))-1;
  const title=$('monthHeading'),back=$('prevMonth'),next=$('nextMonth'),reset=$('thisMonth');
- function render(){
-  const start=new Date(Date.UTC(y,m,1));const daysIn=new Date(Date.UTC(y,m+1,0)).getUTCDate();
-  const label=new Intl.DateTimeFormat('gu-IN',{month:'long',year:'numeric',timeZone:'UTC'}).format(start);
-  title.textContent=label;month.replaceChildren();
-  for(const d of ['રવિ','સોમ','મંગળ','બુધ','ગુરુ','શુક્ર','શનિ']){
-   const el=document.createElement('div');el.className='cal-weekday';el.textContent=d;month.append(el);
+ const hint=$('calendarHint'),detail=$('calDayDetail'),citySelect=$('panchangCity');
+ const make=(tag,cls,text)=>{
+  const el=document.createElement(tag);
+  if(cls)el.className=cls;
+  if(text!==undefined)el.textContent=text;
+  return el;
+ };
+ function selectDay(date){
+  if(!detail)return;
+  const t=P?.forDate(date)||null;
+  const events=C.events.filter(e=>e.date===date);
+  detail.replaceChildren();
+  if(!t){detail.append(make('p','cal-notice','તિથિની માહિતી અત્યારે લોડ થઈ નથી.'));return}
+  const heading=make('div','cal-detail-top');
+  const icon=make('span','cal-moonicon',t.paksha==='સુદ'?'🌔':'🌘');
+  const info=make('div','cal-detail-heading');
+  info.append(make('strong','',t.full),make('small','',t.displayDate));
+  heading.append(icon,info);detail.append(heading);
+  const grid=make('div','cal-facts');
+  for(const [label,value] of [
+   ['તિથિ',t.paksha+' '+t.tithi],
+   ['ગુજરાતી માસ',t.month],
+   ['નક્ષત્ર',t.nakshatra],
+   ['વિક્રમ સંવત',P.gu(t.samvat)],
+   ['સ્થળ',P.city]
+  ]){
+   const line=make('div','cal-fact');
+   line.append(make('small','',label),make('strong','',value));grid.append(line);
   }
-  for(let k=0;k<start.getUTCDay();k++){const blank=document.createElement('div');month.append(blank)}
-  for(let day=1;day<=daysIn;day++){
-   const date=y+'-'+String(m+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
-   const event=C.events.filter(x=>x.date===date);
-   const el=document.createElement('button');el.type='button';el.className='cal-day'+(date===zone.date?' today':'')+(event.length?' has-event':'');
-   el.textContent=new Intl.NumberFormat('gu-IN',{useGrouping:false}).format(day);
-   if(event.length){el.title=event.map(x=>x.gu).join(', ');
-    el.setAttribute('aria-label',day+' '+event.map(x=>x.gu).join(', '));
-    el.onclick=()=>{location.href='search.html?q='+encodeURIComponent(event[0].gu)+'&l=gu'};
-   }else{
-    el.title='આ તારીખ માટે હજુ ખાસ પ્રસંગ સૂચિબદ્ધ નથી';el.onclick=()=>{const desc=$('calendarHint');if(desc)desc.textContent='આ તારીખ માટે કોઈ ખાસ પ્રસંગ સૂચિબદ્ધ નથી.'};
-   }
+  detail.append(grid);
+  if(events.length){
+   const ebox=make('div','cal-festival-info');
+   ebox.append(make('strong','','🎉 '+events.map(e=>e.gu).join(' · ')));
+   const a=make('a','cal-event-link','આ પ્રસંગના મેસેજ જુઓ ↗');
+   a.href='search.html?q='+encodeURIComponent(events[0].gu)+'&l=gu';
+   ebox.append(a);detail.append(ebox);
+  }
+  const footer=make('p','cal-method','સૂર્યોદયની તિથિ · '+P.city+' · સ્થાનિક પંચાંગ મુજબ થોડો ફરક શક્ય');
+  detail.append(footer);
+  for(const button of month.querySelectorAll('.cal-day')){
+   button.classList.toggle('selected',button.dataset.date===date);
+   button.setAttribute('aria-pressed',String(button.dataset.date===date));
+  }
+ }
+ function render(){
+  const start=new Date(Date.UTC(y,m,1));
+  const daysIn=new Date(Date.UTC(y,m+1,0)).getUTCDate();
+  const label=new Intl.DateTimeFormat('gu-IN',{month:'long',year:'numeric',timeZone:'UTC'}).format(start);
+  const firstDate=new Date(Date.UTC(y,m,1)).toISOString().slice(0,10);
+  const lastDate=new Date(Date.UTC(y,m,daysIn)).toISOString().slice(0,10);
+  const first=P?.forDate(firstDate),last=P?.forDate(lastDate);
+  const lunar=first&&last?(first.month===last.month?first.month:first.month+' – '+last.month):'ગુજરાતી પંચાંગ';
+  title.textContent=label;
+  if($('lunarMonthHeading'))$('lunarMonthHeading').textContent=lunar+(first?' · વિ.સં. '+P.gu(first.samvat):'');
+  month.replaceChildren();
+  for(const d of ['રવિ','સોમ','મંગળ','બુધ','ગુરુ','શુક્ર','શનિ']){
+   const el=make('div','cal-weekday',d);
    month.append(el);
   }
-  if($('calendarHint'))$('calendarHint').textContent='રંગીન તારીખ પર ટૅપ કરો અને તે પ્રસંગના મેસેજ જુઓ. ચંદ્ર પંચાંગની તારીખો સ્થાનિક રીતે બદલાઈ શકે છે.';
+  for(let k=0;k<start.getUTCDay();k++)month.append(make('div','cal-empty'));
+  for(let day=1;day<=daysIn;day++){
+   const date=new Date(Date.UTC(y,m,day)).toISOString().slice(0,10);
+   const event=C.events.filter(x=>x.date===date),p=P?.forDate(date);
+   const el=make('button','cal-day'+(date===zone.date?' today':'')+(event.length?' has-event':'')+(p?.tithi==='પૂનમ'||p?.tithi==='અમાસ'?' moon-day':''));
+   el.type='button';el.dataset.date=date;
+   el.append(make('span','cal-number',P?P.gu(day):String(day)));
+   el.append(make('small','cal-tithi',p?p.short:'—'));
+   if(event.length)el.append(make('span','cal-event-dot','•'));
+   el.title=(p?p.full:'તિથિ ઉપલબ્ધ નથી')+(event.length?' · '+event.map(e=>e.gu).join(', '):'');
+   el.setAttribute('aria-label',date+' · '+(p?p.full:'તિથિ ઉપલબ્ધ નથી')+(event.length?' · '+event.map(e=>e.gu).join(' · '):''));
+   el.onclick=()=>selectDay(date);
+   month.append(el);
+  }
+  const selected=(y===Number(zone.date.slice(0,4))&&m===Number(zone.date.slice(5,7))-1)?zone.date:firstDate;
+  selectDay(selected);
+  if(hint)hint.textContent='દરેક તારીખમાં તિથિ · રંગીન ચિહ્ન તહેવાર · તારીખ પસંદ કરો';
  }
  back.onclick=()=>{m--;if(m<0){m=11;y--}render()};
  next.onclick=()=>{m++;if(m>11){m=0;y++}render()};
  reset.onclick=()=>{y=Number(zone.date.slice(0,4));m=Number(zone.date.slice(5,7))-1;render()};
+ if(citySelect&&P)citySelect.onchange=()=>{P.setCity(citySelect.value);render()};
  render();
 }
 
