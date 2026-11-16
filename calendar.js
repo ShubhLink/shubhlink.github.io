@@ -49,7 +49,7 @@ function dateLabel(date,language='gu'){
 }
 function currentCategory(){
  const h=indiaTime().hour;
- return h>=5&&h<12?'morning':h>=12&&h<18?'afternoon':'night';
+ return h>=5&&h<12?'morning':h>=20||h<5?'night':'suvichar';
 }
 function upcoming(limit=8){const today=indiaTime().date;return items.filter(e=>e.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,limit)}
 function todayEvents(){const today=indiaTime().date;return items.filter(e=>e.date===today)}
