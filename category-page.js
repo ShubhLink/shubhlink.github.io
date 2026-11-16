@@ -59,6 +59,11 @@ function messageCard(message,category,language){
  const card=document.createElement("article");card.className="wishitem";
  const tag=document.createElement("span");tag.className="wishtag";
  tag.textContent=(info?.emoji||"💌")+" "+label(info,language);
+ const today=new Date(Date.now()+19800000).toISOString().slice(0,10);
+ if(message.source==="ai_daily"&&message.generated_on===today){
+  const fresh=document.createElement("span");fresh.className="wish-daily-label";
+  fresh.textContent="✨ આજે નવું";card.append(fresh);
+ }
  const h=document.createElement("h3");h.textContent=message.title||fallbackTitle(message.body,info);
  const p=document.createElement("p");p.textContent=message.body;
  const actions=document.createElement("div");actions.className="wish-actions";
@@ -104,7 +109,7 @@ async function hydrate(category,language){
  if(!backend.url||!backend.publishableKey)return;
  const sequence=++fetchSequence;
  try{
-  const url=backend.url.replace(/\/$/,"")+"/rest/v1/shubhlink_messages?select=id,category_id,language,title,body,featured,created_at"+
+  const url=backend.url.replace(/\/$/,"")+"/rest/v1/shubhlink_messages?select=id,category_id,language,title,body,featured,created_at,source,generated_on"+
    "&category_id=eq."+encodeURIComponent(category)+
    "&language=eq."+encodeURIComponent(language)+
    "&is_published=eq.true&order=created_at.desc&limit=500";
