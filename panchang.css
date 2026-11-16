@@ -1,0 +1,59 @@
+/* ShubhLink Gujarati Panchang — jewel & parchment calendar */
+.gujarati-panchang{position:relative;overflow:hidden;background:linear-gradient(156deg,#fffdfa,#fff8f8 60%,#fff9f2);border:1px solid #e6d2e1;border-radius:27px;padding:23px;box-shadow:0 20px 45px #30204418}
+.gujarati-panchang::before{content:"";position:absolute;right:-45px;top:-55px;width:170px;height:170px;background:radial-gradient(circle,#f9cba858,transparent 67%);pointer-events:none}
+.gujarati-panchang .calendar-head{position:relative;align-items:start;gap:9px;flex-wrap:wrap;margin:0 0 10px}
+.gujarati-panchang .calendar-head h3{font-weight:900;font-size:clamp(21px,3vw,26px);margin:0;color:#34233f}
+.cal-lunar-heading{font-size:12px;color:#8b5477;font-weight:850;margin:2px 0 0;line-height:1.5}
+.gujarati-panchang .calendar-nav{gap:5px}
+.gujarati-panchang .calendar-nav button{color:#603d6b;border:1px solid #ece0e9;background:#fff;box-shadow:0 3px 8px #37284012;min-width:36px;min-height:36px}
+.gujarati-panchang .calendar-nav button#thisMonth{background:#39274c;border-color:#39274c;color:#fff}
+.cal-city-row{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:15px;padding:8px 11px;border-radius:12px;background:#f9eff8;color:#6d4672;font-weight:850;font-size:11px}
+.cal-city-row label{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:11px}
+.cal-city-row select{max-width:128px;background:#fff;border:1px solid #dfcfdf;border-radius:8px;min-height:34px;color:#4d3555;font-size:12px;padding:6px 4px;font-weight:750}
+.gujarati-panchang .calendar-grid{column-gap:4px;row-gap:6px;text-align:center}
+.gujarati-panchang .cal-weekday{font-weight:900;color:#9b7485;font-size:11px;padding:7px 0}
+.gujarati-panchang .cal-empty{min-height:63px}
+.gujarati-panchang .cal-day{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;border:1px solid #f2e9ef;background:#fff;border-radius:12px;padding:6px 1px;min-width:0;min-height:68px;box-shadow:0 2px 6px #3d2a3510;transition:transform .14s,box-shadow .14s,border-color .14s;color:#47334c}
+.gujarati-panchang .cal-day:hover,.gujarati-panchang .cal-day:focus-visible{border-color:#c28ac7;transform:translateY(-2px);box-shadow:0 5px 10px #3c2b4b20;outline:none}
+.gujarati-panchang .cal-number{font:900 17px/1.2 'Noto Sans Gujarati','Inter',sans-serif;letter-spacing:-.5px}
+.gujarati-panchang .cal-tithi{font:800 10px/1.3 'Noto Sans Gujarati','Inter',sans-serif;color:#7b6480;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.15px}
+.gujarati-panchang .cal-day.today{background:#3f2959;border-color:#3f2959;color:#fff;box-shadow:0 4px 12px #482d603b}
+.gujarati-panchang .cal-day.today .cal-number,.gujarati-panchang .cal-day.today .cal-tithi{color:#fff}
+.gujarati-panchang .cal-day.has-event{background:#fff0dc;border-color:#f1cfa3}
+.gujarati-panchang .cal-day.has-event .cal-number{color:#764526}
+.gujarati-panchang .cal-day.today.has-event{background:#4a295b;border-color:#4a295b}
+.gujarati-panchang .cal-day.today.has-event .cal-number{color:#fff}
+.gujarati-panchang .cal-day.moon-day:not(.today){border-color:#d8c0ec;background:#f9f2ff}
+.gujarati-panchang .cal-day.has-event.moon-day:not(.today){background:#fff0dc}
+.gujarati-panchang .cal-event-dot{position:absolute;top:2px;right:5px;color:#d97563;font-size:17px;line-height:.8}
+.gujarati-panchang .cal-day.today .cal-event-dot{color:#ffdd9a}
+.gujarati-panchang .cal-day.selected{outline:2px solid #b26e9c;outline-offset:1px;box-shadow:0 4px 13px #6a3d6734}
+.gujarati-panchang .calendar-hint{font-size:11px;line-height:1.65;margin:12px 0 14px;color:#776575}
+.cal-day-detail{border-radius:17px;border:1px solid #e8d9e8;background:linear-gradient(136deg,#fff,#fcf8ff);padding:17px;box-shadow:inset 0 1px #fff}
+.cal-detail-top{display:flex;align-items:center;gap:12px;padding-bottom:13px;border-bottom:1px solid #f0e6ed}
+.cal-moonicon{display:grid;place-items:center;width:43px;height:43px;flex:none;border-radius:13px;background:#f3e9f8;font-size:23px}
+.cal-detail-heading strong{display:block;color:#382541;font-size:17px;font-weight:900;line-height:1.55}
+.cal-detail-heading small{display:block;color:#87738b;font-size:12px}
+.cal-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:13px 0}
+.cal-fact{border-radius:11px;background:#faf5fb;padding:9px 10px;min-width:0;display:flex;flex-direction:column;gap:3px}
+.cal-fact small{font-size:10px;color:#937c94;font-weight:750}
+.cal-fact strong{font-size:13px;color:#49384c;font-weight:850;overflow-wrap:anywhere}
+.cal-festival-info{border-radius:11px;background:#fff4df;border:1px solid #f1d6ac;padding:12px;display:grid;gap:7px;color:#775128}
+.cal-festival-info strong{font-size:13px}
+.cal-event-link{font-size:12px;text-decoration:none;color:#6d4273;font-weight:900}
+.cal-method{color:#8a7d8e;font-size:10px;line-height:1.65;margin:11px 0 0}
+.cal-notice{font-size:12px;color:#8d5e66}
+@media(max-width:720px){
+ .gujarati-panchang{padding:15px 11px;border-radius:21px}
+ .gujarati-panchang .calendar-head h3{font-size:21px}
+ .gujarati-panchang .cal-empty{min-height:55px}
+ .gujarati-panchang .cal-day{min-height:62px;border-radius:10px;gap:2px;padding:4px 0}
+ .gujarati-panchang .cal-number{font-size:16px}
+ .gujarati-panchang .cal-tithi{font-size:9px;letter-spacing:-.35px}
+ .gujarati-panchang .calendar-grid{column-gap:3px;row-gap:5px}
+ .gujarati-panchang .cal-weekday{font-size:10px}
+ .cal-city-row{font-size:10px;padding:8px}
+ .cal-day-detail{padding:12px}
+ .cal-detail-heading strong{font-size:16px}
+}
+@media(max-width:370px){.gujarati-panchang .cal-tithi{font-size:8px}.gujarati-panchang .cal-number{font-size:14px}.cal-city-row{flex-wrap:wrap}.cal-facts{gap:7px}}
