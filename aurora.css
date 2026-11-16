@@ -185,3 +185,5 @@ body{background:radial-gradient(circle at 8% 10%,#ffe4ed 0,transparent 28%),radi
  .smallhero.category-compact+.section.compact .filterbar label{font-size:12px}
  .smallhero.category-compact+.section.compact .wishitem{min-height:0;padding:17px}
 }
+
+.wish-daily-label{display:inline-flex;align-self:flex-start;margin:0 0 8px;padding:5px 10px;background:#e8f8ec;color:#26734a;border:1px solid #bbebcb;border-radius:999px;font-size:11px;font-weight:900}
