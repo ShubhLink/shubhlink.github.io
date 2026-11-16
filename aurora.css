@@ -162,3 +162,12 @@ body{background:radial-gradient(circle at 8% 10%,#ffe4ed 0,transparent 28%),radi
 .sh-share-final-preview{background:linear-gradient(140deg,#edfaef,#f5fff9);border:1px solid #b9dfc6}
 .sh-share-send{background:linear-gradient(110deg,#057e51,#1bbb78)}
 @media(max-width:650px){.smart-feature{border-radius:23px}.catbox{border-radius:23px}.slim-search .search-message{border-radius:22px}}
+
+/* Automated daily originals — visible on home as soon as Supabase publishes. */
+.daily-wish-section[hidden]{display:none!important}
+.daily-wish-section{padding-top:4px}
+.daily-wish-section .wishitem{border:1px solid #eadce9;background:linear-gradient(135deg,#fffaf8,#fff 65%,#f9f3ff);border-radius:22px;box-shadow:0 8px 25px #30203b11}
+.daily-wish-section .wishitem:nth-child(2n){background:linear-gradient(145deg,#fff,#f8f9ff)}
+.daily-wish-section .wishitem h3{font-size:19px;line-height:1.5}
+.daily-wish-section .wishitem p{line-height:1.9}
+@media(max-width:640px){.daily-wish-section .wishitem h3{font-size:17px}}
