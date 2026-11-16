@@ -3,7 +3,7 @@
 'use strict';
 const $=id=>document.getElementById(id),C=window.ShubhCalendar;
 const input=$('smartSearchInput');if(!input)return;
-const form=$('smartSearchForm'),language=$('smartSearchLang'),meta=$('smartSearchCount'),holder=$('smartSearchResults'),next=$('smartLoadMore'),aiLink=$('aiGenerateLink');
+const form=$('smartSearchForm'),language=$('smartSearchLang'),meta=$('smartSearchCount'),holder=$('smartSearchResults'),next=$('smartLoadMore');
 const params=new URLSearchParams(location.search);
 const phrases={
  morning:['morning','good morning','સુપ્રભાત','સવાર','પ્રભાત','सुबह','सुप्रभात','savare','savare'],
@@ -26,7 +26,6 @@ const shuffle=arr=>{
 };
 const kindTerms=new Set(Object.values(phrases).flat().map(norm));
 let core=null,library=[],pool=[],currentKey='',currentQuery='';
-const aiButton=$('smartAiGenerate'),aiResults=$('smartAiResults'),aiStatus=$('smartAiStatus');
 const lang=()=>['gu','hi','en'].includes(language.value)?language.value:'gu';
 function category(q){
  const query=norm(q);let choice=null,best=0;
@@ -69,33 +68,76 @@ function score(m,q,c,parts){
  if(!q&&m.category===(C?.currentCategory()||'morning'))value+=60;
  return value>0&&m.featured?value+44:value;
 }
+const normalizedText=x=>norm(x.title+' '+x.body);
+const genericTokens=new Set(['આજે','આજ','કાલે','શ્રી','જી','બાપા','જયંતિ','જન્મજયંતિ','જ્યંતિ','શુભ','પ્રસંગ','ખાસ','લાગણીભર્યો','ભવ્ય','સરસ','new','today','day','jayanti','special','festival','wishes','wish','happy','the','for','and','message','મેસેજ','શુભેચ્છા','પ્રિય','સુંદર','બનાવો','માટે','mara','meri','my','dear','श्री','जी','जयंती','शुभ','सुंदर','प्यारा','के','लिए']);
+const synonyms={
+ 'બહેન':['બહેન','બેન','બહેને'],'બેન':['બહેન','બેન'],'મિત્ર':['મિત્ર','દોસ્ત','મિત્રતા'],
+ 'દોસ્ત':['દોસ્ત','મિત્ર','મિત્રતા'],'મા':['મા','માતા','મમ્મી'],'મમ્મી':['મા','માતા','મમ્મી'],
+ 'પિતા':['પિતા','પપ્પા','બાપુ'],'પપ્પા':['પિતા','પપ્પા','બાપુ'],
+ 'भाई':['भाई','भैया'],'बहन':['बहन','दीदी'],'friend':['friend','friendship','buddy'],
+ 'sister':['sister','sis'],'brother':['brother','bro'],'mother':['mother','mom','mum']
+};
+function containsTerm(text,term){
+ const t=norm(term);
+ if(!t)return false;
+ return t.length<=3?text.split(' ').includes(t):text.includes(t);
+}
+function selectedEvent(q){
+ const events=C?.findEvents(q)||[];
+ if(!events.length)return null;
+ const query=norm(q);
+ return events.find(e=>[e.gu,e.hi,e.en,...e.aliases].some(name=>norm(name)===query))||
+        events.find(e=>[e.gu,e.hi,e.en,...e.aliases].some(name=>query.includes(norm(name))&&norm(name).length>3))||
+        events[0];
+}
+function eventRelevant(message,event){
+ // A named festival/person must appear by its actual name or recognized alias.
+ // A message about 'Holi' cannot qualify just because both occasions are festivals.
+ if(message.category!=='festival')return false;
+ const text=normalizedText(message);
+ const variants=[event.gu,event.hi,event.en,...event.aliases]
+  .map(norm).filter(x=>x.length>=3&&!genericTokens.has(x));
+ return variants.some(alias=>containsTerm(text,alias));
+}
+function topicRelevant(message,q,cat,terms){
+ if(cat&&message.category!==cat)return false;
+ const text=normalizedText(message);
+ const important=terms.filter(t=>!genericTokens.has(t)&&!kindTerms.has(t));
+ if(important.length){
+  return important.every(token=>(synonyms[token]||[token]).some(alias=>containsTerm(text,alias)));
+ }
+ // A general category query (e.g. 'જન્મદિવસ') intentionally returns its category.
+ if(cat)return true;
+ // An unknown search has no category fallback: show zero rather than off-topic wishes.
+ return text.includes(norm(q));
+}
 function getPool(q,locale){
- const c=category(q),parts=wordParts(q);
- let list=library.filter(x=>x.language===locale).map(x=>({...x,score:score(x,q,c,parts)}));
+ const event=selectedEvent(q);
+ const cat=category(q);
+ const parts=wordParts(q);
+ let list=library.filter(x=>x.language===locale);
  if(q){
-  // Never pretend a message is relevant merely because it is popular.
-  if(c)list=list.filter(x=>x.category===c||x.score>=130);
-  else list=list.filter(x=>x.score>=25);
-  const proper=parts.filter(x=>!kindTerms.has(x));
-  if(proper.length){
-   const specificallyRelated=list.filter(x=>proper.some(t=>norm(x.title+' '+x.body).includes(t)));
-   if(specificallyRelated.length>=3)list=specificallyRelated;
-  }
+  list=list.filter(x=>event?eventRelevant(x,event):topicRelevant(x,q,cat,parts));
  }else{
   const active=C?.currentCategory()||'morning';
   list=list.filter(x=>x.category===active);
  }
- const premium=list.filter(x=>x.featured);
- // The formula-combined 2026 bulk messages are retained only as fallbacks;
- // curated, hand-written originals are preferred when sufficient.
- if(premium.length)return premium;
- // Show legacy built-in messages only when the public curated database is offline.
- return library.some(x=>x.featured)?[]:list;
+ const ranked=list.map(x=>({...x,score:score(x,q,cat,parts)}));
+ // Featured and freshly added messages come first, but don't hide relevant older wishes.
+ ranked.sort((a,b)=>Number(b.featured)-Number(a.featured)||b.score-a.score);
+ return ranked;
 }
 function batch(){
  if(!pool.length){
-  holder.replaceChildren();meta.textContent='આ વિષય માટે તૈયાર મેસેજ મળ્યા નથી. ✦ AI થી નવો મેસેજ બનાવો.';
-  next.hidden=true;return
+  holder.replaceChildren();
+  const noResults=document.createElement('div');noResults.className='search-empty';
+  const heading=document.createElement('strong');heading.textContent='આ વિષયના તૈયાર મેસેજ મળ્યા નથી.';
+  const body=document.createElement('p');body.textContent='બીજા પ્રસંગના મેસેજ બતાવવાના બદલે અહીં તમારા વિષય માટે AI થી નવો મેસેજ બનાવો.';
+  const a=document.createElement('a');const u=new URL('ai.html',location.href);
+  if(currentQuery)u.searchParams.set('q',currentQuery);u.searchParams.set('l',lang());
+  a.href=u.href;a.textContent='✦ AI માં આ વિષયનો મેસેજ બનાવો';
+  noResults.append(heading,body,a);holder.append(noResults);
+  meta.textContent='0 સંબંધિત મેસેજ';next.hidden=true;return
  }
  const size=Math.min(9,pool.length);
  const chosen=window.ShubhFresh?.choose(pool,'search:'+currentKey,size,{quality:x=>x.score+(x.featured?95:0)})||shuffle(pool).slice(0,size);
@@ -125,18 +167,11 @@ function card(it){
  wa.addEventListener('click',()=>window.ShubhShare.open({title:it.title,body:it.body,language:it.language,category:it.category}));
  actions.append(wa);node.append(label,head,body,actions);return node
 }
-function setLink(q){
- const u=new URL('ai.html',location.href);
- if(q.trim())u.searchParams.set('q',q.trim().slice(0,100));
- u.searchParams.set('l',lang());
- aiLink.href=u.href;
-}
 function search(q,updateURL=true){
  const text=String(q||'').trim().slice(0,100);
  currentQuery=text;
  currentKey=lang()+'|'+norm(text);
  pool=getPool(text,lang());
- setLink(text);
  if(updateURL){
   const url=new URL(location.href);
   if(text)url.searchParams.set('q',text);else url.searchParams.delete('q');
@@ -146,62 +181,11 @@ function search(q,updateURL=true){
  batch();
 }
 
-function aiStorageKey(q){return 'shubhlink_ai_search_history_'+lang()+'_'+norm(q).slice(0,65)}
-function readAiHistory(q){
- try{const a=JSON.parse(sessionStorage.getItem(aiStorageKey(q))||'[]');return Array.isArray(a)?a.slice(-9):[]}catch(_){return []}
-}
-function storeAiHistory(q,messages){
- try{const arr=[...readAiHistory(q),...messages].slice(-9);sessionStorage.setItem(aiStorageKey(q),JSON.stringify(arr))}catch(_){}
-}
-function aiError(code){
- const errors={
-  rate_limit:'આજની AI મેસેજ મર્યાદા પૂરી થઈ છે.',
-  ai_quota_exceeded:'Google AI ની મફત મર્યાદા હાલ પૂરી છે.',
-  ai_provider_busy:'AI થોડું વ્યસ્ત છે, ફરી પ્રયાસ કરો.',
-  ai_model_unavailable:'AI મોડેલ ઉપલબ્ધ નથી.',
-  ai_temporarily_unavailable:'હમણાં AI મેસેજ બન્યા નથી, થોડા સમય પછી ફરી અજમાવો.'
- };
- return errors[code]||'હમણાં AI મેસેજ નથી બન્યા. ફરી પ્રયાસ કરો.';
-}
-async function generateAI(){
- const languageCode=lang();
- const q=input.value.trim().slice(0,100)||{
-  gu:'આજના દિવસ માટે એક સરસ અને અનોખો શુભેચ્છા મેસેજ',
-  hi:'आज के लिए नया और सुंदर शुभकामना संदेश',
-  en:'A fresh, original message to share today'
- }[languageCode];
- const cfg=window.SHUBHLINK_BACKEND||{};
- if(!cfg.url||!cfg.publishableKey){aiStatus.textContent='હમણાં AI ઉપલબ્ધ નથી.';return}
- aiButton.disabled=true;aiStatus.textContent='નવા શબ્દો રચાઈ રહ્યા છે...';aiResults.hidden=true;aiResults.replaceChildren();
- try{
-  const recent=readAiHistory(q);
-  const avoids=[...recent,...pool.filter(x=>x.featured).slice(0,3).map(x=>x.body)].slice(-9);
-  const res=await fetch(cfg.url.replace(/\/$/,'')+'/functions/v1/compose-wish',{
-   method:'POST',headers:{'Content-Type':'application/json',apikey:cfg.publishableKey},
-   body:JSON.stringify({topic:q,language:languageCode,tone:'warm',avoid:avoids})
-  });
-  const data=await res.json().catch(()=>({}));
-  if(!res.ok)throw Error(aiError(data.error));
-  const messages=Array.isArray(data.messages)?data.messages.filter(x=>typeof x==='string'&&x.trim().length>=20).slice(0,3):[];
-  if(!messages.length)throw Error('મેસેજ બન્યા નથી. ફરી પ્રયાસ કરો.');
-  storeAiHistory(q,messages);
-  const caption={gu:'✦ નવો AI મેસેજ',hi:'✦ नया AI संदेश',en:'✦ Fresh AI message'}[languageCode];
-  for(let i=0;i<messages.length;i++){
-   aiResults.append(card({title:caption+' '+(i+1),body:messages[i],category:category(q)||'newthought',language:languageCode,event:false,featured:true}))
-  }
-  aiResults.hidden=false;
-  aiStatus.textContent='✦ 3 નવા મેસેજ તૈયાર';
-  aiResults.scrollIntoView({block:'nearest',behavior:'smooth'});
- }catch(e){aiStatus.textContent=e?.message||'હમણાં AI મેસેજ મળ્યા નથી.'}
- finally{aiButton.disabled=false}
-}
-aiButton?.addEventListener('click',generateAI);
-
 input.value=params.get('q')||'';
 language.value=['gu','hi','en'].includes(params.get('l'))?params.get('l'):'gu';
-input.oninput=()=>setLink(input.value);
-form.onsubmit=e=>{e.preventDefault();search(input.value);aiResults.hidden=true;aiStatus.textContent=''};
-language.onchange=()=>{search(input.value);aiResults.hidden=true;aiStatus.textContent=''};
+input.oninput=()=>{};
+form.onsubmit=e=>{e.preventDefault();search(input.value)};
+language.onchange=()=>search(input.value);
 next.onclick=()=>batch();
 if(window.SHUBH_DATA_READY?.then)window.SHUBH_DATA_READY.then(c=>{core=c;library=build();search(input.value,false)}).catch(()=>{meta.textContent='હમણાં મેસેજ લોડ ન થયા.'});
 else meta.textContent='મેસેજ લોડ થઈ રહ્યા છે...';
