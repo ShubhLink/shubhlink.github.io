@@ -9,8 +9,21 @@ const A=window.Astronomy;
 const months=["ચૈત્ર","વૈશાખ","જેઠ","અષાઢ","શ્રાવણ","ભાદરવો","આસો","કારતક","માગશર","પોષ","મહા","ફાગણ"];
 const tithis=["એકમ","બીજ","ત્રીજ","ચોથ","પાંચમ","છઠ","સાતમ","આઠમ","નોમ","દશમ","અગિયારસ","બારસ","તેરસ","ચૌદસ","પૂનમ"];
 const nakshatras=["અશ્વિની","ભરણી","કૃત્તિકા","રોહિણી","મૃગશીર્ષ","આર્દ્રા","પુનર્વસુ","પુષ્ય","આશ્લેષા","મઘા","પૂર્વાફાલ્ગુની","ઉત્તરાફાલ્ગુની","હસ્ત","ચિત્રા","સ્વાતિ","વિશાખા","અનુરાધા","જ્યેષ્ઠા","મૂળ","પૂર્વાષાઢા","ઉત્તરાષાઢા","શ્રવણ","ધનિષ્ઠા","શતભિષા","પૂર્વાભાદ્રપદા","ઉત્તરાભાદ્રપદા","રેવતી"];
-const gu=n=>new Intl.NumberFormat("gu-IN",{useGrouping:false}).format(n);
-const geo=A?new A.Observer(23.0225,72.5714,53):null;
+const gu=n=>String(n).replace(/[0-9]/g,x=>"૦૧૨૩૪૫૬૭૮૯"[Number(x)]);
+const places={
+ ahmedabad:{name:"અમદાવાદ",lat:23.0225,lon:72.5714,height:53},
+ jamnagar:{name:"જામનગર",lat:22.4707,lon:70.0577,height:20},
+ rajkot:{name:"રાજકોટ",lat:22.3039,lon:70.8022,height:120},
+ surat:{name:"સુરત",lat:21.1702,lon:72.8311,height:12},
+ vadodara:{name:"વડોદરા",lat:22.3072,lon:73.1812,height:36}
+};
+let city="ahmedabad";
+let geo=A?new A.Observer(places[city].lat,places[city].lon,places[city].height):null;
+function setCity(key){
+ if(!places[key]||key===city)return;
+ city=key;geo=A?new A.Observer(places[city].lat,places[city].lon,places[city].height):null;
+ cache.clear();years.clear();
+}
 const cache=new Map(),years=new Map();
 const dayMS=86400000;
 const mod=(x,n)=>(x%n+n)%n;
@@ -86,5 +99,5 @@ function forDate(date){
   cache.set(date,answer);return answer;
  }catch(err){console.warn("Panchang calculation failed",date,err);cache.set(date,null);return null}
 }
-window.ShubhPanchang={forDate,months,gu,available:!!A,city:"અમદાવાદ",basis:"સ્થાનિક સૂર્યોદય",newYearDate};
+window.ShubhPanchang={forDate,months,gu,places,setCity,get city(){return places[city].name},available:!!A,basis:"સ્થાનિક સૂર્યોદય",newYearDate};
 })();
