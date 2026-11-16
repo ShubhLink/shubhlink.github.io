@@ -95,6 +95,14 @@ function eventRelevant(message,event){
  // A message about 'Holi' cannot qualify just because both occasions are festivals.
  if(message.category!=='festival')return false;
  const text=normalizedText(message);
+ // More specific festivals must not leak into a broader exact event search:
+ // "દિવાળી" != "દેવ દિવાળી"; "નવું વર્ષ" != "ગુજરાતી નવું વર્ષ".
+ const ownName=norm(event.gu);
+ const differentLonger=(C?.events||[]).filter(other=>{
+  const otherName=norm(other.gu);
+  return otherName!==ownName&&otherName.length>ownName.length&&otherName.includes(ownName);
+ });
+ if(differentLonger.some(other=>text.includes(norm(other.gu))))return false;
  const variants=[event.gu,event.hi,event.en,...event.aliases]
   .map(norm).filter(x=>x.length>=3&&!genericTokens.has(x));
  return variants.some(alias=>containsTerm(text,alias));
