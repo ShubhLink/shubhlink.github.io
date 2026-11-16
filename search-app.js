@@ -74,6 +74,7 @@ const synonyms={
  'બહેન':['બહેન','બેન','બહેને'],'બેન':['બહેન','બેન'],'મિત્ર':['મિત્ર','દોસ્ત','મિત્રતા'],
  'દોસ્ત':['દોસ્ત','મિત્ર','મિત્રતા'],'મા':['મા','માતા','મમ્મી'],'મમ્મી':['મા','માતા','મમ્મી'],
  'પિતા':['પિતા','પપ્પા','બાપુ'],'પપ્પા':['પિતા','પપ્પા','બાપુ'],
+ 'દીકરો':['દીકરો','દીકરા','દીકરાને','દીકરાનો','દીકરાના'],'દીકરી':['દીકરી','દીકરીને','દીકરીનો','દીકરીની'],
  'भाई':['भाई','भैया'],'बहन':['बहन','दीदी'],'friend':['friend','friendship','buddy'],
  'sister':['sister','sis'],'brother':['brother','bro'],'mother':['mother','mom','mum']
 };
@@ -106,8 +107,9 @@ function eventRelevant(message,event){
  const sharedAliases=new Set((C?.events||[])
   .filter(other=>other.gu!==event.gu)
   .flatMap(other=>[other.gu,other.hi,other.en,...other.aliases]).map(norm));
+ const ownNames=new Set([event.gu,event.hi,event.en].map(norm));
  const variants=[event.gu,event.hi,event.en,...event.aliases]
-  .map(norm).filter(x=>x.length>=3&&!genericTokens.has(x)&&!sharedAliases.has(x));
+  .map(norm).filter(x=>x.length>=3&&!genericTokens.has(x)&&(!sharedAliases.has(x)||ownNames.has(x)));
  return variants.some(alias=>containsTerm(text,alias));
 }
 function topicRelevant(message,q,cat,terms){
