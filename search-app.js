@@ -7,7 +7,6 @@ const form=$('smartSearchForm'),language=$('smartSearchLang'),meta=$('smartSearc
 const params=new URLSearchParams(location.search);
 const phrases={
  morning:['morning','good morning','સુપ્રભાત','સવાર','પ્રભાત','सुबह','सुप्रभात','savare','savare'],
- afternoon:['afternoon','બપોર','શુભ બપોર','दोपहर','bapor'],
  night:['night','good night','શુભરાત્રિ','રાત','शुभरात्रि','नींद','sleep'],
  birthday:['birthday','bday','happy birthday','જન્મદિવસ','બર્થડે','જન્મદિન','janamdin','जन्मदिन','बर्थडे'],
  suvichar:['suvichar','સુવિચાર','विचार','wisdom','quote','quotes','સત્ય','વિચાર','વિચારશીલ'],
