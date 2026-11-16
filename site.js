@@ -2,6 +2,9 @@
 window.SHUBH_DATA_READY=(async function(){
 'use strict';
 const D=window.SHUBHLINK_DATA;if(!D)return;
+// Retire the public Good Afternoon category without deleting historical content.
+D.categories=D.categories.filter(item=>item.id!=='afternoon');
+for(const language of ['gu','hi','en'])if(D.wishes[language])delete D.wishes[language].afternoon;
 const backend=window.SHUBHLINK_BACKEND||{};
 const dbTitleMap=new Map();
 const dbFeatured=new Set();
