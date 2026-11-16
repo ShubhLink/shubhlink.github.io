@@ -9,15 +9,42 @@ const backend=window.SHUBHLINK_BACKEND||{};
 const dbTitleMap=new Map();
 const dbFeatured=new Set();
 const dbDaily=[];
+// Paint the available local cards immediately. Never leave the home/category grid
+// empty while a slow Free Tier database wakes up.
+function renderLocalCards(hostId,limit){
+ const host=document.getElementById(hostId);if(!host)return;
+ const first=window.ShubhCalendar?.currentCategory()||'morning';
+ const order=[first,...D.categories.map(c=>c.id)],seen=new Set();
+ host.replaceChildren();
+ for(const id of order){
+  if(seen.has(id))continue;seen.add(id);
+  const c=D.categories.find(x=>x.id===id);if(!c)continue;
+  const a=document.createElement('a');a.href='wishes.html?c='+encodeURIComponent(c.id);
+  a.className='catbox cat-'+c.id;
+  const icon=document.createElement('span');icon.className='catemoji';icon.textContent=c.emoji;
+  const title=document.createElement('strong');title.textContent=c.gu;
+  const desc=document.createElement('small');desc.textContent=c.desc||'';
+  const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';
+  const go=document.createElement('span');go.className='catgo';go.textContent='મેસેજ જુઓ →';
+  a.append(arrow,icon,title,desc,go);host.append(a);
+  if(host.children.length>=limit)break;
+ }
+}
+renderLocalCards('homeCats',8);
+renderLocalCards('allCats',50);
+if(document.getElementById('dailyQuote')){
+ document.getElementById('dailyQuote').textContent=D.wishes.gu?.suvichar?.[0]||'સુંદર વિચારો જીવનને સુંદર બનાવે છે.';
+}
 if(backend.url&&backend.publishableKey){
  try{
   const root=backend.url.replace(/\/$/,'');
   const headers={apikey:backend.publishableKey};
-  const catRequest=fetch(root+'/rest/v1/shubhlink_categories?select=id,emoji,name_gu,name_hi,name_en,description_gu,color&is_active=eq.true',{headers,cache:'no-store'});
+  const signal=typeof AbortSignal!=='undefined'&&AbortSignal.timeout?AbortSignal.timeout(9000):undefined;
+  const catRequest=fetch(root+'/rest/v1/shubhlink_categories?select=id,emoji,name_gu,name_hi,name_en,description_gu,color&is_active=eq.true',{headers,cache:'no-store',signal});
   const messages=[];
   for(let offset=0;offset<10000;offset+=500){
    const url=root+'/rest/v1/shubhlink_messages?select=id,category_id,language,title,body,featured,source,generated_on&is_published=eq.true&order=created_at.desc,id.desc&limit=500&offset='+offset;
-   const response=await fetch(url,{headers,cache:'no-store'});
+   const response=await fetch(url,{headers,cache:'no-store',signal});
    if(!response.ok)throw Error('Published messages could not load');
    const page=await response.json();
    messages.push(...page);
@@ -79,6 +106,7 @@ function catCard(c){
  a.append(arrow,emoji,title,desc,go);return a;
 }
 if($('homeCats')){
+ $('homeCats').replaceChildren();
  {
   const todayEvent=(window.ShubhCalendar?.todayEvents()||[])[0];
   const first=window.ShubhCalendar?.currentCategory()||'morning';
@@ -113,6 +141,7 @@ if($('dailyFeed')&&$('dailyFeedGrid')){
  }
 }
 if($('allCats')){
+ $('allCats').replaceChildren();
  const first=window.ShubhCalendar?.currentCategory()||'morning';
  const hasEvent=(window.ShubhCalendar?.todayEvents()||[]).length>0;
  const ids=[first,...(hasEvent?['festival']:[]),...D.categories.map(x=>x.id)];
