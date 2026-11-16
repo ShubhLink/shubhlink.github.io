@@ -8,6 +8,7 @@ for(const language of ['gu','hi','en'])if(D.wishes[language])delete D.wishes[lan
 const backend=window.SHUBHLINK_BACKEND||{};
 const dbTitleMap=new Map();
 const dbFeatured=new Set();
+const dbDaily=[];
 if(backend.url&&backend.publishableKey){
  try{
   const root=backend.url.replace(/\/$/,'');
@@ -15,7 +16,7 @@ if(backend.url&&backend.publishableKey){
   const catRequest=fetch(root+'/rest/v1/shubhlink_categories?select=id,emoji,name_gu,name_hi,name_en,description_gu,color&is_active=eq.true',{headers,cache:'no-store'});
   const messages=[];
   for(let offset=0;offset<10000;offset+=500){
-   const url=root+'/rest/v1/shubhlink_messages?select=id,category_id,language,title,body,featured&is_published=eq.true&order=created_at.desc,id.desc&limit=500&offset='+offset;
+   const url=root+'/rest/v1/shubhlink_messages?select=id,category_id,language,title,body,featured,source,generated_on&is_published=eq.true&order=created_at.desc,id.desc&limit=500&offset='+offset;
    const response=await fetch(url,{headers,cache:'no-store'});
    if(!response.ok)throw Error('Published messages could not load');
    const page=await response.json();
@@ -35,6 +36,7 @@ if(backend.url&&backend.publishableKey){
    if(!['gu','hi','en'].includes(m.language))continue;
    if(m.title)dbTitleMap.set(m.language+'|'+m.category_id+'|'+m.body,m.title);
    if(m.featured)dbFeatured.add(m.language+'|'+m.category_id+'|'+m.body);
+   if(m.source==='ai_daily'&&m.generated_on)dbDaily.push(m);
    if(!newWishes[m.language])newWishes[m.language]={};
    if(!newWishes[m.language][m.category_id])newWishes[m.language][m.category_id]=[];
    newWishes[m.language][m.category_id].push(m.body);
@@ -90,6 +92,24 @@ if($('homeCats')){
  if(arr.length){
   const premium=arr.filter(m=>dbFeatured.has('gu|suvichar|'+m));
   $('dailyQuote').textContent=(window.ShubhFresh?.pick(premium.length?premium:arr,'daily-quote')||arr[0]);
+ }
+}
+if($('dailyFeed')&&$('dailyFeedGrid')){
+ const fresh=dbDaily.filter(x=>x.language==='gu'&&D.categories.some(c=>c.id===x.category_id)).slice(0,4);
+ if(fresh.length){
+  const grid=$('dailyFeedGrid');
+  for(const m of fresh){
+   const c=D.categories.find(x=>x.id===m.category_id);
+   const card=document.createElement('article');card.className='wishitem';
+   const tag=document.createElement('span');tag.className='wishtag';tag.textContent=c.emoji+' '+c.gu;
+   const h=document.createElement('h3');h.textContent=m.title;
+   const p=document.createElement('p');p.textContent=m.body;
+   const actions=document.createElement('div');actions.className='wish-actions';
+   const wa=document.createElement('button');wa.className='wish-whatsapp';wa.type='button';wa.textContent='◉ WhatsApp પર શેર કરો';
+   wa.addEventListener('click',()=>window.ShubhShare.open({title:m.title,body:m.body,language:'gu',category:m.category_id}));
+   actions.append(wa);card.append(tag,h,p,actions);grid.append(card);
+  }
+  $('dailyFeed').hidden=false;
  }
 }
 if($('allCats')){
