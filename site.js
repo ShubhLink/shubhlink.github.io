@@ -42,8 +42,11 @@ if(backend.url&&backend.publishableKey){
   const signal=typeof AbortSignal!=='undefined'&&AbortSignal.timeout?AbortSignal.timeout(9000):undefined;
   const catRequest=fetch(root+'/rest/v1/shubhlink_categories?select=id,emoji,name_gu,name_hi,name_en,description_gu,color&is_active=eq.true',{headers,cache:'no-store',signal});
   const messages=[];
+  // Home/category teasers only need curated & daily messages; search and editor still load the full library.
+  const teaserOnly=!!(document.getElementById('homeCats')||document.getElementById('allCats'));
+  const teaserFilter=teaserOnly?'&or=(featured.eq.true,source.eq.ai_daily)':'';
   for(let offset=0;offset<10000;offset+=500){
-   const url=root+'/rest/v1/shubhlink_messages?select=id,category_id,language,title,body,featured,source,generated_on&is_published=eq.true&order=created_at.desc,id.desc&limit=500&offset='+offset;
+   const url=root+'/rest/v1/shubhlink_messages?select=id,category_id,language,title,body,featured,source,generated_on&is_published=eq.true'+teaserFilter+'&order=created_at.desc,id.desc&limit=500&offset='+offset;
    const response=await fetch(url,{headers,cache:'no-store',signal});
    if(!response.ok)throw Error('Published messages could not load');
    const page=await response.json();
