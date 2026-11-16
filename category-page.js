@@ -74,7 +74,7 @@ function messageCard(message,category,language){
   if(window.ShubhShare?.open){
    window.ShubhShare.open({title:h.textContent,body:message.body,language,category});
   }else{
-   const text=h.textContent+"\n\n"+message.body;
+   const text=h.textContent+"\n\n"+message.body+"\n\n🔗 ShubhLink પર મેસેજ બનાવો\nhttps://shubhlink.github.io/";
    window.open("https://api.whatsapp.com/send?text="+encodeURIComponent(text),"_blank","noopener");
   }
  };
