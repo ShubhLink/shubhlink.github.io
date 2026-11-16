@@ -100,27 +100,21 @@ if($('allCats')){
  for(const id of ids){if(done.has(id))continue;done.add(id);const cat=D.categories.find(c=>c.id===id);if(cat)$('allCats').append(catCard(cat))}
 }
 if($('wishGrid')){
- const csel=$('filterCat'),lsel=$('filterLang'),search=$('filterSearch');
+ const csel=$('filterCat'),lsel=$('filterLang'),search=$('filterSearch'),grid=$('wishGrid');
  D.categories.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.emoji+' '+c.gu;csel.add(o)});
  csel.value=firstCat;lsel.value=firstLang;
- let lastKey='',more=null;
- function render(loadMore=false){
-  const c=csel.value,l=lsel.value,cat=D.categories.find(x=>x.id===c),q=trim(search.value).toLocaleLowerCase();
-  const all=(D.wishes[l]?.[c]||[]).map((msg,i)=>({msg,i,featured:dbFeatured.has(l+'|'+c+'|'+msg)}));
-  $('wishHeading').textContent=cat.emoji+' '+catName(cat,l);
-  $('wishIntro').textContent='';
-  const grid=$('wishGrid');grid.replaceChildren();
-  let filtered=all.filter(x=>!q||((x.msg+' '+titleFor(x.msg,c,l)).toLocaleLowerCase().includes(q)));
-  const premium=filtered.filter(x=>x.featured);
-  // Curated originals appear first; low-quality formula combinations remain a fallback.
-  if(premium.length)filtered=premium;
-  else if(dbFeatured.size>0)filtered=[]; // Archive low-quality formula messages when curated data is available.
-  const key='category:'+l+':'+c+':'+q;
-  if(key!==lastKey)lastKey=key;
-  const batchSize=Math.min(8,Math.max(4,Math.ceil(filtered.length*0.64)));
-  const selection=window.ShubhFresh?.choose(filtered,key,batchSize,{quality:x=>x.featured?100:0})||filtered.slice(0,batchSize);
-  for(const item of selection){
-   const msg=item.msg,topic=titleFor(msg,c,l);
+ let shown=[],rendered=0,observer=null;
+ const sentinel=document.createElement('div');
+ sentinel.className='wish-auto-sentinel';
+ sentinel.setAttribute('aria-hidden','true');
+ grid.after(sentinel);
+ function appendBatch(){
+  if(rendered>=shown.length){sentinel.hidden=true;observer?.disconnect();return}
+  const fragment=document.createDocumentFragment();
+  const end=Math.min(rendered+16,shown.length);
+  const c=csel.value,l=lsel.value,cat=D.categories.find(x=>x.id===c);
+  for(let i=rendered;i<end;i++){
+   const msg=shown[i].msg,topic=titleFor(msg,c,l);
    const card=document.createElement('article');card.className='wishitem';
    const tag=document.createElement('span');tag.className='wishtag';tag.textContent=cat.emoji+' '+catName(cat,l);
    const h=document.createElement('h3');h.textContent=topic;
@@ -128,22 +122,51 @@ if($('wishGrid')){
    const actions=document.createElement('div');actions.className='wish-actions';
    const wa=document.createElement('button');wa.className='wish-whatsapp';wa.type='button';wa.textContent='◉ WhatsApp પર શેર કરો';
    wa.addEventListener('click',()=>window.ShubhShare.open({title:topic,body:msg,language:l,category:c}));
-   actions.append(wa);card.append(tag,h,p,actions);grid.append(card);
+   actions.append(wa);card.append(tag,h,p,actions);fragment.append(card);
   }
-  $('resultMeta').textContent=selection.length+' નવા મેસેજ · '+filtered.length+' ઉપલબ્ધ';
-  if(!filtered.length){
-   const empty=document.createElement('p');empty.className='empty';empty.textContent='આ વિષય માટે મેસેજ નથી મળ્યો. AI Studio માં નવો મેસેજ બનાવો.';grid.append(empty)
-  }
-  if(!more){
-   more=document.createElement('button');more.type='button';more.className='search-more shubh-more';
-   more.textContent='↻ બીજા અલગ મેસેજ જુઓ';
-   grid.after(more);
-   more.addEventListener('click',()=>render(true));
-  }
-  more.hidden=filtered.length<=selection.length;
-  const url=new URL(location.href);url.searchParams.set('c',c);url.searchParams.set('l',l);history.replaceState(null,'',url);
+  rendered=end;grid.append(fragment);
+  sentinel.hidden=rendered>=shown.length;
+  if(sentinel.hidden)observer?.disconnect();
  }
- csel.addEventListener('change',render);lsel.addEventListener('change',render);search.addEventListener('input',render);render();
+ function render(){
+  observer?.disconnect();
+  const c=csel.value,l=lsel.value,cat=D.categories.find(x=>x.id===c);
+  const q=trim(search.value).toLocaleLowerCase();
+  const norm=window.ShubhCalendar?.normalize||((x)=>String(x||'').toLocaleLowerCase());
+  const query=norm(q);
+  const seen=new Set();
+  shown=(D.wishes[l]?.[c]||[])
+   .filter(msg=>!query||norm(msg+' '+titleFor(msg,c,l)).includes(query))
+   .filter(msg=>{const k=norm(msg);if(seen.has(k))return false;seen.add(k);return true})
+   .map((msg,i)=>({msg,i,featured:dbFeatured.has(l+'|'+c+'|'+msg)}))
+   .sort((a,b)=>Number(b.featured)-Number(a.featured)||a.i-b.i);
+  $('wishHeading').textContent=cat.emoji+' '+catName(cat,l);
+  $('wishIntro').textContent='';
+  $('resultMeta').textContent=shown.length+' મેસેજ';
+  grid.replaceChildren();
+  rendered=0;
+  appendBatch();
+  if(!shown.length){
+   const empty=document.createElement('p');empty.className='empty';
+   empty.textContent='હમણાં આ વિષયના મેસેજ નથી મળ્યા. AI Studio માં નવો મેસેજ બનાવો.';
+   grid.append(empty);
+  }else if(rendered<shown.length){
+   if('IntersectionObserver' in window){
+    observer=new IntersectionObserver(entries=>{
+     if(entries.some(x=>x.isIntersecting))appendBatch();
+    },{rootMargin:'650px 0px'});
+    observer.observe(sentinel);
+   }else{
+    while(rendered<shown.length)appendBatch();
+   }
+  }
+  const url=new URL(location.href);url.searchParams.set('c',c);url.searchParams.set('l',l);
+  history.replaceState(null,'',url);
+ }
+ csel.addEventListener('change',render);
+ lsel.addEventListener('change',render);
+ search.addEventListener('input',render);
+ render();
 }
 if($('editCat')){
  const cat=$('editCat'),lng=$('editLang'),title=$('editTitle'),msg=$('editMsg'),to=$('editTo'),from=$('editFrom'),feedback=$('feedback');
