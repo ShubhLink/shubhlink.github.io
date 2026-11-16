@@ -103,8 +103,11 @@ function eventRelevant(message,event){
   return otherName!==ownName&&otherName.length>ownName.length&&otherName.includes(ownName);
  });
  if(differentLonger.some(other=>text.includes(norm(other.gu))))return false;
+ const sharedAliases=new Set((C?.events||[])
+  .filter(other=>other.gu!==event.gu)
+  .flatMap(other=>[other.gu,other.hi,other.en,...other.aliases]).map(norm));
  const variants=[event.gu,event.hi,event.en,...event.aliases]
-  .map(norm).filter(x=>x.length>=3&&!genericTokens.has(x));
+  .map(norm).filter(x=>x.length>=3&&!genericTokens.has(x)&&!sharedAliases.has(x));
  return variants.some(alias=>containsTerm(text,alias));
 }
 function topicRelevant(message,q,cat,terms){
