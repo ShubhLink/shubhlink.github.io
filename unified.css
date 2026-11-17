@@ -62,3 +62,21 @@ body .mobilebottom a.active-current span{color:#fff!important}
 .allcats .catbox:active{transform:scale(.96)}.allcats .catbox .catemoji{filter:drop-shadow(0 3px 3px #9c55a744);transform:translateY(-2px)}
 .reference-home .wishitem.special .wishtag{filter:drop-shadow(0 3px 5px #b269b550)}
 .ai-chat-head{border-bottom:1px solid #ecd5ef!important}.ai-chat-composer textarea{background:#fff!important;color:#492256!important;border:1px solid #e6c8ec!important;border-radius:15px!important}.ai-chat-composer button{background:#8427ab!important;color:#fff!important}
+
+/* v14 homepage messages only, illustrated cards */
+.reference-home .catgrid,.reference-home #homeCats,.reference-home .smart-section,.reference-home .ai-spotlight,.reference-home .daily-wish-section{display:none!important}
+.reference-home .reference-featured{padding-top:22px!important}
+.reference-home .reference-featured .wishgrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+.reference-home .reference-featured .wishitem.illustrated{min-height:335px!important;padding:14px 10px 12px!important;background-size:cover!important;background-position:center!important;box-shadow:0 8px 24px #71357920!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(4n+1){background-image:linear-gradient(180deg,#fff7e500 8%,#fff0c99a 48%,#fff5e9ee 100%),url("assets/morning-scene.svg")!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(4n+2){background-image:linear-gradient(180deg,#09245616 0%,#09245688 44%,#071c45ee 100%),url("assets/night-scene.svg")!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(4n+2) h3,.reference-home .reference-featured .wishitem.illustrated:nth-child(4n+2) p{color:#fff!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(4n+3){background-image:linear-gradient(160deg,#fce4f4b0,#fff2d9ed)!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(4n+4){background-image:linear-gradient(160deg,#e7e0ffb0,#fce7f6ef)!important}
+.reference-home .reference-featured .wishitem.illustrated p{font-size:clamp(12px,2.8vw,16px)!important;line-height:1.7!important;flex:0 1 auto!important;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.reference-home .reference-featured .wishitem.illustrated .wish-actions{margin-top:14px!important}
+.ai-stage .ai-welcome-icon,.ai-stage .ai-welcome h2,.ai-stage .ai-starters,.ai-stage .ai-pill,.ai-stage .ai-intro{display:none!important}
+.ai-stage .ai-welcome{padding:0!important;min-height:0!important}
+.ai-stage .ai-conversation{min-height:200px!important}
+.ai-stage .ai-chat-details strong{font-size:20px!important}
+@media(max-width:420px){.reference-home .reference-featured .wishitem.illustrated{min-height:310px!important}}
