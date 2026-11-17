@@ -12,11 +12,10 @@ function E(tag,cls,txt){const n=document.createElement(tag);if(cls)n.className=c
 function normalize(name,l){let x=String(name||'').replace(/[<>\r\n]/g,' ').trim().slice(0,65);if(l==='gu'&&window.ShubhNames?.prepare)x=window.ShubhNames.prepare(x,'gu');return x}
 function format(){
  const l=current.language,t=i18n[l]||i18n.gu;
- const to=normalize(parts.to.value,l),from=normalize(parts.from.value,l);
+ const from=normalize(parts.from.value,l);
  const title=String(current.title||'').trim().slice(0,110);
  const body=String(current.body||'').trim().slice(0,1200);
  const blocks=[];
- if(to)blocks.push('💌 '+t.prefix+' '+to+',');
  if(title&&title!==body&&!body.includes(title)&&!/^✦|^◉/.test(title))blocks.push('*'+title.replace(/\*/g,'')+'*');
  blocks.push(body);
  if(from)blocks.push('🌸 '+t.suffix+' — '+from);
@@ -28,12 +27,12 @@ function format(){
 function update(){
  if(!current)return;
  const l=current.language,t=i18n[l]||i18n.gu;
- parts.heading.textContent=t.heading;parts.toLabel.textContent=t.to;parts.fromLabel.textContent=t.from;
- parts.to.placeholder=t.recipient;parts.from.placeholder=t.yourName;
+ parts.heading.textContent=t.heading;parts.fromLabel.textContent=t.from;
+ parts.from.placeholder=t.yourName;
  parts.sendText.textContent=t.send;parts.close.setAttribute('aria-label',t.close);
  parts.msgTitle.textContent=current.title||t.noTitle;
  parts.msgBody.textContent=current.body;
- parts.preview.textContent=format();
+
 }
 function create(){
  if(initialized)return;initialized=true;
@@ -49,16 +48,13 @@ function create(){
  const msgTitle=E('strong','sh-share-title');const msgBody=E('p','sh-share-body');
  card.append(msgTitle,msgBody);
  const fields=E('div','sh-share-fields');
- const toWrapper=E('label','sh-share-field'),fromWrapper=E('label','sh-share-field');
- const toLabel=E('span'),fromLabel=E('span');
- const to=E('input');to.type='text';to.maxLength=65;to.autocomplete='off';
+ const fromWrapper=E('label','sh-share-field');
+ const fromLabel=E('span');
  const from=E('input');from.type='text';from.maxLength=65;from.autocomplete='name';
  const remember=()=>{try{sessionStorage.setItem('shubhlink_sender',from.value.slice(0,65))}catch(_){}};
- toWrapper.append(toLabel,to);fromWrapper.append(fromLabel,from);fields.append(toWrapper,fromWrapper);
- const caption=E('span','sh-share-caption','WhatsApp માં મોકલાતો મેસેજ');
- const preview=E('div','sh-share-final-preview');preview.setAttribute('aria-live','polite');
+ fromWrapper.append(fromLabel,from);fields.append(fromWrapper);
  const send=E('button','sh-share-send');send.type='button';
- const sendText=E('span');send.append(E('span','','◉'),sendText,E('span','','↗'));
+ const sendText=E('span');send.append(E('span','','☏'),sendText);
  send.addEventListener('click',()=>{
   if(!current)return;
   remember();
@@ -68,17 +64,17 @@ function create(){
   // Navigate directly from the user gesture so Android WhatsApp opens reliably.
   window.location.assign(url);
  });
- [to,from].forEach(x=>x.addEventListener('input',update));
- box.append(top,heading,card,fields,caption,preview,send);
+ from.addEventListener('input',update);
+ const actions=E('div','sh-share-actions');const other=E('button','sh-share-other','♧');other.type='button';other.setAttribute('aria-label','અન્ય એપમાં શેર કરો');other.addEventListener('click',async()=>{const payload={title:current.title||'ShubhLink',text:format()};if(navigator.share){try{await navigator.share(payload)}catch(e){if(e.name!=='AbortError')console.warn(e)}}else if(navigator.clipboard){await navigator.clipboard.writeText(payload.text);other.textContent='✓'}});actions.append(send,other);box.append(top,heading,card,fields,actions);
  shade.append(box);
  shade.addEventListener('click',e=>{if(e.target===shade)dismiss()});
  document.body.append(shade);
- parts={shade,box,heading,close,msgTitle,msgBody,toLabel,fromLabel,to,from,send,sendText,preview};
+ parts={shade,box,heading,close,msgTitle,msgBody,fromLabel,from,send,sendText,other};
  document.addEventListener('keydown',e=>{
   if(shade.hidden)return;
   if(e.key==='Escape'){e.preventDefault();dismiss()}
   if(e.key==='Tab'){
-   const focusables=[close,to,from,send],first=focusables[0],last=focusables[focusables.length-1];
+   const focusables=[close,from,send,other],first=focusables[0],last=focusables[focusables.length-1];
    if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault()}
    else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault()}
   }
@@ -96,10 +92,9 @@ function open(data){
  if(!body)return;
  previousFocus=document.activeElement;
  current={body,title:String(data.title||'').trim(),language:l};
- parts.to.value=String(data.recipient||'').slice(0,65);
  let lastName='';try{lastName=sessionStorage.getItem('shubhlink_sender')||''}catch(_){}
  parts.from.value=String(data.sender||lastName).slice(0,65);
- update();parts.shade.hidden=false;document.documentElement.classList.add('sh-share-open');parts.to.focus();
+ update();parts.shade.hidden=false;document.documentElement.classList.add('sh-share-open');parts.from.focus();
 }
 window.ShubhShare={open,dismiss};
 })();
