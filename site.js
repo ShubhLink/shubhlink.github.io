@@ -122,7 +122,7 @@ if($('homeCats')){
  const arr=D.wishes.gu.suvichar||[];
  if(arr.length){
   const premium=arr.filter(m=>dbFeatured.has('gu|suvichar|'+m));
-  $('dailyQuote').textContent=(window.ShubhFresh?.pick(premium.length?premium:arr,'daily-quote')||arr[0]);
+  if($('dailyQuote'))$('dailyQuote').textContent=(window.ShubhFresh?.pick(premium.length?premium:arr,'daily-quote')||arr[0]);
  }
 }
 if($('dailyFeed')&&$('dailyFeedGrid')){
