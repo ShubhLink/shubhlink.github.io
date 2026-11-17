@@ -54,7 +54,7 @@ function create(){
  const remember=()=>{try{sessionStorage.setItem('shubhlink_sender',from.value.slice(0,65))}catch(_){}};
  fromWrapper.append(fromLabel,from);fields.append(fromWrapper);
  const send=E('button','sh-share-send');send.type='button';
- const sendText=E('span');send.append(E('span','','☏'),sendText);
+ const sendText=E('span');const whatsappIcon=E('span','sh-wa-icon');whatsappIcon.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true" width="26" height="26" fill="currentColor"><path d="M16 1a15 15 0 0 0-13 22.5L1 31l7.7-2A15 15 0 1 0 16 1zm0 27a12 12 0 0 1-6-1.6l-.5-.3-4.5 1.2 1.2-4.4-.3-.5A12 12 0 1 1 16 28zm6.6-9.1c-.4-.2-2.1-1.1-2.5-1.2-.3-.1-.6-.2-.8.2l-1.1 1.3c-.2.2-.4.3-.8.1-2.2-1.1-3.7-2.3-5-4.3-.4-.7.4-.7 1.1-2.1.1-.2.1-.5 0-.7l-1.2-2.8c-.3-.7-.6-.6-.8-.6h-.7c-.3 0-.7.1-1 .5-.4.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.9c.2.3 2.6 4 6.2 5.5 2.3 1 3.2 1.1 4.3.9 1.3-.2 2.1-1.1 2.4-2 .3-.9.3-1.6.2-1.8-.1-.2-.4-.3-.8-.5z"/></svg>';send.append(whatsappIcon,sendText);
  send.addEventListener('click',()=>{
   if(!current)return;
   remember();
@@ -65,7 +65,7 @@ function create(){
   window.location.assign(url);
  });
  from.addEventListener('input',update);
- const actions=E('div','sh-share-actions');const other=E('button','sh-share-other','♧');other.type='button';other.setAttribute('aria-label','અન્ય એપમાં શેર કરો');other.addEventListener('click',async()=>{const payload={title:current.title||'ShubhLink',text:format()};if(navigator.share){try{await navigator.share(payload)}catch(e){if(e.name!=='AbortError')console.warn(e)}}else if(navigator.clipboard){await navigator.clipboard.writeText(payload.text);other.textContent='✓'}});actions.append(send,other);box.append(top,heading,card,fields,actions);
+ const actions=E('div','sh-share-actions');const other=E('button','sh-share-other');other.innerHTML='<svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.2m-6.6 8 6.6 3.8"/></svg>';other.type='button';other.setAttribute('aria-label','અન્ય એપમાં શેર કરો');other.addEventListener('click',async()=>{const payload={title:current.title||'ShubhLink',text:format()};if(navigator.share){try{await navigator.share(payload)}catch(e){if(e.name!=='AbortError')console.warn(e)}}else if(navigator.clipboard){await navigator.clipboard.writeText(payload.text);other.textContent='✓'}});actions.append(send,other);box.append(top,heading,card,fields,actions);
  shade.append(box);
  shade.addEventListener('click',e=>{if(e.target===shade)dismiss()});
  document.body.append(shade);
@@ -94,7 +94,7 @@ function open(data){
  current={body,title:String(data.title||'').trim(),language:l};
  let lastName='';try{lastName=sessionStorage.getItem('shubhlink_sender')||''}catch(_){}
  parts.from.value=String(data.sender||lastName).slice(0,65);
- update();parts.shade.hidden=false;document.documentElement.classList.add('sh-share-open');parts.from.focus();
+ update();parts.shade.hidden=false;document.documentElement.classList.add('sh-share-open');parts.close.focus({preventScroll:true});
 }
 window.ShubhShare={open,dismiss};
 })();
