@@ -53,3 +53,12 @@ main{padding-bottom:105px!important}.ai-stage{padding-bottom:110px!important}.ai
 .sh-share-brand{color:#4c205d!important}.sh-share-heading{color:#4c205d!important}
 .sh-share-card{background:linear-gradient(135deg,#fffaf0,#fce9f7)!important;border:1px solid #edcde8!important}.sh-share-title{color:#4b2456!important}.sh-share-body{color:#59415c!important}
 @media(max-width:600px){.ai-chat-shell{margin-top:5px!important}.ai-conversation{min-height:180px!important}.reference-home .reference-featured .wishitem{min-height:265px!important}}
+
+/* final interaction polish */
+body .mobilebottom a:not(.active-current),body .mobilebottom a.on:not(.active-current){background:transparent!important;color:#632579!important}
+body .mobilebottom a.active-current,body .mobilebottom a.active-current.on{background:linear-gradient(135deg,#c34bdf,#7b249d)!important;color:#fff!important;box-shadow:0 4px 12px #8d35b54a!important}
+body .mobilebottom a.active-current span{color:#fff!important}
+.allcats .catbox{transition:transform .18s ease,box-shadow .18s ease;box-shadow:0 8px 22px #9c58a226!important;border-width:2px!important}
+.allcats .catbox:active{transform:scale(.96)}.allcats .catbox .catemoji{filter:drop-shadow(0 3px 3px #9c55a744);transform:translateY(-2px)}
+.reference-home .wishitem.special .wishtag{filter:drop-shadow(0 3px 5px #b269b550)}
+.ai-chat-head{border-bottom:1px solid #ecd5ef!important}.ai-chat-composer textarea{background:#fff!important;color:#492256!important;border:1px solid #e6c8ec!important;border-radius:15px!important}.ai-chat-composer button{background:#8427ab!important;color:#fff!important}
