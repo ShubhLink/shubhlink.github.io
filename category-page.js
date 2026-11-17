@@ -43,7 +43,7 @@ function builtIn(category,language){
 function assembled(category,language){
  const key=category+"|"+language;
  const base=builtIn(category,language);
- const saved=cache.get(key)||[];
+ const saved=[...(window.ShubhDaily?.get(category,language)||[]),...(cache.get(key)||[])];
  const seen=new Set();
  const rows=[];
  for(const m of [...saved,...base]){
