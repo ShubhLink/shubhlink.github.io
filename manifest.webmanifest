@@ -1,0 +1,19 @@
+{
+  "name": "ShubhLink – Gujarati Messages",
+  "short_name": "ShubhLink",
+  "description": "Gujarati, Hindi and English wishes and messages",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fffaff",
+  "theme_color": "#713b89",
+  "lang": "gu",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
