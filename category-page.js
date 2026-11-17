@@ -56,7 +56,7 @@ function assembled(category,language){
 }
 function messageCard(message,category,language){
  const info=categories.find(c=>c.id===category);
- const card=document.createElement("article");card.className="wishitem";
+ const card=document.createElement("article");card.className="wishitem";card.tabIndex=0;card.setAttribute("role","button");card.setAttribute("aria-label","મેસેજનું Preview જુઓ");
  const tag=document.createElement("span");tag.className="wishtag";
  tag.textContent=(info?.emoji||"💌")+" "+label(info,language);
  const today=new Date(Date.now()+19800000).toISOString().slice(0,10);
@@ -78,6 +78,9 @@ function messageCard(message,category,language){
    window.open("https://api.whatsapp.com/send?text="+encodeURIComponent(text),"_blank","noopener");
   }
  };
+ const preview=()=>window.ShubhShare?.open({title:h.textContent,body:message.body,language,category});
+ card.addEventListener("click",e=>{if(e.target.closest("button,a,input,select"))return;preview()});
+ card.addEventListener("keydown",e=>{if(e.target===card&&(e.key==="Enter"||e.key===" ")){e.preventDefault();preview()}});
  actions.append(share);card.append(tag,h,p,actions);
  return card;
 }
