@@ -35,3 +35,21 @@ main.reference-home{padding-bottom:95px}
 main{padding-bottom:105px!important}.ai-stage{padding-bottom:110px!important}.ai-chat-composer{position:relative;z-index:1}.ai-chat-shell{overflow:hidden}.ai-chat-head{min-height:68px}.ai-welcome-icon{margin-bottom:5px!important}.ai-welcome h2{margin:0 0 12px!important}.ai-chat-details strong{display:block!important}.ai-starters{margin-bottom:8px!important}
 .reference-featured{padding-bottom:30px!important}.reference-featured .wish-actions button{min-height:42px}.category-search{margin:12px 0!important}
 @media(max-width:600px){.sitehead .desktopnav{display:none!important}.sitehead .headwrap{justify-content:space-between!important}.sitehead .brand{min-width:0!important}.sitehead .reference-subtitle{letter-spacing:1.2px!important;font-size:7px!important}.reference-head-actions{gap:7px!important}.ai-conversation{min-height:190px!important;max-height:55dvh!important}.ai-welcome{padding:8px 5px 15px!important}.ai-welcome-icon{font-size:34px!important}.ai-welcome h2{font-size:19px!important}.sitefoot{margin-bottom:0!important}}
+
+/* v13 fixes */
+.mobilebottom a.on,.mobilebottom a[aria-current=page]{background:transparent!important;color:#5d236c!important}
+.mobilebottom a.on span,.mobilebottom a[aria-current=page] span{color:#7c309a!important}
+.mobilebottom a.active-current{background:linear-gradient(135deg,#bd43dc,#7e229e)!important;color:#fff!important}
+.mobilebottom a.active-current span{color:#fff!important}
+.reference-home .reference-featured{padding-top:12px!important}.reference-home .reference-featured .wishgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.reference-home .reference-featured .wishitem.special{background:linear-gradient(155deg,#fff3dc,#f8e4ff)!important}
+.reference-home .reference-featured .wishitem.special h3,.reference-home .reference-featured .wishitem.special p{color:#4c2159!important}
+.reference-home .reference-featured .wishitem{min-height:285px!important}.reference-home .reference-featured .wishitem p{overflow-wrap:anywhere}
+.refresh-wishes{display:block;margin:20px auto 10px;border:1px solid #bc78d4;border-radius:28px;background:#fff;color:#6d268c;padding:12px 22px;font-weight:800}
+.ai-stage{margin-top:10px!important}.ai-chat-shell{border-radius:24px!important}.ai-conversation{min-height:150px!important;max-height:53dvh!important}.ai-welcome{padding:18px 10px!important}.ai-chat-composer{margin-bottom:5px!important}.ai-chat-head{background:linear-gradient(110deg,#fff7fd,#f7edff)!important}
+.allcats .catbox{min-height:130px!important;height:130px!important;border-radius:22px!important}.allcats .catbox .catemoji{font-size:39px!important}.allcats .catbox strong{font-size:14px!important}
+.sh-share-backdrop{align-items:flex-start!important;padding:calc(env(safe-area-inset-top,0px) + 14px) 12px 12px!important}
+.sh-share-dialog{border-radius:24px!important;max-height:calc(100dvh - 40px)!important;background:#fffaff!important;border:1px solid #e2b8ed!important;box-shadow:0 22px 65px #1c103b80!important}
+.sh-share-brand{color:#4c205d!important}.sh-share-heading{color:#4c205d!important}
+.sh-share-card{background:linear-gradient(135deg,#fffaf0,#fce9f7)!important;border:1px solid #edcde8!important}.sh-share-title{color:#4b2456!important}.sh-share-body{color:#59415c!important}
+@media(max-width:600px){.ai-chat-shell{margin-top:5px!important}.ai-conversation{min-height:180px!important}.reference-home .reference-featured .wishitem{min-height:265px!important}}
