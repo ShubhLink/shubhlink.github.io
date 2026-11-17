@@ -92,6 +92,16 @@ function render(){
  const intro=$("wishIntro");if(intro)intro.hidden=true;
  const query=short(search.value).toLocaleLowerCase();
  const rows=assembled(c,l).filter(m=>!query||(m.body+" "+m.title).toLocaleLowerCase().includes(query));
+ // Rotate visible messages on every page opening/refresh, without changing search results.
+ if(!query&&rows.length>1){
+  const storageKey="shubhlink-last-first:"+c+":"+l;
+  let previous="";try{previous=sessionStorage.getItem(storageKey)||""}catch(_e){}
+  for(let i=rows.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));[rows[i],rows[j]]=[rows[j],rows[i]];
+  }
+  if(rows[0].body===previous){const swapIndex=rows.findIndex(x=>x.body!==previous);if(swapIndex>0)[rows[0],rows[swapIndex]]=[rows[swapIndex],rows[0]];}
+  try{sessionStorage.setItem(storageKey,rows[0].body)}catch(_e){}
+ }
  const frag=document.createDocumentFragment();
  for(const row of rows)frag.append(messageCard(row,c,l));
  list.replaceChildren(frag);
