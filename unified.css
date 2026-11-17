@@ -96,3 +96,6 @@ body .mobilebottom a.active-current span{color:#fff!important}
 .reference-home .reference-featured .wishitem.illustrated:nth-child(12n+12){background-image:linear-gradient(150deg,#214a5877,#1c304de8),url("assets/night-scene.svg")!important}
 .reference-home .reference-featured .wishitem.illustrated:nth-child(12n+4) h3,.reference-home .reference-featured .wishitem.illustrated:nth-child(12n+4) p,.reference-home .reference-featured .wishitem.illustrated:nth-child(12n+8) h3,.reference-home .reference-featured .wishitem.illustrated:nth-child(12n+8) p,.reference-home .reference-featured .wishitem.illustrated:nth-child(12n+10) h3,.reference-home .reference-featured .wishitem.illustrated:nth-child(12n+10) p,.reference-home .reference-featured .wishitem.illustrated:nth-child(12n+12) h3,.reference-home .reference-featured .wishitem.illustrated:nth-child(12n+12) p{color:white!important}
 .wish-favorite{position:absolute;right:9px;top:9px;z-index:2;border:1px solid #ffffffbd;background:#ffffffed;color:#8328a3;border-radius:50%;width:35px;height:35px;font-size:23px;display:grid;place-items:center;cursor:pointer}
+
+/* Tap cards to preview rather than select text */
+#wishGrid .wishitem{cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}#wishGrid .wishitem:focus-visible{outline:3px solid #a14dc5;outline-offset:3px}
