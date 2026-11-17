@@ -10,8 +10,7 @@ LANGS = {"gu":"Gujarati","hi":"Hindi","en":"English"}
 def main():
     key = os.getenv("OPENAI_API_KEY", "").strip()
     if not key:
-        print("OPENAI_API_KEY GitHub Actions secret is missing. No content generated.")
-        return
+        raise RuntimeError("OPENAI_API_KEY secret missing: add it to repository Actions secrets")
     today = (datetime.datetime.now(datetime.timezone.utc)+datetime.timedelta(hours=5,minutes=30)).date().isoformat()
     history = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {"messages":[]}
     rows = history.get("messages", [])
@@ -42,6 +41,8 @@ def main():
                 existing.add(body.casefold())
                 count+=1
                 if count==10:break
+    if sum(x.get("date")==today for x in rows)==0:
+        raise RuntimeError("No new messages generated. Check OpenAI billing, API quota and logs.")
     history["messages"]=rows[-30000:]
     OUT.write_text(json.dumps(history,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(f"Published {sum(x.get('date')==today for x in rows)} messages for {today}")
