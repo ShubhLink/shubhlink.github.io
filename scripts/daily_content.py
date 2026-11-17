@@ -27,7 +27,7 @@ def main():
                       "not repetitive, no numbered lists, no generic repeated endings. "
                       "Return ONLY a JSON object with key 'messages' containing an array of 12 strings.")
             payload = json.dumps({"contents":[{"parts":[{"text":prompt}]}],"generationConfig":{"temperature":1.0,"responseMimeType":"application/json"}}).encode()
-            endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+            endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent"
             req = urllib.request.Request(endpoint,payload,
                     {"x-goog-api-key":key,"Content-Type":"application/json"},method="POST")
             try:
