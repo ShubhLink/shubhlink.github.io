@@ -84,6 +84,7 @@ function messageCard(message,category,language){
  actions.append(share);card.append(tag,h,p,actions);
  return card;
 }
+document.addEventListener('shubh-daily-ready',()=>render());
 function render(){
  const c=catSel.value,l=langSel.value;
  const info=categories.find(x=>x.id===c);
