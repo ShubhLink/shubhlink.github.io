@@ -26,7 +26,10 @@ def main():
  print("Submitting ONE image generation. This may consume paid API credits.",flush=True)
  try:
   submitted=request("https://api.wavespeed.ai/api/v3/"+model,key,{"prompt":PROMPTS[category],"size":"1024*1024"})
- except urllib.error.HTTPError as e:raise SystemExit(f"Submission HTTP {e.code}: check model availability and account credits") from e
+ except urllib.error.HTTPError as e:
+  detail=e.read(4000).decode("utf-8","replace")
+  detail=re.sub(r'(?i)(bearer\\s+|wsk_live_)[a-z0-9._-]+',r'\\1[REDACTED]',detail)
+  raise SystemExit(f"Submission HTTP {e.code}: {detail[:1200]}") from e
  except Exception as e:raise SystemExit("Submission uncertain; check WaveSpeed History before rerunning to avoid double billing") from e
  task=submitted.get("data",submitted)
  if not task.get("id"):raise SystemExit("No task ID returned. Check WaveSpeed History before rerunning.")
