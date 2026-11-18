@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       category:
-        description: "Generate one image (may use paid WaveSpeed credits)"
+        description: "Generate one image (uses paid OpenAI API credits)"
         required: true
         type: choice
         options:
@@ -28,9 +28,9 @@ jobs:
           python-version: '3.11'
       - name: Generate one premium photo background
         env:
-          WAVESPEED_API_KEY: ${{ secrets.WAVESPEED_API_KEY }}
+          OPENAI_API_KEY2: ${{ secrets.OPENAI_API_KEY2 }}
           ART_CATEGORY: ${{ inputs.category }}
-        run: python scripts/wavespeed_artwork.py
+        run: python scripts/openai_artwork.py
       - name: Publish generated artwork
         run: |
           git config user.name "shubhlink-artwork-bot"
