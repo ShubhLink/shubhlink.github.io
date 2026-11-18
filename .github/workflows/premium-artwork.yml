@@ -1,43 +1,11 @@
-name: Generate ShubhLink premium artwork
+name: Premium artwork generation (paid API disabled)
 on:
   workflow_dispatch:
-    inputs:
-      category:
-        description: "Generate one image (uses paid OpenAI API credits)"
-        required: true
-        type: choice
-        options:
-          - morning
-          - birthday
-          - night
-          - festival
-          - thought
 permissions:
-  contents: write
-concurrency:
-  group: shubhlink-artwork
-  cancel-in-progress: false
+  contents: read
 jobs:
-  generate:
+  notice:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Generate one premium photo background
-        env:
-          OPENAI_API_KEY2: ${{ secrets.OPENAI_API_KEY2 }}
-          ART_CATEGORY: ${{ inputs.category }}
-        run: python scripts/openai_artwork.py
-      - name: Publish generated artwork
-        run: |
-          git config user.name "shubhlink-artwork-bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add artwork/generated/ artwork/manifest.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Add premium AI artwork: ${{ inputs.category }}"
-            git pull --rebase
-            git push
-          fi
+      - name: No paid API calls
+        run: echo "Paid artwork generation is disabled for ShubhLink's zero-budget policy. No API calls were made."
