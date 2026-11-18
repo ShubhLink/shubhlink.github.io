@@ -9,26 +9,30 @@ const brandLogo=new Image();brandLogo.onload=()=>draw();brandLogo.src='icon.svg'
 const saved=localStorage.getItem('shubhlink-poster-name');if(saved)$('sender').value=saved;
 function roundRect(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
 function fitLines(text,maxWidth,font){ctx.font=font;const words=Array.from(text);let lines=[],line='';for(const ch of words){if(ctx.measureText(line+ch).width>maxWidth&&line){lines.push(line);line=ch}else line+=ch}if(line)lines.push(line);return lines}
-function draw(){const base=themes[$('occasion').value],colors=palettes[designIndex%palettes.length],t={...base,top:colors[0],bottom:colors[1],dark:colors[2],accent:colors[3]},w=canvas.width,h=canvas.height;
-design=['classic','floral','minimal','classic','floral'][Math.floor(designIndex/10)%5];const gradient=ctx.createLinearGradient(0,0,w,h);gradient.addColorStop(0,t.top);gradient.addColorStop(1,t.bottom);ctx.fillStyle=gradient;ctx.fillRect(0,0,w,h);
-if(design==='floral'){ctx.save();ctx.globalAlpha=.20;ctx.fillStyle=t.accent;ctx.font='125px serif';for(let i=0;i<7;i++){ctx.fillText('❀',70+(i%2)*850,200+i*165)}ctx.restore()}
-if(design==='minimal'){ctx.save();ctx.globalAlpha=.13;ctx.strokeStyle=t.accent;ctx.lineWidth=28;for(let i=0;i<7;i++){ctx.beginPath();ctx.arc(w/2,h/2,180+i*95,0,Math.PI*2);ctx.stroke()}ctx.restore()}
-ctx.strokeStyle=t.accent;ctx.lineWidth=design==='minimal'?3:9;roundRect(38,38,w-76,h-76,50);ctx.stroke();if(design!=='minimal'){ctx.lineWidth=2;roundRect(57,57,w-114,h-114,38);ctx.stroke();}
-ctx.fillStyle=t.accent;ctx.textAlign='center';ctx.font='72px serif';ctx.fillText(design==='floral'?'❀  ✿  ❀':design==='minimal'?'◈  ◇  ◈':'✦  ❖  ✦',w/2,148);
-let y=200;if(photo){ctx.save();ctx.beginPath();ctx.arc(w/2,350,145,0,Math.PI*2);ctx.clip();const ratio=Math.max(290/photo.width,290/photo.height),iw=photo.width*ratio,ih=photo.height*ratio;ctx.drawImage(photo,w/2-iw/2,350-ih/2,iw,ih);ctx.restore();ctx.beginPath();ctx.arc(w/2,350,150,0,Math.PI*2);ctx.strokeStyle=t.accent;ctx.lineWidth=9;ctx.stroke();y=555}else{ctx.font='150px serif';ctx.fillStyle=t.accent;ctx.fillText(t.icon,w/2,390);y=505}
+const artCache=new Map();
+function draw(){const base=themes[$('occasion').value],art=window.ShubhPosterArt.artwork(designIndex),t={...base,dark:art.ink,accent:art.ink},w=canvas.width,h=canvas.height;
+const artId=designIndex%10;
+if(!artCache.has(artId)){const img=new Image();artCache.set(artId,img);img.onload=()=>draw();img.src=art.src;}
+const bg=artCache.get(artId);
+ctx.clearRect(0,0,w,h);if(bg.complete&&bg.naturalWidth)ctx.drawImage(bg,0,0,w,h);else{ctx.fillStyle=base.top;ctx.fillRect(0,0,w,h)}
+ctx.fillStyle=t.dark;ctx.textAlign='center';
+ctx.fillStyle=(designIndex%10===2||designIndex%10===4||designIndex%10===7||designIndex%10===9)?'#fff9eb':'#fffdf4';
+ctx.globalAlpha=.85;ctx.beginPath();ctx.roundRect(95,485,890,510,46);ctx.fill();ctx.globalAlpha=1;
+ctx.fillStyle=(designIndex%10===2||designIndex%10===4||designIndex%10===7||designIndex%10===9)?'#46314f':t.dark;
+let y=535;if(photo){ctx.save();ctx.beginPath();ctx.arc(w/2,385,120,0,Math.PI*2);ctx.clip();const ratio=Math.max(240/photo.width,240/photo.height),iw=photo.width*ratio,ih=photo.height*ratio;ctx.drawImage(photo,w/2-iw/2,385-ih/2,iw,ih);ctx.restore();ctx.beginPath();ctx.arc(w/2,385,125,0,Math.PI*2);ctx.strokeStyle=t.accent;ctx.lineWidth=9;ctx.stroke();y=570}else{y=570}
 ctx.fillStyle=t.dark;ctx.font='bold 69px "Noto Sans Gujarati",sans-serif';ctx.fillText(t.title,w/2,y);y+=95;
 const recipient=$('recipient').value.trim();if(recipient){ctx.font='bold 43px "Noto Sans Gujarati",sans-serif';for(const line of fitLines('પ્રિય '+recipient,890,ctx.font).slice(0,2)){ctx.fillText(line,w/2,y);y+=58}y+=10}
 let body=$('wishText').value.trim();let fontSize=47;let lines;do{ctx.font='600 '+fontSize+'px "Noto Sans Gujarati",sans-serif';lines=fitLines(body,870,ctx.font);if(lines.length<=7)break;fontSize-=3}while(fontSize>30);
-const lineHeight=fontSize*1.65;const blockHeight=lines.length*lineHeight;const start=Math.max(y+30,Math.min(1010-blockHeight/2,y+80));y=start;for(const line of lines.slice(0,9)){ctx.fillText(line,w/2,y);y+=lineHeight}
-const sender=$('sender').value.trim();if(sender){ctx.font='bold 44px "Noto Sans Gujarati",sans-serif';ctx.fillText('શુભેચ્છાઓ સાથે — '+sender.slice(0,45),w/2,1180)}
+const lineHeight=fontSize*1.65;const blockHeight=lines.length*lineHeight;const start=Math.max(y+20,Math.min(930-blockHeight/2,y+50));y=start;for(const line of lines.slice(0,9)){ctx.fillText(line,w/2,y);y+=lineHeight}
+const sender=$('sender').value.trim();if(sender){ctx.font='bold 44px "Noto Sans Gujarati",sans-serif';ctx.fillText('શુભેચ્છાઓ સાથે — '+sender.slice(0,45),w/2,1110)}
 ctx.font='30px sans-serif';ctx.fillStyle=t.dark;if(brandLogo.complete&&brandLogo.naturalWidth){ctx.drawImage(brandLogo,w/2-93,1236,38,38)}ctx.font='bold 29px sans-serif';ctx.fillText('ShubhLink',w/2+23,1265)}
 document.querySelectorAll('.poster-tools [data-panel]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.poster-tools button').forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-selected',String(b===btn))});document.querySelectorAll('[data-editor]').forEach(panel=>panel.classList.toggle('active',panel.dataset.editor===btn.dataset.panel))}));
-function setDesign(n){designIndex=(n+50)%50;document.getElementById('designCounter').textContent='Design '+(designIndex+1)+' / 50 · ડાબે કે જમણે Swipe કરો';draw()}
+function setDesign(n){designIndex=(n+10)%10;document.getElementById('designCounter').textContent='Design '+(designIndex+1)+' / 10 · ડાબે કે જમણે Swipe કરો';draw()}
 $('prevDesign').onclick=()=>setDesign(designIndex-1);$('nextDesign').onclick=()=>setDesign(designIndex+1);
 let touchX=null;canvas.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX},{passive:true});canvas.addEventListener('touchend',e=>{if(touchX===null)return;const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45)setDesign(designIndex+(dx<0?1:-1));touchX=null},{passive:true});
 const guided={mother:'મમ્મી, તમારો પ્રેમ અને આશીર્વાદ મારા જીવનની સૌથી મોટી ભેટ છે. તમે હંમેશાં ખુશ રહો!',father:'પપ્પા, તમારા માર્ગદર્શન અને આશીર્વાદથી દરેક દિવસ વધુ સુંદર બને છે.',friend:'મિત્ર, આપણી મિત્રતા હંમેશાં ખુશીઓ અને યાદગાર પળોથી ભરેલી રહે!',partner:'તમારા સાથથી દરેક દિવસ ખાસ બને છે. આપણો પ્રેમ અને વિશ્વાસ હંમેશાં વધતો રહે.',family:'આપણા પરિવારમાં હંમેશાં પ્રેમ, સ્વાસ્થ્ય અને ખુશીઓ રહે તેવી શુભેચ્છા!',all:'તમારા જીવનમાં હંમેશાં આનંદ, શાંતિ અને સફળતા રહે તેવી હૃદયપૂર્વક શુભેચ્છાઓ!'};
 $('suggestMessage').onclick=()=>{const relation=$('relation').value,tone=$('tone').value,occasion=themes[$('occasion').value].title;let msg=guided[relation];if(tone==='short')msg=relation==='all'?'સુખ, શાંતિ અને પ્રેમભરી શુભેચ્છાઓ!':msg.split('।')[0];else if(tone==='blessing')msg+=' ઈશ્વરની કૃપા સદા તમારી સાથે રહે.';$('wishText').value=occasion+'! '+msg;draw();document.querySelector('[data-panel="text"]').click()};
-const urlParams=new URLSearchParams(location.search);if(urlParams.has('design'))designIndex=Math.max(0,Math.min(49,Number(urlParams.get('design'))||0));if(urlParams.has('occasion')&&themes[urlParams.get('occasion')])$('occasion').value=urlParams.get('occasion');
+const urlParams=new URLSearchParams(location.search);if(urlParams.has('design'))designIndex=Math.max(0,Math.min(9,Number(urlParams.get('design'))||0));if(urlParams.has('occasion')&&themes[urlParams.get('occasion')])$('occasion').value=urlParams.get('occasion');
 function refreshText(){const k=$('occasion').value;$('wishText').value=messages[k][index%messages[k].length];draw()}
 $('occasion').addEventListener('change',()=>{index=0;refreshText()});for(const id of ['sender','recipient','wishText'])$(id).addEventListener('input',()=>{if(id==='sender')localStorage.setItem('shubhlink-poster-name',$('sender').value);draw()});
 $('photo').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith('image/')||f.size>8*1024*1024){$('posterStatus').textContent='8 MB થી નાનો ફોટો પસંદ કરો.';return}const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{photo=img;URL.revokeObjectURL(url);draw()};img.onerror=()=>{URL.revokeObjectURL(url);$('posterStatus').textContent='ફોટો ખોલી શકાયો નથી.'};img.src=url});
