@@ -84,7 +84,7 @@ function output(messages){
   const share=el('button','whatsapp','◉ WhatsApp પર શેર કરો');
   share.type='button';
   share.onclick=()=>window.ShubhShare.open({title:'',body:msg,language:lang.value,category:'newthought'});
-  buttons.append(share);card.append(buttons);options.append(card)
+  const poster=el('button','ai-poster-action','✨ પોસ્ટર બનાવો');poster.type='button';poster.onclick=()=>{const data={body:msg,title:topic,language:lang.value};try{sessionStorage.setItem('shubhlink-poster-message',JSON.stringify(data));window.location.assign('poster-maker.html?from=message')}catch(e){status.textContent='Poster Editor ખોલી શકાયું નથી. ફરી પ્રયાસ કરો.'}};buttons.append(share,poster);card.append(buttons);options.append(card)
  });
  box.append(options);
  const refine=el('div','ai-refine');
