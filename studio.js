@@ -116,7 +116,9 @@ async function run(input,isFollowup=false){
  if(!topic||!isFollowup){if(!topic){topic=text;avoid=loadRecent(topic)}}
  isBusy=true;send.disabled=true;
  let succeeded=false;
- messageTurn('user',text);
+ const submittedPhoto=attachedImage;
+ const userTurn=messageTurn('user',text);
+ if(submittedPhoto&&userTurn){const image=el('img','ai-user-photo');image.src=submittedPhoto;image.alt='જોડેલો ફોટો';userTurn.append(image)}
  prompt.value='';
  status.textContent='';
  const indicator=working();
