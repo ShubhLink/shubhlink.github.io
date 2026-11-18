@@ -1,0 +1,27 @@
+(()=>{'use strict';
+const $=id=>document.getElementById(id),canvas=$('posterCanvas'),ctx=canvas.getContext('2d');
+const messages={morning:['નવી સવાર નવી આશા અને ખુશીઓ લઈને આવે. તમારો દિવસ શુભ રહે!','દરેક સવાર તમારા સપનાઓને નવી ઉડાન આપે. સુપ્રભાત!'],birthday:['તમારા જીવનમાં પ્રેમ, ખુશી અને સફળતાના રંગો છવાયેલા રહે. જન્મદિવસની શુભેચ્છાઓ!','આજનો ખાસ દિવસ અનેક મીઠી યાદો અને નવા સપના લઈને આવે. જન્મદિવસ મુબારક!'],night:['ચાંદની રાત તમારા મનને શાંતિ અને સુંદર સપનાઓ આપે. શુભરાત્રિ!','આજની ચિંતાઓ ભૂલી આવતીકાલની નવી આશા સાથે આરામ કરો. શુભરાત્રિ!'],thought:['સાચી સફળતા રોજના નાના સારા પ્રયત્નોથી બને છે.','મીઠા શબ્દો અને સારા વિચારો જીવનને સુંદર બનાવે છે.'],festival:['તમારા ઘરમાં સુખ, સમૃદ્ધિ અને આનંદનો પ્રકાશ સદાય રહે. શુભ તહેવાર!','આ શુભ પ્રસંગે પ્રેમ, શાંતિ અને ખુશીઓ તમારા પરિવારમાં છવાય.']};
+const themes={morning:{top:'#fff1ca',bottom:'#f8ac77',dark:'#843c26',accent:'#d67e2e',title:'સુપ્રભાત',icon:'☀'},birthday:{top:'#fce5f3',bottom:'#c7a6e8',dark:'#703464',accent:'#a14c89',title:'જન્મદિવસની શુભેચ્છાઓ',icon:'✿'},night:{top:'#13264e',bottom:'#68478b',dark:'#ffffff',accent:'#f2d7a3',title:'શુભરાત્રિ',icon:'☾'},thought:{top:'#e4f5e7',bottom:'#a5cdbd',dark:'#205c4a',accent:'#b18343',title:'આજનો સુવિચાર',icon:'❀'},festival:{top:'#fff0c7',bottom:'#e8a76c',dark:'#8b3c2b',accent:'#bb7630',title:'શુભ તહેવાર',icon:'✦'}};
+let photo=null,index=0,loaded=false;
+const saved=localStorage.getItem('shubhlink-poster-name');if(saved)$('sender').value=saved;
+function roundRect(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
+function fitLines(text,maxWidth,font){ctx.font=font;const words=Array.from(text);let lines=[],line='';for(const ch of words){if(ctx.measureText(line+ch).width>maxWidth&&line){lines.push(line);line=ch}else line+=ch}if(line)lines.push(line);return lines}
+function draw(){const t=themes[$('occasion').value],w=canvas.width,h=canvas.height;const gradient=ctx.createLinearGradient(0,0,w,h);gradient.addColorStop(0,t.top);gradient.addColorStop(1,t.bottom);ctx.fillStyle=gradient;ctx.fillRect(0,0,w,h);
+ctx.strokeStyle=t.accent;ctx.lineWidth=9;roundRect(38,38,w-76,h-76,50);ctx.stroke();ctx.lineWidth=2;roundRect(57,57,w-114,h-114,38);ctx.stroke();
+ctx.fillStyle=t.accent;ctx.textAlign='center';ctx.font='72px serif';ctx.fillText('✦  ❖  ✦',w/2,148);
+let y=200;if(photo){ctx.save();ctx.beginPath();ctx.arc(w/2,350,145,0,Math.PI*2);ctx.clip();const ratio=Math.max(290/photo.width,290/photo.height),iw=photo.width*ratio,ih=photo.height*ratio;ctx.drawImage(photo,w/2-iw/2,350-ih/2,iw,ih);ctx.restore();ctx.beginPath();ctx.arc(w/2,350,150,0,Math.PI*2);ctx.strokeStyle=t.accent;ctx.lineWidth=9;ctx.stroke();y=555}else{ctx.font='150px serif';ctx.fillStyle=t.accent;ctx.fillText(t.icon,w/2,390);y=505}
+ctx.fillStyle=t.dark;ctx.font='bold 69px "Noto Sans Gujarati",sans-serif';ctx.fillText(t.title,w/2,y);y+=95;
+const recipient=$('recipient').value.trim();if(recipient){ctx.font='bold 43px "Noto Sans Gujarati",sans-serif';for(const line of fitLines('પ્રિય '+recipient,890,ctx.font).slice(0,2)){ctx.fillText(line,w/2,y);y+=58}y+=10}
+let body=$('wishText').value.trim();let fontSize=47;let lines;do{ctx.font='600 '+fontSize+'px "Noto Sans Gujarati",sans-serif';lines=fitLines(body,870,ctx.font);if(lines.length<=7)break;fontSize-=3}while(fontSize>30);
+const lineHeight=fontSize*1.65;const blockHeight=lines.length*lineHeight;const start=Math.max(y+30,Math.min(1010-blockHeight/2,y+80));y=start;for(const line of lines.slice(0,9)){ctx.fillText(line,w/2,y);y+=lineHeight}
+const sender=$('sender').value.trim();if(sender){ctx.font='bold 44px "Noto Sans Gujarati",sans-serif';ctx.fillText('શુભેચ્છાઓ સાથે — '+sender.slice(0,45),w/2,1180)}
+ctx.font='30px sans-serif';ctx.fillStyle=t.dark;ctx.fillText('ShubhLink',w/2,1270)}
+function refreshText(){const k=$('occasion').value;$('wishText').value=messages[k][index%messages[k].length];draw()}
+$('occasion').addEventListener('change',()=>{index=0;refreshText()});for(const id of ['sender','recipient','wishText'])$(id).addEventListener('input',()=>{if(id==='sender')localStorage.setItem('shubhlink-poster-name',$('sender').value);draw()});
+$('photo').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith('image/')||f.size>8*1024*1024){$('posterStatus').textContent='8 MB થી નાનો ફોટો પસંદ કરો.';return}const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{photo=img;URL.revokeObjectURL(url);draw()};img.onerror=()=>{URL.revokeObjectURL(url);$('posterStatus').textContent='ફોટો ખોલી શકાયો નથી.'};img.src=url});
+$('removePhoto').onclick=()=>{photo=null;$('photo').value='';draw()};$('newPoster').onclick=()=>{index++;refreshText()};
+function blob(){return new Promise(resolve=>canvas.toBlob(resolve,'image/png'))}
+$('downloadPoster').onclick=async()=>{const b=await blob();if(!b)return;const url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='ShubhLink-Wishes.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('posterStatus').textContent='Poster Download તૈયાર છે.'};
+$('sharePoster').onclick=async()=>{const b=await blob();if(!b)return;const file=new File([b],'ShubhLink-Wishes.png',{type:'image/png'});if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'ShubhLink Wishes'})}catch(e){if(e.name!=='AbortError')$('posterStatus').textContent='Share થઈ શક્યું નથી; PNG Download કરો.'}}else{$('posterStatus').textContent='આ Browser માં Image Share સપોર્ટ નથી; PNG Download કરીને WhatsApp પર મોકલો.'}};
+document.fonts?.ready.then(()=>{loaded=true;draw()});refreshText();
+})();
