@@ -5,6 +5,7 @@ const themes={morning:{top:'#fff1ca',bottom:'#f8ac77',dark:'#843c26',accent:'#d6
 let photo=null,index=0,loaded=false,design='classic',designIndex=0;
 const palettes=[['#ffedc3','#f5a17d','#813c31','#bd782e'],['#e4f3ed','#81c4ac','#16594f','#a27c45'],['#fce3ed','#d89dbb','#76385b','#b46b8a'],['#e2e5ff','#818bc9','#283c78','#c5a25d'],['#fff2da','#c9a16e','#654321','#b88d42'],['#183f47','#0b6b63','#fff1bf','#d8ae5a'],['#301f4e','#785b9b','#fff1d7','#d3a46b'],['#f1e5cc','#c9ad83','#57412c','#a57d4c'],['#e8f4ff','#8cc3d5','#2b5872','#d8a56a'],['#f8e3df','#e3a48e','#7d3d48','#c5815c']];
 const ornaments=['✦','❀','◈','✿','❖'];
+const brandLogo=new Image();brandLogo.onload=()=>draw();brandLogo.src='icon.svg';
 const saved=localStorage.getItem('shubhlink-poster-name');if(saved)$('sender').value=saved;
 function roundRect(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
 function fitLines(text,maxWidth,font){ctx.font=font;const words=Array.from(text);let lines=[],line='';for(const ch of words){if(ctx.measureText(line+ch).width>maxWidth&&line){lines.push(line);line=ch}else line+=ch}if(line)lines.push(line);return lines}
@@ -20,7 +21,7 @@ const recipient=$('recipient').value.trim();if(recipient){ctx.font='bold 43px "N
 let body=$('wishText').value.trim();let fontSize=47;let lines;do{ctx.font='600 '+fontSize+'px "Noto Sans Gujarati",sans-serif';lines=fitLines(body,870,ctx.font);if(lines.length<=7)break;fontSize-=3}while(fontSize>30);
 const lineHeight=fontSize*1.65;const blockHeight=lines.length*lineHeight;const start=Math.max(y+30,Math.min(1010-blockHeight/2,y+80));y=start;for(const line of lines.slice(0,9)){ctx.fillText(line,w/2,y);y+=lineHeight}
 const sender=$('sender').value.trim();if(sender){ctx.font='bold 44px "Noto Sans Gujarati",sans-serif';ctx.fillText('શુભેચ્છાઓ સાથે — '+sender.slice(0,45),w/2,1180)}
-ctx.font='30px sans-serif';ctx.fillStyle=t.dark;ctx.font='bold 29px sans-serif';ctx.fillText('✦ ShubhLink',w/2,1270)}
+ctx.font='30px sans-serif';ctx.fillStyle=t.dark;if(brandLogo.complete&&brandLogo.naturalWidth){ctx.drawImage(brandLogo,w/2-93,1236,38,38)}ctx.font='bold 29px sans-serif';ctx.fillText('ShubhLink',w/2+23,1265)}
 document.querySelectorAll('.poster-tools [data-panel]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.poster-tools button').forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-selected',String(b===btn))});document.querySelectorAll('[data-editor]').forEach(panel=>panel.classList.toggle('active',panel.dataset.editor===btn.dataset.panel))}));
 function setDesign(n){designIndex=(n+50)%50;document.getElementById('designCounter').textContent='Design '+(designIndex+1)+' / 50 · ડાબે કે જમણે Swipe કરો';draw()}
 $('prevDesign').onclick=()=>setDesign(designIndex-1);$('nextDesign').onclick=()=>setDesign(designIndex+1);
