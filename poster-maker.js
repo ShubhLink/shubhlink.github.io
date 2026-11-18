@@ -18,13 +18,13 @@ ctx.clearRect(0,0,w,h);if(bg.complete&&bg.naturalWidth)ctx.drawImage(bg,0,0,w,h)
 if(window.ShubhPosterPhotos){if(!photoCache.has(artId)){const pic=new Image();pic.crossOrigin='anonymous';photoCache.set(artId,pic);pic.onload=()=>draw();pic.onerror=()=>{photoCache.set(artId,null);draw()};pic.src=window.ShubhPosterPhotos.url(artId)}const pic=photoCache.get(artId);if(pic&&pic.complete&&pic.naturalWidth){ctx.drawImage(pic,0,0,w,h);const fade=ctx.createLinearGradient(0,0,0,h);fade.addColorStop(0,'rgba(15,12,28,.08)');fade.addColorStop(.46,'rgba(15,12,28,.14)');fade.addColorStop(1,'rgba(15,12,28,.46)');ctx.fillStyle=fade;ctx.fillRect(0,0,w,h)}}
 ctx.fillStyle=t.dark;ctx.textAlign='center';
 ctx.fillStyle='#fffdf4';
-ctx.globalAlpha=.92;ctx.beginPath();ctx.roundRect(95,485,890,510,46);ctx.fill();ctx.globalAlpha=1;
+ctx.globalAlpha=.83;ctx.beginPath();ctx.roundRect(85,515,910,485,36);ctx.fill();ctx.globalAlpha=1;
 ctx.fillStyle='#543348';
 let y=535;if(photo){ctx.save();ctx.beginPath();ctx.arc(w/2,385,120,0,Math.PI*2);ctx.clip();const ratio=Math.max(240/photo.width,240/photo.height),iw=photo.width*ratio,ih=photo.height*ratio;ctx.drawImage(photo,w/2-iw/2,385-ih/2,iw,ih);ctx.restore();ctx.beginPath();ctx.arc(w/2,385,125,0,Math.PI*2);ctx.strokeStyle=t.accent;ctx.lineWidth=9;ctx.stroke();y=570}else{y=570}
-ctx.fillStyle='#543348';ctx.font='bold 69px "Noto Sans Gujarati",sans-serif';for(const line of fitLines(t.title,820,ctx.font).slice(0,2)){ctx.fillText(line,w/2,y);y+=82}y+=18;
+ctx.fillStyle='#543348';y+=48;
 const recipient=$('recipient').value.trim();if(recipient){ctx.font='bold 43px "Noto Sans Gujarati",sans-serif';for(const line of fitLines('પ્રિય '+recipient,890,ctx.font).slice(0,2)){ctx.fillText(line,w/2,y);y+=58}y+=10}
 let body=$('wishText').value.trim();let fontSize=47;let lines;do{ctx.font='600 '+fontSize+'px "Noto Sans Gujarati",sans-serif';lines=fitLines(body,870,ctx.font);if(lines.length<=7)break;fontSize-=3}while(fontSize>30);
-const lineHeight=fontSize*1.65;const blockHeight=lines.length*lineHeight;const start=Math.max(y+20,Math.min(930-blockHeight/2,y+50));y=start;for(const line of lines.slice(0,7)){ctx.fillText(line,w/2,y);y+=lineHeight}
+const lineHeight=fontSize*1.65;const blockHeight=lines.length*lineHeight;const start=Math.max(y+20,Math.min(860-blockHeight/2,y+50));y=start;for(const line of lines.slice(0,7)){ctx.fillText(line,w/2,y);y+=lineHeight}
 const sender=$('sender').value.trim();if(sender){ctx.font='bold 44px "Noto Sans Gujarati",sans-serif';ctx.fillText('શુભેચ્છાઓ સાથે — '+sender.slice(0,45),w/2,1110)}
 ctx.font='30px sans-serif';ctx.fillStyle=t.dark;if(brandLogo.complete&&brandLogo.naturalWidth){ctx.drawImage(brandLogo,w/2-93,1236,38,38)}ctx.font='bold 29px sans-serif';ctx.fillText('ShubhLink',w/2+23,1265)}
 document.querySelectorAll('.poster-tools [data-panel]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.poster-tools button').forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-selected',String(b===btn))});document.querySelectorAll('[data-editor]').forEach(panel=>panel.classList.toggle('active',panel.dataset.editor===btn.dataset.panel))}));
