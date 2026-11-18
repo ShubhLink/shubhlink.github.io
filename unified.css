@@ -99,3 +99,16 @@ body .mobilebottom a.active-current span{color:#fff!important}
 
 /* Tap cards to preview rather than select text */
 #wishGrid .wishitem{cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}#wishGrid .wishitem:focus-visible{outline:3px solid #a14dc5;outline-offset:3px}
+
+/* v17: readable, unique editorial message cards without repetitive icons */
+.reference-home .reference-featured .wishitem.illustrated{background-image:none!important;background-color:#fffaf6!important;min-height:290px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;color:#3b2941!important;border:1px solid #ead6e5!important;box-shadow:0 9px 24px #3b234018!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(6n+1){background:linear-gradient(150deg,#fff6e9,#f9e5d6)!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(6n+2){background:linear-gradient(150deg,#e8f3f1,#d3e9e5)!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(6n+3){background:linear-gradient(150deg,#f6eafa,#e9ddf5)!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(6n+4){background:linear-gradient(150deg,#fce9ed,#f5dce4)!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(6n+5){background:linear-gradient(150deg,#f7f1d9,#e8eac9)!important}
+.reference-home .reference-featured .wishitem.illustrated:nth-child(6n+6){background:linear-gradient(150deg,#e5effa,#dce4f7)!important}
+.reference-home .reference-featured .wishitem.illustrated .wishtag,.reference-home .reference-featured .wishitem.illustrated h3{display:none!important}
+.reference-home .reference-featured .wishitem.illustrated p{color:#3b2941!important;text-shadow:none!important;font-weight:700!important;line-height:1.85!important;overflow-wrap:anywhere!important;position:relative;z-index:1}
+.reference-home .reference-featured .wishitem.illustrated .wish-actions{position:relative;z-index:2;margin-top:auto}
+.reference-home .reference-featured .wishitem.illustrated .wish-favorite{z-index:3}
