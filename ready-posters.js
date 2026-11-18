@@ -1,1 +1,20 @@
-(()=>{'use strict';const el=document.getElementById('readyPosterGrid');if(!el||!window.ShubhPosterArt)return;const data=[['morning','સુપ્રભાત','નવી સવાર, નવી આશા'],['birthday','જન્મદિવસ','ખુશીઓભર્યો ખાસ દિવસ'],['night','શુભરાત્રિ','સુંદર સપનાંઓની રાત'],['thought','સુવિચાર','સારા વિચારો, સુંદર જીવન'],['festival','શુભ તહેવાર','સુખ અને સમૃદ્ધિ']];function render(){el.replaceChildren();for(let i=0;i<10;i++){const [key,title,subtitle]=data[i%5],art=window.ShubhPosterArt.artwork(i),a=document.createElement('a');a.href='poster-maker.html?occasion='+key+'&design='+i;a.className='ready-poster-card';const img=document.createElement('img');img.src=window.ShubhPosterPhotos?window.ShubhPosterPhotos.url(i,560):art.src;img.onerror=()=>{img.onerror=null;img.src=art.src};img.alt=title+' માટે અલગ Artwork Poster';img.loading=i<4?'eager':'lazy';a.appendChild(img);const overlay=document.createElement('div');overlay.className='ready-poster-overlay';const h=document.createElement('strong');h.textContent=title;const p=document.createElement('span');p.textContent=subtitle;overlay.append(h,p);a.appendChild(overlay);const label=document.createElement('small');label.textContent='ShubhLink · Edit Poster';a.appendChild(label);el.appendChild(a)}}render();document.addEventListener('shubh-artwork-ready',render)})();
+(()=>{'use strict';
+const el=document.getElementById('readyPosterGrid');if(!el||!window.ShubhPosterArt)return;
+const designs=[
+ ['morning','દરેક સવાર નવી આશા લઈને આવે'],
+ ['birthday','તમારા જીવનમાં ખુશીઓ ખીલતી રહે'],
+ ['night','ચાંદની જેવી શાંતિ જીવનમાં રહે'],
+ ['thought','સુંદર વિચારો જીવનને ઉજ્જવળ બનાવે'],
+ ['festival','ઘરમાં આનંદ અને સમૃદ્ધિ છવાય'],
+ ['morning','આજનો દિવસ યાદગાર બની રહે'],
+ ['birthday','સપનાંઓને નવી પાંખો મળે'],
+ ['night','મીઠાં સપનાંઓની સુંદર રાત'],
+ ['thought','સારા કર્મો જ સાચી ઓળખ છે'],
+ ['festival','પ્રેમ અને પ્રકાશથી જીવન ઝળહળે']
+];
+function render(){el.replaceChildren();designs.forEach(([key,message],i)=>{const art=window.ShubhPosterArt.artwork(i),a=document.createElement('a');a.href='poster-maker.html?occasion='+key+'&design='+i;a.className='ready-poster-card';a.setAttribute('aria-label',message+' — પોસ્ટર બનાવો');
+const img=document.createElement('img');img.src=window.ShubhPosterPhotos?window.ShubhPosterPhotos.url(i,720):art.src;img.onerror=()=>{img.onerror=null;img.src=art.src};img.alt='સુંદર પ્રીમિયમ પોસ્ટર બેકગ્રાઉન્ડ';img.loading=i<4?'eager':'lazy';a.appendChild(img);
+const overlay=document.createElement('div');overlay.className='ready-poster-overlay';const quote=document.createElement('strong');quote.textContent=message;overlay.appendChild(quote);a.appendChild(overlay);
+const edit=document.createElement('span');edit.className='ready-poster-edit';edit.textContent='✦ તમારું નામ ઉમેરો';a.appendChild(edit);el.appendChild(a)})}
+render();document.addEventListener('shubh-artwork-ready',render);
+})();
