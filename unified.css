@@ -112,3 +112,13 @@ body .mobilebottom a.active-current span{color:#fff!important}
 .reference-home .reference-featured .wishitem.illustrated p{color:#3b2941!important;text-shadow:none!important;font-weight:700!important;line-height:1.85!important;overflow-wrap:anywhere!important;position:relative;z-index:1}
 .reference-home .reference-featured .wishitem.illustrated .wish-actions{position:relative;z-index:2;margin-top:auto}
 .reference-home .reference-featured .wishitem.illustrated .wish-favorite{z-index:3}
+
+/* v18: high-contrast, balanced home message tiles */
+.reference-home .reference-featured .wishgrid{gap:12px!important}
+.reference-home .reference-featured .wishitem.illustrated{background-image:none!important;min-height:245px!important;height:auto!important;padding:54px 13px 13px!important;justify-content:space-between!important;align-items:stretch!important;gap:10px!important;border-radius:22px!important}
+.reference-home .reference-featured .wishitem.illustrated p,.reference-home .reference-featured .wishitem.illustrated:nth-child(n) p{color:#35223c!important;-webkit-text-fill-color:#35223c!important;text-shadow:none!important;font-size:clamp(13px,3.5vw,17px)!important;font-weight:700!important;line-height:1.75!important;display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important;flex:1 0 auto!important;align-self:stretch!important;text-align:center!important;margin:auto 0!important}
+.reference-home .reference-featured .wishitem.illustrated .wish-actions{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:7px!important;margin-top:12px!important}
+.reference-home .reference-featured .wishitem.illustrated .wish-whatsapp{font-size:12px!important;padding:9px 7px!important;min-width:0!important;white-space:nowrap!important}
+.reference-home .reference-featured .wishitem.illustrated .share-secondary{flex:none!important}
+.reference-home .reference-featured .wishitem.illustrated .wish-favorite{top:10px!important;right:10px!important}
+@media(max-width:390px){.reference-home .reference-featured .wishitem.illustrated{padding:51px 9px 10px!important;min-height:230px!important}.reference-home .reference-featured .wishitem.illustrated p{font-size:13px!important}}
