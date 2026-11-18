@@ -23,3 +23,15 @@ html.sh-share-open,html.sh-share-open body{overflow:hidden}
 .sh-share-send:hover{filter:brightness(1.05)}
 @media(min-width:700px){.sh-share-backdrop{align-items:center}.sh-share-dialog{border-radius:26px}}
 @media(max-width:410px){.sh-share-dialog{padding:15px}.sh-share-fields{grid-template-columns:1fr}.sh-share-body{font-size:14px;max-height:150px}}
+
+/* Compact unified message action dialog */
+.sh-share-dialog{max-height:86dvh;padding:16px;border-radius:22px}
+.sh-share-heading{font-size:17px;margin:5px 0 9px}
+.sh-share-card{padding:12px 13px;border-radius:14px}
+.sh-share-body{max-height:125px;line-height:1.7}
+.sh-share-symbol{object-fit:contain;width:34px;height:34px;background:none;border-radius:9px}
+.sh-share-fields{margin:10px 0}
+.sh-share-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px;align-items:stretch}
+.sh-share-edit{grid-column:1/-1;width:100%;border:1px solid #a773ba;border-radius:13px;background:#f3e8f8;color:#63257b;font:800 15px "Noto Sans Gujarati",sans-serif;min-height:48px;cursor:pointer}
+.sh-share-edit:focus-visible{outline:3px solid #ad75bd}
+@media(max-width:600px){.sh-share-backdrop{align-items:center}.sh-share-dialog{max-height:84dvh}.sh-share-brand{font-size:17px}}
