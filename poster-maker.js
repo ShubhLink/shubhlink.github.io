@@ -9,16 +9,17 @@ const brandLogo=new Image();brandLogo.onload=()=>draw();brandLogo.src='icon.svg'
 const saved=localStorage.getItem('shubhlink-poster-name');if(saved)$('sender').value=saved;
 function roundRect(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
 function fitLines(text,maxWidth,font){ctx.font=font;const words=Array.from(text);let lines=[],line='';for(const ch of words){if(ctx.measureText(line+ch).width>maxWidth&&line){lines.push(line);line=ch}else line+=ch}if(line)lines.push(line);return lines}
-const artCache=new Map();
+const artCache=new Map(),photoCache=new Map();
 function draw(){const base=themes[$('occasion').value],art=window.ShubhPosterArt.artwork(designIndex),t={...base,dark:art.ink,accent:art.ink},w=canvas.width,h=canvas.height;
 const artId=designIndex%10;
 if(!artCache.has(artId)){const img=new Image();artCache.set(artId,img);img.onload=()=>draw();img.src=art.src;}
 const bg=artCache.get(artId);
 ctx.clearRect(0,0,w,h);if(bg.complete&&bg.naturalWidth)ctx.drawImage(bg,0,0,w,h);else{ctx.fillStyle=base.top;ctx.fillRect(0,0,w,h)}
+if(window.ShubhPosterPhotos){if(!photoCache.has(artId)){const pic=new Image();pic.crossOrigin='anonymous';photoCache.set(artId,pic);pic.onload=()=>draw();pic.onerror=()=>{photoCache.set(artId,null);draw()};pic.src=window.ShubhPosterPhotos.url(artId)}const pic=photoCache.get(artId);if(pic&&pic.complete&&pic.naturalWidth){ctx.drawImage(pic,0,0,w,h);const fade=ctx.createLinearGradient(0,0,0,h);fade.addColorStop(0,'rgba(15,12,28,.08)');fade.addColorStop(.46,'rgba(15,12,28,.14)');fade.addColorStop(1,'rgba(15,12,28,.46)');ctx.fillStyle=fade;ctx.fillRect(0,0,w,h)}}
 ctx.fillStyle=t.dark;ctx.textAlign='center';
-ctx.fillStyle=(designIndex%10===2||designIndex%10===4||designIndex%10===7||designIndex%10===9)?'#fff9eb':'#fffdf4';
-ctx.globalAlpha=.85;ctx.beginPath();ctx.roundRect(95,485,890,510,46);ctx.fill();ctx.globalAlpha=1;
-ctx.fillStyle=(designIndex%10===2||designIndex%10===4||designIndex%10===7||designIndex%10===9)?'#46314f':t.dark;
+ctx.fillStyle='#fffdf4';
+ctx.globalAlpha=.92;ctx.beginPath();ctx.roundRect(95,485,890,510,46);ctx.fill();ctx.globalAlpha=1;
+ctx.fillStyle='#543348';
 let y=535;if(photo){ctx.save();ctx.beginPath();ctx.arc(w/2,385,120,0,Math.PI*2);ctx.clip();const ratio=Math.max(240/photo.width,240/photo.height),iw=photo.width*ratio,ih=photo.height*ratio;ctx.drawImage(photo,w/2-iw/2,385-ih/2,iw,ih);ctx.restore();ctx.beginPath();ctx.arc(w/2,385,125,0,Math.PI*2);ctx.strokeStyle=t.accent;ctx.lineWidth=9;ctx.stroke();y=570}else{y=570}
 ctx.fillStyle=t.dark;ctx.font='bold 69px "Noto Sans Gujarati",sans-serif';ctx.fillText(t.title,w/2,y);y+=95;
 const recipient=$('recipient').value.trim();if(recipient){ctx.font='bold 43px "Noto Sans Gujarati",sans-serif';for(const line of fitLines('પ્રિય '+recipient,890,ctx.font).slice(0,2)){ctx.fillText(line,w/2,y);y+=58}y+=10}
