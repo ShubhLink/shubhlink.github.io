@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name "shubhlink-artwork-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add artwork/generated/
+          git add artwork/generated/ artwork/manifest.json
           if ! git diff --cached --quiet; then
             git commit -m "Add premium AI artwork: ${{ inputs.category }}"
             git pull --rebase
