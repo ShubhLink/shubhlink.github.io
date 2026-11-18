@@ -9,7 +9,7 @@ const brandLogo=new Image();brandLogo.onload=()=>draw();brandLogo.src='icon.svg'
 const saved=localStorage.getItem('shubhlink-poster-name');if(saved)$('sender').value=saved;
 function roundRect(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
 function fitLines(text,maxWidth,font){ctx.font=font;const parts=String(text).split(/(\\s+)/u);let lines=[],line='';for(const part of parts){if(ctx.measureText(line+part).width<=maxWidth){line+=part;continue}if(line.trim())lines.push(line.trim());line='';if(ctx.measureText(part).width<=maxWidth){line=part.trimStart();continue}const chars=typeof Intl.Segmenter==='function'?[...new Intl.Segmenter('gu',{granularity:'grapheme'}).segment(part)].map(x=>x.segment):Array.from(part);for(const ch of chars){if(ctx.measureText(line+ch).width>maxWidth&&line){lines.push(line);line=''}line+=ch}}if(line.trim())lines.push(line.trim());return lines}
-const artCache=new Map(),photoCache=new Map();
+const artCache=new Map(),photoCache=new Map();document.addEventListener('shubh-artwork-ready',()=>{photoCache.clear();draw()});
 function draw(){const base=themes[$('occasion').value],art=window.ShubhPosterArt.artwork(designIndex),t={...base,dark:art.ink,accent:art.ink},w=canvas.width,h=canvas.height;
 const artId=designIndex%10;
 if(!artCache.has(artId)){const img=new Image();artCache.set(artId,img);img.onload=()=>draw();img.src=art.src;}
