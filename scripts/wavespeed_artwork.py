@@ -53,7 +53,7 @@ def main():
    OUT.mkdir(parents=True,exist_ok=True)
    filename=f"{category}-{task_id[:16]}{ext}"
    (OUT/filename).write_bytes(image)
-   print("Saved",filename,flush=True)
+   manifest=ROOT/"artwork"/"manifest.json"\n   try: records=json.loads(manifest.read_text()) if manifest.exists() else []\n   except (ValueError,OSError): records=[]\n   records=[{"category":category,"url":"artwork/generated/"+filename,"source":"wavespeed"}]+[item for item in records if item.get("url")!="artwork/generated/"+filename]\n   manifest.write_text(json.dumps(records[:100],ensure_ascii=False,indent=2)+"\\n")\n   print("Saved",filename,flush=True)
    return
   if status in ("failed","cancelled","timeout","deleted"):raise SystemExit("Prediction "+str(status))
  raise SystemExit("Prediction still processing. ID: "+task_id+"; check WaveSpeed History.")
