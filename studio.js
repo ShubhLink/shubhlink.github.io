@@ -72,7 +72,8 @@ async function copy(text,btn){
   const old=btn.textContent;btn.textContent='✓ કોપી થયું';setTimeout(()=>btn.textContent=old,1500)
  }catch{status.textContent='કોપી ન થયું. મેસેજ લાંબો દબાવીને કોપી કરો.'}
 }
-function output(messages){
+function wantsPoster(text){return /પોસ્ટર|poster|पोस्टर|पोस्टर बनाओ|postar|postor/i.test(text)}
+function output(messages,asPoster=false){
  const row=el('div','ai-turn assistant'),box=el('div','ai-assistant-bubble');
  box.append(el('div','ai-response-top','✦ ShubhLink AI'));
  const options=el('div','ai-options');
@@ -84,7 +85,7 @@ function output(messages){
   const share=el('button','whatsapp','◉ WhatsApp પર શેર કરો');
   share.type='button';
   share.onclick=()=>window.ShubhShare.open({title:'',body:msg,language:lang.value,category:'newthought'});
-  const poster=el('button','ai-poster-action','✨ પોસ્ટર બનાવો');poster.type='button';poster.onclick=()=>{const data={body:msg,title:topic,language:lang.value};try{sessionStorage.setItem('shubhlink-poster-message',JSON.stringify(data));window.location.assign('poster-maker.html?from=message')}catch(e){status.textContent='Poster Editor ખોલી શકાયું નથી. ફરી પ્રયાસ કરો.'}};buttons.append(share,poster);card.append(buttons);options.append(card)
+  const poster=el('button','ai-poster-action','✨ પોસ્ટર બનાવો');poster.type='button';poster.onclick=()=>{const data={body:msg,title:topic,language:lang.value};try{sessionStorage.setItem('shubhlink-poster-message',JSON.stringify(data));window.location.assign('poster-maker.html?from=message')}catch(e){status.textContent='Poster Editor ખોલી શકાયું નથી. ફરી પ્રયાસ કરો.'}};buttons.append(share,poster);card.append(buttons);if(asPoster&&window.ShubhInlinePoster)window.ShubhInlinePoster.attach(card,msg,topic,i,lang.value);options.append(card)
  });
  box.append(options);
  const refine=el('div','ai-refine');
@@ -133,7 +134,7 @@ async function run(input,isFollowup=false){
   if(!response.ok)throw Error(knownErrors[data.error]||'હમણાં AI મેસેજ નથી મળ્યો.');
   const list=Array.isArray(data.messages)?data.messages.filter(x=>typeof x==='string'&&x.length>8).slice(0,3):[];
   if(!list.length)throw Error('નવા મેસેજ નથી મળ્યા. ફરી પ્રયાસ કરો.');
-  output(list);
+  output(list,wantsPoster(topic)||wantsPoster(text));
   succeeded=true;
   round++;
   history.push('User: '+text,'AI ideas: '+list.map(x=>small(x,130)).join(' | '));
