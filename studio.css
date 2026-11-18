@@ -11,3 +11,34 @@
 
 /* Conversational photo-to-poster layout */
 .ai-user-photo{display:block;max-width:140px;max-height:170px;object-fit:cover;border-radius:14px;margin:7px 0 7px auto;box-shadow:0 4px 14px #1a112a25}.ai-direct-poster{max-width:440px;width:100%;margin:5px auto 8px}.ai-direct-poster canvas{border-radius:19px}.ai-direct-poster-actions button{min-height:46px;font-size:13px}.ai-chat-composer textarea{font-size:16px}.ai-chat-composer .ai-attach-button{height:49px;width:49px;min-width:49px}.ai-conversation{scroll-behavior:smooth}
+
+/* AI Studio full-viewport workspace */
+body:has(.ai-stage){overflow-x:hidden}
+body:has(.ai-stage) .sitefoot{display:none!important}
+.ai-stage{width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+.ai-chat-shell{width:100%!important;max-width:none!important;border-radius:0!important;border:0!important;box-shadow:none!important;display:flex!important;flex-direction:column!important;height:calc(100dvh - 160px)!important;min-height:440px}
+.ai-chat-head{flex:none}
+.ai-conversation{flex:1!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;padding-bottom:22px!important}
+.ai-chat-composer,.ai-photo-preview,.ai-status{flex:none}
+.ai-assistant-bubble{max-width:min(100%,780px)}
+.ai-direct-poster canvas{cursor:zoom-in}
+.ai-poster-open{overflow:hidden!important}
+.ai-poster-modal[hidden],.ai-poster-editor[hidden]{display:none!important}
+.ai-poster-modal{position:fixed;inset:0;z-index:99999;background:#14101bec;display:flex;flex-direction:column;align-items:center;overflow:auto;padding:env(safe-area-inset-top,8px) 10px 20px;color:white}
+.ai-poster-modal-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:7px;width:min(100%,620px);background:#241b2e;padding:10px 6px;border-radius:0 0 13px 13px}
+.ai-poster-modal-head strong{flex:1;font-size:14px}
+.ai-poster-modal-head button,.ai-poster-modal-actions button,.ai-poster-editor button{background:#fff;color:#49265b;border:0;border-radius:10px;padding:10px 12px;font:700 13px "Noto Sans Gujarati",sans-serif}
+.ai-poster-modal-head button:nth-of-type(2){background:#9b49ba;color:white}
+.ai-poster-modal-canvas{display:block;width:min(100%,460px);height:auto;max-height:calc(100dvh - 180px);object-fit:contain;margin:12px auto;border-radius:13px}
+.ai-poster-modal-actions{width:min(100%,460px);display:flex;justify-content:center}
+.ai-poster-editor{width:min(100%,460px);display:grid;gap:9px;margin:8px auto}
+.ai-poster-editor textarea{width:100%;border-radius:12px;padding:12px;font:500 15px "Noto Sans Gujarati",sans-serif}
+@media(max-width:650px){
+.ai-chat-shell{height:calc(100dvh - 242px)!important;min-height:380px}
+.ai-stage{margin:0!important}
+.ai-conversation{padding:12px 8px 18px!important}
+.ai-assistant-bubble{padding:8px!important}
+.ai-message-card{padding:7px!important}
+.ai-direct-poster{width:min(100%,390px)!important}
+.ai-poster-modal-canvas{max-height:calc(100dvh - 155px)}
+}
