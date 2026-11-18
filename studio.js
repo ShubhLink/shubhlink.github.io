@@ -77,15 +77,15 @@ function output(messages,asPoster=false,photo=null){
  const row=el('div','ai-turn assistant'),box=el('div','ai-assistant-bubble');
  box.append(el('div','ai-response-top','✦ ShubhLink AI'));
  const options=el('div','ai-options');
- messages.forEach((raw,i)=>{
+ (asPoster?messages.slice(0,1):messages).forEach((raw,i)=>{
   const msg=small(raw,650),card=el('article','ai-message-card');
-  card.append(el('div','ai-card-label',(replyWords[lang.value]||replyWords.gu)[i]||'ખાસ મેસેજ'));
-  card.append(el('p','ai-message-body',msg));
+  if(!asPoster)card.append(el('div','ai-card-label',(replyWords[lang.value]||replyWords.gu)[i]||'ખાસ મેસેજ'));
+  if(!asPoster)card.append(el('p','ai-message-body',msg));
   const buttons=el('div','ai-message-actions');
   const share=el('button','whatsapp','◉ WhatsApp પર શેર કરો');
   share.type='button';
   share.onclick=()=>window.ShubhShare.open({title:'',body:msg,language:lang.value,category:'newthought'});
-  const poster=el('button','ai-poster-action','✨ પોસ્ટર બનાવો');poster.type='button';poster.onclick=()=>{const data={body:msg,title:topic,language:lang.value};try{sessionStorage.setItem('shubhlink-poster-message',JSON.stringify(data));window.location.assign('poster-maker.html?from=message')}catch(e){status.textContent='Poster Editor ખોલી શકાયું નથી. ફરી પ્રયાસ કરો.'}};buttons.append(share,poster);card.append(buttons);if(asPoster&&window.ShubhInlinePoster)window.ShubhInlinePoster.attach(card,msg,topic,i,lang.value,photo);options.append(card)
+  const poster=el('button','ai-poster-action','✨ પોસ્ટર બનાવો');poster.type='button';poster.onclick=()=>{const data={body:msg,title:topic,language:lang.value};try{sessionStorage.setItem('shubhlink-poster-message',JSON.stringify(data));window.location.assign('poster-maker.html?from=message')}catch(e){status.textContent='Poster Editor ખોલી શકાયું નથી. ફરી પ્રયાસ કરો.'}};if(asPoster&&window.ShubhInlinePoster){window.ShubhInlinePoster.attach(card,msg,topic,i,lang.value,photo)}else{buttons.append(share,poster);card.append(buttons)}options.append(card)
  });
  box.append(options);
  const refine=el('div','ai-refine');
@@ -134,14 +134,14 @@ async function run(input,isFollowup=false){
   if(!response.ok)throw Error(knownErrors[data.error]||'હમણાં AI મેસેજ નથી મળ્યો.');
   const list=Array.isArray(data.messages)?data.messages.filter(x=>typeof x==='string'&&x.length>8).slice(0,3):[];
   if(!list.length)throw Error('નવા મેસેજ નથી મળ્યા. ફરી પ્રયાસ કરો.');
-  output(list,wantsPoster(topic)||wantsPoster(text)||!!attachedImage,attachedImage);
+  output(list,wantsPoster(topic)||wantsPoster(text)||!!submittedPhoto,submittedPhoto);
   succeeded=true;
   round++;
   history.push('User: '+text,'AI ideas: '+list.map(x=>small(x,130)).join(' | '));
   history=history.slice(-5);
   avoid.push(...list);avoid=avoid.slice(-9);
   saveRecent(topic,list);
-  status.textContent='';
+  status.textContent='';attachedImage=null;if(photoInput)photoInput.value='';if(photoPreview){photoPreview.hidden=true;photoPreview.replaceChildren()}
  }catch(e){
   indicator.remove();
   if(round===0)topic='';
