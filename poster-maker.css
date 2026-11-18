@@ -32,3 +32,19 @@ body{background:linear-gradient(145deg,#fff9ee,#fae9fb);font-family:"Noto Sans G
 .poster-tools button{font-size:12px;padding:11px 2px}
 .poster-controls{padding:15px}
 }
+
+/* Simplified preview-led studio */
+.poster-main{padding-top:15px}
+.poster-main h1,.poster-main>p,.poster-category{display:none!important}
+.poster-layout{display:flex;flex-direction:column;gap:14px;max-width:700px;margin:auto}
+.poster-preview,.poster-editor{width:100%;box-sizing:border-box}
+.poster-preview{order:0}
+.poster-editor{order:1}
+.swipe-stage{display:flex;align-items:center;gap:5px;touch-action:pan-y}
+.swipe-stage canvas{width:min(100%,430px);min-width:0;flex:1;touch-action:pan-y}
+.swipe-stage>button{flex:0 0 28px;height:62px;border:0;border-radius:13px;background:#733d8c;color:#fff;font-size:30px;cursor:pointer}
+.design-counter{text-align:center;color:#7b6780;font-size:12px;margin:8px 0}
+.poster-tools{grid-template-columns:repeat(4,minmax(0,1fr))}
+.poster-controls label{display:grid}
+.poster-preview{padding:12px}
+@media(max-width:740px){.poster-main{padding-top:12px}.swipe-stage>button{flex-basis:26px;font-size:24px}.poster-preview canvas{max-width:360px}.poster-tools button{font-size:12px}}
