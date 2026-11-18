@@ -51,7 +51,11 @@ function build(){
    }
   }
  }
- return out;
+ for(const m of (window.ShubhDaily?.all()||[])){
+  if(!m?.body||!m?.category||!m?.language)continue;
+  out.push({category:m.category,language:m.language,title:core.titleFor(m.body,m.category,m.language),body:m.body,featured:false,event:false});
+ }
+ const seen=new Set();return out.filter(m=>{const key=m.language+"|"+m.category+"|"+m.body.trim().toLocaleLowerCase();if(seen.has(key))return false;seen.add(key);return true});
 }
 function score(m,q,c,parts){
  const txt=norm(m.title+' '+m.body);
@@ -202,4 +206,5 @@ language.onchange=()=>search(input.value);
 next.onclick=()=>batch();
 if(window.SHUBH_DATA_READY?.then)window.SHUBH_DATA_READY.then(c=>{core=c;library=build();search(input.value,false)}).catch(()=>{meta.textContent='હમણાં મેસેજ લોડ ન થયા.'});
 else meta.textContent='મેસેજ લોડ થઈ રહ્યા છે...';
+document.addEventListener('shubh-daily-ready',()=>{if(core){library=build();search(input.value,false)}});
 })();
