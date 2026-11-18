@@ -129,11 +129,18 @@ function topicRelevant(message,q,cat,terms){
  return text.includes(norm(q));
 }
 function getPool(q,locale){
- const event=selectedEvent(q);
+ const topic=window.ShubhSearchTopics?.match(q);
+ const event=topic?null:selectedEvent(q);
  const cat=category(q);
  const parts=wordParts(q);
  let list=library.filter(x=>x.language===locale);
- if(q){
+ if(topic){
+  const aliases=topic.aliases.map(norm);
+  const matches=list.filter(m=>aliases.some(a=>a.length>2&&normalizedText(m).includes(a)));
+  const prepared=window.ShubhSearchTopics.messages(topic,locale);
+  const seen=new Set();
+  list=[...matches,...prepared].filter(m=>{const k=norm(m.body);if(seen.has(k))return false;seen.add(k);return true});
+ }else if(q){
   list=list.filter(x=>event?eventRelevant(x,event):topicRelevant(x,q,cat,parts));
  }else{
   const active=C?.currentCategory()||'morning';
@@ -149,7 +156,7 @@ function batch(){
   holder.replaceChildren();
   const noResults=document.createElement('div');noResults.className='search-empty';
   const heading=document.createElement('strong');heading.textContent='આ વિષયના તૈયાર મેસેજ મળ્યા નથી.';
-  const body=document.createElement('p');body.textContent='બીજા પ્રસંગના મેસેજ બતાવવાના બદલે અહીં તમારા વિષય માટે AI થી નવો મેસેજ બનાવો.';
+  const body=document.createElement('p');body.textContent='હાલની મેસેજ લાઇબ્રેરીમાં આ ચોક્કસ વિષય મળ્યો નથી. AI માં આ જ વિષય લખીને નવો મેસેજ બનાવી શકો છો.';
   const a=document.createElement('a');const u=new URL('ai.html',location.href);
   if(currentQuery)u.searchParams.set('q',currentQuery);u.searchParams.set('l',lang());
   a.href=u.href;a.textContent='✦ AI માં આ વિષયનો મેસેજ બનાવો';
