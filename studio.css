@@ -4,3 +4,5 @@
 .ai-message-actions .ai-poster-action{border:1px solid #c69ad8;border-radius:13px;background:linear-gradient(135deg,#713b89,#a24bb0);color:#fff;padding:11px 15px;font:800 14px "Noto Sans Gujarati",sans-serif;min-height:44px;cursor:pointer;box-shadow:0 5px 13px #713b8928}
 .ai-message-actions .ai-poster-action:focus-visible{outline:3px solid #e6b9ed;outline-offset:2px}
 @media(max-width:420px){.ai-message-actions .ai-poster-action{flex:1 1 100%}}
+
+.ai-direct-poster{margin:12px auto 5px;max-width:380px}.ai-direct-poster canvas{display:block;width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px #25182e32}.ai-direct-poster-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.ai-direct-poster-actions button{border:0;border-radius:11px;padding:11px 7px;background:#603576;color:white;font:800 12px "Noto Sans Gujarati",sans-serif;cursor:pointer}.ai-direct-poster-actions button:last-child{background:#167a58}@media(max-width:390px){.ai-direct-poster-actions{grid-template-columns:1fr}}
