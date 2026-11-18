@@ -3,10 +3,10 @@
 'use strict';
 const $=id=>document.getElementById(id);
 const form=$('aiChatForm');if(!form)return;
-const prompt=$('aiPrompt'),lang=$('aiLang'),tone=$('aiTone'),board=$('aiConversation'),status=$('aiStatus'),send=$('aiSend');
+const prompt=$('aiPrompt'),board=$('aiConversation'),status=$('aiStatus'),send=$('aiSend');
 const config=window.SHUBHLINK_BACKEND||{};
 const searchParams=new URLSearchParams(location.search);
-const validLang=['gu','hi','en'];
+const lang={value:'gu'},tone={value:'warm'};const photoInput=$('aiPhoto'),photoPreview=$('aiPhotoPreview');let attachedImage=null;function detectLang(t){return /[\u0900-\u097f]/.test(t)?'hi':/[\u0a80-\u0aff]/.test(t)?'gu':/\b(hindi|हिन्दी|हिंदी)\b/i.test(t)?'hi':/\b(english|અંગ્રેજી)\b/i.test(t)?'en':'gu'}
 let isBusy=false,topic='',history=[],avoid=[],round=0;
 function memoryKey(q){
  const v=String(q||'').toLocaleLowerCase().slice(0,90);let h=2166136261;
@@ -73,7 +73,7 @@ async function copy(text,btn){
  }catch{status.textContent='કોપી ન થયું. મેસેજ લાંબો દબાવીને કોપી કરો.'}
 }
 function wantsPoster(text){return /પોસ્ટર|poster|पोस्टर|पोस्टर बनाओ|postar|postor/i.test(text)}
-function output(messages,asPoster=false){
+function output(messages,asPoster=false,photo=null){
  const row=el('div','ai-turn assistant'),box=el('div','ai-assistant-bubble');
  box.append(el('div','ai-response-top','✦ ShubhLink AI'));
  const options=el('div','ai-options');
@@ -85,7 +85,7 @@ function output(messages,asPoster=false){
   const share=el('button','whatsapp','◉ WhatsApp પર શેર કરો');
   share.type='button';
   share.onclick=()=>window.ShubhShare.open({title:'',body:msg,language:lang.value,category:'newthought'});
-  const poster=el('button','ai-poster-action','✨ પોસ્ટર બનાવો');poster.type='button';poster.onclick=()=>{const data={body:msg,title:topic,language:lang.value};try{sessionStorage.setItem('shubhlink-poster-message',JSON.stringify(data));window.location.assign('poster-maker.html?from=message')}catch(e){status.textContent='Poster Editor ખોલી શકાયું નથી. ફરી પ્રયાસ કરો.'}};buttons.append(share,poster);card.append(buttons);if(asPoster&&window.ShubhInlinePoster)window.ShubhInlinePoster.attach(card,msg,topic,i,lang.value);options.append(card)
+  const poster=el('button','ai-poster-action','✨ પોસ્ટર બનાવો');poster.type='button';poster.onclick=()=>{const data={body:msg,title:topic,language:lang.value};try{sessionStorage.setItem('shubhlink-poster-message',JSON.stringify(data));window.location.assign('poster-maker.html?from=message')}catch(e){status.textContent='Poster Editor ખોલી શકાયું નથી. ફરી પ્રયાસ કરો.'}};buttons.append(share,poster);card.append(buttons);if(asPoster&&window.ShubhInlinePoster)window.ShubhInlinePoster.attach(card,msg,topic,i,lang.value,photo);options.append(card)
  });
  box.append(options);
  const refine=el('div','ai-refine');
@@ -110,7 +110,7 @@ const knownErrors={
  quota_check_unavailable:'મેસેજ બનાવવામાં હંગામી મુશ્કેલી આવી છે.'
 };
 async function run(input,isFollowup=false){
- const text=small(input,240);
+ const text=small(input,240);lang.value=detectLang(text+' '+topic);tone.value=/કાવ્ય|poetic|शायरी/i.test(text)?'poetic':/ટૂંકું|short|छोटा/i.test(text)?'short':'warm';
  if(isBusy||text.length<2)return;
  if(!config.url||!config.publishableKey){status.textContent='હમણાં AI ઉપલબ્ધ નથી.';return}
  if(!topic||!isFollowup){if(!topic){topic=text;avoid=loadRecent(topic)}}
@@ -134,7 +134,7 @@ async function run(input,isFollowup=false){
   if(!response.ok)throw Error(knownErrors[data.error]||'હમણાં AI મેસેજ નથી મળ્યો.');
   const list=Array.isArray(data.messages)?data.messages.filter(x=>typeof x==='string'&&x.length>8).slice(0,3):[];
   if(!list.length)throw Error('નવા મેસેજ નથી મળ્યા. ફરી પ્રયાસ કરો.');
-  output(list,wantsPoster(topic)||wantsPoster(text));
+  output(list,wantsPoster(topic)||wantsPoster(text)||!!attachedImage,attachedImage);
   succeeded=true;
   round++;
   history.push('User: '+text,'AI ideas: '+list.map(x=>small(x,130)).join(' | '));
@@ -151,8 +151,9 @@ async function run(input,isFollowup=false){
 form.onsubmit=e=>{e.preventDefault();const text=prompt.value.trim();if(text.length<2){status.textContent='મેસેજ વિશે બે શબ્દ લખો.';return}run(text,round>0)};
 prompt.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();form.requestSubmit()}};
 $('aiNewChat').onclick=()=>{topic='';history=[];avoid=[];round=0;prompt.value='';status.textContent='';welcome();prompt.focus()};
-lang.value=validLang.includes(searchParams.get('l'))?searchParams.get('l'):'gu';
+lang.value=detectLang(searchParams.get('q')||'');
 const text=searchParams.get('q')||searchParams.get('prompt')||'';
 prompt.value=small(text,240);
 welcome();
+if(photoInput){photoInput.addEventListener('change',()=>{const file=photoInput.files?.[0];if(!file){attachedImage=null;photoPreview.hidden=true;return}if(!file.type.startsWith('image/')||file.size>8*1024*1024){status.textContent='માત્ર 8MB સુધીનો ફોટો જોડો.';photoInput.value='';return}const reader=new FileReader();reader.onload=()=>{attachedImage=String(reader.result);photoPreview.hidden=false;photoPreview.replaceChildren();const img=el('img');img.src=attachedImage;img.alt='જોડેલો ફોટો';const remove=el('button','','✕ ફોટો દૂર કરો');remove.type='button';remove.onclick=()=>{attachedImage=null;photoInput.value='';photoPreview.hidden=true};photoPreview.append(img,remove)};reader.readAsDataURL(file)})}
 })();
