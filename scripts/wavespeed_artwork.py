@@ -47,13 +47,18 @@ def main():
    with urllib.request.urlopen(urllib.request.Request(url,headers={"User-Agent":"ShubhLink-Artwork-Publisher"}),timeout=60) as resp:
     content_type=resp.headers.get("Content-Type","")
     image=resp.read(12_000_001)
-   if len(image)>12_000_000 or not (image.startswith(b"\\xff\\xd8\\xff") or image.startswith(b"\\x89PNG\\r\\n\\x1a\\n") or image.startswith(b"RIFF") and image[8:12]==b"WEBP"):
+   if len(image)>12_000_000 or not (image.startswith(bytes.fromhex("ffd8ff")) or image.startswith(bytes.fromhex("89504e470d0a1a0a")) or image.startswith(b"RIFF") and image[8:12]==b"WEBP"):
     raise SystemExit("Downloaded file is not a supported image or exceeds 12MB")
-   ext=".png" if image.startswith(b"\\x89PNG") else ".webp" if image.startswith(b"RIFF") else ".jpg"
+   ext=".png" if image.startswith(bytes.fromhex("89504e47")) else ".webp" if image.startswith(b"RIFF") else ".jpg"
    OUT.mkdir(parents=True,exist_ok=True)
    filename=f"{category}-{task_id[:16]}{ext}"
    (OUT/filename).write_bytes(image)
-   manifest=ROOT/"artwork"/"manifest.json"\n   try: records=json.loads(manifest.read_text()) if manifest.exists() else []\n   except (ValueError,OSError): records=[]\n   records=[{"category":category,"url":"artwork/generated/"+filename,"source":"wavespeed"}]+[item for item in records if item.get("url")!="artwork/generated/"+filename]\n   manifest.write_text(json.dumps(records[:100],ensure_ascii=False,indent=2)+"\\n")\n   print("Saved",filename,flush=True)
+   manifest=ROOT/"artwork"/"manifest.json"
+   try: records=json.loads(manifest.read_text()) if manifest.exists() else []
+   except (ValueError,OSError): records=[]
+   records=[{"category":category,"url":"artwork/generated/"+filename,"source":"wavespeed"}]+[item for item in records if item.get("url")!="artwork/generated/"+filename]
+   manifest.write_text(json.dumps(records[:100],ensure_ascii=False,indent=2)+"\\n")
+   print("Saved",filename,flush=True)
    return
   if status in ("failed","cancelled","timeout","deleted"):raise SystemExit("Prediction "+str(status))
  raise SystemExit("Prediction still processing. ID: "+task_id+"; check WaveSpeed History.")
