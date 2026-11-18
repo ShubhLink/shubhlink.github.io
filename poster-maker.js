@@ -8,7 +8,7 @@ const ornaments=['✦','❀','◈','✿','❖'];
 const brandLogo=new Image();brandLogo.onload=()=>draw();brandLogo.src='icon.svg';
 const saved=localStorage.getItem('shubhlink-poster-name');if(saved)$('sender').value=saved;
 function roundRect(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
-function fitLines(text,maxWidth,font){ctx.font=font;const words=Array.from(text);let lines=[],line='';for(const ch of words){if(ctx.measureText(line+ch).width>maxWidth&&line){lines.push(line);line=ch}else line+=ch}if(line)lines.push(line);return lines}
+function fitLines(text,maxWidth,font){ctx.font=font;const parts=String(text).split(/(\\s+)/u);let lines=[],line='';for(const part of parts){if(ctx.measureText(line+part).width<=maxWidth){line+=part;continue}if(line.trim())lines.push(line.trim());line='';if(ctx.measureText(part).width<=maxWidth){line=part.trimStart();continue}const chars=typeof Intl.Segmenter==='function'?[...new Intl.Segmenter('gu',{granularity:'grapheme'}).segment(part)].map(x=>x.segment):Array.from(part);for(const ch of chars){if(ctx.measureText(line+ch).width>maxWidth&&line){lines.push(line);line=''}line+=ch}}if(line.trim())lines.push(line.trim());return lines}
 const artCache=new Map(),photoCache=new Map();
 function draw(){const base=themes[$('occasion').value],art=window.ShubhPosterArt.artwork(designIndex),t={...base,dark:art.ink,accent:art.ink},w=canvas.width,h=canvas.height;
 const artId=designIndex%10;
@@ -21,10 +21,10 @@ ctx.fillStyle='#fffdf4';
 ctx.globalAlpha=.92;ctx.beginPath();ctx.roundRect(95,485,890,510,46);ctx.fill();ctx.globalAlpha=1;
 ctx.fillStyle='#543348';
 let y=535;if(photo){ctx.save();ctx.beginPath();ctx.arc(w/2,385,120,0,Math.PI*2);ctx.clip();const ratio=Math.max(240/photo.width,240/photo.height),iw=photo.width*ratio,ih=photo.height*ratio;ctx.drawImage(photo,w/2-iw/2,385-ih/2,iw,ih);ctx.restore();ctx.beginPath();ctx.arc(w/2,385,125,0,Math.PI*2);ctx.strokeStyle=t.accent;ctx.lineWidth=9;ctx.stroke();y=570}else{y=570}
-ctx.fillStyle=t.dark;ctx.font='bold 69px "Noto Sans Gujarati",sans-serif';ctx.fillText(t.title,w/2,y);y+=95;
+ctx.fillStyle='#543348';ctx.font='bold 69px "Noto Sans Gujarati",sans-serif';for(const line of fitLines(t.title,820,ctx.font).slice(0,2)){ctx.fillText(line,w/2,y);y+=82}y+=18;
 const recipient=$('recipient').value.trim();if(recipient){ctx.font='bold 43px "Noto Sans Gujarati",sans-serif';for(const line of fitLines('પ્રિય '+recipient,890,ctx.font).slice(0,2)){ctx.fillText(line,w/2,y);y+=58}y+=10}
 let body=$('wishText').value.trim();let fontSize=47;let lines;do{ctx.font='600 '+fontSize+'px "Noto Sans Gujarati",sans-serif';lines=fitLines(body,870,ctx.font);if(lines.length<=7)break;fontSize-=3}while(fontSize>30);
-const lineHeight=fontSize*1.65;const blockHeight=lines.length*lineHeight;const start=Math.max(y+20,Math.min(930-blockHeight/2,y+50));y=start;for(const line of lines.slice(0,9)){ctx.fillText(line,w/2,y);y+=lineHeight}
+const lineHeight=fontSize*1.65;const blockHeight=lines.length*lineHeight;const start=Math.max(y+20,Math.min(930-blockHeight/2,y+50));y=start;for(const line of lines.slice(0,7)){ctx.fillText(line,w/2,y);y+=lineHeight}
 const sender=$('sender').value.trim();if(sender){ctx.font='bold 44px "Noto Sans Gujarati",sans-serif';ctx.fillText('શુભેચ્છાઓ સાથે — '+sender.slice(0,45),w/2,1110)}
 ctx.font='30px sans-serif';ctx.fillStyle=t.dark;if(brandLogo.complete&&brandLogo.naturalWidth){ctx.drawImage(brandLogo,w/2-93,1236,38,38)}ctx.font='bold 29px sans-serif';ctx.fillText('ShubhLink',w/2+23,1265)}
 document.querySelectorAll('.poster-tools [data-panel]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.poster-tools button').forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-selected',String(b===btn))});document.querySelectorAll('[data-editor]').forEach(panel=>panel.classList.toggle('active',panel.dataset.editor===btn.dataset.panel))}));
@@ -38,8 +38,8 @@ function refreshText(){const k=$('occasion').value;$('wishText').value=messages[
 $('occasion').addEventListener('change',()=>{index=0;refreshText()});for(const id of ['sender','recipient','wishText'])$(id).addEventListener('input',()=>{if(id==='sender')localStorage.setItem('shubhlink-poster-name',$('sender').value);draw()});
 $('photo').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith('image/')||f.size>8*1024*1024){$('posterStatus').textContent='8 MB થી નાનો ફોટો પસંદ કરો.';return}const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{photo=img;URL.revokeObjectURL(url);draw()};img.onerror=()=>{URL.revokeObjectURL(url);$('posterStatus').textContent='ફોટો ખોલી શકાયો નથી.'};img.src=url});
 $('removePhoto').onclick=()=>{photo=null;$('photo').value='';draw()};$('newPoster').onclick=()=>{index++;refreshText()};
-function blob(){return new Promise(resolve=>canvas.toBlob(resolve,'image/png'))}
+async function blob(){try{return await new Promise((resolve,reject)=>{try{canvas.toBlob(b=>b?resolve(b):reject(new Error('PNG unavailable')),'image/png')}catch(e){reject(e)}})}catch(e){$('posterStatus').textContent='આ Photo નું PNG બનાવી શકાતું નથી. બીજો Design પસંદ કરો અથવા પછી ફરી પ્રયાસ કરો.';return null}}
 $('downloadPoster').onclick=async()=>{const b=await blob();if(!b)return;const url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='ShubhLink-Wishes.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('posterStatus').textContent='Poster Download તૈયાર છે.'};
 $('sharePoster').onclick=async()=>{const b=await blob();if(!b)return;const file=new File([b],'ShubhLink-Wishes.png',{type:'image/png'});if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'ShubhLink Wishes'})}catch(e){if(e.name!=='AbortError')$('posterStatus').textContent='Share થઈ શક્યું નથી; PNG Download કરો.'}}else{$('posterStatus').textContent='આ Browser માં Image Share સપોર્ટ નથી; PNG Download કરીને WhatsApp પર મોકલો.'}};
-document.fonts?.ready.then(()=>{loaded=true;draw()});refreshText();setDesign(designIndex);
+if(document.fonts){document.fonts.load('600 47px "Noto Sans Gujarati"').then(()=>draw()).catch(()=>draw())}refreshText();setDesign(designIndex);
 })();
