@@ -1,27 +1,30 @@
-/* Free, browser-rendered AI message poster with ShubhLink footer branding. */
-(function(){'use strict';
-function poster(message,topic,index,lang){
- const W=900,H=1200,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
- const palette=[['#33274e','#ad6d96'],['#123b4b','#4c9e94'],['#3e2450','#cf875d'],['#222d59','#6d77b9'],['#493047','#c27d83']][index%5];
- const grad=x.createLinearGradient(0,0,W,H);grad.addColorStop(0,palette[0]);grad.addColorStop(1,palette[1]);x.fillStyle=grad;x.fillRect(0,0,W,H);
- const shine=x.createRadialGradient(690,230,20,690,230,500);shine.addColorStop(0,'rgba(255,227,170,.45)');shine.addColorStop(1,'rgba(255,227,170,0)');x.fillStyle=shine;x.fillRect(0,0,W,H);
- x.strokeStyle='rgba(255,235,203,.32)';x.lineWidth=2;x.strokeRect(35,35,W-70,H-70);x.strokeRect(47,47,W-94,H-94);
- x.fillStyle='rgba(255,255,255,.09)';for(let i=0;i<18;i++){const px=(i*173+89)%W,py=(i*233+97)%H;x.beginPath();x.arc(px,py,6+(i%4)*9,0,Math.PI*2);x.fill()}
- x.textAlign='center';x.fillStyle='#fff3d6';x.font='65px serif';x.fillText('✦',W/2,205);
- const boxX=74,boxY=280,boxW=W-148,boxH=655;x.fillStyle='rgba(255,252,248,.94)';x.beginPath();x.roundRect(boxX,boxY,boxW,boxH,38);x.fill();
- x.fillStyle='#50394f';x.textBaseline='middle';
- function lines(txt,maxWidth,font){x.font=font;const words=String(txt).trim().split(/\s+/);let result=[],line='';for(const word of words){const test=line?line+' '+word:word;if(x.measureText(test).width<=maxWidth){line=test;continue}if(line)result.push(line);line='';for(const ch of Array.from(word)){if(x.measureText(line+ch).width>maxWidth&&line){result.push(line);line=''}line+=ch}}if(line)result.push(line);return result}
- let size=49,wrapped=[];do{wrapped=lines(message,boxW-100,'600 '+size+'px "Noto Sans Gujarati",sans-serif');if(wrapped.length*size*1.7<boxH-120)break;size-=2}while(size>25);
- const lh=size*1.65;let y=boxY+boxH/2-(Math.min(wrapped.length,13)-1)*lh/2;
- x.font='600 '+size+'px "Noto Sans Gujarati",sans-serif';for(const line of wrapped.slice(0,13)){x.fillText(line,W/2,y);y+=lh}
- x.textBaseline='alphabetic';x.fillStyle='#fff';x.font='bold 33px Inter,sans-serif';x.fillText('✦ ShubhLink',W/2,1080);x.font='22px Inter,sans-serif';x.fillText('shubhlink.github.io',W/2,1120);
- return c
+/* ShubhLink: font-safe, responsive poster rendering, zero paid image calls. */
+(()=>{'use strict';
+const W=900,H=1200;
+const palettes=[['#251b46','#9763a5'],['#073f48','#53a18c'],['#4b214a','#d48d60'],['#18254f','#697ac5']];
+async function fontReady(){try{await document.fonts.load('600 42px "Noto Sans Gujarati"');await document.fonts.ready}catch(_){}}
+function wrap(ctx,text,max){const words=String(text).replace(/\s+/g,' ').trim().split(' '),rows=[];let line='';for(const word of words){if(!word)continue;const candidate=line?line+' '+word:word;if(ctx.measureText(candidate).width<=max){line=candidate;continue}if(line)rows.push(line);line=word;if(ctx.measureText(line).width>max){const chars=Array.from(word);line='';for(const ch of chars){if(line&&ctx.measureText(line+ch).width>max){rows.push(line);line=''}line+=ch}}}if(line)rows.push(line);return rows}
+function cover(ctx,img,x,y,w,h){const scale=Math.max(w/img.width,h/img.height),dw=img.width*scale,dh=img.height*scale;ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh)}
+async function draw(canvas,message,index,photo){
+ await fontReady();const ctx=canvas.getContext('2d');const [a,b]=palettes[index%palettes.length];const grad=ctx.createLinearGradient(0,0,W,H);grad.addColorStop(0,a);grad.addColorStop(1,b);ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+ const glow=ctx.createRadialGradient(690,160,5,690,160,630);glow.addColorStop(0,'#ffffff36');glow.addColorStop(1,'#ffffff00');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
+ ctx.strokeStyle='#ffffff70';ctx.lineWidth=2;ctx.strokeRect(32,32,W-64,H-64);
+ const hasPhoto=!!photo;let panelY=hasPhoto?535:270,panelH=hasPhoto?460:655;
+ if(hasPhoto){try{const img=new Image();img.src=photo;await img.decode();ctx.save();ctx.beginPath();ctx.roundRect(82,78,736,420,30);ctx.clip();cover(ctx,img,82,78,736,420);ctx.restore()}catch(_){panelY=270;panelH=655}}
+ else{ctx.fillStyle='#f7dbab';ctx.font='76px serif';ctx.textAlign='center';ctx.fillText('✦',450,180)}
+ ctx.fillStyle='#fffaf3';ctx.beginPath();ctx.roundRect(75,panelY,750,panelH,30);ctx.fill();
+ ctx.save();ctx.beginPath();ctx.rect(112,panelY+30,676,panelH-60);ctx.clip();
+ let size=48,rows=[];while(size>=24){ctx.font='600 '+size+'px "Noto Sans Gujarati",sans-serif';rows=wrap(ctx,message,640);if(rows.length*size*1.7<=panelH-95)break;size-=2}
+ const lh=size*1.7;ctx.font='600 '+size+'px "Noto Sans Gujarati",sans-serif';ctx.fillStyle='#422b43';ctx.textAlign='center';ctx.textBaseline='middle';
+ const limit=Math.floor((panelH-80)/lh);const shown=rows.slice(0,limit);if(rows.length>limit&&shown.length)shown[shown.length-1]=shown[shown.length-1].slice(0,-3)+'…';
+ let y=panelY+panelH/2-(shown.length-1)*lh/2;for(const line of shown){ctx.fillText(line,450,y,640);y+=lh}ctx.restore();
+ ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='#fff';ctx.font='bold 34px Inter,sans-serif';ctx.fillText('✦ ShubhLink',450,1083);ctx.font='23px Inter,sans-serif';ctx.fillText('shubhlink.github.io',450,1122);
 }
 function attach(target,message,topic,index,lang,photo){
- const holder=document.createElement('div');holder.className='ai-direct-poster';const canvas=poster(message,topic,index,lang);canvas.setAttribute('aria-label','તમારું ShubhLink પોસ્ટર');holder.append(canvas);if(photo){const img=new Image();img.onload=()=>{const x=canvas.getContext('2d');x.save();x.beginPath();x.roundRect(115,65,670,260,26);x.clip();const ratio=Math.max(670/img.width,260/img.height),w=img.width*ratio,h=img.height*ratio;x.drawImage(img,450-w/2,195-h/2,w,h);x.restore();x.fillStyle='rgba(255,255,255,.94)';x.fillRect(75,345,750,580);x.fillStyle='#50394f';x.textAlign='center';x.textBaseline='middle';let size=43,words=String(message).trim().split(/\\s+/),lines=[];do{lines=[];x.font='600 '+size+'px "Noto Sans Gujarati",sans-serif';let line='';for(const word of words){const t=line?line+' '+word:word;if(x.measureText(t).width>670&&line){lines.push(line);line=word}else line=t}if(line)lines.push(line);if(lines.length*size*1.55<520)break;size-=2}while(size>23);let y=635-(lines.length-1)*size*.78;for(const line of lines.slice(0,14)){x.fillText(line,450,y);y+=size*1.55}};img.src=photo;}
- const buttons=document.createElement('div');buttons.className='ai-direct-poster-actions';
- const download=document.createElement('button');download.type='button';download.textContent='⬇ PNG ડાઉનલોડ';download.onclick=()=>{const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download='ShubhLink-poster.png';a.click()};
- const share=document.createElement('button');share.type='button';share.textContent='↗ પોસ્ટર શેર કરો';share.onclick=async()=>{try{const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('PNG unavailable');const file=new File([blob],'ShubhLink-poster.png',{type:'image/png'});if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:'ShubhLink Poster'});return}download.click()}catch(e){if(e.name!=='AbortError')download.click()}};
+ const holder=document.createElement('div');holder.className='ai-direct-poster';const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;canvas.setAttribute('aria-label','ShubhLink પોસ્ટર');holder.append(canvas);
+ let ready=draw(canvas,message,index,photo);const buttons=document.createElement('div');buttons.className='ai-direct-poster-actions';
+ const download=document.createElement('button');download.type='button';download.textContent='⬇ PNG ડાઉનલોડ';download.onclick=async()=>{await ready;const link=document.createElement('a');link.download='ShubhLink-poster.png';link.href=canvas.toDataURL('image/png');link.click()};
+ const share=document.createElement('button');share.type='button';share.textContent='↗ પોસ્ટર શેર કરો';share.onclick=async()=>{try{await ready;const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('PNG unavailable');const file=new File([blob],'ShubhLink-poster.png',{type:'image/png'});if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:'ShubhLink Poster'})}else download.click()}catch(e){if(e.name!=='AbortError')download.click()}};
  buttons.append(download,share);holder.append(buttons);target.append(holder);return holder
 }
 window.ShubhInlinePoster={attach};
