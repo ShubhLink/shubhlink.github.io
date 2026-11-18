@@ -1,0 +1,22 @@
+/* Royal Indian category collection — scoped to Categories page */
+.royal-categories{--royal-gold:#e6bd6d;--royal-ink:#48213f}
+.royal-categories .allcats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:15px!important;align-items:stretch;padding:8px 0 34px}
+.royal-categories .allcats .catbox{--jewel:#843c68;--light:#fff1d7;position:relative!important;display:flex!important;flex-direction:column;align-items:center;justify-content:center;min-height:226px!important;padding:25px 10px 22px!important;border:2px solid #e2b66b!important;border-radius:27px 27px 19px 19px!important;background:radial-gradient(circle at 50% 9%,#fffdf6 0%,transparent 55%),linear-gradient(150deg,var(--light),#fff5e8 80%)!important;color:var(--royal-ink)!important;text-align:center!important;box-shadow:0 7px 0 #d9a65d25,0 14px 25px #6d315b21,inset 0 0 0 4px #fff9ec,inset 0 0 0 5px #edc780!important;overflow:hidden;isolation:isolate;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.royal-categories .allcats .catbox::before{content:"✦  ❖  ✦";position:absolute;inset:7px 9px auto!important;width:auto!important;height:auto!important;right:9px!important;bottom:auto!important;border-radius:0!important;background:none!important;opacity:.85!important;color:#b98537;font-size:11px;letter-spacing:4px;z-index:0}
+.royal-categories .allcats .catbox::after{content:"";position:absolute;left:18px;right:18px;bottom:11px;height:10px;background:radial-gradient(circle,#c99b56 1.3px,transparent 2px) center/15px 10px repeat-x;opacity:.65;pointer-events:none}
+.royal-categories .allcats .catbox .catemoji{width:84px!important;height:84px!important;margin:6px auto 12px!important;display:grid!important;place-items:center!important;font-size:47px!important;line-height:1!important;border-radius:50% 50% 44% 44%!important;background:radial-gradient(circle at 32% 24%,#fffefa,#ffedc5 65%,#dfb46b)!important;border:2px solid #d5a657!important;box-shadow:0 7px 13px #80502824,inset 0 2px 9px #fff!important;filter:drop-shadow(0 3px 3px #77441e24)!important;transform:none!important}
+.royal-categories .allcats .catbox strong{font-size:clamp(15px,3.8vw,20px)!important;line-height:1.5!important;font-weight:900!important;color:var(--jewel)!important;position:relative;z-index:1}
+.royal-categories .allcats .catbox small,.royal-categories .allcats .catbox .catgo,.royal-categories .allcats .catbox .arrow{display:none!important}
+.royal-categories .allcats .catbox:hover,.royal-categories .allcats .catbox:focus-visible{transform:translateY(-4px)!important;box-shadow:0 12px 26px #6d315b35,inset 0 0 0 4px #fff9ec,inset 0 0 0 5px #edc780!important}
+.royal-categories .allcats .catbox:focus-visible{outline:3px solid #74398d;outline-offset:3px}
+.royal-categories .allcats .cat-morning{--jewel:#9c571c;--light:#ffedc8}
+.royal-categories .allcats .cat-birthday{--jewel:#9d3663;--light:#ffebef}
+.royal-categories .allcats .cat-suvichar{--jewel:#63398b;--light:#f3e7ff}
+.royal-categories .allcats .cat-newthought{--jewel:#2d6859;--light:#e6f4e9}
+.royal-categories .allcats .cat-night{--jewel:#343d83;--light:#e7e9ff}
+.royal-categories .allcats .cat-festival{--jewel:#a14b22;--light:#ffe6cd}
+.royal-categories .allcats .cat-friendship{--jewel:#a04765;--light:#ffe7e7}
+.royal-categories .allcats .cat-anniversary{--jewel:#813b7a;--light:#f6e4f6}
+.royal-categories .allcats .cat-congrats{--jewel:#28745b;--light:#e6f4df}
+@media(min-width:800px){.royal-categories .allcats{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:23px!important}.royal-categories .allcats .catbox{min-height:245px!important}}
+@media(max-width:380px){.royal-categories .allcats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.royal-categories .allcats .catbox{min-height:196px!important;padding:20px 6px!important}.royal-categories .allcats .catbox .catemoji{width:69px!important;height:69px!important;font-size:38px!important}}
