@@ -19,8 +19,11 @@ def main():
         print("Today's messages already published.")
         return
     failures=[]
+    quota_exhausted=False
     for lang, language in LANGS.items():
+        if quota_exhausted: break
         for cat in CATS:
+            if quota_exhausted: break
             if sum(x.get("date")==today and x.get("language")==lang and x.get("category")==cat for x in rows)>=10:
                 continue
             print(f"Generating {language}/{cat}", flush=True)
@@ -46,10 +49,11 @@ def main():
                         raise RuntimeError(f"Gemini API configuration error HTTP {exc.code}: {details}") from exc
                     if exc.code==429:
                         failures.append(f"{language}/{cat}: quota exceeded")
+                        quota_exhausted=True
                         break
                 except (TimeoutError, socket.timeout, urllib.error.URLError, ValueError, KeyError, IndexError) as exc:
                     print(f"Gemini attempt {attempt+1}/3 failed on {language}/{cat}: {exc}",flush=True)
-                if attempt<2:time.sleep(3*(attempt+1))
+                if attempt<2 and not quota_exhausted:time.sleep(3*(attempt+1))
             if generated is None:
                 failures.append(f"{language}/{cat}: no response")
                 continue
@@ -63,6 +67,7 @@ def main():
                 count+=1
                 if count==10:break
     if failures: print("Skipped batches: "+", ".join(failures),flush=True)
+    if quota_exhausted: print("Free-tier quota exhausted; preserving successfully generated messages.",flush=True)
     if sum(x.get("date")==today for x in rows)==0:
         raise RuntimeError("No new messages generated. Check Gemini API free-tier quota, key and logs.")
     history["messages"]=rows[-30000:]
