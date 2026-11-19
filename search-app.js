@@ -204,10 +204,10 @@ function card(it){
  const body=document.createElement('p');body.textContent=it.body;
  const actions=document.createElement('div');actions.className='search-actions';
  const wa=document.createElement('button');
- wa.type='button';wa.className='search-whatsapp';
- wa.textContent='◉ WhatsApp પર શેર કરો';
+ wa.type='button';wa.className='wish-whatsapp search-whatsapp';
+ wa.innerHTML='<svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 2.1 17.7L.5 23.5l5.9-1.6A11.8 11.8 0 1 0 20.5 3.5Zm-8.5 18a9.5 9.5 0 0 1-4.8-1.3l-.3-.2-3.5 1 1-3.4-.2-.4A9.5 9.5 0 1 1 12 21.5Zm5.3-7.1c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-.9-2.1c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.2 3.2 1.4 3.4 2.4 3.6 5.7 4.9c.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/></svg><span>શેર કરો</span>';
  wa.addEventListener('click',()=>window.ShubhShare.open({title:it.title,body:it.body,language:it.language,category:it.category}));
- actions.append(wa);node.append(label,head,body,actions);return node
+ const other=document.createElement('button');other.type='button';other.className='share-secondary';other.setAttribute('aria-label','અન્ય એપમાં શેર કરો');other.innerHTML='<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg>';other.onclick=async()=>{const text=it.title+'\n'+it.body;try{if(navigator.share)await navigator.share({text});else await copyText(text,other)}catch(e){if(e.name!=='AbortError')await copyText(text,other)}};actions.append(wa,other);node.append(label,head,body,actions);return node
 }
 function search(q,updateURL=true){
  const text=String(q||'').trim().slice(0,100);
