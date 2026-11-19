@@ -1,5 +1,6 @@
 (function(){'use strict';
 const subjects=[
+{id:'devdiwali',aliases:['dev diwali','devdiwali','dev divali','dev deepawali','dev deepavali','દેવ દિવાળી','દેવદિવાળી','દેવ દીપાવલી','देव दिवाली','देव दीपावली'],category:'festival',gu:['દેવ દિવાળીના પાવન પર્વે તમારા જીવનમાં શ્રદ્ધાનો પ્રકાશ, પરિવારનો પ્રેમ અને સુખ-સમૃદ્ધિનો ઉજાસ ફેલાય. હાર્દિક શુભકામનાઓ!','કાર્તિક પૂર્ણિમાના પવિત્ર દિવસે દીવડાઓની રોશની તમારા ઘર અને હૃદયને આનંદથી ભરી દે. દેવ દિવાળીની શુભેચ્છાઓ!'],hi:['देव दीपावली के पावन पर्व पर आपके जीवन में प्रकाश, प्रेम और खुशहाली बनी रहे। हार्दिक शुभकामनाएँ!'],en:['Happy Dev Diwali! May the sacred lights of Kartik Purnima fill your home with peace, joy and blessings.']},
 {id:'bhaibij',aliases:['bhaibij','bhai bij','bhaibeej','bhai beej','bhaidooj','bhai dooj','bhai duj','ભાઈબીજ','ભાઈ બીજ','ભાઇબીજ','ભાઈદૂજ','भाई दूज','भाईदूज','भाई बीज'],category:'festival',
 gu:['ભાઈબીજના પવિત્ર અવસરે ભાઈ-બહેનનો પ્રેમ હંમેશા અખંડ રહે. જીવનમાં સુખ, શાંતિ અને સમૃદ્ધિ રહે. ભાઈબીજની હાર્દિક શુભકામનાઓ!','બાળપણની યાદો, મીઠી મસ્તી અને જીવનભરનો સાથ—ભાઈ-બહેનનો સંબંધ હંમેશા આવો જ સુંદર રહે. ભાઈબીજની ખૂબ ખૂબ શુભેચ્છાઓ!','ભાઈબીજના આ શુભ દિવસે તમારા પરિવાર પર ખુશીઓ વરસે અને ભાઈ-બહેનનો સ્નેહ દર વર્ષે વધુ ગાઢ બને.','ભાઈ હોય તો હિંમત મળે, બહેન હોય તો લાગણીનો આધાર મળે. આ અનમોલ સંબંધને ભાઈબીજની હાર્દિક શુભકામનાઓ!'],
 hi:['भाई दूज के पावन अवसर पर भाई-बहन का स्नेह हमेशा बना रहे। आपके परिवार को सुख और समृद्धि की शुभकामनाएँ!','बचपन की यादें और जीवन भर का साथ—भाई-बहन का रिश्ता हमेशा यूँ ही खूबसूरत रहे। भाई दूज की हार्दिक शुभकामनाएँ!'],
@@ -17,6 +18,9 @@ gu:['હર હર મહાદેવ! ભોળાનાથની કૃપા�
 hi:['हर हर महादेव! भोलेनाथ की कृपा से आपके जीवन में शांति, साहस और नई ऊर्जा बनी रहे।'],
 en:['Har Har Mahadev! May Lord Shiva bless your journey with strength, calm and hope.']}
 ];
-const normalize=s=>String(s||'').toLocaleLowerCase().trim();
-window.ShubhSearchTopics={match(query){const q=normalize(query);return subjects.find(s=>s.aliases.some(a=>q.includes(normalize(a))))||null},messages(topic,language){return(topic?.[language]||[]).map(body=>({category:topic.category,language,title:body.split(/[.!?।॥]/)[0].slice(0,65),body,featured:false,event:false}))}};
+const normalize=s=>String(s||'').toLocaleLowerCase().normalize('NFKC').replace(/[\\s._-]+/g,' ').trim();
+const compact=s=>normalize(s).replace(/\\s/g,'');
+function distance(a,b){if(Math.abs(a.length-b.length)>3)return 99;const row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let prev=row[0];row[0]=i;for(let j=1;j<=b.length;j++){const old=row[j];row[j]=Math.min(row[j]+1,row[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=old}}return row[b.length]}
+function bestMatch(query){const q=compact(query);if(!q||q.length<3)return null;let best=null,score=99;for(const topic of subjects)for(const alias of topic.aliases){const a=compact(alias);if(!a)continue;if(q===a||(q.includes(a)&&a.length>=4)||(a.includes(q)&&q.length>=4))return topic;const d=distance(q,a);if(d<score){score=d;best=topic}}return score<=Math.min(3,Math.floor(q.length*.27))?best:null}
+window.ShubhSearchTopics={match(query){const q=normalize(query);return bestMatch(q)},messages(topic,language){return(topic?.[language]||[]).map(body=>({category:topic.category,language,title:body.split(/[.!?।॥]/)[0].slice(0,65),body,featured:false,event:false}))}};
 })();
