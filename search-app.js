@@ -129,6 +129,8 @@ function topicRelevant(message,q,cat,terms){
  return text.includes(norm(q));
 }
 function getPool(q,locale){
+ const world=window.ShubhWorldFestivals?.match(q);
+ if(world)return window.ShubhWorldFestivals.messages(world,locale).map(x=>({...x,score:1000}));
  const topic=window.ShubhSearchTopics?.match(q);
  const event=topic?null:selectedEvent(q);
  const cat=category(q);
