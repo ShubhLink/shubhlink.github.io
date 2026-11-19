@@ -18,8 +18,8 @@ gu:['હર હર મહાદેવ! ભોળાનાથની કૃપા�
 hi:['हर हर महादेव! भोलेनाथ की कृपा से आपके जीवन में शांति, साहस और नई ऊर्जा बनी रहे।'],
 en:['Har Har Mahadev! May Lord Shiva bless your journey with strength, calm and hope.']}
 ];
-const normalize=s=>String(s||'').toLocaleLowerCase().normalize('NFKC').replace(/[\\s._-]+/g,' ').trim();
-const compact=s=>normalize(s).replace(/\\s/g,'');
+const normalize=s=>String(s||'').toLocaleLowerCase().normalize('NFKC').replace(/[\s._-]+/g,' ').trim();
+const compact=s=>normalize(s).replace(/\s/g,'');
 function distance(a,b){if(Math.abs(a.length-b.length)>3)return 99;const row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let prev=row[0];row[0]=i;for(let j=1;j<=b.length;j++){const old=row[j];row[j]=Math.min(row[j]+1,row[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=old}}return row[b.length]}
 function bestMatch(query){const q=compact(query);if(!q||q.length<3)return null;let best=null,score=99;for(const topic of subjects)for(const alias of topic.aliases){const a=compact(alias);if(!a)continue;if(q===a||(q.includes(a)&&a.length>=4)||(a.includes(q)&&q.length>=4))return topic;const d=distance(q,a);if(d<score){score=d;best=topic}}return score<=Math.min(3,Math.floor(q.length*.27))?best:null}
 window.ShubhSearchTopics={match(query){const q=normalize(query);return bestMatch(q)},messages(topic,language){return(topic?.[language]||[]).map(body=>({category:topic.category,language,title:body.split(/[.!?।॥]/)[0].slice(0,65),body,featured:false,event:false}))}};
