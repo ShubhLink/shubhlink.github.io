@@ -136,10 +136,10 @@ function getPool(q,locale){
  let list=library.filter(x=>x.language===locale);
  if(topic){
   const aliases=topic.aliases.map(norm);
-  const matches=list.filter(m=>aliases.some(a=>a.length>2&&normalizedText(m).includes(a)));
+  const matches=list.filter(m=>m.category===topic.category&&aliases.some(a=>a.length>3&&normalizedText(m).includes(a)));
   const prepared=window.ShubhSearchTopics.messages(topic,locale);
   const seen=new Set();
-  list=[...matches,...prepared].filter(m=>{const k=norm(m.body);if(seen.has(k))return false;seen.add(k);return true});
+  list=[...prepared,...matches].filter(m=>{const k=norm(m.body);if(seen.has(k))return false;seen.add(k);return true});
  }else if(q){
   list=list.filter(x=>event?eventRelevant(x,event):topicRelevant(x,q,cat,parts));
  }else{
@@ -164,7 +164,7 @@ function batch(){
   meta.textContent='0 સંબંધિત મેસેજ';next.hidden=true;return
  }
  const size=Math.min(9,pool.length);
- const chosen=window.ShubhFresh?.choose(pool,'search:'+currentKey,size,{quality:x=>x.score+(x.featured?95:0)})||shuffle(pool).slice(0,size);
+ const chosen=pool.slice(0,size);
  holder.replaceChildren();
  for(const item of chosen)holder.append(card(item));
  meta.textContent=chosen.length+' મેસેજ · '+pool.length+' ઉપલબ્ધ';
