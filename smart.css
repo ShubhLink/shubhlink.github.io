@@ -133,3 +133,9 @@
 .slim-search .search-actions button{background:#f1edf3;color:#69566c}
 .slim-search .search-more{background:#503660;color:white;border:0;box-shadow:0 5px 15px #4a345028;cursor:pointer;margin:19px auto 15px}
 @media(max-width:700px){.ai-spotlight{margin:0 auto 18px;padding:22px;flex-direction:column;align-items:flex-start;gap:12px}.ai-spotlight .btn{width:100%;text-align:center}.smart-feature{min-height:0}.slim-search .search-hero{padding:22px 18px}.slim-search .search-message{padding:17px}.slim-search .search-message p{font-size:14px;min-height:0}.slim-search .search-ai-link{font-size:12px}.smart-topline .smart-date{font-size:11px;padding:7px 10px}.smart-topline{gap:7px}}
+
+/* Consistent home-style sharing controls on search cards */
+.slim-search .search-message .search-actions{display:flex;align-items:center;gap:10px;width:100%;margin-top:auto}
+.slim-search .search-message .search-actions .search-whatsapp{display:inline-flex!important;align-items:center;justify-content:center;gap:7px;flex:1;min-width:0;min-height:48px;background:#09a947!important;color:#fff!important;border:0!important;border-radius:28px!important;padding:10px 12px!important;font-size:14px!important;font-weight:800!important;white-space:nowrap}
+.slim-search .search-message .search-actions .share-secondary{display:grid!important;place-items:center;flex:0 0 48px;width:48px;height:48px;background:#652081!important;color:#fff!important;border:1px solid #e9c1f6!important;border-radius:50%!important;padding:0!important}
+.slim-search .search-message .search-actions .wa-icon{width:23px;height:23px;fill:currentColor}
