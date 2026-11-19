@@ -153,6 +153,22 @@ function getPool(q,locale){
  ranked.sort((a,b)=>Number(b.featured)-Number(a.featured)||b.score-a.score);
  return ranked;
 }
+async function generateUnknownFestival(){
+ const q=currentQuery.trim();if(!q)return;
+ const btn=document.getElementById('searchAiGenerate');if(btn){btn.disabled=true;btn.textContent='AI મેસેજ બનાવી રહ્યું છે...'}
+ const config=window.SHUBHLINK_BACKEND||{};
+ if(!config.url||!config.publishableKey){if(btn){btn.disabled=false;btn.textContent='AI ઉપલબ્ધ નથી — AI Studio ખોલો'}return}
+ try{
+  const instruction='The user searched for the cultural/religious festival or occasion: '+q+'. First assess whether it is a real named festival. If real, create culturally appropriate greetings specifically for that festival, without inventing dates, rituals, religious beliefs, historical claims, or unrelated holidays. If ambiguous or unknown, do not invent facts: write neutral greetings that explicitly mention the searched name. No unrelated festival greetings.';
+  const response=await fetch(config.url.replace(/\\/$/,'')+'/functions/v1/compose-wish',{method:'POST',headers:{'content-type':'application/json','apikey':config.publishableKey},body:JSON.stringify({topic:q,language:lang(),tone:'warm',instruction,history:[],avoid:[]})});
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw Error(data.error||'AI હમણાં ઉપલબ્ધ નથી');
+  const messages=(Array.isArray(data.messages)?data.messages:[]).filter(x=>typeof x==='string'&&x.trim().length>10).slice(0,3);
+  if(!messages.length)throw Error('મેસેજ મળ્યા નથી');
+  pool=messages.map(body=>({category:'festival',language:lang(),title:q+' · શુભેચ્છાઓ',body,event:true,featured:false,score:1000}));
+  batch();const note=document.createElement('p');note.className='search-ai-note';note.textContent='✦ આ મેસેજ AI દ્વારા બનાવાયા છે. અજાણ્યા તહેવાર વિશેની પરંપરા અને વિગતો જાતે ચકાસો.';holder.prepend(note);
+ }catch(err){if(btn){btn.disabled=false;btn.textContent='ફરી AI મેસેજ બનાવો'}const note=document.createElement('p');note.className='search-ai-note';note.textContent='AI સેવા હાલમાં જવાબ આપી શકી નથી. AI Studio માં ફરી પ્રયાસ કરો.';holder.append(note)}
+}
 function batch(){
  if(!pool.length){
   holder.replaceChildren();
@@ -162,7 +178,7 @@ function batch(){
   const a=document.createElement('a');const u=new URL('ai.html',location.href);
   if(currentQuery)u.searchParams.set('q',currentQuery);u.searchParams.set('l',lang());
   a.href=u.href;a.textContent='✦ AI માં આ વિષયનો મેસેજ બનાવો';
-  noResults.append(heading,body,a);holder.append(noResults);
+  const generate=document.createElement('button');generate.type='button';generate.id='searchAiGenerate';generate.className='search-more';generate.textContent='✦ આ વિષયના AI મેસેજ બનાવો';generate.onclick=generateUnknownFestival;if(currentQuery.trim().length>2)noResults.append(heading,body,generate,a);else noResults.append(heading,body,a);holder.append(noResults);
   meta.textContent='0 સંબંધિત મેસેજ';next.hidden=true;return
  }
  const size=Math.min(9,pool.length);
