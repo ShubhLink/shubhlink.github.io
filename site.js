@@ -98,7 +98,7 @@ const titleFor=(m,c,l)=>{
 const catName=(c,l)=>c[l]||c.gu;
 function catCard(c){
  const a=document.createElement('a');a.className='catbox cat-'+c.id;a.href='wishes.html?c='+enc(c.id);a.setAttribute('aria-label',c.gu+' માટે મેસેજ જુઓ');
- const emoji=document.createElement('span');emoji.className='catemoji';emoji.textContent=c.emoji; if(document.getElementById('allCats')){const filenames={morning:'suprabhat',birthday:'birthday',suvichar:'daily-suvichar',newthought:'new-thought',night:'good-night',friendship:'friendship',anniversary:'anniversary',congrats:'congratulations'};const img=document.createElement('img');img.className='category-real-photo';img.src='assets/categories/'+(filenames[c.id]||c.id)+'.png';img.alt='';img.loading='lazy';img.onerror=()=>img.remove();emoji.append(img)}
+ const emoji=document.createElement('span');emoji.className='catemoji';emoji.textContent=c.emoji; if(document.getElementById('allCats')){const filenames={morning:'suprabhat',birthday:'birthday',suvichar:'daily-suvichar',newthought:'new-thought',night:'good-night',friendship:'friendship',anniversary:'anniversary',congrats:'congratulations'};const img=document.createElement('img');img.className='category-real-photo';img.src='assets/categories/'+(filenames[c.id]||c.id)+'.png';img.alt='';img.loading='lazy';img.onload=()=>a.classList.add('has-artwork');img.onerror=()=>{img.remove();a.classList.remove('has-artwork')};emoji.textContent='';emoji.append(img)}
  const title=document.createElement('strong');title.textContent=c.gu;
  const desc=document.createElement('small');
  const messages=D.wishes.gu?.[c.id]||[];
