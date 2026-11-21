@@ -25,9 +25,9 @@ function renderLocalCards(hostId,limit){
   if(hostId==='allCats'){
    const filenames={morning:'suprabhat',birthday:'birthday',suvichar:'daily-suvichar',newthought:'new-thought',night:'good-night',friendship:'friendship',anniversary:'anniversary',congrats:'congratulations'};
    const base='assets/categories/'+(filenames[c.id]||c.id);
-   const img=document.createElement('img');img.className='category-real-photo';img.alt='';img.width=480;img.height=324;img.loading=host.children.length<4?'eager':'lazy';img.decoding='async';img.src=base+'.webp';
+   const img=document.createElement('img');img.className='category-real-photo';img.alt='';img.width=480;img.height=324;img.loading=host.children.length<4?'eager':'lazy';img.decoding='async';img.src=base+'.clean.webp';
    a.classList.add('artwork-pending');img.onload=()=>{a.classList.remove('artwork-pending');a.classList.add('has-artwork')};
-   img.onerror=()=>{if(img.src.endsWith('.webp')){img.src=base+'.png';return}img.remove();a.classList.remove('artwork-pending')};
+   img.onerror=()=>{if(img.src.endsWith('.clean.webp')){img.src=base+'.webp';return}if(img.src.endsWith('.webp')){img.src=base+'.png';return}img.remove();a.classList.remove('artwork-pending')};
    icon.textContent='';icon.append(img);
   }
   const title=document.createElement('strong');title.textContent=c.gu;
@@ -107,7 +107,7 @@ const titleFor=(m,c,l)=>{
 const catName=(c,l)=>c[l]||c.gu;
 function catCard(c){
  const a=document.createElement('a');a.className='catbox cat-'+c.id;a.href='wishes.html?c='+enc(c.id);a.setAttribute('aria-label',c.gu+' માટે મેસેજ જુઓ');
- const emoji=document.createElement('span');emoji.className='catemoji';emoji.textContent=c.emoji; if(document.getElementById('allCats')){const filenames={morning:'suprabhat',birthday:'birthday',suvichar:'daily-suvichar',newthought:'new-thought',night:'good-night',friendship:'friendship',anniversary:'anniversary',congrats:'congratulations'};const img=document.createElement('img');img.className='category-real-photo';const imageBase='assets/categories/'+(filenames[c.id]||c.id);img.src=imageBase+'.webp';img.alt='';img.loading='eager';img.decoding='async';img.fetchPriority='high';img.width=480;img.height=324;img.onload=()=>a.classList.add('has-artwork');img.onerror=()=>{if(img.src.endsWith('.webp')){img.src=imageBase+'.png';return}img.remove();a.classList.remove('has-artwork')};emoji.textContent='';emoji.append(img)}
+ const emoji=document.createElement('span');emoji.className='catemoji';emoji.textContent=c.emoji; if(document.getElementById('allCats')){const filenames={morning:'suprabhat',birthday:'birthday',suvichar:'daily-suvichar',newthought:'new-thought',night:'good-night',friendship:'friendship',anniversary:'anniversary',congrats:'congratulations'};const img=document.createElement('img');img.className='category-real-photo';const imageBase='assets/categories/'+(filenames[c.id]||c.id);img.src=imageBase+'.clean.webp';img.alt='';img.loading='eager';img.decoding='async';img.fetchPriority='high';img.width=480;img.height=324;img.onload=()=>a.classList.add('has-artwork');img.onerror=()=>{if(img.src.endsWith('.clean.webp')){img.src=imageBase+'.webp';return}if(img.src.endsWith('.webp')){img.src=imageBase+'.png';return}img.remove();a.classList.remove('has-artwork')};emoji.textContent='';emoji.append(img)}
  const title=document.createElement('strong');title.textContent=c.gu;
  const desc=document.createElement('small');
  const messages=D.wishes.gu?.[c.id]||[];
