@@ -147,9 +147,9 @@ if($('allCats')){
  $('allCats').replaceChildren();
  const first=window.ShubhCalendar?.currentCategory()||'morning';
  const hasEvent=(window.ShubhCalendar?.todayEvents()||[]).length>0;
- const ids=[first,...(hasEvent?['festival']:[]),...D.categories.map(x=>x.id)];
+ const ids=[first,...D.categories.filter(x=>x.id!=='festival').map(x=>x.id)];
  const done=new Set();
- for(const id of ids){if(done.has(id))continue;done.add(id);const cat=D.categories.find(c=>c.id===id);if(cat)$('allCats').append(catCard(cat))}
+ for(const id of ids){if(done.has(id))continue;done.add(id);const cat=D.categories.find(c=>c.id===id);if(cat&&cat.id!=='festival')$('allCats').append(catCard(cat))}
 }
 if($('wishGrid')){
  const csel=$('filterCat'),lsel=$('filterLang'),search=$('filterSearch'),grid=$('wishGrid');
