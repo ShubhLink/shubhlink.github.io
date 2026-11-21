@@ -1,6 +1,6 @@
 /* Curated worldwide festival names; not an exhaustive global calendar. */
 (function(){'use strict';
-const items=[
+const allItems=[
 {id:"diwali",gu:"દિવાળી",hi:"दिवाली",en:"Diwali",aliases:["diwali","deepavali","deepawali","divali","દિવાળી","दीपावली"]},
 {id:"holi",gu:"હોળી",hi:"होली",en:"Holi",aliases:["holi","holika","હોળી","होली"]},
 {id:"navratri",gu:"નવરાત્રી",hi:"नवरात्रि",en:"Navratri",aliases:["navratri","navratree","garba","નવરાત્રી","नवरात्रि"]},
@@ -59,7 +59,10 @@ const items=[
 {id:"hanuman",gu:"હનુમાન જયંતિ",hi:"हनुमान जयंती",en:"Hanuman Jayanti",aliases:["hanuman jayanti","hanuman janmotsav","હનુમાન જયંતિ","हनुमान जयंती"]},
 {id:"durga",gu:"દુર્ગા પૂજા",hi:"दुर्गा पूजा",en:"Durga Puja",aliases:["durga puja","durgapuja","દુર્ગા પૂજા","दुर्गा पूजा"]},
 {id:"karvachauth",gu:"કરવા ચોથ",hi:"करवा चौथ",en:"Karwa Chauth",aliases:["karwa chauth","karvachauth","કરવા ચોથ","करवा चौथ"]}
-];
+]; 
+// Only Hindu festival categories are exposed to cards, search matching and wishes.
+const hinduFestivalIds=new Set(["diwali","holi","navratri","dussehra","janmashtami","ganesh","newyear","onam","pongal","lohri","makarsankranti","rakhi","devdiwali","bhai","tulsivivah","ramnavami","mahashivratri","hanuman","durga","karvachauth"]);
+const items=allItems.filter(item=>hinduFestivalIds.has(item.id));
 const norm=s=>String(s||'').toLocaleLowerCase().normalize('NFKC').replace(/[._\\-]+/g,' ').replace(/\\s+/g,' ').trim();
 const compact=s=>norm(s).replace(/\\s/g,'');
 function dist(a,b){if(Math.abs(a.length-b.length)>3)return 99;let row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let old=row[0];row[0]=i;for(let j=1;j<=b.length;j++){let temp=row[j];row[j]=Math.min(row[j]+1,row[j-1]+1,old+(a[i-1]===b[j-1]?0:1));old=temp}}return row[b.length]}
