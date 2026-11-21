@@ -112,7 +112,7 @@ const knownErrors={
  quota_check_unavailable:'મેસેજ બનાવવામાં હંગામી મુશ્કેલી આવી છે.'
 };
 async function run(input,isFollowup=false){
- const text=small(input,240);lang.value=detectLang(text+' '+topic);tone.value=/કાવ્ય|poetic|शायरी/i.test(text)?'poetic':/ટૂંકું|short|छोटा/i.test(text)?'short':'warm';
+ const text=small(input,240);lang.value=detectLang(text+' '+topic);if(mode==='chat'&&/\b(what|how|why|when|where|who|explain|write|create|tell|can|please|help|about|difference|between)\b/i.test(text)&&!/[\u0a80-\u0aff\u0900-\u097f]/.test(text))lang.value='en';tone.value=/કાવ્ય|poetic|शायरी/i.test(text)?'poetic':/ટૂંકું|short|छोटा/i.test(text)?'short':'warm';
  if(isBusy||text.length<2)return;
  if(!config.url||!config.publishableKey){status.textContent='હમણાં AI ઉપલબ્ધ નથી.';return}
  if(mode==='chat'){if(!topic){topic=text;history=[];round=0}}else if(!topic||!isFollowup){topic=text;avoid=loadRecent(topic);history=[];round=0;}
@@ -141,7 +141,7 @@ async function run(input,isFollowup=false){
   output(list,mode==='creator'&&(wantsPoster(topic)||wantsPoster(text)||!!submittedPhoto),submittedPhoto);
   succeeded=true;
   round++;
-  history.push('User: '+text,'AI ideas: '+list.map(x=>small(x,130)).join(' | '));
+  history.push('User: '+text,'AI: '+list.map(x=>small(x,350)).join(' | '));
   history=history.slice(-5);
   avoid.push(...list);avoid=avoid.slice(-9);
   saveRecent(topic,list);
