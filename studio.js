@@ -78,7 +78,7 @@ function output(messages,asPoster=false,photo=null){
  box.append(el('div','ai-response-top','✦ ShubhLink AI'));
  const options=el('div','ai-options');
  (asPoster?messages.slice(0,1):messages).forEach((raw,i)=>{
-  const msg=small(raw,650),card=el('article','ai-message-card');
+  const msg=small(raw,900),card=el('article','ai-message-card');
   if(!asPoster)card.append(el('div','ai-card-label',(replyWords[lang.value]||replyWords.gu)[i]||'ખાસ મેસેજ'));
   if(!asPoster)card.append(el('p','ai-message-body',msg));
   const buttons=el('div','ai-message-actions');
