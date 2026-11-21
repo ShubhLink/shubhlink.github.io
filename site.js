@@ -98,7 +98,7 @@ const titleFor=(m,c,l)=>{
 const catName=(c,l)=>c[l]||c.gu;
 function catCard(c){
  const a=document.createElement('a');a.className='catbox cat-'+c.id;a.href='wishes.html?c='+enc(c.id);a.setAttribute('aria-label',c.gu+' માટે મેસેજ જુઓ');
- const emoji=document.createElement('span');emoji.className='catemoji';emoji.textContent=c.emoji;
+ const emoji=document.createElement('span');emoji.className='catemoji';emoji.textContent=c.emoji; if(document.getElementById('allCats')){const terms={morning:'sunrise,mountains',birthday:'birthday,cake',suvichar:'books,coffee',newthought:'lightbulb,books',night:'moon,night',friendship:'friends,together',anniversary:'wedding,rings',congrats:'celebration,confetti'};const term=terms[c.id]||'celebration';const img=document.createElement('img');img.className='category-real-photo';img.src='https://loremflickr.com/640/420/'+term+'?lock='+Array.from(c.id).reduce((n,ch)=>n+ch.charCodeAt(0),0);img.alt='';img.loading='lazy';img.onerror=()=>img.remove();emoji.append(img)}
  const title=document.createElement('strong');title.textContent=c.gu;
  const desc=document.createElement('small');
  const messages=D.wishes.gu?.[c.id]||[];
