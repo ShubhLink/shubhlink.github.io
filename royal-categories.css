@@ -27,3 +27,9 @@
 .royal-categories .allcats .catbox .catemoji{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;border:0!important;border-radius:0!important;background:linear-gradient(135deg,#70375e,#d1a66d)!important;box-shadow:none!important;font-size:56px!important}
 .royal-categories .allcats .catbox .category-real-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0}
 .royal-categories .allcats .catbox strong{position:relative!important;z-index:3!important;max-width:96%;padding:7px 12px 5px!important;border:2px solid #d6a955!important;border-radius:999px!important;background:linear-gradient(#fffdf0,#ffe4a7)!important;color:#3c1950!important;font-size:clamp(13px,3.6vw,19px)!important;line-height:1.4!important;text-align:center;box-shadow:0 2px 8px #35152255}
+
+/* Fix mobile card overlap and horizontal overflow */
+.royal-categories .allcats,.festival-category-grid{gap:12px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;max-width:100%!important;min-width:0!important}
+.royal-categories .allcats .catbox,.festival-category-card{box-sizing:border-box!important;min-width:0!important;width:100%!important;max-width:100%!important;transform:none!important;aspect-ratio:1.48!important}
+.royal-categories .allcats .catbox .catemoji{box-sizing:border-box!important}
+@media(max-width:380px){.royal-categories .allcats,.festival-category-grid{gap:9px!important}}
