@@ -10,6 +10,8 @@ if(!list||!catSel||!langSel||!search)return;
 const params=new URLSearchParams(location.search);
 const languages=["gu","hi","en"];
 const categories=data.categories.filter(c=>c.id!=="afternoon");
+const festivals=window.ShubhWorldFestivals?.items||[];
+for(const f of festivals)if(!categories.some(c=>c.id===f.id))categories.push({id:f.id,gu:f.gu,hi:f.hi,en:f.en,emoji:"🌺"});
 const cache=new Map();
 const short=s=>String(s||"").replace(/[\u0000-\u001f]/g," ").trim();
 const label=(cat,l)=>cat?.[l]||cat?.gu||"મેસેજ";
@@ -22,7 +24,7 @@ const fallbackTitle=(body,cat)=>{
 const requestedCat=params.get("c");
 let currentCat=categories.some(c=>c.id===requestedCat)?requestedCat:"morning";
 let currentLang=languages.includes(params.get("l"))?params.get("l"):"gu";
-let fetchSequence=0;
+let fetchSequence=0;\nlet visibleCount=30;
 function addCategory(c){
  if(!c||c.id==="afternoon"||categories.some(item=>item.id===c.id))return;
  categories.push(c);
@@ -42,7 +44,7 @@ function builtIn(category,language){
 }
 function assembled(category,language){
  const key=category+"|"+language;
- const base=builtIn(category,language);
+ const base=builtIn(category,language);\n if(language==="gu"&&window.ShubhExpandedMessages){const fest=festivals.find(f=>f.id===category);for(const [i,body] of window.ShubhExpandedMessages.generate(category,fest?.gu).entries())base.push({body,title:fest?.gu||categories.find(c=>c.id===category)?.gu,key:"expanded-"+i});}
  const saved=[...(window.ShubhDaily?.get(category,language)||[]),...(cache.get(key)||[])];
  const seen=new Set();
  const rows=[];
@@ -104,8 +106,8 @@ function render(){
   try{sessionStorage.setItem(storageKey,rows[0].body)}catch(_e){}
  }
  const frag=document.createDocumentFragment();
- for(const row of rows)frag.append(messageCard(row,c,l));
- list.replaceChildren(frag);
+ for(const row of rows.slice(0,visibleCount))frag.append(messageCard(row,c,l));
+ list.replaceChildren(frag);\n if(rows.length>visibleCount){const more=document.createElement("button");more.type="button";more.className="refresh-wishes";more.textContent="વધુ મેસેજ જુઓ ("+(rows.length-visibleCount)+" બાકી)";more.onclick=()=>{visibleCount+=30;render()};list.append(more);}
  const meta=$("resultMeta");
  if(meta)meta.textContent=rows.length+" મેસેજ";
  if(!rows.length){
@@ -153,7 +155,7 @@ async function loadCategories(){
   }
  }catch(_err){}
 }
-function changeCategory(){
+function changeCategory(){\n visibleCount=30;
  currentCat=catSel.value;currentLang=langSel.value;
  render();
  hydrate(currentCat,currentLang);
