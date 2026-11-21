@@ -18,7 +18,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python -m pip install --disable-pip-version-check Pillow
+      - name: Install image converter
+        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Show source images
+        run: |
+          python --version
+          find assets/categories -maxdepth 1 -name '*.png' | wc -l
       - name: Convert category images
         run: |
           python - <<'PY'
@@ -39,5 +44,6 @@ jobs:
           git add assets/categories/*.webp
           if ! git diff --cached --quiet; then
             git commit -m "Add optimized WebP category images"
-            git push
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
