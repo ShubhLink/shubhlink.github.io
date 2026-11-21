@@ -102,7 +102,8 @@ function output(messages,asPoster=false,photo=null){
 }
 const knownErrors={
  rate_limit:'આજના મફત AI મેસેજની મર્યાદા પૂરી થઈ ગઈ છે. આવતીકાલે ફરી બનાવશો.',
- ai_quota_exceeded:'AI ના મફત ઉપયોગની મર્યાદા હાલ પૂરી થઈ છે.',
+ ai_quota_exceeded:'Gemini AI ની મફત મર્યાદા હાલ પૂરી થઈ છે.',
+ ai_provider_rate_limited:'Gemini AI પર હાલમાં વધારે વિનંતીઓ છે. થોડી વાર પછી પ્રયાસ કરો.',
  ai_provider_busy:'હમણાં AI વ્યસ્ત છે. થોડા સમય પછી ફરી પ્રયાસ કરો.',
  ai_temporarily_unavailable:'હમણાં મેસેજ બની શક્યો નથી. ફરી પ્રયાસ કરો.',
  ai_model_unavailable:'AI મોડેલ હમણાં ઉપલબ્ધ નથી.',
