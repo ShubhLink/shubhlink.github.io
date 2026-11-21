@@ -95,9 +95,9 @@ def main():
             req = urllib.request.Request(endpoint,payload,
                     {"x-goog-api-key":key,"Content-Type":"application/json"},method="POST")
             generated=None
-            for attempt in range(3):
+            for attempt in range(2):
                 try:
-                    with urllib.request.urlopen(req,timeout=35) as res:
+                    with urllib.request.urlopen(req,timeout=12) as res:
                         answer=json.load(res)
                     generated=json.loads(answer["candidates"][0]["content"]["parts"][0]["text"])["messages"]
                     break
@@ -108,12 +108,20 @@ def main():
                         print(f"Gemini API unavailable (HTTP {exc.code}); switching to free fallback.",flush=True)
                         publish_fallback()
                         return
+                    if exc.code in (429,500,502,503,504):
+                        print(f"Gemini overloaded (HTTP {exc.code}); switching to fast fallback.",flush=True)
+                        publish_fallback()
+                        return
                     if exc.code==429:
                         failures.append(f"{language}/{cat}: quota exceeded")
                         quota_exhausted=True
                         break
                 except (TimeoutError, socket.timeout, urllib.error.URLError, ValueError, KeyError, IndexError) as exc:
-                    print(f"Gemini attempt {attempt+1}/3 failed on {language}/{cat}: {exc}",flush=True)
+                    print(f"Gemini attempt {attempt+1}/2 failed on {language}/{cat}: {exc}",flush=True)
+                    if attempt==1:
+                        print("Gemini timed out twice; switching to fast fallback.",flush=True)
+                        publish_fallback()
+                        return
                 if attempt<2 and not quota_exhausted:time.sleep(3*(attempt+1))
             if generated is None:
                 failures.append(f"{language}/{cat}: no response")
