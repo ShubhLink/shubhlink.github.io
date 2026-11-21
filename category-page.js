@@ -17,14 +17,16 @@ const short=s=>String(s||"").replace(/[\u0000-\u001f]/g," ").trim();
 const label=(cat,l)=>cat?.[l]||cat?.gu||"મેસેજ";
 const fallbackTitle=(body,cat)=>{
   const plain=short(body).replace(/^[^\p{L}\p{N}]+/u,"");
-  const sentences=plain.split(/[.!?।॥\n]/).map(v=>v.trim()).filter(Boolean);
+  const sentences=plain.split(/[.!?।॥
+]/).map(v=>v.trim()).filter(Boolean);
   const title=sentences.find(v=>v.length>7)||sentences[0]||cat?.gu||"ખાસ મેસેજ";
   return title.length>65?title.slice(0,62)+"…":title;
 };
 const requestedCat=params.get("c");
 let currentCat=categories.some(c=>c.id===requestedCat)?requestedCat:"morning";
 let currentLang=languages.includes(params.get("l"))?params.get("l"):"gu";
-let fetchSequence=0;\nlet visibleCount=30;
+let fetchSequence=0;
+let visibleCount=30;
 function addCategory(c){
  if(!c||c.id==="afternoon"||categories.some(item=>item.id===c.id))return;
  categories.push(c);
@@ -44,7 +46,8 @@ function builtIn(category,language){
 }
 function assembled(category,language){
  const key=category+"|"+language;
- const base=builtIn(category,language);\n if(language==="gu"&&window.ShubhExpandedMessages){const fest=festivals.find(f=>f.id===category);for(const [i,body] of window.ShubhExpandedMessages.generate(category,fest?.gu).entries())base.push({body,title:fest?.gu||categories.find(c=>c.id===category)?.gu,key:"expanded-"+i});}
+ const base=builtIn(category,language);
+ if(language==="gu"&&window.ShubhExpandedMessages){const fest=festivals.find(f=>f.id===category);for(const [i,body] of window.ShubhExpandedMessages.generate(category,fest?.gu).entries())base.push({body,title:fest?.gu||categories.find(c=>c.id===category)?.gu,key:"expanded-"+i});}
  const saved=[...(window.ShubhDaily?.get(category,language)||[]),...(cache.get(key)||[])];
  const seen=new Set();
  const rows=[];
@@ -76,7 +79,12 @@ function messageCard(message,category,language){
   if(window.ShubhShare?.open){
    window.ShubhShare.open({title:h.textContent,body:message.body,language,category});
   }else{
-   const text=h.textContent+"\n\n"+message.body+"\n\n🔗 ShubhLink પર મેસેજ બનાવો\nhttps://shubhlink.github.io/";
+   const text=h.textContent+"
+
+"+message.body+"
+
+🔗 ShubhLink પર મેસેજ બનાવો
+https://shubhlink.github.io/";
    window.open("https://api.whatsapp.com/send?text="+encodeURIComponent(text),"_blank","noopener");
   }
  };
@@ -107,7 +115,8 @@ function render(){
  }
  const frag=document.createDocumentFragment();
  for(const row of rows.slice(0,visibleCount))frag.append(messageCard(row,c,l));
- list.replaceChildren(frag);\n if(rows.length>visibleCount){const more=document.createElement("button");more.type="button";more.className="refresh-wishes";more.textContent="વધુ મેસેજ જુઓ ("+(rows.length-visibleCount)+" બાકી)";more.onclick=()=>{visibleCount+=30;render()};list.append(more);}
+ list.replaceChildren(frag);
+ if(rows.length>visibleCount){const more=document.createElement("button");more.type="button";more.className="refresh-wishes";more.textContent="વધુ મેસેજ જુઓ ("+(rows.length-visibleCount)+" બાકી)";more.onclick=()=>{visibleCount+=30;render()};list.append(more);}
  const meta=$("resultMeta");
  if(meta)meta.textContent=rows.length+" મેસેજ";
  if(!rows.length){
@@ -155,7 +164,8 @@ async function loadCategories(){
   }
  }catch(_err){}
 }
-function changeCategory(){\n visibleCount=30;
+function changeCategory(){
+ visibleCount=30;
  currentCat=catSel.value;currentLang=langSel.value;
  render();
  hydrate(currentCat,currentLang);
