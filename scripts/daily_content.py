@@ -2,7 +2,7 @@
 """Daily ShubhLink publisher. Requires Gemini API key for fresh AI-written messages.
 No secret is committed to the repository. Safely skips when key is missing.
 """
-import datetime, json, os, pathlib, urllib.request, urllib.error, time, socket
+import datetime, json, os, pathlib, urllib.request, urllib.error, time, socket, itertools
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / "daily-content.json"
 CATS = ["birthday","morning","suvichar","newthought","night","rakhi","friendship","anniversary","congrats"]
@@ -51,9 +51,10 @@ def publish_fallback():
     for lang,by_cat in FALLBACK.items():
         for cat,lines in by_cat.items():
             if any(m.get("date")==today and m.get("category")==cat and m.get("language")==lang for m in rows):continue
-            # Rotate sentence order for a finite fallback pool; never publish duplicates.
-            for shift in range(5):
-                order=[lines[(i+shift+day)%len(lines)] for i in range(len(lines))]
+            # Rotate 120 distinct arrangements per category and language without duplicating text.
+            arrangements=list(itertools.permutations(lines))
+            for shift in range(len(arrangements)):
+                order=arrangements[(shift+day)%len(arrangements)]
                 body="\n\n".join([order[0], " ".join(order[1:4]), order[4]])
                 if body.casefold() in seen:continue
                 rows.append({"date":today,"category":cat,"language":lang,"body":body})
