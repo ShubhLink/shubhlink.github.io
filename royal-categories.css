@@ -20,3 +20,10 @@
 .royal-categories .allcats .cat-congrats{--jewel:#28745b;--light:#e6f4df}
 @media(min-width:800px){.royal-categories .allcats{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:23px!important}.royal-categories .allcats .catbox{min-height:245px!important}}
 @media(max-width:380px){.royal-categories .allcats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.royal-categories .allcats .catbox{min-height:196px!important;padding:20px 6px!important}.royal-categories .allcats .catbox .catemoji{width:69px!important;height:69px!important;font-size:38px!important}}
+
+/* Premium photo tiles for original categories */
+.royal-categories .allcats .catbox{min-height:0!important;aspect-ratio:1.5!important;overflow:hidden!important;justify-content:flex-end!important;padding:0 8px 10px!important;border:3px solid #d4a755!important;border-radius:24px!important;background:linear-gradient(135deg,#713e5d,#d5a85d)!important;box-shadow:0 5px 14px #744c5029!important}
+.royal-categories .allcats .catbox:before,.royal-categories .allcats .catbox:after{display:none!important}
+.royal-categories .allcats .catbox .catemoji{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;border:0!important;border-radius:0!important;background:linear-gradient(135deg,#70375e,#d1a66d)!important;box-shadow:none!important;font-size:56px!important}
+.royal-categories .allcats .catbox .category-real-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0}
+.royal-categories .allcats .catbox strong{position:relative!important;z-index:3!important;max-width:96%;padding:7px 12px 5px!important;border:2px solid #d6a955!important;border-radius:999px!important;background:linear-gradient(#fffdf0,#ffe4a7)!important;color:#3c1950!important;font-size:clamp(13px,3.6vw,19px)!important;line-height:1.4!important;text-align:center;box-shadow:0 2px 8px #35152255}
