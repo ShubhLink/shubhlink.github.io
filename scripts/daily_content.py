@@ -91,7 +91,7 @@ def main():
                       "not repetitive, no numbered lists, no generic repeated endings. "
                       "Return ONLY a JSON object with key 'messages' containing an array of 12 strings.")
             payload = json.dumps({"contents":[{"parts":[{"text":prompt}]}],"generationConfig":{"temperature":1.0,"responseMimeType":"application/json"}}).encode()
-            endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+            endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent"
             req = urllib.request.Request(endpoint,payload,
                     {"x-goog-api-key":key,"Content-Type":"application/json"},method="POST")
             generated=None
@@ -105,7 +105,9 @@ def main():
                     details=exc.read().decode("utf-8","replace")[:600]
                     print(f"Gemini HTTP {exc.code} on {language}/{cat}: {details}",flush=True)
                     if exc.code in (400,401,403,404):
-                        raise RuntimeError(f"Gemini API configuration error HTTP {exc.code}: {details}") from exc
+                        print(f"Gemini API unavailable (HTTP {exc.code}); switching to free fallback.",flush=True)
+                        publish_fallback()
+                        return
                     if exc.code==429:
                         failures.append(f"{language}/{cat}: quota exceeded")
                         quota_exhausted=True
