@@ -7,3 +7,7 @@
 .royal-categories .allcats>.catbox strong{position:relative!important;z-index:2!important;display:block!important;max-width:100%!important;padding:6px 12px!important;box-sizing:border-box!important;border:2px solid #d5ab59!important;border-radius:999px!important;background:linear-gradient(#fffef2,#ffe6ac)!important;color:#3c1950!important;font-weight:900!important;font-size:clamp(13px,3.5vw,19px)!important;line-height:1.45!important;white-space:normal!important}
 .royal-categories .allcats>.catbox small,.royal-categories .allcats>.catbox .catgo,.royal-categories .allcats>.catbox .arrow{display:none!important}
 @media(min-width:800px){.royal-categories .allcats{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+
+/* Artwork PNG already contains the category name. */
+.royal-categories .allcats>.catbox.has-artwork strong{display:none!important}
+.royal-categories .allcats>.catbox:not(.has-artwork) .catemoji{background:radial-gradient(circle at 30% 20%,#f6e4c7,#ac7691 65%,#603c67)!important}
