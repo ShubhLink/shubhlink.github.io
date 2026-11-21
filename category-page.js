@@ -17,14 +17,14 @@ const short=s=>String(s||"").replace(/[\u0000-\u001f]/g," ").trim();
 const label=(cat,l)=>cat?.[l]||cat?.gu||"મેસેજ";
 const fallbackTitle=(body,cat)=>{
   const plain=short(body).replace(/^[^\p{L}\p{N}]+/u,"");
-  const sentences=plain.split(/[.!?।॥
-]/).map(v=>v.trim()).filter(Boolean);
+  const sentences=plain.split(/[.!?।॥\n]/).map(v=>v.trim()).filter(Boolean);
   const title=sentences.find(v=>v.length>7)||sentences[0]||cat?.gu||"ખાસ મેસેજ";
   return title.length>65?title.slice(0,62)+"…":title;
 };
 const requestedCat=params.get("c");
 let currentCat=categories.some(c=>c.id===requestedCat)?requestedCat:"morning";
-let currentLang=languages.includes(params.get("l"))?params.get("l"):"gu";
+let savedLanguage="gu";try{savedLanguage=localStorage.getItem("shubhlink-language")||"gu"}catch(_e){}
+let currentLang=languages.includes(params.get("l"))?params.get("l"):(languages.includes(savedLanguage)?savedLanguage:"gu");
 let fetchSequence=0;
 let visibleCount=30;
 function addCategory(c){
@@ -79,12 +79,7 @@ function messageCard(message,category,language){
   if(window.ShubhShare?.open){
    window.ShubhShare.open({title:h.textContent,body:message.body,language,category});
   }else{
-   const text=h.textContent+"
-
-"+message.body+"
-
-🔗 ShubhLink પર મેસેજ બનાવો
-https://shubhlink.github.io/";
+   const text=[h.textContent,message.body,"🔗 ShubhLink પર મેસેજ બનાવો","https://shubhlink.github.io/"].join("\\n\\n");
    window.open("https://api.whatsapp.com/send?text="+encodeURIComponent(text),"_blank","noopener");
   }
  };
@@ -170,7 +165,7 @@ function changeCategory(){
  render();
  hydrate(currentCat,currentLang);
 }
-catSel.onchange=changeCategory;langSel.onchange=changeCategory;
+catSel.onchange=changeCategory;langSel.onchange=()=>{try{localStorage.setItem("shubhlink-language",langSel.value)}catch(_e){}changeCategory()};
 search.oninput=()=>render();
 render(); // Critical: static messages are visible before any fetch finishes.
 hydrate(currentCat,currentLang);
