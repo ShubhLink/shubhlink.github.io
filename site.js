@@ -57,13 +57,14 @@ if(backend.url&&backend.publishableKey){
   if(!catResponse.ok)throw Error('Categories could not load');
   const cats=await catResponse.json();
   for(const c of cats){
+   if(c.id==='afternoon'||c.id==='festival')continue;
    if(!D.categories.some(x=>x.id===c.id)){
     D.categories.push({id:c.id,emoji:c.emoji,gu:c.name_gu,hi:c.name_hi,en:c.name_en,desc:c.description_gu,color:c.color||'pink'});
    }
   }
   const newWishes={};
   for(const m of messages){
-   if(!['gu','hi','en'].includes(m.language))continue;
+   if(!['gu','hi','en'].includes(m.language)||m.category_id==='afternoon'||m.category_id==='festival')continue;
    if(m.title)dbTitleMap.set(m.language+'|'+m.category_id+'|'+m.body,m.title);
    if(m.featured)dbFeatured.add(m.language+'|'+m.category_id+'|'+m.body);
    if(m.source==='ai_daily'&&m.generated_on)dbDaily.push(m);
