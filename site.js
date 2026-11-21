@@ -21,7 +21,7 @@ function renderLocalCards(hostId,limit){
   const c=D.categories.find(x=>x.id===id);if(!c)continue;
   const a=document.createElement('a');a.href='wishes.html?c='+encodeURIComponent(c.id);
   a.className='catbox cat-'+c.id;
-  const icon=document.createElement('span');icon.className='catemoji';icon.textContent=c.emoji;
+  const icon=document.createElement('span');icon.className='catemoji';icon.textContent=hostId==='allCats'?'':c.emoji;
   if(hostId==='allCats'){
    const filenames={morning:'suprabhat',birthday:'birthday',suvichar:'daily-suvichar',newthought:'new-thought',night:'good-night',friendship:'friendship',anniversary:'anniversary',congrats:'congratulations'};
    const base='assets/categories/'+(filenames[c.id]||c.id);
