@@ -22,6 +22,14 @@ function renderLocalCards(hostId,limit){
   const a=document.createElement('a');a.href='wishes.html?c='+encodeURIComponent(c.id);
   a.className='catbox cat-'+c.id;
   const icon=document.createElement('span');icon.className='catemoji';icon.textContent=c.emoji;
+  if(hostId==='allCats'){
+   const filenames={morning:'suprabhat',birthday:'birthday',suvichar:'daily-suvichar',newthought:'new-thought',night:'good-night',friendship:'friendship',anniversary:'anniversary',congrats:'congratulations'};
+   const base='assets/categories/'+(filenames[c.id]||c.id);
+   const img=document.createElement('img');img.className='category-real-photo';img.alt='';img.width=480;img.height=324;img.loading=host.children.length<4?'eager':'lazy';img.decoding='async';img.src=base+'.webp';
+   a.classList.add('artwork-pending');img.onload=()=>{a.classList.remove('artwork-pending');a.classList.add('has-artwork')};
+   img.onerror=()=>{if(img.src.endsWith('.webp')){img.src=base+'.png';return}img.remove();a.classList.remove('artwork-pending')};
+   icon.textContent='';icon.append(img);
+  }
   const title=document.createElement('strong');title.textContent=c.gu;
   const desc=document.createElement('small');desc.textContent=c.desc||'';
   const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';
@@ -144,7 +152,7 @@ if($('dailyFeed')&&$('dailyFeedGrid')){
   $('dailyFeed').hidden=false;
  }
 }
-if($('allCats')){
+if($('allCats')&&!$('allCats').children.length){
  $('allCats').replaceChildren();
  const first=window.ShubhCalendar?.currentCategory()||'morning';
  const hasEvent=(window.ShubhCalendar?.todayEvents()||[]).length>0;
