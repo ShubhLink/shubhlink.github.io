@@ -5,7 +5,7 @@ No secret is committed to the repository. Safely skips when key is missing.
 import datetime, json, os, pathlib, urllib.request, urllib.error, time, socket
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / "daily-content.json"
-CATS = ["birthday","morning","suvichar","newthought","night","festival","friendship","anniversary","congrats"]
+CATS = ["birthday","morning","suvichar","newthought","night","rakhi","friendship","anniversary","congrats"]
 LANGS = {"gu":"Gujarati","hi":"Hindi","en":"English"}
 def main():
     key = os.getenv("GEMINI_API_KEY", "").strip() or os.getenv("OPENAI_API_KEY", "").strip()
@@ -27,12 +27,12 @@ def main():
             if sum(x.get("date")==today and x.get("language")==lang and x.get("category")==cat for x in rows)>=10:
                 continue
             print(f"Generating {language}/{cat}", flush=True)
-            prompt = (f"Write exactly 12 original, natural, high-quality {language} short shareable messages "
-                      f"for the category {cat}. Each must be 1-3 sentences, warm, culturally appropriate, "
+            prompt = (f"Write exactly 12 original, natural, high-quality {language} detailed, heartfelt, shareable greeting messages "
+                      f"for the category {cat}. Each should be 4-7 sentences, warm, culturally appropriate, "
                       "not repetitive, no numbered lists, no generic repeated endings. "
                       "Return ONLY a JSON object with key 'messages' containing an array of 12 strings.")
             payload = json.dumps({"contents":[{"parts":[{"text":prompt}]}],"generationConfig":{"temperature":1.0,"responseMimeType":"application/json"}}).encode()
-            endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent"
+            endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
             req = urllib.request.Request(endpoint,payload,
                     {"x-goog-api-key":key,"Content-Type":"application/json"},method="POST")
             generated=None
