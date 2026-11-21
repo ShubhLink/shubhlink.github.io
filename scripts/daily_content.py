@@ -127,7 +127,9 @@ def main():
     if failures: print("Skipped batches: "+", ".join(failures),flush=True)
     if quota_exhausted: print("Free-tier quota exhausted; preserving successfully generated messages.",flush=True)
     if sum(x.get("date")==today for x in rows)==0:
-        raise RuntimeError("No new messages generated. Check Gemini API free-tier quota, key and logs.")
+        print("AI unavailable or quota exhausted: using built-in messages.",flush=True)
+        publish_fallback()
+        return
     history["messages"]=rows[-30000:]
     OUT.write_text(json.dumps(history,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(f"Published {sum(x.get('date')==today for x in rows)} messages for {today}")
