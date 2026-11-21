@@ -28,7 +28,7 @@ let currentLang=languages.includes(params.get("l"))?params.get("l"):(languages.i
 let fetchSequence=0;
 let visibleCount=30;
 function addCategory(c){
- if(!c||c.id==="afternoon"||categories.some(item=>item.id===c.id))return;
+ if(!c||c.id==="afternoon"||c.id==="festival"||categories.some(item=>item.id===c.id))return;
  categories.push(c);
  const option=document.createElement("option");
  option.value=c.id;option.textContent=(c.emoji||"💌")+" "+c.gu;catSel.append(option);
