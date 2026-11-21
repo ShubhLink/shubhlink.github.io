@@ -28,6 +28,7 @@ function el(tag,cls,txt){
  const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e
 }
 function chatScroll(){board.scrollTop=board.scrollHeight}
+function isCreatorRequest(t){return /message|msg|wish|greeting|caption|poster|status|quote|શુભેચ્છા|મેસેજ|સંદેશ|પોસ્ટર|કૅપ્શન|जन्मदिन|शुभकामना|संदेश|पोस्टर|દિવાળી|diwali|birthday|anniversary|welcome|બનેવી|suprabhat|good morning|good night|નવરાત્રી|રક્ષાબંધન|rakhi/i.test(t)}
 function welcome(){
  board.replaceChildren();
  const v=el('div','ai-welcome'),icon=el('span','ai-welcome-icon',mode==='chat'?'✨':'💌'),h=el('h2','',mode==='chat'?'Ask ShubhLink AI anything':'કોણ માટે મેસેજ બનાવીએ?'),list=el('div','ai-starters');
@@ -112,7 +113,7 @@ const knownErrors={
  quota_check_unavailable:'મેસેજ બનાવવામાં હંગામી મુશ્કેલી આવી છે.'
 };
 async function run(input,isFollowup=false){
- const text=small(input,240);lang.value=detectLang(text+' '+topic);if(mode==='chat'&&/\b(what|how|why|when|where|who|explain|write|create|tell|can|please|help|about|difference|between)\b/i.test(text)&&!/[\u0a80-\u0aff\u0900-\u097f]/.test(text))lang.value='en';tone.value=/કાવ્ય|poetic|शायरी/i.test(text)?'poetic':/ટૂંકું|short|छोटा/i.test(text)?'short':'warm';
+ const text=small(input,240);if(!isFollowup)mode=isCreatorRequest(text)?'creator':'chat';lang.value=detectLang(text+' '+topic);if(mode==='chat'&&/\b(what|how|why|when|where|who|explain|write|create|tell|can|please|help|about|difference|between)\b/i.test(text)&&!/[\u0a80-\u0aff\u0900-\u097f]/.test(text))lang.value='en';tone.value=/કાવ્ય|poetic|शायरी/i.test(text)?'poetic':/ટૂંકું|short|छोटा/i.test(text)?'short':'warm';
  if(isBusy||text.length<2)return;
  if(!config.url||!config.publishableKey){status.textContent='હમણાં AI ઉપલબ્ધ નથી.';return}
  if(mode==='chat'){if(!topic){topic=text;history=[];round=0}}else if(!topic||!isFollowup){topic=text;avoid=loadRecent(topic);history=[];round=0;}
@@ -155,7 +156,7 @@ async function run(input,isFollowup=false){
 form.onsubmit=e=>{e.preventDefault();const text=prompt.value.trim();if(text.length<2){status.textContent='મેસેજ વિશે બે શબ્દ લખો.';return}run(text,false)};
 prompt.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();form.requestSubmit()}};
 $('aiNewChat').onclick=()=>{topic='';history=[];avoid=[];round=0;prompt.value='';status.textContent='';welcome();prompt.focus()};
-const modeSwitch=$('aiModeSwitch');if(modeSwitch){modeSwitch.value=mode;modeSwitch.onchange=()=>{mode=modeSwitch.value==='creator'?'creator':'chat';topic='';history=[];avoid=[];round=0;welcome();prompt.placeholder=mode==='chat'?'Ask anything in Gujarati, Hindi or English...':'Describe the message you want...';}};
+
 lang.value=detectLang(searchParams.get('q')||'');
 const text=searchParams.get('q')||searchParams.get('prompt')||'';
 prompt.value=small(text,240);
