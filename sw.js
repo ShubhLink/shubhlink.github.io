@@ -1,4 +1,4 @@
-const CACHE='shubhlink-shell-v3';
+const CACHE='shubhlink-shell-v4';
 const SHELL=['./','./index.html','./categories.html','./wishes.html','./search.html','./favorites.html','./ai.html','./icon.svg','./site.css','./unified.css','./data.js','./reference-home.js','./daily-loader.js'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(async cache=>{
@@ -12,7 +12,7 @@ self.addEventListener('fetch',event=>{
  const req=event.request;
  if(req.method!=='GET'||new URL(req.url).origin!==location.origin)return;
  const url=new URL(req.url);
- if(url.pathname.endsWith('/categories.html')||url.pathname.endsWith('/site.js')||url.pathname.endsWith('/festival-categories.js')||url.pathname.endsWith('/daily-content.json')){
+ if(url.pathname.endsWith('/categories.html')||url.pathname.endsWith('/site.js')||url.pathname.endsWith('/festival-categories.js')||url.pathname.endsWith('/ai.html')||url.pathname.endsWith('/studio.js')||url.pathname.endsWith('/studio.css')||url.pathname.endsWith('/daily-content.json')){
   event.respondWith(fetch(req,{cache:'no-store'}).catch(()=>caches.match(req)));
   return;
  }
