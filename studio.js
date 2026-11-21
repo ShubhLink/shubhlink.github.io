@@ -113,7 +113,7 @@ async function run(input,isFollowup=false){
  const text=small(input,240);lang.value=detectLang(text+' '+topic);tone.value=/કાવ્ય|poetic|शायरी/i.test(text)?'poetic':/ટૂંકું|short|छोटा/i.test(text)?'short':'warm';
  if(isBusy||text.length<2)return;
  if(!config.url||!config.publishableKey){status.textContent='હમણાં AI ઉપલબ્ધ નથી.';return}
- if(!topic||!isFollowup){if(!topic){topic=text;avoid=loadRecent(topic)}}
+ if(!topic||!isFollowup){topic=text;avoid=loadRecent(topic);history=[];round=0;}
  isBusy=true;send.disabled=true;
  let succeeded=false;
  const submittedPhoto=attachedImage;
@@ -125,7 +125,7 @@ async function run(input,isFollowup=false){
  try{
   const request={
    topic:small(topic,180),language:lang.value,tone:tone.value,
-   instruction:round>0?text:'',history:history.slice(-5),avoid:avoid.slice(-9)
+   instruction:isFollowup?text:'',history:history.slice(-5),avoid:avoid.slice(-9)
   };
   const response=await fetch(config.url.replace(/\/$/,'')+'/functions/v1/compose-wish',{
    method:'POST',headers:{'content-type':'application/json','apikey':config.publishableKey},
