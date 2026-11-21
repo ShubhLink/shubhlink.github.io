@@ -21,7 +21,7 @@ function format(){
  if(from)blocks.push('🌸 '+t.suffix+' — '+from);
  // Link back to the public site, never to an editor URL containing encoded names/messages.
  // Keep it literal and short so WhatsApp shows one readable clickable link.
- blocks.push('🔗 ShubhLink પર તમારા નામથી મેસેજ બનાવો\nhttps://shubhlink.github.io/');
+ blocks.push((l==='hi'?'🔗 ShubhLink पर अपने नाम से मैसेज बनाएं':l==='en'?'🔗 Create a message with your name on ShubhLink':'🔗 ShubhLink પર તમારા નામથી મેસેજ બનાવો')+'\nhttps://shubhlink.github.io/');
  return blocks.filter(Boolean).join('\n\n');
 }
 function update(){
