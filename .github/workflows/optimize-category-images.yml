@@ -35,6 +35,15 @@ jobs:
                   im=ImageOps.exif_transpose(original)
                   im.thumbnail((720, 540), Image.Resampling.LANCZOS)
                   im.save(target,'WEBP',quality=78,method=6)
+              clean=source.with_name(source.stem+'.clean.webp')
+              with Image.open(source) as original:
+                  im=ImageOps.exif_transpose(original).convert('RGB')
+                  w,h=im.size
+                  # Remove the printed title plaque at the bottom of existing artwork.
+                  im=im.crop((int(w*.035),int(h*.055),int(w*.965),int(h*.655)))
+                  im=ImageOps.fit(im,(960,640),method=Image.Resampling.LANCZOS,centering=(.5,.4))
+                  im.save(clean,'WEBP',quality=87,method=6)
+              print(f'Clean photo: {clean.name}: {clean.stat().st_size} bytes')
               print(f'{source.name}: {source.stat().st_size} -> {target.stat().st_size} bytes')
           PY
       - name: Commit optimized images
