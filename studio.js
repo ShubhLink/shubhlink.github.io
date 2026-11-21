@@ -150,7 +150,7 @@ async function run(input,isFollowup=false){
   messageTurn('assistant',e?.message||'મેસેજ નથી બન્યો.');
  }finally{isBusy=false;send.disabled=false;if(!succeeded)chatScroll()}
 }
-form.onsubmit=e=>{e.preventDefault();const text=prompt.value.trim();if(text.length<2){status.textContent='મેસેજ વિશે બે શબ્દ લખો.';return}run(text,round>0)};
+form.onsubmit=e=>{e.preventDefault();const text=prompt.value.trim();if(text.length<2){status.textContent='મેસેજ વિશે બે શબ્દ લખો.';return}run(text,false)};
 prompt.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();form.requestSubmit()}};
 $('aiNewChat').onclick=()=>{topic='';history=[];avoid=[];round=0;prompt.value='';status.textContent='';welcome();prompt.focus()};
 lang.value=detectLang(searchParams.get('q')||'');
