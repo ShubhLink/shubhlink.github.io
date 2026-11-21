@@ -7,7 +7,7 @@ const prompt=$('aiPrompt'),board=$('aiConversation'),status=$('aiStatus'),send=$
 const config=window.SHUBHLINK_BACKEND||{};
 const searchParams=new URLSearchParams(location.search);
 const lang={value:'gu'},tone={value:'warm'};const photoInput=$('aiPhoto'),photoPreview=$('aiPhotoPreview');let attachedImage=null;function detectLang(t){return /[\u0900-\u097f]/.test(t)?'hi':/[\u0a80-\u0aff]/.test(t)?'gu':/\b(hindi|हिन्दी|हिंदी)\b/i.test(t)?'hi':/\b(english|અંગ્રેજી)\b/i.test(t)?'en':'gu'}
-let isBusy=false,topic='',history=[],avoid=[],round=0;let mode='chat';
+let isBusy=false,topic='',history=[],avoid=[],round=0;let mode='creator';
 function memoryKey(q){
  const v=String(q||'').toLocaleLowerCase().slice(0,90);let h=2166136261;
  for(let i=0;i<v.length;i++){h=Math.imul(h^v.charCodeAt(i),16777619)}
@@ -31,8 +31,8 @@ function chatScroll(){board.scrollTop=board.scrollHeight}
 function isCreatorRequest(t){return /message|msg|wish|greeting|caption|poster|status|quote|શુભેચ્છા|મેસેજ|સંદેશ|પોસ્ટર|કૅપ્શન|जन्मदिन|शुभकामना|संदेश|पोस्टर|દિવાળી|diwali|birthday|anniversary|welcome|બનેવી|suprabhat|good morning|good night|નવરાત્રી|રક્ષાબંધન|rakhi/i.test(t)}
 function welcome(){
  board.replaceChildren();
- const v=el('div','ai-welcome'),icon=el('span','ai-welcome-icon',mode==='chat'?'✨':'💌'),h=el('h2','',mode==='chat'?'Ask ShubhLink AI anything':'કોણ માટે મેસેજ બનાવીએ?'),list=el('div','ai-starters');
- for(const x of (mode==='chat'?[{label:'💬 Ask anything',text:'What can you help me with?'},{label:'✍️ Write',text:'Write a professional introduction for my business'},{label:'📚 Explain',text:'Explain how artificial intelligence works in simple Gujarati'}]:starter)){
+ const v=el('div','ai-welcome'),icon=el('span','ai-welcome-icon','💌'),h=el('h2','','કોણ માટે મેસેજ બનાવીએ?'),list=el('div','ai-starters');
+ for(const x of starter){
   const btn=el('button','',x.label);btn.type='button';btn.onclick=()=>{prompt.value=x.text;prompt.focus();prompt.scrollIntoView({block:'nearest'})};
   list.append(btn)
  }
@@ -113,7 +113,7 @@ const knownErrors={
  quota_check_unavailable:'મેસેજ બનાવવામાં હંગામી મુશ્કેલી આવી છે.'
 };
 async function run(input,isFollowup=false){
- const text=small(input,240);if(!isFollowup)mode=isCreatorRequest(text)?'creator':'chat';lang.value=detectLang(text+' '+topic);if(mode==='chat'&&/\b(what|how|why|when|where|who|explain|write|create|tell|can|please|help|about|difference|between)\b/i.test(text)&&!/[\u0a80-\u0aff\u0900-\u097f]/.test(text))lang.value='en';tone.value=/કાવ્ય|poetic|शायरी/i.test(text)?'poetic':/ટૂંકું|short|छोटा/i.test(text)?'short':'warm';
+ const text=small(input,240);lang.value=detectLang(text+' '+topic);if(mode==='chat'&&/\b(what|how|why|when|where|who|explain|write|create|tell|can|please|help|about|difference|between)\b/i.test(text)&&!/[\u0a80-\u0aff\u0900-\u097f]/.test(text))lang.value='en';tone.value=/કાવ્ય|poetic|शायरी/i.test(text)?'poetic':/ટૂંકું|short|छोटा/i.test(text)?'short':'warm';
  if(isBusy||text.length<2)return;
  if(!config.url||!config.publishableKey){status.textContent='હમણાં AI ઉપલબ્ધ નથી.';return}
  if(mode==='chat'){if(!topic){topic=text;history=[];round=0}}else if(!topic||!isFollowup){topic=text;avoid=loadRecent(topic);history=[];round=0;}
