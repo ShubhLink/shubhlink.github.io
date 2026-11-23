@@ -161,7 +161,7 @@ async function readBulkFile(file){
  if(ext==='csv'||ext==='txt'||ext==='json'){const t=await file.text();return textRecords(t)}
  if(ext==='xlsx'||ext==='xls'){if(!window.XLSX)throw Error('Excel reader load થયું નથી.');const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];return XLSX.utils.sheet_to_json(ws,{defval:''}).map(normalizeRecord)}
  if(ext==='docx'){if(!window.mammoth)throw Error('Word reader load થયું નથી.');const r=await mammoth.extractRawText({arrayBuffer:await file.arrayBuffer()});return textRecords(r.value)}
- if(ext==='pdf'){if(!window.pdfjsLib)throw Error('PDF reader load થયું નથી.');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let all='';for(let n=1;n<=pdf.numPages;n++){const page=await pdf.getPage(n),c=await page.getTextContent();all+=c.items.map(x=>x.str).join(' ')+'\n'}return textRecords(all)}
+ if(ext==='pdf'){if(!window.pdfjsLib)throw Error('PDF reader load થયું નથી.');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let all='';for(let n=1;n<=pdf.numPages;n++){const page=await pdf.getPage(n),c=await page.getTextContent();all+=c.items.map(x=>x.str+(x.hasEOL?'\n':' ')).join('')+'\n'}return textRecords(all)}
  throw Error('આ ફાઇલ પ્રકાર સપોર્ટેડ નથી.');
 }
 function resolveCategory(v){const k=norm(v);return categories.find(c=>norm(c.id)===k||norm(c.name_gu)===k||norm(c.name_hi)===k||norm(c.name_en)===k)}
