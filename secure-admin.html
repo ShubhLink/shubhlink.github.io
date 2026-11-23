@@ -136,10 +136,10 @@ $('createCategory').onclick=async()=>{
 };
 
 let bulkRecords=[];
-const norm=v=>String(v??'').trim().toLocaleLowerCase().replace(/\\s+/g,' ');
+const norm=v=>String(v??'').trim().toLocaleLowerCase().replace(/\s+/g,' ');
 const headerKey=v=>norm(v).replace(/[ _-]/g,'');
 function parseDelimited(text,delimiter){
- const lines=text.replace(/^\\uFEFF/,'').split(/\\r?\\n/).filter(x=>x.trim());
+ const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim());
  if(!lines.length)return [];
  const parseLine=line=>{let a=[],v='',q=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&line[i+1]==='"'&&q){v+='"';i++}else if(c==='"')q=!q;else if(c===delimiter&&!q){a.push(v);v=''}else v+=c}a.push(v);return a};
  const h=parseLine(lines[0]).map(headerKey);
@@ -152,16 +152,16 @@ function normalizeRecord(o){
 function textRecords(text){
  const t=text.trim();if(!t)return [];
  if(t.startsWith('[')||t.startsWith('{')){try{const j=JSON.parse(t),a=Array.isArray(j)?j:(j.messages||[j]);return a.map(normalizeRecord)}catch(e){}}
- if(/^category[,;\\t]/im.test(t.split(/\\r?\\n/)[0]))return parseDelimited(t,t.includes('\\t')?'\\t':t.split(/\\r?\\n/)[0].includes(';')?';':',').map(normalizeRecord);
- const chunks=t.split(/\\n\\s*\\n/).filter(x=>x.trim());
- return chunks.map(chunk=>{const o={};chunk.split(/\\r?\\n/).forEach(line=>{const m=line.match(/^\\s*([^:：]+)\\s*[:：]\\s*(.*)$/);if(m)o[headerKey(m[1])]=m[2]});return normalizeRecord(o)});
+ if(/^category[,;\t]/im.test(t.split(/\r?\n/)[0]))return parseDelimited(t,t.includes('\t')?'\t':t.split(/\r?\n/)[0].includes(';')?';':',').map(normalizeRecord);
+ const chunks=t.split(/\n\s*\n/).filter(x=>x.trim());
+ return chunks.map(chunk=>{const o={};chunk.split(/\r?\n/).forEach(line=>{const m=line.match(/^\s*([^:：]+)\s*[:：]\s*(.*)$/);if(m)o[headerKey(m[1])]=m[2]});return normalizeRecord(o)});
 }
 async function readBulkFile(file){
  const ext=file.name.split('.').pop().toLowerCase();
  if(ext==='csv'||ext==='txt'||ext==='json'){const t=await file.text();return textRecords(t)}
  if(ext==='xlsx'||ext==='xls'){if(!window.XLSX)throw Error('Excel reader load થયું નથી.');const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];return XLSX.utils.sheet_to_json(ws,{defval:''}).map(normalizeRecord)}
  if(ext==='docx'){if(!window.mammoth)throw Error('Word reader load થયું નથી.');const r=await mammoth.extractRawText({arrayBuffer:await file.arrayBuffer()});return textRecords(r.value)}
- if(ext==='pdf'){if(!window.pdfjsLib)throw Error('PDF reader load થયું નથી.');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let all='';for(let n=1;n<=pdf.numPages;n++){const page=await pdf.getPage(n),c=await page.getTextContent();all+=c.items.map(x=>x.str).join(' ')+'\\n'}return textRecords(all)}
+ if(ext==='pdf'){if(!window.pdfjsLib)throw Error('PDF reader load થયું નથી.');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let all='';for(let n=1;n<=pdf.numPages;n++){const page=await pdf.getPage(n),c=await page.getTextContent();all+=c.items.map(x=>x.str).join(' ')+'\n'}return textRecords(all)}
  throw Error('આ ફાઇલ પ્રકાર સપોર્ટેડ નથી.');
 }
 function resolveCategory(v){const k=norm(v);return categories.find(c=>norm(c.id)===k||norm(c.name_gu)===k||norm(c.name_hi)===k||norm(c.name_en)===k)}
@@ -176,7 +176,7 @@ function renderBulkPreview(){
 }
 $('bulkFile').onchange=async()=>{const file=$('bulkFile').files[0];if(!file)return;showStatus('bulkStatus','ફાઇલ વાંચી રહ્યા છીએ...');$('bulkPreview').hidden=true;try{const rows=await readBulkFile(file);bulkRecords=rows.map(r=>{const c=resolveCategory(r.category);const language=['gu','hi','en'].includes(r.language)?r.language:'gu';const error=!c?'કેટેગરી મળી નથી':!r.title?'શીર્ષક ખાલી છે':!r.body?'મેસેજ ખાલી છે':!['gu','hi','en'].includes(r.language)?'ભાષા gu/hi/en હોવી જોઈએ':'';return {...r,language,category_id:c?.id||'',categoryName:c?.name_gu||r.category,error}});renderBulkPreview();showStatus('bulkStatus',rows.length+' મેસેજ વાંચ્યા. કૃપા કરીને Preview તપાસો.')}catch(e){bulkRecords=[];showStatus('bulkStatus',errorText(e),true)}};
 $('clearBulk').onclick=()=>{$('bulkFile').value='';bulkRecords=[];$('bulkPreview').hidden=true;showStatus('bulkStatus','')};
-$('downloadTemplate').onclick=()=>{const csv='category,language,title,body,is_published\\nexample-category,gu,સુંદર સવાર,તમારો દિવસ શુભ રહે,true\\n';const blob=new Blob(['\\uFEFF'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='shubhlink-bulk-template.csv';a.click();URL.revokeObjectURL(url)};
+$('downloadTemplate').onclick=()=>{const csv='category,language,title,body,is_published\nexample-category,gu,સુંદર સવાર,તમારો દિવસ શુભ રહે,true\n';const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='shubhlink-bulk-template.csv';a.click();URL.revokeObjectURL(url)};
 $('runBulk').onclick=async()=>{
  const valid=bulkRecords.filter(r=>r.category_id&&r.title&&r.body&&['gu','hi','en'].includes(r.language));
  if(!valid.length)return;
