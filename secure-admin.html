@@ -14,6 +14,8 @@ button.secondary{background:#e9e3f6;color:#433781}button.danger{background:#fff0
 .preview{background:linear-gradient(140deg,#fff8e9,#f5dfef);border-radius:16px;padding:23px;text-align:center;white-space:pre-wrap;overflow-wrap:anywhere}
 .status{color:#487b56;font-weight:750;font-size:13px;min-height:22px}.error{color:#af3345}section[hidden]{display:none!important}
 @media(max-width:740px){.grid{grid-template-columns:1fr}.box{padding:16px}}
+
+.bulk-help{background:#f7f4ff;border:1px solid #e6def8;border-radius:13px;padding:12px;font-size:13px;line-height:1.7}.bulk-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.bulk-table-wrap{overflow:auto;max-height:360px;border:1px solid #eee7f1;border-radius:12px;margin-top:12px}.bulk-table{border-collapse:collapse;width:100%;font-size:12px;min-width:620px}.bulk-table th,.bulk-table td{padding:9px;border-bottom:1px solid #eee7f1;text-align:left;vertical-align:top;max-width:260px;overflow-wrap:anywhere}.bulk-table th{position:sticky;top:0;background:#f7f4fb}.bulk-counts{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.bulk-counts span{background:#f0edf7;border-radius:9px;padding:7px 10px;font-size:12px;font-weight:750}.bulk-progress{height:8px;background:#eee9f4;border-radius:20px;overflow:hidden;margin:10px 0}.bulk-progress i{display:block;height:100%;width:0;background:#6551b2;transition:width .2s}
 </style></head><body><header><div class="admin-brand"><img src="icon.svg" alt="ShubhLink Lotus Logo"><span>ShubhLink · Secure Admin</span></div><a href="index.html">↗ Public Website</a></header>
 <main class="shell">
 <section class="box" id="setup" hidden><h1>Backend જોડવાનું બાકી છે</h1><p>આ પેજ સુરક્ષિત Direct Save માટે બનાવ્યું છે. Supabase Database અને Admin Account સેટ થયા પછી અહીંથી મેસેજ તરત Publish કરી શકશો. હાલમાં <a href="https://github.com/ShubhLink/shubhlink.github.io/actions/workflows/shubhlink-admin.yml">જૂનું GitHub Admin</a> કામ કરે છે.</p></section>
@@ -23,6 +25,17 @@ button.secondary{background:#e9e3f6;color:#433781}button.danger{background:#fff0
 <button id="signIn">Login</button><p class="status" id="loginStatus" role="status"></p></section>
 <section id="dashboard" hidden>
 <div class="box"><div class="row" style="justify-content:space-between"><div><h1>Admin Content Studio</h1><p class="muted">Save કરેલો Published Message Database માં તરત જ ઉપલબ્ધ થાય છે.</p></div><button class="secondary" id="logout">Logout</button></div></div>
+
+<section class="box" id="bulkUpload">
+<h2>📥 Bulk Upload — એક સાથે 1000+ મેસેજ</h2>
+<p class="muted">જૂના મેસેજ અપડેટ થશે અને નવા મેસેજ ઉમેરાશે. સમાન કેટેગરી + ભાષા + શીર્ષક મળે તો જૂનો મેસેજ અપડેટ થશે.</p>
+<div class="bulk-help"><b>ફાઇલમાં જરૂરી કૉલમ:</b> category, language, title, body, is_published (વૈકલ્પિક). Categoryમાં category ID અથવા કેટેગરીનું નામ લખો. Languageમાં gu / hi / en લખો. Excel/CSV સૌથી વિશ્વસનીય છે. PDF/DOCX/TXT પણ સપોર્ટેડ છે.</div>
+<label>ફાઇલ પસંદ કરો<input type="file" id="bulkFile" accept=".csv,.txt,.json,.xlsx,.xls,.docx,.pdf"></label>
+<div class="row"><button class="secondary" type="button" id="downloadTemplate">⬇ CSV Template</button><span class="muted">CSV, TXT, JSON, Excel, Word અને PDF</span></div>
+<div id="bulkPreview" hidden><div class="bulk-counts" id="bulkCounts"></div><div class="bulk-table-wrap"><table class="bulk-table"><thead><tr><th>#</th><th>કેટેગરી</th><th>ભાષા</th><th>શીર્ષક</th><th>મેસેજ</th><th>સ્થિતિ</th></tr></thead><tbody id="bulkRows"></tbody></table></div>
+<div class="bulk-actions"><button id="runBulk">✓ બધા મેસેજ સેવ કરો</button><button class="secondary" id="clearBulk">ફાઇલ દૂર કરો</button></div></div>
+<div class="bulk-progress" id="bulkProgressWrap" hidden><i id="bulkProgress"></i></div><p class="status" id="bulkStatus" role="status"></p>
+</section>
 <div class="grid">
 <div>
 <section class="box">
@@ -50,7 +63,7 @@ button.secondary{background:#e9e3f6;color:#433781}button.danger{background:#fff0
 </div></div>
 </section></main>
 <script src="backend-config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>\n<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>\n<script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>\n<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 (async()=>{'use strict';
 const $=id=>document.getElementById(id),cfg=window.SHUBHLINK_BACKEND||{};
@@ -121,6 +134,68 @@ $('createCategory').onclick=async()=>{
  if(error)showStatus('catStatus',errorText(error),true);
  else{showStatus('catStatus','✓ કેટેગરી સેવ થઈ.');await loadCategories()}
 };
+
+let bulkRecords=[];
+const norm=v=>String(v??'').trim().toLocaleLowerCase().replace(/\\s+/g,' ');
+const headerKey=v=>norm(v).replace(/[ _-]/g,'');
+function parseDelimited(text,delimiter){
+ const lines=text.replace(/^\\uFEFF/,'').split(/\\r?\\n/).filter(x=>x.trim());
+ if(!lines.length)return [];
+ const parseLine=line=>{let a=[],v='',q=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&line[i+1]==='"'&&q){v+='"';i++}else if(c==='"')q=!q;else if(c===delimiter&&!q){a.push(v);v=''}else v+=c}a.push(v);return a};
+ const h=parseLine(lines[0]).map(headerKey);
+ return lines.slice(1).map(line=>{const vals=parseLine(line),o={};h.forEach((k,i)=>o[k]=vals[i]??'');return o});
+}
+function normalizeRecord(o){
+ const pick=(...keys)=>{for(const k of keys){const v=o[headerKey(k)];if(v!==undefined&&String(v).trim()!=='')return String(v).trim()}return ''};
+ return {category:pick('category','category_id','કેટેગરી'),language:(pick('language','lang','ભાષા')||'gu').toLowerCase(),title:pick('title','શીર્ષક','name'),body:pick('body','message','મેસેજ','content','text'),is_published:!['false','0','no','draft','નહીં'].includes((pick('is_published','published','status')||'true').toLowerCase())};
+}
+function textRecords(text){
+ const t=text.trim();if(!t)return [];
+ if(t.startsWith('[')||t.startsWith('{')){try{const j=JSON.parse(t),a=Array.isArray(j)?j:(j.messages||[j]);return a.map(normalizeRecord)}catch(e){}}
+ if(/^category[,;\\t]/im.test(t.split(/\\r?\\n/)[0]))return parseDelimited(t,t.includes('\\t')?'\\t':t.split(/\\r?\\n/)[0].includes(';')?';':',').map(normalizeRecord);
+ const chunks=t.split(/\\n\\s*\\n/).filter(x=>x.trim());
+ return chunks.map(chunk=>{const o={};chunk.split(/\\r?\\n/).forEach(line=>{const m=line.match(/^\\s*([^:：]+)\\s*[:：]\\s*(.*)$/);if(m)o[headerKey(m[1])]=m[2]});return normalizeRecord(o)});
+}
+async function readBulkFile(file){
+ const ext=file.name.split('.').pop().toLowerCase();
+ if(ext==='csv'||ext==='txt'||ext==='json'){const t=await file.text();return textRecords(t)}
+ if(ext==='xlsx'||ext==='xls'){if(!window.XLSX)throw Error('Excel reader load થયું નથી.');const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];return XLSX.utils.sheet_to_json(ws,{defval:''}).map(normalizeRecord)}
+ if(ext==='docx'){if(!window.mammoth)throw Error('Word reader load થયું નથી.');const r=await mammoth.extractRawText({arrayBuffer:await file.arrayBuffer()});return textRecords(r.value)}
+ if(ext==='pdf'){if(!window.pdfjsLib)throw Error('PDF reader load થયું નથી.');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let all='';for(let n=1;n<=pdf.numPages;n++){const page=await pdf.getPage(n),c=await page.getTextContent();all+=c.items.map(x=>x.str).join(' ')+'\\n'}return textRecords(all)}
+ throw Error('આ ફાઇલ પ્રકાર સપોર્ટેડ નથી.');
+}
+function resolveCategory(v){const k=norm(v);return categories.find(c=>norm(c.id)===k||norm(c.name_gu)===k||norm(c.name_hi)===k||norm(c.name_en)===k)}
+function renderBulkPreview(){
+ const valid=bulkRecords.filter(r=>r.category_id&&r.title&&r.body&&['gu','hi','en'].includes(r.language));
+ const bad=bulkRecords.length-valid.length;$('bulkPreview').hidden=!bulkRecords.length;
+ $('bulkCounts').replaceChildren();[['કુલ',bulkRecords.length],['યોગ્ય',valid.length],['ભૂલ',bad]].forEach(([k,v])=>{const e=document.createElement('span');e.textContent=k+': '+v;$('bulkCounts').append(e)});
+ const body=$('bulkRows');body.replaceChildren();
+ bulkRecords.slice(0,100).forEach((r,i)=>{const tr=document.createElement('tr');[i+1,r.categoryName||r.category,r.language,r.title,r.body,r.error||'તૈયાર'].forEach((v,j)=>{const td=document.createElement('td');td.textContent=String(v||'').slice(0,j===4?180:100);tr.append(td)});body.append(tr)});
+ if(bulkRecords.length>100){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.textContent='Previewમાં પહેલા 100 બતાવ્યા છે. બાકીના '+(bulkRecords.length-100)+' મેસેજ પણ Import થશે.';tr.append(td);body.append(tr)}
+ $('runBulk').disabled=!valid.length;
+}
+$('bulkFile').onchange=async()=>{const file=$('bulkFile').files[0];if(!file)return;showStatus('bulkStatus','ફાઇલ વાંચી રહ્યા છીએ...');$('bulkPreview').hidden=true;try{const rows=await readBulkFile(file);bulkRecords=rows.map(r=>{const c=resolveCategory(r.category);const language=['gu','hi','en'].includes(r.language)?r.language:'gu';const error=!c?'કેટેગરી મળી નથી':!r.title?'શીર્ષક ખાલી છે':!r.body?'મેસેજ ખાલી છે':!['gu','hi','en'].includes(r.language)?'ભાષા gu/hi/en હોવી જોઈએ':'';return {...r,language,category_id:c?.id||'',categoryName:c?.name_gu||r.category,error}});renderBulkPreview();showStatus('bulkStatus',rows.length+' મેસેજ વાંચ્યા. કૃપા કરીને Preview તપાસો.')}catch(e){bulkRecords=[];showStatus('bulkStatus',errorText(e),true)}};
+$('clearBulk').onclick=()=>{$('bulkFile').value='';bulkRecords=[];$('bulkPreview').hidden=true;showStatus('bulkStatus','')};
+$('downloadTemplate').onclick=()=>{const csv='category,language,title,body,is_published\\nexample-category,gu,સુંદર સવાર,તમારો દિવસ શુભ રહે,true\\n';const blob=new Blob(['\\uFEFF'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='shubhlink-bulk-template.csv';a.click();URL.revokeObjectURL(url)};
+$('runBulk').onclick=async()=>{
+ const valid=bulkRecords.filter(r=>r.category_id&&r.title&&r.body&&['gu','hi','en'].includes(r.language));
+ if(!valid.length)return;
+ if(!confirm(valid.length+' મેસેજ Import કરવા છે? સમાન કેટેગરી + ભાષા + શીર્ષકવાળા જૂના મેસેજ Update થશે અને બાકીના નવા Add થશે.'))return;
+ $('runBulk').disabled=true;$('bulkProgressWrap').hidden=false;showStatus('bulkStatus','Database તપાસી રહ્યા છીએ...');
+ try{
+  const keys=[...new Set(valid.map(r=>r.category_id))],existing=[];
+  for(const id of keys){const {data,error}=await db.from('shubhlink_messages').select('id,category_id,language,title').eq('category_id',id);if(error)throw error;existing.push(...(data||[]))}
+  const map=new Map(existing.map(m=>[m.category_id+'|'+m.language+'|'+norm(m.title),m]));
+  const seen=new Set(),toInsert=[],toUpdate=[];
+  for(const r of valid){const key=r.category_id+'|'+r.language+'|'+norm(r.title);if(seen.has(key))continue;seen.add(key);const payload={category_id:r.category_id,language:r.language,title:r.title,body:r.body,is_published:r.is_published};const old=map.get(key);if(old)toUpdate.push({id:old.id,payload});else toInsert.push(payload)}
+  let done=0;const total=toUpdate.length+toInsert.length;
+  for(let i=0;i<toUpdate.length;i+=10){const batch=toUpdate.slice(i,i+10);const results=await Promise.all(batch.map(x=>db.from('shubhlink_messages').update(x.payload).eq('id',x.id)));const err=results.find(x=>x.error);if(err)throw err.error;done+=batch.length;$('bulkProgress').style.width=Math.round(done/Math.max(total,1)*100)+'%'}
+  for(let i=0;i<toInsert.length;i+=100){const batch=toInsert.slice(i,i+100);const {error}=await db.from('shubhlink_messages').insert(batch);if(error)throw error;done+=batch.length;$('bulkProgress').style.width=Math.round(done/Math.max(total,1)*100)+'%'}
+  showStatus('bulkStatus','✓ પૂર્ણ થયું: '+toUpdate.length+' જૂના મેસેજ Update, '+toInsert.length+' નવા Add. ફાઇલમાં ડુપ્લિકેટ લાઇન હોય તો એક જ વાર ગણાઈ.');await loadMessages();
+ }catch(e){showStatus('bulkStatus','Import દરમિયાન સમસ્યા: '+errorText(e)+' કૃપા કરીને બાકી રહેલા રેકોર્ડ માટે ફરી પ્રયાસ કરતા પહેલાં સૂચિ તપાસો.',true)}
+ $('runBulk').disabled=false;
+};
+
 await guard();
 })();
 </script></body></html>
